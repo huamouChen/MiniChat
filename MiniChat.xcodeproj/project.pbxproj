@@ -13,9 +13,13 @@
 		C0F25A5E2095BC1900C6BCA6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C0F25A5D2095BC1900C6BCA6 /* Assets.xcassets */; };
 		C0F25A612095BC1900C6BCA6 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C0F25A5F2095BC1900C6BCA6 /* LaunchScreen.storyboard */; };
 		C0F25A642095BC1900C6BCA6 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = C0F25A632095BC1900C6BCA6 /* main.m */; };
+		ED891324062D28F94FBC2561 /* Pods_MiniChat.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6621D17447B24B984234EF83 /* Pods_MiniChat.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		6621D17447B24B984234EF83 /* Pods_MiniChat.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MiniChat.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		79BE6016547BAA125EC667D1 /* Pods-MiniChat.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MiniChat.release.xcconfig"; path = "Pods/Target Support Files/Pods-MiniChat/Pods-MiniChat.release.xcconfig"; sourceTree = "<group>"; };
+		C00427522095C8EF00BE24C1 /* Constants.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Constants.h; sourceTree = "<group>"; };
 		C0F25A512095BC1800C6BCA6 /* MiniChat.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MiniChat.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C0F25A542095BC1800C6BCA6 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		C0F25A552095BC1800C6BCA6 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -26,6 +30,7 @@
 		C0F25A602095BC1900C6BCA6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		C0F25A622095BC1900C6BCA6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		C0F25A632095BC1900C6BCA6 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		C55E4F23FBEA5E9FC8BF1C94 /* Pods-MiniChat.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MiniChat.debug.xcconfig"; path = "Pods/Target Support Files/Pods-MiniChat/Pods-MiniChat.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -33,17 +38,28 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				ED891324062D28F94FBC2561 /* Pods_MiniChat.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		717493A1348D1A166597C83F /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				6621D17447B24B984234EF83 /* Pods_MiniChat.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		C0F25A482095BC1800C6BCA6 = {
 			isa = PBXGroup;
 			children = (
 				C0F25A532095BC1800C6BCA6 /* MiniChat */,
 				C0F25A522095BC1800C6BCA6 /* Products */,
+				C7A3E529F81D56D6ABD513E9 /* Pods */,
+				717493A1348D1A166597C83F /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -65,10 +81,20 @@
 				C0F25A5A2095BC1800C6BCA6 /* Main.storyboard */,
 				C0F25A5D2095BC1900C6BCA6 /* Assets.xcassets */,
 				C0F25A5F2095BC1900C6BCA6 /* LaunchScreen.storyboard */,
+				C00427522095C8EF00BE24C1 /* Constants.h */,
 				C0F25A622095BC1900C6BCA6 /* Info.plist */,
 				C0F25A632095BC1900C6BCA6 /* main.m */,
 			);
 			path = MiniChat;
+			sourceTree = "<group>";
+		};
+		C7A3E529F81D56D6ABD513E9 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				C55E4F23FBEA5E9FC8BF1C94 /* Pods-MiniChat.debug.xcconfig */,
+				79BE6016547BAA125EC667D1 /* Pods-MiniChat.release.xcconfig */,
+			);
+			name = Pods;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -78,9 +104,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = C0F25A672095BC1900C6BCA6 /* Build configuration list for PBXNativeTarget "MiniChat" */;
 			buildPhases = (
+				F0CB8FF72198BA1B7CB593E9 /* [CP] Check Pods Manifest.lock */,
 				C0F25A4D2095BC1800C6BCA6 /* Sources */,
 				C0F25A4E2095BC1800C6BCA6 /* Frameworks */,
 				C0F25A4F2095BC1800C6BCA6 /* Resources */,
+				93C2056E26D927B2BF2ADEFB /* [CP] Embed Pods Frameworks */,
+				57B32127D87695FC815D5ADB /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -135,6 +164,83 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		57B32127D87695FC815D5ADB /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-MiniChat/Pods-MiniChat-resources.sh",
+				"${PODS_ROOT}/RongCloudIM/RongCloudIM/RongCloud.bundle",
+				"${PODS_ROOT}/RongCloudIM/RongCloudIM/en.lproj",
+				"${PODS_ROOT}/RongCloudIM/RongCloudIM/zh-Hans.lproj",
+				"${PODS_ROOT}/RongCloudIM/RongCloudIM/Emoji.plist",
+				"${PODS_ROOT}/RongCloudIM/RongCloudIM/RCConfig.plist",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/RongCloud.bundle",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/en.lproj",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/zh-Hans.lproj",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/Emoji.plist",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/RCConfig.plist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-MiniChat/Pods-MiniChat-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		93C2056E26D927B2BF2ADEFB /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-MiniChat/Pods-MiniChat-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/AFNetworking/AFNetworking.framework",
+				"${BUILT_PRODUCTS_DIR}/IQKeyboardManager/IQKeyboardManager.framework",
+				"${BUILT_PRODUCTS_DIR}/MJExtension/MJExtension.framework",
+				"${BUILT_PRODUCTS_DIR}/MJRefresh/MJRefresh.framework",
+				"${BUILT_PRODUCTS_DIR}/Masonry/Masonry.framework",
+				"${BUILT_PRODUCTS_DIR}/SDWebImage/SDWebImage.framework",
+				"${BUILT_PRODUCTS_DIR}/SVProgressHUD/SVProgressHUD.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AFNetworking.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/IQKeyboardManager.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MJExtension.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MJRefresh.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Masonry.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SDWebImage.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SVProgressHUD.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-MiniChat/Pods-MiniChat-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		F0CB8FF72198BA1B7CB593E9 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-MiniChat-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		C0F25A4D2095BC1800C6BCA6 /* Sources */ = {
@@ -281,33 +387,39 @@
 		};
 		C0F25A682095BC1900C6BCA6 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = C55E4F23FBEA5E9FC8BF1C94 /* Pods-MiniChat.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = SGYD3BGQ2N;
 				INFOPLIST_FILE = MiniChat/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = info.huamouchen.MiniChat;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
 		C0F25A692095BC1900C6BCA6 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 79BE6016547BAA125EC667D1 /* Pods-MiniChat.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = SGYD3BGQ2N;
 				INFOPLIST_FILE = MiniChat/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = info.huamouchen.MiniChat;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
