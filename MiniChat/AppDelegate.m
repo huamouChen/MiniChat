@@ -8,7 +8,6 @@
 
 #import "AppDelegate.h"
 #import <RongIMKit/RongIMKit.h>
-#import "Constants.h"
 
 @interface AppDelegate ()
     

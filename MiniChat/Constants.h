@@ -12,6 +12,8 @@
 
 // 融云 AppKey
 #define RongCloudAppKey   @"cpj2xarlc74vn"
+// 融云调试token
+#define RongCloudToken      @"zEbrjwwUm+EDZcrWU8kj+JFo+JgPj1M/zSlaPtimCR62bPZKSfTJHCW4V1Sqi2jUAWzI9UB2Ql1s5F6tgEscEQ=="
 
 
 #ifdef DEBUG

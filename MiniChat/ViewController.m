@@ -7,6 +7,7 @@
 //
 
 #import "ViewController.h"
+#import <RongIMKit/RongIMKit.h>
 
 @interface ViewController ()
 
@@ -17,6 +18,16 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
+    
+    
+    // 连接融云服务器
+    [[RCIM sharedRCIM] connectWithToken:RongCloudToken success:^(NSString *userId) {
+        NSLog(@"----成功连接服务器");
+    } error:^(RCConnectErrorCode status) {
+        NSLog(@"----连接服务器失败");
+    } tokenIncorrect:^{
+         NSLog(@"----token错误");
+    }];
 }
 
 
