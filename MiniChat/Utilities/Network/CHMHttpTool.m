@@ -110,4 +110,14 @@ static CHMHttpTool *instanse = nil;
     [CHMHttpTool requestWithMethod:RequestMethodTypeGet url:RongTokenURL params:@{} success:success failure:failure];
 }
 
+/**
+ 获取用户信息
+ 
+ @param success 成功
+ @param failure 失败
+ */
++ (void)getUserInfoWithSuccess:(successBlock)success failure:(failureBlock)failure {
+    [CHMHttpTool requestWithMethod:RequestMethodTypeGet url:GetUserInfoURL params:@{} success:success failure:failure];
+}
+
 @end

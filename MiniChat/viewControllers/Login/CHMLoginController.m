@@ -62,12 +62,8 @@
             [[NSUserDefaults standardUserDefaults] setObject:RongCloudToken forKey:rongToken];
             // 连接融云服务器
             [[RCIM sharedRCIM] connectWithToken:rongToken success:^(NSString *userId) {
-                [CHMProgressHUD dismissHUD];
-                NSLog(@"---------- 连接成功");
-                // 切换根控制器
-                dispatch_async(dispatch_get_main_queue(), ^{
-                    [[NSNotificationCenter defaultCenter] postNotificationName:KLoginNotification object:nil];
-                });
+                // 获取个人信息
+                [self getUserInfo];
                 
             } error:^(RCConnectErrorCode status) {
                 [CHMProgressHUD showErrorWithInfo:@"连接服务器出错"];
@@ -84,6 +80,38 @@
         }
         
         
+    } failure:^(NSError *error) {
+        [CHMProgressHUD showErrorWithInfo:[NSString stringWithFormat:@"错误码--%zd", error.code]];
+    }];
+}
+
+
+
+/**
+ 获取用户信息
+ */
+- (void)getUserInfo {
+    [CHMHttpTool getUserInfoWithSuccess:^(id response) {
+        NSLog(@"------------%@", response);
+        [CHMProgressHUD dismissHUD];
+        NSString *userName = response[@"UserName"];
+        if (userName) {
+            NSString *nicknName =   response[@"NickName"];
+            NSString *headerImg = response[@"HeaderImage"];
+            NSString *phoneNum = response[@"PhoneNum"];
+            nicknName = nicknName ? nicknName : userName;
+            // 保存用户信息
+            [[NSUserDefaults standardUserDefaults] setObject:userName forKey:KAccount];
+            [[NSUserDefaults standardUserDefaults] setObject:nicknName forKey:KNickName];
+            [[NSUserDefaults standardUserDefaults] setObject:headerImg forKey:KPortrait];
+            [[NSUserDefaults standardUserDefaults] setObject:phoneNum forKey:KPhoneNum];
+            
+            // 切换根控制器
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [[NSNotificationCenter defaultCenter] postNotificationName:KLoginNotification object:nil];
+            });
+            
+        }
     } failure:^(NSError *error) {
         [CHMProgressHUD showErrorWithInfo:[NSString stringWithFormat:@"错误码--%zd", error.code]];
     }];
@@ -118,6 +146,7 @@
 }
 
 - (void)initAppearance {
+    [self.view sendSubviewToBack:self.bgImg];
     self.loginTimes = 0;
     _accountTextField.textColor = [UIColor whiteColor];
     _accountTextField.attributedPlaceholder = [[NSAttributedString alloc] initWithString:@"账号" attributes:@{NSForegroundColorAttributeName: [UIColor whiteColor]}];

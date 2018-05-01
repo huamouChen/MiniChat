@@ -15,6 +15,8 @@ static NSString *const itemReuseablId = @"CHMMineItemCell";
 
 @interface CHMMineController ()
 
+@property (nonatomic, strong) NSArray *datasArray;
+
 @end
 
 @implementation CHMMineController
@@ -25,6 +27,8 @@ static NSString *const itemReuseablId = @"CHMMineItemCell";
     [super viewDidLoad];
     
     [self setupAppearance];
+    
+    [self initData];
 }
 
 /**
@@ -44,6 +48,23 @@ static NSString *const itemReuseablId = @"CHMMineItemCell";
 }
 
 
+/**
+ 初始化数据
+ */
+- (void)initData {
+    // 从沙盒中取登录时保存的用户信息
+    NSString *nickName = [[NSUserDefaults standardUserDefaults] valueForKey:KNickName];
+    NSString *account = [[NSUserDefaults standardUserDefaults] valueForKey:KAccount];
+    NSString *portrait = [[NSUserDefaults standardUserDefaults] valueForKey:KPortrait];
+    
+    self.datasArray = @[@[@{KPortrait:portrait, KNickName: nickName, KAccount: account}],
+                        @[@{KPortrait:@"setting_up", KNickName: @"帐号设置"},
+                          @{KPortrait:@"wallet", KNickName: @"我的钱包"}],
+                        @[@{KPortrait:@"sevre_inactive", KNickName: @"意见反馈"},
+                          @{KPortrait:@"about_rongcloud", KNickName: @"关于 微小信"}]];
+}
+
+
 #pragma mark - table view data sourece
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     return 3;
@@ -56,10 +77,12 @@ static NSString *const itemReuseablId = @"CHMMineItemCell";
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.section == 0) {
         CHMMineDetailCell *cell = [tableView dequeueReusableCellWithIdentifier:detailReuseablId];
+        cell.infoDict = self.datasArray[indexPath.section][indexPath.row];
         return cell;
     }
     
     CHMMineItemCell *cell = [tableView dequeueReusableCellWithIdentifier:itemReuseablId];
+    cell.infoDict = self.datasArray[indexPath.section][indexPath.row];
     return cell;
 }
 

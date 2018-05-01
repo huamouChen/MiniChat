@@ -17,9 +17,11 @@
 // 登录
 #define LoginURL        @"api/Log/Login"
 
-
 // 获取融云 token
 #define RongTokenURL    @"api/Im/Token"
+
+// 获取账号信息
+#define GetUserInfoURL     @"api/User/GetUserInfo"
 
 
 

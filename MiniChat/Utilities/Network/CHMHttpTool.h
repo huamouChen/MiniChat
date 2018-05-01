@@ -53,4 +53,13 @@ typedef void(^failureBlock)(NSError *error);
  */
 + (void)getRongCloudTokenWithSuccess:(successBlock)success failure:(failureBlock)failure;
 
+
+/**
+ 获取用户信息
+
+ @param success 成功
+ @param failure 失败
+ */
++ (void)getUserInfoWithSuccess:(successBlock)success failure:(failureBlock)failure;
+
 @end
