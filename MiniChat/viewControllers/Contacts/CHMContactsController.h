@@ -1,5 +1,5 @@
 //
-//  CHMMainController.h
+//  CHMContactsController.h
 //  MiniChat
 //
 //  Created by 陈华谋 on 01/05/2018.
@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface CHMMainController : UITabBarController
+@interface CHMContactsController : UIViewController
 
 @end

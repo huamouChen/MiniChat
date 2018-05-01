@@ -52,12 +52,9 @@
     NSString *token =  [[NSUserDefaults standardUserDefaults] valueForKey:LoginToken];
     if (token) {
         
-        
-        CHMMainController *mainController = [CHMMainController new];
+        CHMMainController *mainController = (CHMMainController *)[[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"tabBarController"];
+//        CHMMainController *mainController = [[CHMMainController alloc] init];
         self.window.rootViewController = mainController;
-        
-        
-        
     } else {
         UINavigationController *navCon = [[UINavigationController alloc] initWithRootViewController:[CHMLoginController new]];
         self.window.rootViewController = navCon;

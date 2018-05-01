@@ -1,28 +1,22 @@
 //
-//  CHMMainController.m
+//  CHMConversationController.m
 //  MiniChat
 //
 //  Created by 陈华谋 on 01/05/2018.
 //  Copyright © 2018 陈华谋. All rights reserved.
 //
 
-#import "CHMMainController.h"
 #import "CHMConversationController.h"
-#import "CHMContactsController.h"
-#import "CHMChatRoomController.h"
-#import "CHMMineController.h"
 
-@interface CHMMainController ()
+@interface CHMConversationController ()
 
 @end
 
-@implementation CHMMainController
-
-
+@implementation CHMConversationController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
+    // Do any additional setup after loading the view.
 }
 
 - (void)didReceiveMemoryWarning {
