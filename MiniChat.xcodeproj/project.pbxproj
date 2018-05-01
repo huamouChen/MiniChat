@@ -7,16 +7,17 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		C004275B209705B400BE24C1 /* CHMLoginController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0042759209705B400BE24C1 /* CHMLoginController.swift */; };
-		C004275C209705B400BE24C1 /* CHMLoginController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C004275A209705B400BE24C1 /* CHMLoginController.xib */; };
 		C0EAA5CB209712560046F05C /* RCUnderlineTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = C0EAA5CA209712560046F05C /* RCUnderlineTextField.m */; };
-		C0EAA5CE2097219F0046F05C /* CHMRegisterController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0EAA5CC2097219E0046F05C /* CHMRegisterController.swift */; };
-		C0EAA5CF2097219F0046F05C /* CHMRegisterController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C0EAA5CD2097219E0046F05C /* CHMRegisterController.xib */; };
-		C0EAA5D32097263C0046F05C /* ConstantsSwift.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0EAA5D22097263C0046F05C /* ConstantsSwift.swift */; };
 		C0EAA5D72097E8210046F05C /* CHMHttpTool.m in Sources */ = {isa = PBXBuildFile; fileRef = C0EAA5D62097E8210046F05C /* CHMHttpTool.m */; };
+		C0EAA5ED20981EE70046F05C /* CHMLoginController.m in Sources */ = {isa = PBXBuildFile; fileRef = C0EAA5EB20981EE70046F05C /* CHMLoginController.m */; };
+		C0EAA5EE20981EE70046F05C /* CHMLoginController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C0EAA5EC20981EE70046F05C /* CHMLoginController.xib */; };
+		C0EAA5F2209823F40046F05C /* CHMRegisterController.m in Sources */ = {isa = PBXBuildFile; fileRef = C0EAA5F0209823F40046F05C /* CHMRegisterController.m */; };
+		C0EAA5F3209823F40046F05C /* CHMRegisterController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C0EAA5F1209823F40046F05C /* CHMRegisterController.xib */; };
+		C0EAA5F62098259D0046F05C /* CHMRongTokenResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = C0EAA5F52098259D0046F05C /* CHMRongTokenResponse.m */; };
+		C0EAA5F92098270B0046F05C /* CHMProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = C0EAA5F82098270B0046F05C /* CHMProgressHUD.m */; };
+		C0EAA5FE20984F2D0046F05C /* CHMMainController.m in Sources */ = {isa = PBXBuildFile; fileRef = C0EAA5FC20984F2D0046F05C /* CHMMainController.m */; };
+		C0EAA5FF20984F2D0046F05C /* CHMMainController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C0EAA5FD20984F2D0046F05C /* CHMMainController.xib */; };
 		C0F25A562095BC1800C6BCA6 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = C0F25A552095BC1800C6BCA6 /* AppDelegate.m */; };
-		C0F25A592095BC1800C6BCA6 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C0F25A582095BC1800C6BCA6 /* ViewController.m */; };
-		C0F25A5C2095BC1800C6BCA6 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C0F25A5A2095BC1800C6BCA6 /* Main.storyboard */; };
 		C0F25A5E2095BC1900C6BCA6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C0F25A5D2095BC1900C6BCA6 /* Assets.xcassets */; };
 		C0F25A612095BC1900C6BCA6 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C0F25A5F2095BC1900C6BCA6 /* LaunchScreen.storyboard */; };
 		C0F25A642095BC1900C6BCA6 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = C0F25A632095BC1900C6BCA6 /* main.m */; };
@@ -26,24 +27,30 @@
 /* Begin PBXFileReference section */
 		6621D17447B24B984234EF83 /* Pods_MiniChat.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MiniChat.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		79BE6016547BAA125EC667D1 /* Pods-MiniChat.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MiniChat.release.xcconfig"; path = "Pods/Target Support Files/Pods-MiniChat/Pods-MiniChat.release.xcconfig"; sourceTree = "<group>"; };
-		C00427522095C8EF00BE24C1 /* Constants.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Constants.h; sourceTree = "<group>"; };
 		C00427532095CC7600BE24C1 /* PrefixHeader.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
-		C0042759209705B400BE24C1 /* CHMLoginController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CHMLoginController.swift; sourceTree = "<group>"; };
-		C004275A209705B400BE24C1 /* CHMLoginController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CHMLoginController.xib; sourceTree = "<group>"; };
-		C0EAA5C7209709A80046F05C /* MiniChat-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MiniChat-Bridging-Header.h"; sourceTree = "<group>"; };
 		C0EAA5C9209712560046F05C /* RCUnderlineTextField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RCUnderlineTextField.h; sourceTree = "<group>"; };
 		C0EAA5CA209712560046F05C /* RCUnderlineTextField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RCUnderlineTextField.m; sourceTree = "<group>"; };
-		C0EAA5CC2097219E0046F05C /* CHMRegisterController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CHMRegisterController.swift; sourceTree = "<group>"; };
-		C0EAA5CD2097219E0046F05C /* CHMRegisterController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CHMRegisterController.xib; sourceTree = "<group>"; };
-		C0EAA5D22097263C0046F05C /* ConstantsSwift.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConstantsSwift.swift; sourceTree = "<group>"; };
 		C0EAA5D52097E8210046F05C /* CHMHttpTool.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CHMHttpTool.h; sourceTree = "<group>"; };
 		C0EAA5D62097E8210046F05C /* CHMHttpTool.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CHMHttpTool.m; sourceTree = "<group>"; };
+		C0EAA5E120980AE30046F05C /* HttpConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HttpConstants.h; sourceTree = "<group>"; };
+		C0EAA5E320980AE30046F05C /* Constants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Constants.h; sourceTree = "<group>"; };
+		C0EAA5E7209811140046F05C /* UserInfoConstants.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UserInfoConstants.h; sourceTree = "<group>"; };
+		C0EAA5EA20981EE70046F05C /* CHMLoginController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CHMLoginController.h; sourceTree = "<group>"; };
+		C0EAA5EB20981EE70046F05C /* CHMLoginController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CHMLoginController.m; sourceTree = "<group>"; };
+		C0EAA5EC20981EE70046F05C /* CHMLoginController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CHMLoginController.xib; sourceTree = "<group>"; };
+		C0EAA5EF209823F40046F05C /* CHMRegisterController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CHMRegisterController.h; sourceTree = "<group>"; };
+		C0EAA5F0209823F40046F05C /* CHMRegisterController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CHMRegisterController.m; sourceTree = "<group>"; };
+		C0EAA5F1209823F40046F05C /* CHMRegisterController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CHMRegisterController.xib; sourceTree = "<group>"; };
+		C0EAA5F42098259D0046F05C /* CHMRongTokenResponse.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CHMRongTokenResponse.h; sourceTree = "<group>"; };
+		C0EAA5F52098259D0046F05C /* CHMRongTokenResponse.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CHMRongTokenResponse.m; sourceTree = "<group>"; };
+		C0EAA5F72098270B0046F05C /* CHMProgressHUD.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CHMProgressHUD.h; sourceTree = "<group>"; };
+		C0EAA5F82098270B0046F05C /* CHMProgressHUD.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CHMProgressHUD.m; sourceTree = "<group>"; };
+		C0EAA5FB20984F2D0046F05C /* CHMMainController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CHMMainController.h; sourceTree = "<group>"; };
+		C0EAA5FC20984F2D0046F05C /* CHMMainController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CHMMainController.m; sourceTree = "<group>"; };
+		C0EAA5FD20984F2D0046F05C /* CHMMainController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CHMMainController.xib; sourceTree = "<group>"; };
 		C0F25A512095BC1800C6BCA6 /* MiniChat.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MiniChat.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C0F25A542095BC1800C6BCA6 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		C0F25A552095BC1800C6BCA6 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		C0F25A572095BC1800C6BCA6 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		C0F25A582095BC1800C6BCA6 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
-		C0F25A5B2095BC1800C6BCA6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		C0F25A5D2095BC1900C6BCA6 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		C0F25A602095BC1900C6BCA6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		C0F25A622095BC1900C6BCA6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -74,6 +81,7 @@
 		C00427562097053200BE24C1 /* viewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				C0EAA5FA20984F150046F05C /* Main */,
 				C00427572097056000BE24C1 /* Login */,
 			);
 			path = viewControllers;
@@ -82,10 +90,12 @@
 		C00427572097056000BE24C1 /* Login */ = {
 			isa = PBXGroup;
 			children = (
-				C0042759209705B400BE24C1 /* CHMLoginController.swift */,
-				C004275A209705B400BE24C1 /* CHMLoginController.xib */,
-				C0EAA5CC2097219E0046F05C /* CHMRegisterController.swift */,
-				C0EAA5CD2097219E0046F05C /* CHMRegisterController.xib */,
+				C0EAA5EA20981EE70046F05C /* CHMLoginController.h */,
+				C0EAA5EB20981EE70046F05C /* CHMLoginController.m */,
+				C0EAA5EC20981EE70046F05C /* CHMLoginController.xib */,
+				C0EAA5EF209823F40046F05C /* CHMRegisterController.h */,
+				C0EAA5F0209823F40046F05C /* CHMRegisterController.m */,
+				C0EAA5F1209823F40046F05C /* CHMRegisterController.xib */,
 			);
 			path = Login;
 			sourceTree = "<group>";
@@ -93,6 +103,7 @@
 		C0EAA5C82097123C0046F05C /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
+				C0EAA5D92097FE980046F05C /* ProgressHUD */,
 				C0EAA5D42097E7DB0046F05C /* Network */,
 				C0EAA5C9209712560046F05C /* RCUnderlineTextField.h */,
 				C0EAA5CA209712560046F05C /* RCUnderlineTextField.m */,
@@ -107,6 +118,52 @@
 				C0EAA5D62097E8210046F05C /* CHMHttpTool.m */,
 			);
 			path = Network;
+			sourceTree = "<group>";
+		};
+		C0EAA5D92097FE980046F05C /* ProgressHUD */ = {
+			isa = PBXGroup;
+			children = (
+				C0EAA5F72098270B0046F05C /* CHMProgressHUD.h */,
+				C0EAA5F82098270B0046F05C /* CHMProgressHUD.m */,
+			);
+			path = ProgressHUD;
+			sourceTree = "<group>";
+		};
+		C0EAA5DC209802240046F05C /* Service */ = {
+			isa = PBXGroup;
+			children = (
+				C0EAA5DD2098023F0046F05C /* response */,
+			);
+			path = Service;
+			sourceTree = "<group>";
+		};
+		C0EAA5DD2098023F0046F05C /* response */ = {
+			isa = PBXGroup;
+			children = (
+				C0EAA5F42098259D0046F05C /* CHMRongTokenResponse.h */,
+				C0EAA5F52098259D0046F05C /* CHMRongTokenResponse.m */,
+			);
+			path = response;
+			sourceTree = "<group>";
+		};
+		C0EAA5E020980AB10046F05C /* Constants */ = {
+			isa = PBXGroup;
+			children = (
+				C0EAA5E320980AE30046F05C /* Constants.h */,
+				C0EAA5E120980AE30046F05C /* HttpConstants.h */,
+				C0EAA5E7209811140046F05C /* UserInfoConstants.h */,
+			);
+			path = Constants;
+			sourceTree = "<group>";
+		};
+		C0EAA5FA20984F150046F05C /* Main */ = {
+			isa = PBXGroup;
+			children = (
+				C0EAA5FB20984F2D0046F05C /* CHMMainController.h */,
+				C0EAA5FC20984F2D0046F05C /* CHMMainController.m */,
+				C0EAA5FD20984F2D0046F05C /* CHMMainController.xib */,
+			);
+			path = Main;
 			sourceTree = "<group>";
 		};
 		C0F25A482095BC1800C6BCA6 = {
@@ -130,19 +187,15 @@
 		C0F25A532095BC1800C6BCA6 /* MiniChat */ = {
 			isa = PBXGroup;
 			children = (
+				C0EAA5E020980AB10046F05C /* Constants */,
+				C0EAA5DC209802240046F05C /* Service */,
 				C0EAA5C82097123C0046F05C /* Utilities */,
 				C00427562097053200BE24C1 /* viewControllers */,
 				C0F25A542095BC1800C6BCA6 /* AppDelegate.h */,
 				C0F25A552095BC1800C6BCA6 /* AppDelegate.m */,
-				C0F25A572095BC1800C6BCA6 /* ViewController.h */,
-				C0F25A582095BC1800C6BCA6 /* ViewController.m */,
-				C0F25A5A2095BC1800C6BCA6 /* Main.storyboard */,
 				C0F25A5D2095BC1900C6BCA6 /* Assets.xcassets */,
 				C0F25A5F2095BC1900C6BCA6 /* LaunchScreen.storyboard */,
-				C00427522095C8EF00BE24C1 /* Constants.h */,
-				C0EAA5D22097263C0046F05C /* ConstantsSwift.swift */,
 				C00427532095CC7600BE24C1 /* PrefixHeader.pch */,
-				C0EAA5C7209709A80046F05C /* MiniChat-Bridging-Header.h */,
 				C0F25A622095BC1900C6BCA6 /* Info.plist */,
 				C0F25A632095BC1900C6BCA6 /* main.m */,
 			);
@@ -220,11 +273,11 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C0EAA5CF2097219F0046F05C /* CHMRegisterController.xib in Resources */,
-				C004275C209705B400BE24C1 /* CHMLoginController.xib in Resources */,
+				C0EAA5F3209823F40046F05C /* CHMRegisterController.xib in Resources */,
+				C0EAA5EE20981EE70046F05C /* CHMLoginController.xib in Resources */,
 				C0F25A612095BC1900C6BCA6 /* LaunchScreen.storyboard in Resources */,
+				C0EAA5FF20984F2D0046F05C /* CHMMainController.xib in Resources */,
 				C0F25A5E2095BC1900C6BCA6 /* Assets.xcassets in Resources */,
-				C0F25A5C2095BC1800C6BCA6 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -312,28 +365,21 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C004275B209705B400BE24C1 /* CHMLoginController.swift in Sources */,
+				C0EAA5ED20981EE70046F05C /* CHMLoginController.m in Sources */,
+				C0EAA5F2209823F40046F05C /* CHMRegisterController.m in Sources */,
 				C0EAA5CB209712560046F05C /* RCUnderlineTextField.m in Sources */,
-				C0EAA5D32097263C0046F05C /* ConstantsSwift.swift in Sources */,
-				C0F25A592095BC1800C6BCA6 /* ViewController.m in Sources */,
 				C0F25A642095BC1900C6BCA6 /* main.m in Sources */,
 				C0F25A562095BC1800C6BCA6 /* AppDelegate.m in Sources */,
 				C0EAA5D72097E8210046F05C /* CHMHttpTool.m in Sources */,
-				C0EAA5CE2097219F0046F05C /* CHMRegisterController.swift in Sources */,
+				C0EAA5F92098270B0046F05C /* CHMProgressHUD.m in Sources */,
+				C0EAA5F62098259D0046F05C /* CHMRongTokenResponse.m in Sources */,
+				C0EAA5FE20984F2D0046F05C /* CHMMainController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		C0F25A5A2095BC1800C6BCA6 /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				C0F25A5B2095BC1800C6BCA6 /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		C0F25A5F2095BC1900C6BCA6 /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -472,9 +518,10 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = info.huamouchen.MiniChat;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_OBJC_BRIDGING_HEADER = "/Users/chenhuamou/Desktop/miniChat/MiniChat/MiniChat/MiniChat-Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 3.0;
+				SWIFT_SWIFT3_OBJC_INFERENCE = On;
+				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
@@ -496,8 +543,9 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = info.huamouchen.MiniChat;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_OBJC_BRIDGING_HEADER = "/Users/chenhuamou/Desktop/miniChat/MiniChat/MiniChat/MiniChat-Bridging-Header.h";
-				SWIFT_VERSION = 3.0;
+				SWIFT_OBJC_BRIDGING_HEADER = "";
+				SWIFT_SWIFT3_OBJC_INFERENCE = On;
+				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;

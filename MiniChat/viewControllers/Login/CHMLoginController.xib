@@ -12,13 +12,11 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="CHMLoginController" customModule="MiniChat" customModuleProvider="target">
             <connections>
-                <outlet property="accountTextField" destination="xWb-9p-ntF" id="aOl-ur-ANf"/>
-                <outlet property="backgroundImageView" destination="pFS-pr-78l" id="itO-03-TVf"/>
-                <outlet property="inputBackground" destination="6na-IS-EFn" id="fCn-Mx-PNj"/>
-                <outlet property="loginButton" destination="F82-ya-ikC" id="9nc-5e-WXM"/>
-                <outlet property="passwordTextField" destination="eWd-hu-sM8" id="aWS-oy-9Ja"/>
-                <outlet property="registerBtnBottomConstraint" destination="OYn-aw-bNm" id="zZy-xp-sgY"/>
-                <outlet property="registerButton" destination="CMY-ds-eSJ" id="YWK-OO-BNo"/>
+                <outlet property="accountTextField" destination="xWb-9p-ntF" id="Qim-Z9-rae"/>
+                <outlet property="bgImg" destination="pFS-pr-78l" id="sto-v5-0gI"/>
+                <outlet property="passwordTextField" destination="eWd-hu-sM8" id="9BU-uU-J3d"/>
+                <outlet property="registerButton" destination="CMY-ds-eSJ" id="S8b-Yv-Keh"/>
+                <outlet property="registerButtonConstraint" destination="OYn-aw-bNm" id="hmq-FX-Mru"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -27,6 +25,9 @@
             <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="de_bg" translatesAutoresizingMaskIntoConstraints="NO" id="pFS-pr-78l">
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                </imageView>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6na-IS-EFn" userLabel="inputView">
                     <rect key="frame" x="0.0" y="120" width="375" height="155"/>
                     <subviews>
@@ -45,7 +46,7 @@
                             <rect key="frame" x="30" y="110" width="315" height="45"/>
                             <state key="normal" backgroundImage="login_button"/>
                             <connections>
-                                <action selector="clickLoginButton" destination="-1" eventType="touchUpInside" id="nKc-QG-mYR"/>
+                                <action selector="clickLoginButton" destination="-1" eventType="touchUpInside" id="rrh-N5-6Xn"/>
                             </connections>
                         </button>
                     </subviews>
@@ -66,25 +67,22 @@
                     </constraints>
                 </view>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CMY-ds-eSJ">
-                    <rect key="frame" x="299" y="601" width="60" height="46"/>
+                    <rect key="frame" x="299" y="621" width="60" height="46"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="46" id="POV-XK-yrK"/>
                         <constraint firstAttribute="width" constant="60" id="zQu-af-1II"/>
                     </constraints>
                     <state key="normal" title="新用户"/>
                     <connections>
-                        <action selector="clickRegisterButton" destination="-1" eventType="touchUpInside" id="j0M-bD-tAv"/>
+                        <action selector="clickRegisterButton" destination="-1" eventType="touchUpInside" id="scg-33-S0e"/>
                     </connections>
                 </button>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="de_bg" translatesAutoresizingMaskIntoConstraints="NO" id="pFS-pr-78l">
-                    <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                </imageView>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
                 <constraint firstItem="pFS-pr-78l" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="MSj-1R-mAD"/>
                 <constraint firstItem="6na-IS-EFn" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="100" id="MqT-xk-emo"/>
-                <constraint firstItem="CMY-ds-eSJ" firstAttribute="bottom" secondItem="fnl-2z-Ty3" secondAttribute="bottom" constant="-20" id="OYn-aw-bNm"/>
+                <constraint firstItem="CMY-ds-eSJ" firstAttribute="bottom" secondItem="fnl-2z-Ty3" secondAttribute="bottom" id="OYn-aw-bNm"/>
                 <constraint firstAttribute="bottom" secondItem="pFS-pr-78l" secondAttribute="bottom" id="Uyr-X2-tAf"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="6na-IS-EFn" secondAttribute="trailing" id="XdT-F2-ejm"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="CMY-ds-eSJ" secondAttribute="trailing" constant="16" id="lRz-hq-aGF"/>
