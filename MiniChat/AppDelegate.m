@@ -8,6 +8,9 @@
 
 #import "AppDelegate.h"
 #import <RongIMKit/RongIMKit.h>
+#import <IQKeyboardManager/IQKeyboardManager.h>
+
+#import "MiniChat-Swift.h"
 
 @interface AppDelegate ()
     
@@ -19,10 +22,31 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
     
+    self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
+    self.window.backgroundColor = [UIColor whiteColor];
+    [self.window makeKeyAndVisible];
+    
+    [self switchRootViewController];
+    
     // 初始化融云
     [[RCIM sharedRCIM] initWithAppKey:RongCloudAppKey];
     
+    
+    // IQKeyBoard 关闭toolBar
+    [[IQKeyboardManager sharedManager] setEnableAutoToolbar:NO];
+    
+    
     return YES;
+}
+
+
+
+/**
+ 设置跟控制器
+ */
+- (void)switchRootViewController {
+    UINavigationController *navCon = [[UINavigationController alloc] initWithRootViewController:[CHMLoginController new]];
+    self.window.rootViewController = navCon;
 }
     
     

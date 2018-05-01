@@ -23,4 +23,9 @@
 #endif
 
 
+#define KTouchBarHeight 34.0f
+#define KIphoneXHeight 2436.0f
+#define KIsiPhoneX ([UIScreen instancesRespondToSelector:@selector(currentMode)] ? CGSizeEqualToSize(CGSizeMake(1125, 2436), [[UIScreen mainScreen] currentMode].size) : NO)  
+
+
 #endif /* Constants_h */
