@@ -23,6 +23,9 @@
 // 获取账号信息
 #define GetUserInfoURL     @"api/User/GetUserInfo"
 
+// 获取聊天室
+#define GetChatRoomListURL  @"api/Im/ListChatroom"
+
 
 
 

@@ -86,7 +86,7 @@
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <connections>
-                        <segue destination="KLz-hh-ho9" kind="relationship" relationship="rootViewController" id="Yo0-hw-5cd"/>
+                        <segue destination="RqK-1V-DjY" kind="relationship" relationship="rootViewController" id="NLX-ML-u1S"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="aDq-GQ-GXc" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -94,20 +94,33 @@
             <point key="canvasLocation" x="-787" y="881"/>
         </scene>
         <!--聊天室-->
-        <scene sceneID="PNE-m2-vZa">
+        <scene sceneID="OOs-wD-aZ0">
             <objects>
-                <viewController id="KLz-hh-ho9" customClass="CHMChatRoomController" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="7t9-ub-Avw">
+                <tableViewController title="聊天室" id="RqK-1V-DjY" customClass="CHMChatRoomController" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="Ylq-NO-80x">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <viewLayoutGuide key="safeArea" id="WuB-9M-29r"/>
-                    </view>
-                    <navigationItem key="navigationItem" title="聊天室" id="J5l-Ad-QGp"/>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="xpT-n8-Ohd" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="iIY-2G-zz4">
+                                <rect key="frame" x="0.0" y="28" width="375" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="iIY-2G-zz4" id="mf0-Jh-3Wn">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="RqK-1V-DjY" id="CeF-Io-XPk"/>
+                            <outlet property="delegate" destination="RqK-1V-DjY" id="Ok1-Tt-hfH"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="聊天室" id="hfy-Xl-Oca"/>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="P4X-L7-cXU" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="17" y="886"/>
+            <point key="canvasLocation" x="25" y="896"/>
         </scene>
         <!--通讯录-->
         <scene sceneID="tYa-2m-q5n">

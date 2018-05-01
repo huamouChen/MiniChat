@@ -28,6 +28,9 @@
 		C0EAA62F209872520046F05C /* CHMMineItemCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C0EAA62D209872520046F05C /* CHMMineItemCell.m */; };
 		C0EAA630209872520046F05C /* CHMMineItemCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C0EAA62E209872520046F05C /* CHMMineItemCell.xib */; };
 		C0EAA63B2098819F0046F05C /* UIImageView+CHMImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = C0EAA63A2098819F0046F05C /* UIImageView+CHMImageView.m */; };
+		C0EAA6402098B63D0046F05C /* CHMChatRoomCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C0EAA63E2098B63D0046F05C /* CHMChatRoomCell.m */; };
+		C0EAA6412098B63D0046F05C /* CHMChatRoomCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C0EAA63F2098B63D0046F05C /* CHMChatRoomCell.xib */; };
+		C0EAA6442098B7C80046F05C /* CHMChatRoomModel.m in Sources */ = {isa = PBXBuildFile; fileRef = C0EAA6432098B7C80046F05C /* CHMChatRoomModel.m */; };
 		C0F25A562095BC1800C6BCA6 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = C0F25A552095BC1800C6BCA6 /* AppDelegate.m */; };
 		C0F25A5E2095BC1900C6BCA6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C0F25A5D2095BC1900C6BCA6 /* Assets.xcassets */; };
 		C0F25A612095BC1900C6BCA6 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C0F25A5F2095BC1900C6BCA6 /* LaunchScreen.storyboard */; };
@@ -80,6 +83,11 @@
 		C0EAA62E209872520046F05C /* CHMMineItemCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CHMMineItemCell.xib; sourceTree = "<group>"; };
 		C0EAA6392098819F0046F05C /* UIImageView+CHMImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImageView+CHMImageView.h"; sourceTree = "<group>"; };
 		C0EAA63A2098819F0046F05C /* UIImageView+CHMImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImageView+CHMImageView.m"; sourceTree = "<group>"; };
+		C0EAA63D2098B63D0046F05C /* CHMChatRoomCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CHMChatRoomCell.h; sourceTree = "<group>"; };
+		C0EAA63E2098B63D0046F05C /* CHMChatRoomCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CHMChatRoomCell.m; sourceTree = "<group>"; };
+		C0EAA63F2098B63D0046F05C /* CHMChatRoomCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CHMChatRoomCell.xib; sourceTree = "<group>"; };
+		C0EAA6422098B7C80046F05C /* CHMChatRoomModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CHMChatRoomModel.h; sourceTree = "<group>"; };
+		C0EAA6432098B7C80046F05C /* CHMChatRoomModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CHMChatRoomModel.m; sourceTree = "<group>"; };
 		C0F25A512095BC1800C6BCA6 /* MiniChat.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MiniChat.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C0F25A542095BC1800C6BCA6 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		C0F25A552095BC1800C6BCA6 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -178,6 +186,8 @@
 			children = (
 				C0EAA5F42098259D0046F05C /* CHMRongTokenResponse.h */,
 				C0EAA5F52098259D0046F05C /* CHMRongTokenResponse.m */,
+				C0EAA6422098B7C80046F05C /* CHMChatRoomModel.h */,
+				C0EAA6432098B7C80046F05C /* CHMChatRoomModel.m */,
 			);
 			path = response;
 			sourceTree = "<group>";
@@ -222,6 +232,7 @@
 		C0EAA60420985DAF0046F05C /* ChatRoom */ = {
 			isa = PBXGroup;
 			children = (
+				C0EAA63C2098B6260046F05C /* cell */,
 				C0EAA60620985DCC0046F05C /* CHMChatRoomController.h */,
 				C0EAA60720985DCC0046F05C /* CHMChatRoomController.m */,
 			);
@@ -296,6 +307,16 @@
 				C0EAA63A2098819F0046F05C /* UIImageView+CHMImageView.m */,
 			);
 			path = ImageView;
+			sourceTree = "<group>";
+		};
+		C0EAA63C2098B6260046F05C /* cell */ = {
+			isa = PBXGroup;
+			children = (
+				C0EAA63D2098B63D0046F05C /* CHMChatRoomCell.h */,
+				C0EAA63E2098B63D0046F05C /* CHMChatRoomCell.m */,
+				C0EAA63F2098B63D0046F05C /* CHMChatRoomCell.xib */,
+			);
+			path = cell;
 			sourceTree = "<group>";
 		};
 		C0F25A482095BC1800C6BCA6 = {
@@ -407,6 +428,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				C0EAA5F3209823F40046F05C /* CHMRegisterController.xib in Resources */,
+				C0EAA6412098B63D0046F05C /* CHMChatRoomCell.xib in Resources */,
 				C0EAA5EE20981EE70046F05C /* CHMLoginController.xib in Resources */,
 				C0EAA62B2098723B0046F05C /* CHMMineDetailCell.xib in Resources */,
 				C0F25A612095BC1900C6BCA6 /* LaunchScreen.storyboard in Resources */,
@@ -503,9 +525,11 @@
 				C0EAA63B2098819F0046F05C /* UIImageView+CHMImageView.m in Sources */,
 				C0EAA5ED20981EE70046F05C /* CHMLoginController.m in Sources */,
 				C0EAA60B20985DDD0046F05C /* CHMContactsController.m in Sources */,
+				C0EAA6402098B63D0046F05C /* CHMChatRoomCell.m in Sources */,
 				C0EAA62A2098723B0046F05C /* CHMMineDetailCell.m in Sources */,
 				C0EAA60820985DCC0046F05C /* CHMChatRoomController.m in Sources */,
 				C0EAA621209870E10046F05C /* RCUnderlineTextField.m in Sources */,
+				C0EAA6442098B7C80046F05C /* CHMChatRoomModel.m in Sources */,
 				C0EAA5F2209823F40046F05C /* CHMRegisterController.m in Sources */,
 				C0EAA62F209872520046F05C /* CHMMineItemCell.m in Sources */,
 				C0EAA617209866D60046F05C /* UIColor+CHMColor.m in Sources */,
