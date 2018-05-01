@@ -21,6 +21,7 @@
 		C0EAA60B20985DDD0046F05C /* CHMContactsController.m in Sources */ = {isa = PBXBuildFile; fileRef = C0EAA60A20985DDD0046F05C /* CHMContactsController.m */; };
 		C0EAA60E20985DEE0046F05C /* CHMConversationController.m in Sources */ = {isa = PBXBuildFile; fileRef = C0EAA60D20985DEE0046F05C /* CHMConversationController.m */; };
 		C0EAA61120985DFA0046F05C /* CHMMineController.m in Sources */ = {isa = PBXBuildFile; fileRef = C0EAA61020985DFA0046F05C /* CHMMineController.m */; };
+		C0EAA617209866D60046F05C /* UIColor+CHMColor.m in Sources */ = {isa = PBXBuildFile; fileRef = C0EAA616209866D60046F05C /* UIColor+CHMColor.m */; };
 		C0F25A562095BC1800C6BCA6 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = C0F25A552095BC1800C6BCA6 /* AppDelegate.m */; };
 		C0F25A5E2095BC1900C6BCA6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C0F25A5D2095BC1900C6BCA6 /* Assets.xcassets */; };
 		C0F25A612095BC1900C6BCA6 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C0F25A5F2095BC1900C6BCA6 /* LaunchScreen.storyboard */; };
@@ -60,6 +61,9 @@
 		C0EAA60D20985DEE0046F05C /* CHMConversationController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CHMConversationController.m; sourceTree = "<group>"; };
 		C0EAA60F20985DFA0046F05C /* CHMMineController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CHMMineController.h; sourceTree = "<group>"; };
 		C0EAA61020985DFA0046F05C /* CHMMineController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CHMMineController.m; sourceTree = "<group>"; };
+		C0EAA612209864E10046F05C /* ColorConstants.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ColorConstants.h; sourceTree = "<group>"; };
+		C0EAA615209866D60046F05C /* UIColor+CHMColor.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIColor+CHMColor.h"; sourceTree = "<group>"; };
+		C0EAA616209866D60046F05C /* UIColor+CHMColor.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIColor+CHMColor.m"; sourceTree = "<group>"; };
 		C0F25A512095BC1800C6BCA6 /* MiniChat.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MiniChat.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C0F25A542095BC1800C6BCA6 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		C0F25A552095BC1800C6BCA6 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -119,6 +123,7 @@
 		C0EAA5C82097123C0046F05C /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
+				C0EAA613209866B20046F05C /* Category */,
 				C0EAA5D92097FE980046F05C /* ProgressHUD */,
 				C0EAA5D42097E7DB0046F05C /* Network */,
 				C0EAA5C9209712560046F05C /* RCUnderlineTextField.h */,
@@ -168,6 +173,7 @@
 				C0EAA5E320980AE30046F05C /* Constants.h */,
 				C0EAA5E120980AE30046F05C /* HttpConstants.h */,
 				C0EAA5E7209811140046F05C /* UserInfoConstants.h */,
+				C0EAA612209864E10046F05C /* ColorConstants.h */,
 			);
 			path = Constants;
 			sourceTree = "<group>";
@@ -215,6 +221,23 @@
 				C0EAA60D20985DEE0046F05C /* CHMConversationController.m */,
 			);
 			path = Conversation;
+			sourceTree = "<group>";
+		};
+		C0EAA613209866B20046F05C /* Category */ = {
+			isa = PBXGroup;
+			children = (
+				C0EAA614209866B20046F05C /* Color */,
+			);
+			path = Category;
+			sourceTree = "<group>";
+		};
+		C0EAA614209866B20046F05C /* Color */ = {
+			isa = PBXGroup;
+			children = (
+				C0EAA615209866D60046F05C /* UIColor+CHMColor.h */,
+				C0EAA616209866D60046F05C /* UIColor+CHMColor.m */,
+			);
+			path = Color;
 			sourceTree = "<group>";
 		};
 		C0F25A482095BC1800C6BCA6 = {
@@ -423,6 +446,7 @@
 				C0EAA61120985DFA0046F05C /* CHMMineController.m in Sources */,
 				C0EAA5F2209823F40046F05C /* CHMRegisterController.m in Sources */,
 				C0EAA5CB209712560046F05C /* RCUnderlineTextField.m in Sources */,
+				C0EAA617209866D60046F05C /* UIColor+CHMColor.m in Sources */,
 				C0EAA60E20985DEE0046F05C /* CHMConversationController.m in Sources */,
 				C0F25A642095BC1900C6BCA6 /* main.m in Sources */,
 				C0F25A562095BC1800C6BCA6 /* AppDelegate.m in Sources */,

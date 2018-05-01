@@ -7,10 +7,6 @@
 //
 
 #import "CHMMainController.h"
-#import "CHMConversationController.h"
-#import "CHMContactsController.h"
-#import "CHMChatRoomController.h"
-#import "CHMMineController.h"
 
 @interface CHMMainController ()
 
@@ -22,6 +18,8 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    self.tabBar.tintColor = [UIColor chm_colorWithHexString:KMainColor alpha:1.0];
     
 }
 

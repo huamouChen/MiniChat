@@ -16,6 +16,8 @@
 #import "Constants.h"
 #import "HttpConstants.h"
 #import "UserInfoConstants.h"
+#import "ColorConstants.h"
+#import "UIColor+CHMColor.h"
 
 #import "CHMProgressHUD.h"
 #import "MJExtension.h"
