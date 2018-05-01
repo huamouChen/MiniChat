@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		C0EAA5CB209712560046F05C /* RCUnderlineTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = C0EAA5CA209712560046F05C /* RCUnderlineTextField.m */; };
 		C0EAA5D72097E8210046F05C /* CHMHttpTool.m in Sources */ = {isa = PBXBuildFile; fileRef = C0EAA5D62097E8210046F05C /* CHMHttpTool.m */; };
 		C0EAA5ED20981EE70046F05C /* CHMLoginController.m in Sources */ = {isa = PBXBuildFile; fileRef = C0EAA5EB20981EE70046F05C /* CHMLoginController.m */; };
 		C0EAA5EE20981EE70046F05C /* CHMLoginController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C0EAA5EC20981EE70046F05C /* CHMLoginController.xib */; };
@@ -20,8 +19,15 @@
 		C0EAA60820985DCC0046F05C /* CHMChatRoomController.m in Sources */ = {isa = PBXBuildFile; fileRef = C0EAA60720985DCC0046F05C /* CHMChatRoomController.m */; };
 		C0EAA60B20985DDD0046F05C /* CHMContactsController.m in Sources */ = {isa = PBXBuildFile; fileRef = C0EAA60A20985DDD0046F05C /* CHMContactsController.m */; };
 		C0EAA60E20985DEE0046F05C /* CHMConversationController.m in Sources */ = {isa = PBXBuildFile; fileRef = C0EAA60D20985DEE0046F05C /* CHMConversationController.m */; };
-		C0EAA61120985DFA0046F05C /* CHMMineController.m in Sources */ = {isa = PBXBuildFile; fileRef = C0EAA61020985DFA0046F05C /* CHMMineController.m */; };
 		C0EAA617209866D60046F05C /* UIColor+CHMColor.m in Sources */ = {isa = PBXBuildFile; fileRef = C0EAA616209866D60046F05C /* UIColor+CHMColor.m */; };
+		C0EAA621209870E10046F05C /* RCUnderlineTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = C0EAA61D209870E10046F05C /* RCUnderlineTextField.m */; };
+		C0EAA622209870E10046F05C /* CHMTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C0EAA620209870E10046F05C /* CHMTableViewController.m */; };
+		C0EAA6252098713E0046F05C /* CHMMineController.m in Sources */ = {isa = PBXBuildFile; fileRef = C0EAA6242098713E0046F05C /* CHMMineController.m */; };
+		C0EAA62A2098723B0046F05C /* CHMMineDetailCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C0EAA6282098723B0046F05C /* CHMMineDetailCell.m */; };
+		C0EAA62B2098723B0046F05C /* CHMMineDetailCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C0EAA6292098723B0046F05C /* CHMMineDetailCell.xib */; };
+		C0EAA62F209872520046F05C /* CHMMineItemCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C0EAA62D209872520046F05C /* CHMMineItemCell.m */; };
+		C0EAA630209872520046F05C /* CHMMineItemCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C0EAA62E209872520046F05C /* CHMMineItemCell.xib */; };
+		C0EAA63B2098819F0046F05C /* UIImageView+CHMImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = C0EAA63A2098819F0046F05C /* UIImageView+CHMImageView.m */; };
 		C0F25A562095BC1800C6BCA6 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = C0F25A552095BC1800C6BCA6 /* AppDelegate.m */; };
 		C0F25A5E2095BC1900C6BCA6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C0F25A5D2095BC1900C6BCA6 /* Assets.xcassets */; };
 		C0F25A612095BC1900C6BCA6 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C0F25A5F2095BC1900C6BCA6 /* LaunchScreen.storyboard */; };
@@ -33,8 +39,6 @@
 		6621D17447B24B984234EF83 /* Pods_MiniChat.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MiniChat.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		79BE6016547BAA125EC667D1 /* Pods-MiniChat.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MiniChat.release.xcconfig"; path = "Pods/Target Support Files/Pods-MiniChat/Pods-MiniChat.release.xcconfig"; sourceTree = "<group>"; };
 		C00427532095CC7600BE24C1 /* PrefixHeader.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
-		C0EAA5C9209712560046F05C /* RCUnderlineTextField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RCUnderlineTextField.h; sourceTree = "<group>"; };
-		C0EAA5CA209712560046F05C /* RCUnderlineTextField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RCUnderlineTextField.m; sourceTree = "<group>"; };
 		C0EAA5D52097E8210046F05C /* CHMHttpTool.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CHMHttpTool.h; sourceTree = "<group>"; };
 		C0EAA5D62097E8210046F05C /* CHMHttpTool.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CHMHttpTool.m; sourceTree = "<group>"; };
 		C0EAA5E120980AE30046F05C /* HttpConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HttpConstants.h; sourceTree = "<group>"; };
@@ -59,11 +63,23 @@
 		C0EAA60A20985DDD0046F05C /* CHMContactsController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CHMContactsController.m; sourceTree = "<group>"; };
 		C0EAA60C20985DEE0046F05C /* CHMConversationController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CHMConversationController.h; sourceTree = "<group>"; };
 		C0EAA60D20985DEE0046F05C /* CHMConversationController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CHMConversationController.m; sourceTree = "<group>"; };
-		C0EAA60F20985DFA0046F05C /* CHMMineController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CHMMineController.h; sourceTree = "<group>"; };
-		C0EAA61020985DFA0046F05C /* CHMMineController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CHMMineController.m; sourceTree = "<group>"; };
 		C0EAA612209864E10046F05C /* ColorConstants.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ColorConstants.h; sourceTree = "<group>"; };
 		C0EAA615209866D60046F05C /* UIColor+CHMColor.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIColor+CHMColor.h"; sourceTree = "<group>"; };
 		C0EAA616209866D60046F05C /* UIColor+CHMColor.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIColor+CHMColor.m"; sourceTree = "<group>"; };
+		C0EAA61D209870E10046F05C /* RCUnderlineTextField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RCUnderlineTextField.m; sourceTree = "<group>"; };
+		C0EAA61E209870E10046F05C /* CHMTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CHMTableViewController.h; sourceTree = "<group>"; };
+		C0EAA61F209870E10046F05C /* RCUnderlineTextField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RCUnderlineTextField.h; sourceTree = "<group>"; };
+		C0EAA620209870E10046F05C /* CHMTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CHMTableViewController.m; sourceTree = "<group>"; };
+		C0EAA6232098713E0046F05C /* CHMMineController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CHMMineController.h; sourceTree = "<group>"; };
+		C0EAA6242098713E0046F05C /* CHMMineController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CHMMineController.m; sourceTree = "<group>"; };
+		C0EAA6272098723B0046F05C /* CHMMineDetailCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CHMMineDetailCell.h; sourceTree = "<group>"; };
+		C0EAA6282098723B0046F05C /* CHMMineDetailCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CHMMineDetailCell.m; sourceTree = "<group>"; };
+		C0EAA6292098723B0046F05C /* CHMMineDetailCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CHMMineDetailCell.xib; sourceTree = "<group>"; };
+		C0EAA62C209872520046F05C /* CHMMineItemCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CHMMineItemCell.h; sourceTree = "<group>"; };
+		C0EAA62D209872520046F05C /* CHMMineItemCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CHMMineItemCell.m; sourceTree = "<group>"; };
+		C0EAA62E209872520046F05C /* CHMMineItemCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CHMMineItemCell.xib; sourceTree = "<group>"; };
+		C0EAA6392098819F0046F05C /* UIImageView+CHMImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImageView+CHMImageView.h"; sourceTree = "<group>"; };
+		C0EAA63A2098819F0046F05C /* UIImageView+CHMImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImageView+CHMImageView.m"; sourceTree = "<group>"; };
 		C0F25A512095BC1800C6BCA6 /* MiniChat.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MiniChat.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C0F25A542095BC1800C6BCA6 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		C0F25A552095BC1800C6BCA6 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -123,11 +139,10 @@
 		C0EAA5C82097123C0046F05C /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
+				C0EAA61C209870E10046F05C /* DiyView */,
 				C0EAA613209866B20046F05C /* Category */,
 				C0EAA5D92097FE980046F05C /* ProgressHUD */,
 				C0EAA5D42097E7DB0046F05C /* Network */,
-				C0EAA5C9209712560046F05C /* RCUnderlineTextField.h */,
-				C0EAA5CA209712560046F05C /* RCUnderlineTextField.m */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -199,8 +214,7 @@
 		C0EAA60320985DAE0046F05C /* Mine */ = {
 			isa = PBXGroup;
 			children = (
-				C0EAA60F20985DFA0046F05C /* CHMMineController.h */,
-				C0EAA61020985DFA0046F05C /* CHMMineController.m */,
+				C0EAA6182098705D0046F05C /* HomePage */,
 			);
 			path = Mine;
 			sourceTree = "<group>";
@@ -226,6 +240,7 @@
 		C0EAA613209866B20046F05C /* Category */ = {
 			isa = PBXGroup;
 			children = (
+				C0EAA6382098819F0046F05C /* ImageView */,
 				C0EAA614209866B20046F05C /* Color */,
 			);
 			path = Category;
@@ -238,6 +253,49 @@
 				C0EAA616209866D60046F05C /* UIColor+CHMColor.m */,
 			);
 			path = Color;
+			sourceTree = "<group>";
+		};
+		C0EAA6182098705D0046F05C /* HomePage */ = {
+			isa = PBXGroup;
+			children = (
+				C0EAA6262098721F0046F05C /* cell */,
+				C0EAA6232098713E0046F05C /* CHMMineController.h */,
+				C0EAA6242098713E0046F05C /* CHMMineController.m */,
+			);
+			path = HomePage;
+			sourceTree = "<group>";
+		};
+		C0EAA61C209870E10046F05C /* DiyView */ = {
+			isa = PBXGroup;
+			children = (
+				C0EAA61E209870E10046F05C /* CHMTableViewController.h */,
+				C0EAA620209870E10046F05C /* CHMTableViewController.m */,
+				C0EAA61F209870E10046F05C /* RCUnderlineTextField.h */,
+				C0EAA61D209870E10046F05C /* RCUnderlineTextField.m */,
+			);
+			path = DiyView;
+			sourceTree = "<group>";
+		};
+		C0EAA6262098721F0046F05C /* cell */ = {
+			isa = PBXGroup;
+			children = (
+				C0EAA6272098723B0046F05C /* CHMMineDetailCell.h */,
+				C0EAA6282098723B0046F05C /* CHMMineDetailCell.m */,
+				C0EAA6292098723B0046F05C /* CHMMineDetailCell.xib */,
+				C0EAA62C209872520046F05C /* CHMMineItemCell.h */,
+				C0EAA62D209872520046F05C /* CHMMineItemCell.m */,
+				C0EAA62E209872520046F05C /* CHMMineItemCell.xib */,
+			);
+			path = cell;
+			sourceTree = "<group>";
+		};
+		C0EAA6382098819F0046F05C /* ImageView */ = {
+			isa = PBXGroup;
+			children = (
+				C0EAA6392098819F0046F05C /* UIImageView+CHMImageView.h */,
+				C0EAA63A2098819F0046F05C /* UIImageView+CHMImageView.m */,
+			);
+			path = ImageView;
 			sourceTree = "<group>";
 		};
 		C0F25A482095BC1800C6BCA6 = {
@@ -350,8 +408,10 @@
 			files = (
 				C0EAA5F3209823F40046F05C /* CHMRegisterController.xib in Resources */,
 				C0EAA5EE20981EE70046F05C /* CHMLoginController.xib in Resources */,
+				C0EAA62B2098723B0046F05C /* CHMMineDetailCell.xib in Resources */,
 				C0F25A612095BC1900C6BCA6 /* LaunchScreen.storyboard in Resources */,
 				C0EAA601209859960046F05C /* Main.storyboard in Resources */,
+				C0EAA630209872520046F05C /* CHMMineItemCell.xib in Resources */,
 				C0F25A5E2095BC1900C6BCA6 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -440,19 +500,23 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C0EAA63B2098819F0046F05C /* UIImageView+CHMImageView.m in Sources */,
 				C0EAA5ED20981EE70046F05C /* CHMLoginController.m in Sources */,
 				C0EAA60B20985DDD0046F05C /* CHMContactsController.m in Sources */,
+				C0EAA62A2098723B0046F05C /* CHMMineDetailCell.m in Sources */,
 				C0EAA60820985DCC0046F05C /* CHMChatRoomController.m in Sources */,
-				C0EAA61120985DFA0046F05C /* CHMMineController.m in Sources */,
+				C0EAA621209870E10046F05C /* RCUnderlineTextField.m in Sources */,
 				C0EAA5F2209823F40046F05C /* CHMRegisterController.m in Sources */,
-				C0EAA5CB209712560046F05C /* RCUnderlineTextField.m in Sources */,
+				C0EAA62F209872520046F05C /* CHMMineItemCell.m in Sources */,
 				C0EAA617209866D60046F05C /* UIColor+CHMColor.m in Sources */,
 				C0EAA60E20985DEE0046F05C /* CHMConversationController.m in Sources */,
 				C0F25A642095BC1900C6BCA6 /* main.m in Sources */,
 				C0F25A562095BC1800C6BCA6 /* AppDelegate.m in Sources */,
 				C0EAA5D72097E8210046F05C /* CHMHttpTool.m in Sources */,
+				C0EAA622209870E10046F05C /* CHMTableViewController.m in Sources */,
 				C0EAA5F92098270B0046F05C /* CHMProgressHUD.m in Sources */,
 				C0EAA5F62098259D0046F05C /* CHMRongTokenResponse.m in Sources */,
+				C0EAA6252098713E0046F05C /* CHMMineController.m in Sources */,
 				C0EAA5FE20984F2D0046F05C /* CHMMainController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

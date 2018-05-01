@@ -18,6 +18,7 @@
 #import "UserInfoConstants.h"
 #import "ColorConstants.h"
 #import "UIColor+CHMColor.h"
+#import "UIImageView+CHMImageView.h"
 
 #import "CHMProgressHUD.h"
 #import "MJExtension.h"

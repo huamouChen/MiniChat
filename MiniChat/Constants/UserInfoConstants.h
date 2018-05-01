@@ -13,10 +13,12 @@
 
 #define KLoginNotification   @"loginSuccess"
 
-#define AccountName        @"UserName"
+#define KAccount        @"account"
 #define Password            @"Password"
 #define LoginToken           @"Token"
 #define RongCloudToken       @"RongToken"
+#define KNickName       @"nickName"
+#define KPortrait       @"portrait"
 
 
 #endif /* UserInfoConstants_h */
