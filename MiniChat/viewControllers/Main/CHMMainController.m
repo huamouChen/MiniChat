@@ -18,9 +18,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
-    self.tabBar.tintColor = [UIColor chm_colorWithHexString:KMainColor alpha:1.0];
-    
+
 }
 
 - (void)didReceiveMemoryWarning {

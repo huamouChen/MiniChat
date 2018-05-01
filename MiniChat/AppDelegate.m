@@ -25,6 +25,8 @@
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(switchRootViewController) name:KLoginNotification object:nil];
     
+    [self setupBarAppearance];
+    
     self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
     self.window.backgroundColor = [UIColor whiteColor];
     [self.window makeKeyAndVisible];
@@ -53,12 +55,23 @@
     if (token) {
         
         CHMMainController *mainController = (CHMMainController *)[[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"tabBarController"];
-//        CHMMainController *mainController = [[CHMMainController alloc] init];
         self.window.rootViewController = mainController;
     } else {
         UINavigationController *navCon = [[UINavigationController alloc] initWithRootViewController:[CHMLoginController new]];
         self.window.rootViewController = navCon;
     }
+}
+
+
+/**
+ 设置 navigationBar 和 tabBar 的样式
+ */
+- (void)setupBarAppearance {
+    // navigationBar
+    [[UINavigationBar appearance] setBarTintColor:[UIColor chm_colorWithHexString:KMainColor alpha:1.0]];
+    [[UINavigationBar appearance] setTitleTextAttributes:@{NSForegroundColorAttributeName:[UIColor whiteColor], NSFontAttributeName: [UIFont systemFontOfSize:18]}];
+    // tabBar
+    [[UITabBar appearance] setTintColor:[UIColor chm_colorWithHexString:KMainColor alpha:1.0]];
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application {
