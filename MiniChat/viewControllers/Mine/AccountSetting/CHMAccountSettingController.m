@@ -13,6 +13,7 @@
 static NSString *const settingCellReuseId = @"CHMAccountSettingCell";
 static NSString *const logoutCellReuseId = @"CHMLogoutCell";
 static int const rowHeight = 44;
+static int const sectionHeaderHeight = 15;
 
 @interface CHMAccountSettingController ()
 @property (nonatomic, strong) NSArray *itemArray;
@@ -23,10 +24,11 @@ static int const rowHeight = 44;
 #pragma mark - view life cycler
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // 获取数据
-    [self initData];
     // 设置外观
     [self setupAppearance];
+    
+    // 获取数据
+    [self initData];
 }
 
 
@@ -42,6 +44,10 @@ static int const rowHeight = 44;
     [self.tableView registerNib:[UINib nibWithNibName:NSStringFromClass([CHMLogoutCell class]) bundle:nil] forCellReuseIdentifier:logoutCellReuseId];
     // row height
     self.tableView.rowHeight = rowHeight;
+    // section view height
+    self.tableView.sectionHeaderHeight = sectionHeaderHeight;
+    // background color
+    self.tableView.backgroundColor = [UIColor chm_colorWithHexString:KTableViweBackgroundColor alpha:1.0];
 }
 
 
@@ -87,6 +93,12 @@ static int const rowHeight = 44;
 }
 
 #pragma mark - table view delegate
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
+    UIView *sectionView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 15)];
+    sectionView.backgroundColor = [UIColor chm_colorWithHexString:KTableViweBackgroundColor alpha:1.0];
+    return sectionView;
+}
+
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     if (indexPath.section == 2) {

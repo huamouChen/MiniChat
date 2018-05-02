@@ -46,6 +46,8 @@ static NSString *const itemReuseablId = @"CHMMineItemCell";
     // auto estima height
     self.tableView.estimatedRowHeight = 70;
     self.tableView.rowHeight = UITableViewAutomaticDimension;
+    
+    self.tableView.backgroundColor = [UIColor chm_colorWithHexString:KTableViweBackgroundColor alpha:1.0];
 }
 
 
@@ -96,6 +98,12 @@ static NSString *const itemReuseablId = @"CHMMineItemCell";
             [self.navigationController pushViewController:[CHMAccountSettingController new] animated:YES];
         }
     }
+}
+
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
+    UIView *sectionView = [UIView new];
+    sectionView.backgroundColor = [UIColor chm_colorWithHexString:KTableViweBackgroundColor alpha:1.0];
+    return sectionView;
 }
 
 

@@ -10,7 +10,6 @@
 		C066ED8B2099C98F00CB87FC /* CHMConversationController.m in Sources */ = {isa = PBXBuildFile; fileRef = C066ED892099C98F00CB87FC /* CHMConversationController.m */; };
 		C066ED8C2099C98F00CB87FC /* CHMConversationController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C066ED8A2099C98F00CB87FC /* CHMConversationController.xib */; };
 		C066ED912099E2C500CB87FC /* CHMAccountSettingController.m in Sources */ = {isa = PBXBuildFile; fileRef = C066ED8F2099E2C500CB87FC /* CHMAccountSettingController.m */; };
-		C066ED922099E2C500CB87FC /* CHMAccountSettingController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C066ED902099E2C500CB87FC /* CHMAccountSettingController.xib */; };
 		C066ED972099E45500CB87FC /* CHMAccountSettingCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C066ED952099E45500CB87FC /* CHMAccountSettingCell.m */; };
 		C066ED982099E45500CB87FC /* CHMAccountSettingCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C066ED962099E45500CB87FC /* CHMAccountSettingCell.xib */; };
 		C066ED9C2099E47600CB87FC /* CHMLogoutCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C066ED9A2099E47600CB87FC /* CHMLogoutCell.m */; };
@@ -55,7 +54,6 @@
 		C066ED8A2099C98F00CB87FC /* CHMConversationController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CHMConversationController.xib; sourceTree = "<group>"; };
 		C066ED8E2099E2C500CB87FC /* CHMAccountSettingController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CHMAccountSettingController.h; sourceTree = "<group>"; };
 		C066ED8F2099E2C500CB87FC /* CHMAccountSettingController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CHMAccountSettingController.m; sourceTree = "<group>"; };
-		C066ED902099E2C500CB87FC /* CHMAccountSettingController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CHMAccountSettingController.xib; sourceTree = "<group>"; };
 		C066ED942099E45500CB87FC /* CHMAccountSettingCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CHMAccountSettingCell.h; sourceTree = "<group>"; };
 		C066ED952099E45500CB87FC /* CHMAccountSettingCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CHMAccountSettingCell.m; sourceTree = "<group>"; };
 		C066ED962099E45500CB87FC /* CHMAccountSettingCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CHMAccountSettingCell.xib; sourceTree = "<group>"; };
@@ -170,7 +168,6 @@
 				C066ED932099E42F00CB87FC /* view */,
 				C066ED8E2099E2C500CB87FC /* CHMAccountSettingController.h */,
 				C066ED8F2099E2C500CB87FC /* CHMAccountSettingController.m */,
-				C066ED902099E2C500CB87FC /* CHMAccountSettingController.xib */,
 			);
 			path = AccountSetting;
 			sourceTree = "<group>";
@@ -478,7 +475,6 @@
 				C0EAA5F3209823F40046F05C /* CHMRegisterController.xib in Resources */,
 				C0EAA6412098B63D0046F05C /* CHMChatRoomCell.xib in Resources */,
 				C0EAA5EE20981EE70046F05C /* CHMLoginController.xib in Resources */,
-				C066ED922099E2C500CB87FC /* CHMAccountSettingController.xib in Resources */,
 				C0EAA62B2098723B0046F05C /* CHMMineDetailCell.xib in Resources */,
 				C0F25A612095BC1900C6BCA6 /* LaunchScreen.storyboard in Resources */,
 				C0EAA601209859960046F05C /* Main.storyboard in Resources */,
