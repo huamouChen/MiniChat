@@ -9,6 +9,12 @@
 /* Begin PBXBuildFile section */
 		C066ED8B2099C98F00CB87FC /* CHMConversationController.m in Sources */ = {isa = PBXBuildFile; fileRef = C066ED892099C98F00CB87FC /* CHMConversationController.m */; };
 		C066ED8C2099C98F00CB87FC /* CHMConversationController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C066ED8A2099C98F00CB87FC /* CHMConversationController.xib */; };
+		C066ED912099E2C500CB87FC /* CHMAccountSettingController.m in Sources */ = {isa = PBXBuildFile; fileRef = C066ED8F2099E2C500CB87FC /* CHMAccountSettingController.m */; };
+		C066ED922099E2C500CB87FC /* CHMAccountSettingController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C066ED902099E2C500CB87FC /* CHMAccountSettingController.xib */; };
+		C066ED972099E45500CB87FC /* CHMAccountSettingCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C066ED952099E45500CB87FC /* CHMAccountSettingCell.m */; };
+		C066ED982099E45500CB87FC /* CHMAccountSettingCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C066ED962099E45500CB87FC /* CHMAccountSettingCell.xib */; };
+		C066ED9C2099E47600CB87FC /* CHMLogoutCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C066ED9A2099E47600CB87FC /* CHMLogoutCell.m */; };
+		C066ED9D2099E47600CB87FC /* CHMLogoutCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C066ED9B2099E47600CB87FC /* CHMLogoutCell.xib */; };
 		C0EAA5D72097E8210046F05C /* CHMHttpTool.m in Sources */ = {isa = PBXBuildFile; fileRef = C0EAA5D62097E8210046F05C /* CHMHttpTool.m */; };
 		C0EAA5ED20981EE70046F05C /* CHMLoginController.m in Sources */ = {isa = PBXBuildFile; fileRef = C0EAA5EB20981EE70046F05C /* CHMLoginController.m */; };
 		C0EAA5EE20981EE70046F05C /* CHMLoginController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C0EAA5EC20981EE70046F05C /* CHMLoginController.xib */; };
@@ -47,6 +53,15 @@
 		C066ED882099C98F00CB87FC /* CHMConversationController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CHMConversationController.h; sourceTree = "<group>"; };
 		C066ED892099C98F00CB87FC /* CHMConversationController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CHMConversationController.m; sourceTree = "<group>"; };
 		C066ED8A2099C98F00CB87FC /* CHMConversationController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CHMConversationController.xib; sourceTree = "<group>"; };
+		C066ED8E2099E2C500CB87FC /* CHMAccountSettingController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CHMAccountSettingController.h; sourceTree = "<group>"; };
+		C066ED8F2099E2C500CB87FC /* CHMAccountSettingController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CHMAccountSettingController.m; sourceTree = "<group>"; };
+		C066ED902099E2C500CB87FC /* CHMAccountSettingController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CHMAccountSettingController.xib; sourceTree = "<group>"; };
+		C066ED942099E45500CB87FC /* CHMAccountSettingCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CHMAccountSettingCell.h; sourceTree = "<group>"; };
+		C066ED952099E45500CB87FC /* CHMAccountSettingCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CHMAccountSettingCell.m; sourceTree = "<group>"; };
+		C066ED962099E45500CB87FC /* CHMAccountSettingCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CHMAccountSettingCell.xib; sourceTree = "<group>"; };
+		C066ED992099E47600CB87FC /* CHMLogoutCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CHMLogoutCell.h; sourceTree = "<group>"; };
+		C066ED9A2099E47600CB87FC /* CHMLogoutCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CHMLogoutCell.m; sourceTree = "<group>"; };
+		C066ED9B2099E47600CB87FC /* CHMLogoutCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CHMLogoutCell.xib; sourceTree = "<group>"; };
 		C0EAA5D52097E8210046F05C /* CHMHttpTool.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CHMHttpTool.h; sourceTree = "<group>"; };
 		C0EAA5D62097E8210046F05C /* CHMHttpTool.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CHMHttpTool.m; sourceTree = "<group>"; };
 		C0EAA5E120980AE30046F05C /* HttpConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HttpConstants.h; sourceTree = "<group>"; };
@@ -149,6 +164,30 @@
 			path = Login;
 			sourceTree = "<group>";
 		};
+		C066ED8D2099E2A500CB87FC /* AccountSetting */ = {
+			isa = PBXGroup;
+			children = (
+				C066ED932099E42F00CB87FC /* view */,
+				C066ED8E2099E2C500CB87FC /* CHMAccountSettingController.h */,
+				C066ED8F2099E2C500CB87FC /* CHMAccountSettingController.m */,
+				C066ED902099E2C500CB87FC /* CHMAccountSettingController.xib */,
+			);
+			path = AccountSetting;
+			sourceTree = "<group>";
+		};
+		C066ED932099E42F00CB87FC /* view */ = {
+			isa = PBXGroup;
+			children = (
+				C066ED942099E45500CB87FC /* CHMAccountSettingCell.h */,
+				C066ED952099E45500CB87FC /* CHMAccountSettingCell.m */,
+				C066ED962099E45500CB87FC /* CHMAccountSettingCell.xib */,
+				C066ED992099E47600CB87FC /* CHMLogoutCell.h */,
+				C066ED9A2099E47600CB87FC /* CHMLogoutCell.m */,
+				C066ED9B2099E47600CB87FC /* CHMLogoutCell.xib */,
+			);
+			path = view;
+			sourceTree = "<group>";
+		};
 		C0EAA5C82097123C0046F05C /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
@@ -229,6 +268,7 @@
 		C0EAA60320985DAE0046F05C /* Mine */ = {
 			isa = PBXGroup;
 			children = (
+				C066ED8D2099E2A500CB87FC /* AccountSetting */,
 				C0EAA6182098705D0046F05C /* HomePage */,
 			);
 			path = Mine;
@@ -438,11 +478,14 @@
 				C0EAA5F3209823F40046F05C /* CHMRegisterController.xib in Resources */,
 				C0EAA6412098B63D0046F05C /* CHMChatRoomCell.xib in Resources */,
 				C0EAA5EE20981EE70046F05C /* CHMLoginController.xib in Resources */,
+				C066ED922099E2C500CB87FC /* CHMAccountSettingController.xib in Resources */,
 				C0EAA62B2098723B0046F05C /* CHMMineDetailCell.xib in Resources */,
 				C0F25A612095BC1900C6BCA6 /* LaunchScreen.storyboard in Resources */,
 				C0EAA601209859960046F05C /* Main.storyboard in Resources */,
 				C0EAA630209872520046F05C /* CHMMineItemCell.xib in Resources */,
+				C066ED9D2099E47600CB87FC /* CHMLogoutCell.xib in Resources */,
 				C0F25A5E2095BC1900C6BCA6 /* Assets.xcassets in Resources */,
+				C066ED982099E45500CB87FC /* CHMAccountSettingCell.xib in Resources */,
 				C066ED8C2099C98F00CB87FC /* CHMConversationController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -538,14 +581,17 @@
 				C0EAA62A2098723B0046F05C /* CHMMineDetailCell.m in Sources */,
 				C066ED8B2099C98F00CB87FC /* CHMConversationController.m in Sources */,
 				C0EAA60820985DCC0046F05C /* CHMChatRoomController.m in Sources */,
+				C066ED912099E2C500CB87FC /* CHMAccountSettingController.m in Sources */,
 				C0EAA621209870E10046F05C /* RCUnderlineTextField.m in Sources */,
 				C0EAA6442098B7C80046F05C /* CHMChatRoomModel.m in Sources */,
 				C0EAA5F2209823F40046F05C /* CHMRegisterController.m in Sources */,
 				C0EAA62F209872520046F05C /* CHMMineItemCell.m in Sources */,
+				C066ED9C2099E47600CB87FC /* CHMLogoutCell.m in Sources */,
 				C0EAA617209866D60046F05C /* UIColor+CHMColor.m in Sources */,
 				C0EAA60E20985DEE0046F05C /* CHMConversationListController.m in Sources */,
 				C0F25A642095BC1900C6BCA6 /* main.m in Sources */,
 				C0F25A562095BC1800C6BCA6 /* AppDelegate.m in Sources */,
+				C066ED972099E45500CB87FC /* CHMAccountSettingCell.m in Sources */,
 				C0EAA5D72097E8210046F05C /* CHMHttpTool.m in Sources */,
 				C0EAA622209870E10046F05C /* CHMTableViewController.m in Sources */,
 				C0EAA5F92098270B0046F05C /* CHMProgressHUD.m in Sources */,

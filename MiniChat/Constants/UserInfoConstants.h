@@ -11,15 +11,20 @@
 
 
 
-#define KLoginNotification   @"loginSuccess"
+#define KSwitchRootViewController   @"switchRootViewController"
 
 #define KAccount        @"account"
 #define KPassword            @"Password"
-#define LoginToken           @"Token"
+#define KLoginToken           @"loginToken"
 #define KRongCloudToken       @"RongToken"
 #define KNickName       @"nickName"
 #define KPortrait       @"portrait"
 #define KPhoneNum       @"phoneNum"
+
+
+
+
+#define KTitle    @"cellTitle"
 
 
 #endif /* UserInfoConstants_h */

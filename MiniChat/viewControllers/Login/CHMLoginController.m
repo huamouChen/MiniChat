@@ -35,8 +35,8 @@
         NSLog(@"----------%@", response );
         NSNumber *result = response[@"Result"];
         if (result.integerValue == 0) {
-            NSString *loginToken = response[LoginToken];
-            [[NSUserDefaults standardUserDefaults] setObject:loginToken forKey:LoginToken];
+            NSString *loginToken = response[@"Token"];
+            [[NSUserDefaults standardUserDefaults] setObject:loginToken forKey:KLoginToken];
             [self getRongToken];
         } else {
             [CHMProgressHUD showErrorWithInfo:response[@"Error"]];
@@ -108,7 +108,7 @@
             
             // 切换根控制器
             dispatch_async(dispatch_get_main_queue(), ^{
-                [[NSNotificationCenter defaultCenter] postNotificationName:KLoginNotification object:nil];
+                [[NSNotificationCenter defaultCenter] postNotificationName:KSwitchRootViewController object:nil];
             });
             
         }

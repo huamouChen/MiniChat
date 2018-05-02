@@ -50,7 +50,7 @@ static CHMHttpTool *instanse = nil;
     // 百分比化 url
     url = [url stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]];
     
-    NSString *tokenString = [[NSUserDefaults standardUserDefaults] objectForKey:LoginToken];
+    NSString *tokenString = [[NSUserDefaults standardUserDefaults] objectForKey:KLoginToken];
     if (tokenString) {
         [[CHMHttpTool shareManager].sessionManager.requestSerializer setValue:[NSString stringWithFormat:@"Bearer %@", tokenString] forHTTPHeaderField:@"Authorization"];
     }

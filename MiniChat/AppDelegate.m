@@ -25,7 +25,7 @@
     
     [application setStatusBarStyle:UIStatusBarStyleLightContent];
     
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(switchRootViewController) name:KLoginNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(switchRootViewController) name:KSwitchRootViewController object:nil];
     
     // 初始化融云
     [[RCIM sharedRCIM] initWithAppKey:RongCloudAppKey];
@@ -55,7 +55,7 @@
  设置跟控制器
  */
 - (void)switchRootViewController {
-    NSString *token =  [[NSUserDefaults standardUserDefaults] valueForKey:LoginToken];
+    NSString *token =  [[NSUserDefaults standardUserDefaults] valueForKey:KRongCloudToken];
     if (token) {
         
         CHMMainController *mainController = (CHMMainController *)[[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"tabBarController"];
@@ -72,10 +72,10 @@
  设置 navigationBar 和 tabBar 的样式
  */
 - (void)setupBarAppearance {
-    
     // navigationBar
     [[UINavigationBar appearance] setBarTintColor:[UIColor chm_colorWithHexString:KMainColor alpha:1.0]];
     [[UINavigationBar appearance] setTitleTextAttributes:@{NSForegroundColorAttributeName:[UIColor whiteColor], NSFontAttributeName: [UIFont systemFontOfSize:18]}];
+    [[UINavigationBar appearance] setTintColor:[UIColor whiteColor]];
     // tabBar
     [[UITabBar appearance] setTintColor:[UIColor chm_colorWithHexString:KMainColor alpha:1.0]];
 }

@@ -9,6 +9,7 @@
 #import "CHMMineController.h"
 #import "CHMMineDetailCell.h"
 #import "CHMMineItemCell.h"
+#import "CHMAccountSettingController.h"
 
 static NSString *const detailReuseablId = @"CHMMineDetailCell";
 static NSString *const itemReuseablId = @"CHMMineItemCell";
@@ -88,6 +89,15 @@ static NSString *const itemReuseablId = @"CHMMineItemCell";
 
 
 #pragma mark - table view delegate
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    if (indexPath.section == 1) {
+        if (indexPath.row == 0) { // 账号设置
+            [self.navigationController pushViewController:[CHMAccountSettingController new] animated:YES];
+        }
+    }
+}
+
 
 
 
