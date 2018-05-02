@@ -11,9 +11,12 @@
 
 
 // 融云 AppKey
+
+#ifdef DEBUG
 #define RongCloudAppKey   @"cpj2xarlc74vn"
-// 融云调试token
-#define RongCloudTestToken      @"zEbrjwwUm+EDZcrWU8kj+JFo+JgPj1M/zSlaPtimCR62bPZKSfTJHCW4V1Sqi2jUAWzI9UB2Ql1s5F6tgEscEQ=="
+#else
+#define RongCloudAppKey   @"cpj2xarlc74vn"
+#endif
 
 
 #define KIsiPhoneX ([UIScreen instancesRespondToSelector:@selector(currentMode)] ? CGSizeEqualToSize(CGSizeMake(1125, 2436), [[UIScreen mainScreen] currentMode].size) : NO)

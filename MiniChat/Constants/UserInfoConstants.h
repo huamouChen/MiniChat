@@ -16,7 +16,7 @@
 #define KAccount        @"account"
 #define KPassword            @"Password"
 #define LoginToken           @"Token"
-#define RongCloudToken       @"RongToken"
+#define KRongCloudToken       @"RongToken"
 #define KNickName       @"nickName"
 #define KPortrait       @"portrait"
 #define KPhoneNum       @"phoneNum"

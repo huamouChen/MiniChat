@@ -59,7 +59,7 @@
         if (codeId.integerValue == 100) {
             NSString *rongToken = response[@"Value"][@"RongToken"];
             // 保存融云Token
-            [[NSUserDefaults standardUserDefaults] setObject:RongCloudToken forKey:rongToken];
+            [[NSUserDefaults standardUserDefaults] setObject:rongToken forKey:KRongCloudToken];
             // 连接融云服务器
             [[RCIM sharedRCIM] connectWithToken:rongToken success:^(NSString *userId) {
                 // 获取个人信息

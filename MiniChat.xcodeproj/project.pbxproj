@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		C066ED8B2099C98F00CB87FC /* CHMConversationController.m in Sources */ = {isa = PBXBuildFile; fileRef = C066ED892099C98F00CB87FC /* CHMConversationController.m */; };
+		C066ED8C2099C98F00CB87FC /* CHMConversationController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C066ED8A2099C98F00CB87FC /* CHMConversationController.xib */; };
 		C0EAA5D72097E8210046F05C /* CHMHttpTool.m in Sources */ = {isa = PBXBuildFile; fileRef = C0EAA5D62097E8210046F05C /* CHMHttpTool.m */; };
 		C0EAA5ED20981EE70046F05C /* CHMLoginController.m in Sources */ = {isa = PBXBuildFile; fileRef = C0EAA5EB20981EE70046F05C /* CHMLoginController.m */; };
 		C0EAA5EE20981EE70046F05C /* CHMLoginController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C0EAA5EC20981EE70046F05C /* CHMLoginController.xib */; };
@@ -18,7 +20,7 @@
 		C0EAA601209859960046F05C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C0EAA600209859960046F05C /* Main.storyboard */; };
 		C0EAA60820985DCC0046F05C /* CHMChatRoomController.m in Sources */ = {isa = PBXBuildFile; fileRef = C0EAA60720985DCC0046F05C /* CHMChatRoomController.m */; };
 		C0EAA60B20985DDD0046F05C /* CHMContactsController.m in Sources */ = {isa = PBXBuildFile; fileRef = C0EAA60A20985DDD0046F05C /* CHMContactsController.m */; };
-		C0EAA60E20985DEE0046F05C /* CHMConversationController.m in Sources */ = {isa = PBXBuildFile; fileRef = C0EAA60D20985DEE0046F05C /* CHMConversationController.m */; };
+		C0EAA60E20985DEE0046F05C /* CHMConversationListController.m in Sources */ = {isa = PBXBuildFile; fileRef = C0EAA60D20985DEE0046F05C /* CHMConversationListController.m */; };
 		C0EAA617209866D60046F05C /* UIColor+CHMColor.m in Sources */ = {isa = PBXBuildFile; fileRef = C0EAA616209866D60046F05C /* UIColor+CHMColor.m */; };
 		C0EAA621209870E10046F05C /* RCUnderlineTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = C0EAA61D209870E10046F05C /* RCUnderlineTextField.m */; };
 		C0EAA622209870E10046F05C /* CHMTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C0EAA620209870E10046F05C /* CHMTableViewController.m */; };
@@ -42,6 +44,9 @@
 		6621D17447B24B984234EF83 /* Pods_MiniChat.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MiniChat.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		79BE6016547BAA125EC667D1 /* Pods-MiniChat.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MiniChat.release.xcconfig"; path = "Pods/Target Support Files/Pods-MiniChat/Pods-MiniChat.release.xcconfig"; sourceTree = "<group>"; };
 		C00427532095CC7600BE24C1 /* PrefixHeader.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
+		C066ED882099C98F00CB87FC /* CHMConversationController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CHMConversationController.h; sourceTree = "<group>"; };
+		C066ED892099C98F00CB87FC /* CHMConversationController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CHMConversationController.m; sourceTree = "<group>"; };
+		C066ED8A2099C98F00CB87FC /* CHMConversationController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CHMConversationController.xib; sourceTree = "<group>"; };
 		C0EAA5D52097E8210046F05C /* CHMHttpTool.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CHMHttpTool.h; sourceTree = "<group>"; };
 		C0EAA5D62097E8210046F05C /* CHMHttpTool.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CHMHttpTool.m; sourceTree = "<group>"; };
 		C0EAA5E120980AE30046F05C /* HttpConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HttpConstants.h; sourceTree = "<group>"; };
@@ -64,8 +69,8 @@
 		C0EAA60720985DCC0046F05C /* CHMChatRoomController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CHMChatRoomController.m; sourceTree = "<group>"; };
 		C0EAA60920985DDD0046F05C /* CHMContactsController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CHMContactsController.h; sourceTree = "<group>"; };
 		C0EAA60A20985DDD0046F05C /* CHMContactsController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CHMContactsController.m; sourceTree = "<group>"; };
-		C0EAA60C20985DEE0046F05C /* CHMConversationController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CHMConversationController.h; sourceTree = "<group>"; };
-		C0EAA60D20985DEE0046F05C /* CHMConversationController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CHMConversationController.m; sourceTree = "<group>"; };
+		C0EAA60C20985DEE0046F05C /* CHMConversationListController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CHMConversationListController.h; sourceTree = "<group>"; };
+		C0EAA60D20985DEE0046F05C /* CHMConversationListController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CHMConversationListController.m; sourceTree = "<group>"; };
 		C0EAA612209864E10046F05C /* ColorConstants.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ColorConstants.h; sourceTree = "<group>"; };
 		C0EAA615209866D60046F05C /* UIColor+CHMColor.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIColor+CHMColor.h"; sourceTree = "<group>"; };
 		C0EAA616209866D60046F05C /* UIColor+CHMColor.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIColor+CHMColor.m"; sourceTree = "<group>"; };
@@ -242,8 +247,11 @@
 		C0EAA60520985DAF0046F05C /* Conversation */ = {
 			isa = PBXGroup;
 			children = (
-				C0EAA60C20985DEE0046F05C /* CHMConversationController.h */,
-				C0EAA60D20985DEE0046F05C /* CHMConversationController.m */,
+				C0EAA60C20985DEE0046F05C /* CHMConversationListController.h */,
+				C0EAA60D20985DEE0046F05C /* CHMConversationListController.m */,
+				C066ED882099C98F00CB87FC /* CHMConversationController.h */,
+				C066ED892099C98F00CB87FC /* CHMConversationController.m */,
+				C066ED8A2099C98F00CB87FC /* CHMConversationController.xib */,
 			);
 			path = Conversation;
 			sourceTree = "<group>";
@@ -435,6 +443,7 @@
 				C0EAA601209859960046F05C /* Main.storyboard in Resources */,
 				C0EAA630209872520046F05C /* CHMMineItemCell.xib in Resources */,
 				C0F25A5E2095BC1900C6BCA6 /* Assets.xcassets in Resources */,
+				C066ED8C2099C98F00CB87FC /* CHMConversationController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -527,13 +536,14 @@
 				C0EAA60B20985DDD0046F05C /* CHMContactsController.m in Sources */,
 				C0EAA6402098B63D0046F05C /* CHMChatRoomCell.m in Sources */,
 				C0EAA62A2098723B0046F05C /* CHMMineDetailCell.m in Sources */,
+				C066ED8B2099C98F00CB87FC /* CHMConversationController.m in Sources */,
 				C0EAA60820985DCC0046F05C /* CHMChatRoomController.m in Sources */,
 				C0EAA621209870E10046F05C /* RCUnderlineTextField.m in Sources */,
 				C0EAA6442098B7C80046F05C /* CHMChatRoomModel.m in Sources */,
 				C0EAA5F2209823F40046F05C /* CHMRegisterController.m in Sources */,
 				C0EAA62F209872520046F05C /* CHMMineItemCell.m in Sources */,
 				C0EAA617209866D60046F05C /* UIColor+CHMColor.m in Sources */,
-				C0EAA60E20985DEE0046F05C /* CHMConversationController.m in Sources */,
+				C0EAA60E20985DEE0046F05C /* CHMConversationListController.m in Sources */,
 				C0F25A642095BC1900C6BCA6 /* main.m in Sources */,
 				C0F25A562095BC1800C6BCA6 /* AppDelegate.m in Sources */,
 				C0EAA5D72097E8210046F05C /* CHMHttpTool.m in Sources */,

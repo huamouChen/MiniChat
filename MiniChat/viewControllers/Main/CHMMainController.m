@@ -8,7 +8,7 @@
 
 #import "CHMMainController.h"
 
-@interface CHMMainController ()
+@interface CHMMainController () <RCIMUserInfoDataSource>
 
 @end
 
@@ -18,10 +18,47 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    // 连接融云服务器
+    [self connectToRongCloud];
+    
+    [RCIM sharedRCIM].userInfoDataSource = self;
+    
 }
 
-- (UIStatusBarStyle)preferredStatusBarStyle {
-    return UIStatusBarStyleLightContent;
+/**
+ 连接融云服务器
+ */
+- (void)connectToRongCloud {
+    NSString *rongCloudToken = [[NSUserDefaults standardUserDefaults] valueForKey:KRongCloudToken];
+    [[RCIM sharedRCIM] connectWithToken:rongCloudToken success:^(NSString *userId) {
+        NSLog(@"----连接成功%@",userId);
+        [self setCurrentUserInfo];
+    } error:^(RCConnectErrorCode status) {
+        NSLog(@"----连接失败%ld",(long)status);
+    } tokenIncorrect:^{
+        NSLog(@"----连接token不正确");
+    }];
+}
+
+
+/**
+ 设置当前用户的用户信息，用于SDK显示和发送。
+ */
+- (void)setCurrentUserInfo {
+    // 从沙盒中取登录时保存的用户信息
+    NSString *nickName = [[NSUserDefaults standardUserDefaults] valueForKey:KNickName];
+    NSString *account = [[NSUserDefaults standardUserDefaults] valueForKey:KAccount];
+    NSString *portrait = [[NSUserDefaults standardUserDefaults] valueForKey:KPortrait];
+    portrait = [NSString stringWithFormat:@"%@%@",BaseURL, portrait];
+    [RCIM sharedRCIM].currentUserInfo = [[RCUserInfo alloc] initWithUserId:account name:nickName portrait:portrait];
+}
+
+
+
+#pragma mark - 用户信息提供者
+- (void)getUserInfoWithUserId:(NSString *)userId completion:(void (^)(RCUserInfo *))completion {
+    
 }
 
 - (void)didReceiveMemoryWarning {
@@ -29,14 +66,5 @@
     // Dispose of any resources that can be recreated.
 }
 
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end
