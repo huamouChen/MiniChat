@@ -70,4 +70,12 @@ typedef void(^failureBlock)(NSError *error);
  */
 + (void)getChatRoomListsWithSuccess:(successBlock)success failure:(failureBlock)failure;
 
+/**
+ 获取用户关系列表
+ 
+ @param success 成功
+ @param failure 失败
+ */
++ (void)getUserRelationShipListWithSuccess:(successBlock)success failure:(failureBlock)failure;
+
 @end

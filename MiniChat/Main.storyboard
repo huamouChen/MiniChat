@@ -160,7 +160,7 @@
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <connections>
-                        <segue destination="uiA-Ix-cSz" kind="relationship" relationship="rootViewController" id="Zg7-Ea-fMK"/>
+                        <segue destination="HGw-wk-3JH" kind="relationship" relationship="rootViewController" id="ohe-T0-bCi"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Bc9-Y8-yaL" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -168,20 +168,20 @@
             <point key="canvasLocation" x="-800" y="220"/>
         </scene>
         <!--通讯录-->
-        <scene sceneID="Wm6-R3-WSr">
+        <scene sceneID="f89-QQ-Whd">
             <objects>
-                <viewController id="uiA-Ix-cSz" customClass="CHMContactsController" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="SkH-7Y-Hrj">
+                <viewController id="HGw-wk-3JH" customClass="CHMContactsController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="v7p-7s-wjE">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <viewLayoutGuide key="safeArea" id="OQm-xh-DJb"/>
+                        <viewLayoutGuide key="safeArea" id="y1y-EN-v37"/>
                     </view>
-                    <navigationItem key="navigationItem" title="通讯录" id="qzS-kO-dn8"/>
+                    <navigationItem key="navigationItem" title="通讯录" id="snU-bO-zvQ"/>
                 </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="u0z-8q-OLF" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="sYz-7m-SBk" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="6" y="224"/>
+            <point key="canvasLocation" x="-44" y="220"/>
         </scene>
         <!--会话-->
         <scene sceneID="fQE-4x-DKa">

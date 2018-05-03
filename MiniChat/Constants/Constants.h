@@ -37,6 +37,12 @@
 #define KTouchBarHeight 34.0f
 #define KIsiPhoneX ([UIScreen instancesRespondToSelector:@selector(currentMode)] ? CGSizeEqualToSize(CGSizeMake(1125, 2436), [[UIScreen mainScreen] currentMode].size) : NO)
 
+#define KNavigationBar88    88.0
+#define KNavigationBar64    64.0
+#define KNavigationBar44    44.0
+#define KTabBar49    49.0
+#define KMargin10    10.0f
+
 // 弱引用、强引用
 #define kWeakSelf(type)  __weak typeof(type) weak##type = type;
 #define kStrongSelf(type) __strong typeof(type) type = weak##type;

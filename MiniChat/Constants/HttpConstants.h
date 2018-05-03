@@ -27,6 +27,10 @@
 #define GetChatRoomListURL  @"api/Im/ListChatroom"
 
 
+// 获取用户关系列表
+#define GetUserRelationshipListsURL       @"api/Im/ListFriends"
+
+
 
 
 
