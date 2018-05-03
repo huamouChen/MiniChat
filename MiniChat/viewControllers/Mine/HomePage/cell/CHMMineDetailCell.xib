@@ -68,6 +68,7 @@
                 <outlet property="accountLabel" destination="3eR-hs-Ih9" id="oP6-fX-Z3x"/>
                 <outlet property="headerImg" destination="ugE-jL-VzC" id="gE4-qu-aIE"/>
                 <outlet property="nicknameLabel" destination="nVn-6u-oDP" id="Mmn-Xm-CPY"/>
+                <outlet property="rightArrowImg" destination="yfk-wW-GJi" id="aAQ-VL-vY5"/>
             </connections>
             <point key="canvasLocation" x="69" y="79.5"/>
         </tableViewCell>

@@ -23,6 +23,8 @@
 		C066EDB4209A862300CB87FC /* CHMUserDetailController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C066EDB2209A862300CB87FC /* CHMUserDetailController.xib */; };
 		C066EDB7209A9C7E00CB87FC /* CHMContactHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = C066EDB6209A9C7E00CB87FC /* CHMContactHeaderView.m */; };
 		C066EDB9209A9C8F00CB87FC /* CHMContactHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = C066EDB8209A9C8F00CB87FC /* CHMContactHeaderView.xib */; };
+		C066EDBD209AB6E300CB87FC /* CHMUserDetailFooter.m in Sources */ = {isa = PBXBuildFile; fileRef = C066EDBC209AB6E300CB87FC /* CHMUserDetailFooter.m */; };
+		C066EDBF209AB6EE00CB87FC /* CHMUserDetailFooter.xib in Resources */ = {isa = PBXBuildFile; fileRef = C066EDBE209AB6EE00CB87FC /* CHMUserDetailFooter.xib */; };
 		C0EAA5D72097E8210046F05C /* CHMHttpTool.m in Sources */ = {isa = PBXBuildFile; fileRef = C0EAA5D62097E8210046F05C /* CHMHttpTool.m */; };
 		C0EAA5ED20981EE70046F05C /* CHMLoginController.m in Sources */ = {isa = PBXBuildFile; fileRef = C0EAA5EB20981EE70046F05C /* CHMLoginController.m */; };
 		C0EAA5EE20981EE70046F05C /* CHMLoginController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C0EAA5EC20981EE70046F05C /* CHMLoginController.xib */; };
@@ -84,6 +86,9 @@
 		C066EDB5209A9C7E00CB87FC /* CHMContactHeaderView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CHMContactHeaderView.h; sourceTree = "<group>"; };
 		C066EDB6209A9C7E00CB87FC /* CHMContactHeaderView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CHMContactHeaderView.m; sourceTree = "<group>"; };
 		C066EDB8209A9C8F00CB87FC /* CHMContactHeaderView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CHMContactHeaderView.xib; sourceTree = "<group>"; };
+		C066EDBB209AB6E300CB87FC /* CHMUserDetailFooter.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CHMUserDetailFooter.h; sourceTree = "<group>"; };
+		C066EDBC209AB6E300CB87FC /* CHMUserDetailFooter.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CHMUserDetailFooter.m; sourceTree = "<group>"; };
+		C066EDBE209AB6EE00CB87FC /* CHMUserDetailFooter.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CHMUserDetailFooter.xib; sourceTree = "<group>"; };
 		C0EAA5D52097E8210046F05C /* CHMHttpTool.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CHMHttpTool.h; sourceTree = "<group>"; };
 		C0EAA5D62097E8210046F05C /* CHMHttpTool.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CHMHttpTool.m; sourceTree = "<group>"; };
 		C0EAA5E120980AE30046F05C /* HttpConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HttpConstants.h; sourceTree = "<group>"; };
@@ -245,11 +250,22 @@
 		C066EDAF209A860500CB87FC /* UserDetail */ = {
 			isa = PBXGroup;
 			children = (
+				C066EDBA209AB6A000CB87FC /* view */,
 				C066EDB0209A862300CB87FC /* CHMUserDetailController.h */,
 				C066EDB1209A862300CB87FC /* CHMUserDetailController.m */,
 				C066EDB2209A862300CB87FC /* CHMUserDetailController.xib */,
 			);
 			path = UserDetail;
+			sourceTree = "<group>";
+		};
+		C066EDBA209AB6A000CB87FC /* view */ = {
+			isa = PBXGroup;
+			children = (
+				C066EDBB209AB6E300CB87FC /* CHMUserDetailFooter.h */,
+				C066EDBC209AB6E300CB87FC /* CHMUserDetailFooter.m */,
+				C066EDBE209AB6EE00CB87FC /* CHMUserDetailFooter.xib */,
+			);
+			path = view;
 			sourceTree = "<group>";
 		};
 		C0EAA5C82097123C0046F05C /* Utilities */ = {
@@ -547,6 +563,7 @@
 				C0EAA6412098B63D0046F05C /* CHMChatRoomCell.xib in Resources */,
 				C066EDB4209A862300CB87FC /* CHMUserDetailController.xib in Resources */,
 				C0EAA5EE20981EE70046F05C /* CHMLoginController.xib in Resources */,
+				C066EDBF209AB6EE00CB87FC /* CHMUserDetailFooter.xib in Resources */,
 				C066EDA3209A7B7300CB87FC /* CHMContactCell.xib in Resources */,
 				C066EDB9209A9C8F00CB87FC /* CHMContactHeaderView.xib in Resources */,
 				C0EAA62B2098723B0046F05C /* CHMMineDetailCell.xib in Resources */,
@@ -656,6 +673,7 @@
 				C0EAA60820985DCC0046F05C /* CHMChatRoomController.m in Sources */,
 				C066ED912099E2C500CB87FC /* CHMAccountSettingController.m in Sources */,
 				C0EAA621209870E10046F05C /* RCUnderlineTextField.m in Sources */,
+				C066EDBD209AB6E300CB87FC /* CHMUserDetailFooter.m in Sources */,
 				C0EAA6442098B7C80046F05C /* CHMChatRoomModel.m in Sources */,
 				C0EAA5F2209823F40046F05C /* CHMRegisterController.m in Sources */,
 				C0EAA62F209872520046F05C /* CHMMineItemCell.m in Sources */,

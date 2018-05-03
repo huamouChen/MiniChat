@@ -10,4 +10,6 @@
 
 @interface CHMMineDetailCell : UITableViewCell
 @property (nonatomic, strong) NSDictionary *infoDict;
+// 是否显示向右的箭头
+@property (nonatomic, assign) Boolean isHideRightArrow;
 @end

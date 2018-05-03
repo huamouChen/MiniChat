@@ -14,6 +14,7 @@
 @property (weak, nonatomic) IBOutlet UIImageView *headerImg;
 @property (weak, nonatomic) IBOutlet UILabel *nicknameLabel;
 @property (weak, nonatomic) IBOutlet UILabel *accountLabel;
+@property (weak, nonatomic) IBOutlet UIImageView *rightArrowImg;
 
 
 @end
@@ -26,7 +27,11 @@
     [_headerImg chm_imageViewWithURL:infoDict[KPortrait] placeholder:@""];
     _nicknameLabel.text = [NSString stringWithFormat:@"昵称：%@", infoDict[KNickName]];
     _accountLabel.text = [NSString stringWithFormat:@"iM账号：%@",infoDict[KAccount]];
-    
+}
+
+- (void)setIsHideRightArrow:(Boolean)isHideRightArrow {
+    _isHideRightArrow = isHideRightArrow;
+    _rightArrowImg.hidden = _isHideRightArrow;
 }
 
 - (void)awakeFromNib {

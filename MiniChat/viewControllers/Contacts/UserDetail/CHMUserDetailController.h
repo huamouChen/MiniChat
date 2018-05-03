@@ -9,6 +9,6 @@
 #import <UIKit/UIKit.h>
 @class CHMFriendModel;
 
-@interface CHMUserDetailController : UIViewController
+@interface CHMUserDetailController : UITableViewController
 @property (nonatomic, strong) CHMFriendModel *friendModel;
 @end
