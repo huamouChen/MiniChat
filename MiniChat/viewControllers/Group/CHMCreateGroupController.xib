@@ -24,6 +24,20 @@
             <subviews>
                 <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="AddPhotoDefault" translatesAutoresizingMaskIntoConstraints="NO" id="Ctx-4e-VUQ">
                     <rect key="frame" x="152" y="100" width="70" height="70"/>
+                    <gestureRecognizers/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="70" id="4Qa-hm-T2X"/>
+                        <constraint firstAttribute="width" constant="70" id="b6f-Jd-EE3"/>
+                    </constraints>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
+                        <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                            <integer key="value" value="5"/>
+                        </userDefinedRuntimeAttribute>
+                    </userDefinedRuntimeAttributes>
+                    <connections>
+                        <outletCollection property="gestureRecognizers" destination="AJl-UG-Mb3" appends="YES" id="Fsh-md-mbo"/>
+                    </connections>
                 </imageView>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5c9-Qh-esd" customClass="RCUnderlineTextField">
                     <rect key="frame" x="60" y="200" width="255" height="45"/>
@@ -45,6 +59,9 @@
                             <integer key="value" value="5"/>
                         </userDefinedRuntimeAttribute>
                     </userDefinedRuntimeAttributes>
+                    <connections>
+                        <action selector="createGroupButtonClick" destination="-1" eventType="touchUpInside" id="5QO-a3-EIh"/>
+                    </connections>
                 </button>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -60,6 +77,11 @@
             </constraints>
             <viewLayoutGuide key="safeArea" id="Q5M-cg-NOt"/>
         </view>
+        <tapGestureRecognizer id="AJl-UG-Mb3">
+            <connections>
+                <action selector="tapGroupImageView:" destination="-1" id="5Pg-L4-q5Q"/>
+            </connections>
+        </tapGestureRecognizer>
     </objects>
     <resources>
         <image name="AddPhotoDefault" width="70" height="70"/>

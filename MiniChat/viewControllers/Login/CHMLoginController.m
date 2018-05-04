@@ -43,7 +43,7 @@
         }
         
     } failure:^(NSError *error) {
-        [CHMProgressHUD showErrorWithInfo:error.description];
+        [CHMProgressHUD showErrorWithInfo:[NSString stringWithFormat:@"错误码--%zd", error.code]];
     }];
 }
 

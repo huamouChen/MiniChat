@@ -78,4 +78,36 @@ typedef void(^failureBlock)(NSError *error);
  */
 + (void)getUserRelationShipListWithSuccess:(successBlock)success failure:(failureBlock)failure;
 
+/**
+ 创建群组
+ 
+ @param groupName 群组名称
+ @param groupMembers 群组成员
+ @param groupPortrait 群组头像
+ @param success 成功
+ @param failure 失败
+ */
++ (void)createGroupWtihGroupName:(NSString *)groupName groupMembers:(NSArray *)groupMembers groupPortrait:(UIImage *)groupPortrait success:(successBlock)success failure:(failureBlock)failure;
+
+/**
+ 上传图片
+ 
+ @param urlString 上传地址
+ @param params 参数
+ @param image 图片
+ @param imageName 图片名称
+ @param success 成功
+ @param failure 失败
+ */
++ (void)postWithURLString:(NSString *)urlString params:(NSDictionary *)params image:(UIImage *)image imageName:(NSString *)imageName success:(successBlock)success failure:(failureBlock)failure;
+
+/**
+ 修改群组头像
+ 
+ @param groupId 群组ID
+ @param image 群组头像
+ @param success 成功
+ @param failure 失败
+ */
++ (void)setGroupPortraitWithGroupId:(NSString *)groupId groupPortrait:(UIImage *)image success:(successBlock)success failure:(failureBlock)failure;
 @end

@@ -9,5 +9,6 @@
 #import <UIKit/UIKit.h>
 
 @interface CHMCreateGroupController : UIViewController
-
+// 选中的成员数组
+@property (nonatomic, strong) NSMutableArray *selectedMembersArray;
 @end

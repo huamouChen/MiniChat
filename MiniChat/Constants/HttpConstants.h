@@ -44,6 +44,8 @@
 #define KickGroupMemberURL               @"api/Im/KickGroup"
 // 群组成员
 #define GetGroupMembersURL               @"api/Im/ListGroupUsers"
+//设置群组头像
+#define SetGroupPortraitURL               @"api/Im/SetGroupImg"
 
 
 

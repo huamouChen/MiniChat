@@ -53,7 +53,29 @@ static CGFloat const KIndexViewWidth = 55 / 2.0;
 - (void)comfirmButtonClick {
     // 调到创建群组界面
     CHMCreateGroupController *createGroupController = [CHMCreateGroupController new];
+    createGroupController.selectedMembersArray = [self dealWithSelectedArray];
     [self.navigationController pushViewController:createGroupController animated:YES];
+}
+
+
+/**
+ 处理选中的成员数据
+
+ @return 处理好的数组
+ */
+- (NSMutableArray *)dealWithSelectedArray {
+    NSMutableArray *resultArray = [NSMutableArray array];
+    for (int i = 0; i < self.dataArr.count; i++) {
+        NSArray *sectionArray = self.dataArr[i];
+        for (int j = 0; j < sectionArray.count; j++) {
+            // 如果是选中状态就加入数组
+            CHMFriendModel *friendModel = sectionArray[j];
+            if (friendModel.isCheck) {
+                [resultArray addObject:friendModel];
+            }
+        }
+    }
+    return resultArray;
 }
 
 #pragma mark - 获取数据

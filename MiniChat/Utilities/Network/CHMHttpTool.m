@@ -20,7 +20,7 @@
 
 @implementation CHMHttpTool
 
-// 单利
+// 单例
 static CHMHttpTool *instanse = nil;
 + (instancetype)shareManager {
     static dispatch_once_t onceToken;
@@ -87,8 +87,47 @@ static CHMHttpTool *instanse = nil;
 
 
 /**
- 登录
+ 上传图片
+ 
+ @param urlString 上传地址
+ @param params 参数
+ @param image 图片
+ @param imageName 图片名称
+ @param success 成功
+ @param failure 失败
+ */
++ (void)postWithURLString:(NSString *)urlString params:(NSDictionary *)params image:(UIImage *)image imageName:(NSString *)imageName success:(successBlock)success failure:(failureBlock)failure {
+    NSData *data = UIImageJPEGRepresentation(image, 0.2);
+    
+    
+    NSString *tokenString = [[NSUserDefaults standardUserDefaults] objectForKey:KLoginToken];
+    if (tokenString) {
+        [[CHMHttpTool shareManager].sessionManager.requestSerializer setValue:[NSString stringWithFormat:@"Bearer %@", tokenString] forHTTPHeaderField:@"Authorization"];
+    }
+    
+    [[CHMHttpTool shareManager].sessionManager POST:urlString parameters:params constructingBodyWithBlock:^(id<AFMultipartFormData>  _Nonnull formData) {
+        
+        [formData appendPartWithFileData:data name:imageName fileName:@"file" mimeType:@"image/jpg"];
+        
+    } progress:^(NSProgress * _Nonnull uploadProgress) {}
+                                            success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+                                                NSLog(@"上传文件---%@",responseObject);
+                                                NSString *desc = responseObject[@"type"];
+                                                if ([desc isEqualToString:@"SUCCESS"]) {
+                                                    success(responseObject);
+                                                }else{
+                                                    failure(responseObject[@"desc"]);
+                                                }
+                                            } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+                                                failure(error);
+                                            }];
+    
+}
 
+
+/**
+ 登录
+ 
  @param account 账号
  @param password 密码
  @param success 成功
@@ -102,7 +141,7 @@ static CHMHttpTool *instanse = nil;
 
 /**
  获取融云token
-
+ 
  @param success 成功
  @param failure 失败
  */
@@ -122,7 +161,7 @@ static CHMHttpTool *instanse = nil;
 
 /**
  获取聊天室列表
-
+ 
  @param success 成功
  @param failure 失败
  */
@@ -133,12 +172,63 @@ static CHMHttpTool *instanse = nil;
 
 /**
  获取用户关系列表
-
+ 
  @param success 成功
  @param failure 失败
  */
 + (void)getUserRelationShipListWithSuccess:(successBlock)success failure:(failureBlock)failure {
     [CHMHttpTool requestWithMethod:RequestMethodTypeGet url:GetUserRelationshipListsURL params:@{} success:success failure:failure];
+}
+
+
+/**
+ 创建群组
+ 
+ @param groupName 群组名称
+ @param groupMembers 群组成员
+ @param groupPortrait 群组头像
+ @param success 成功
+ @param failure 失败
+ */
++ (void)createGroupWtihGroupName:(NSString *)groupName groupMembers:(NSArray *)groupMembers groupPortrait:(UIImage *)groupPortrait success:(successBlock)success failure:(failureBlock)failure {
+    // 参数
+    NSString *groupOwner = [[NSUserDefaults standardUserDefaults] valueForKey:KAccount];
+    NSData *imgData = UIImageJPEGRepresentation(groupPortrait, 0.5);
+    NSDictionary *params = @{@"Owner": groupOwner, @"GroupName": groupName, @"GroupImgStream": imgData, @"Members":groupMembers };
+    [CHMHttpTool requestWithMethod:RequestMethodTypePost url:CreateGroupURL params:params success:success failure:failure];
+}
+
+
+/**
+ 修改群组头像
+
+ @param groupId 群组ID
+ @param image 群组头像
+ @param success 成功
+ @param failure 失败
+ */
++ (void)setGroupPortraitWithGroupId:(NSString *)groupId groupPortrait:(UIImage *)image success:(successBlock)success failure:(failureBlock)failure {
+    
+    NSString *tokenString = [[NSUserDefaults standardUserDefaults] objectForKey:KLoginToken];
+    if (tokenString) {
+        [[CHMHttpTool shareManager].sessionManager.requestSerializer setValue:[NSString stringWithFormat:@"Bearer %@", tokenString] forHTTPHeaderField:@"Authorization"];
+    }
+    
+    // 参数
+    NSData *imgData = UIImageJPEGRepresentation(image, 0.1);
+    NSDictionary *params = @{@"GroupId": groupId, @"GroupImgStream": imgData};
+    NSData *data = UIImageJPEGRepresentation(image, 0.1);
+//    [CHMHttpTool requestWithMethod:RequestMethodTypePost url:SetGroupPortraitURL params:params success:success failure:failure];
+    
+    [[CHMHttpTool shareManager].sessionManager POST:SetGroupPortraitURL parameters:params constructingBodyWithBlock:^(id<AFMultipartFormData>  _Nonnull formData) {
+        [formData appendPartWithFileData:data name:@"GroupImgStream" fileName:@"file" mimeType:@"image/jpg"];
+    } progress:^(NSProgress * _Nonnull uploadProgress) {
+        
+    } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        NSLog(@"--------%@",responseObject);
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        NSLog(@"--------%@",error);
+    }];
 }
 
 @end
