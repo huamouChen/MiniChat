@@ -40,7 +40,7 @@ static CHMHttpTool *instanse = nil;
         // 设置超时时间
         _sessionManager.requestSerializer.timeoutInterval = 10.0;
         // 设置响应内容的类型
-        _sessionManager.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"application/json", @"text/json", @"text/javascript",@"text/html", nil];
+        _sessionManager.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"application/json", @"text/json", @"text/javascript",@"text/html", @"charset=utf-8", nil];
     }
     return self;
 }

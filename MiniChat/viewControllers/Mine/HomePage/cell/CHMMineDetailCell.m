@@ -24,7 +24,7 @@
 
 - (void)setInfoDict:(NSDictionary *)infoDict {
     _infoDict = infoDict;
-    [_headerImg chm_imageViewWithURL:infoDict[KPortrait] placeholder:@""];
+    [_headerImg chm_imageViewWithURL:infoDict[KPortrait] placeholder:@"icon_person"];
     _nicknameLabel.text = [NSString stringWithFormat:@"昵称：%@", infoDict[KNickName]];
     _accountLabel.text = [NSString stringWithFormat:@"iM账号：%@",infoDict[KAccount]];
 }

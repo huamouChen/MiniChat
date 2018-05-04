@@ -18,7 +18,7 @@
 
 - (void)setFriendModel:(CHMFriendModel *)friendModel {
     _friendModel = friendModel;
-    [_portraitImageView chm_imageViewWithURL:_friendModel.HeaderImage placeholder:@""];
+    [_portraitImageView chm_imageViewWithURL:_friendModel.HeaderImage placeholder:@"icon_person"];
     _nameLabel.text = _friendModel.NickName;
 }
 

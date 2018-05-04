@@ -22,7 +22,7 @@
 
 - (void)setFriendModel:(CHMFriendModel *)friendModel {
     _friendModel = friendModel;
-    [_portraitImg chm_imageViewWithURL:_friendModel.HeaderImage placeholder:@""];
+    [_portraitImg chm_imageViewWithURL:_friendModel.HeaderImage placeholder:@"icon_person"];
     _nameLabel.text = _friendModel.NickName;
     [_checkButton setSelected:_friendModel.isCheck];
 }

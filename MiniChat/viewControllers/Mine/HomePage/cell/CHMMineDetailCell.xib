@@ -18,9 +18,8 @@
                 <rect key="frame" x="0.0" y="0.0" width="390" height="99.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="ugE-jL-VzC">
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon_person" translatesAutoresizingMaskIntoConstraints="NO" id="ugE-jL-VzC">
                         <rect key="frame" x="16" y="15" width="70" height="70"/>
-                        <color key="backgroundColor" red="0.0" green="0.97680455450000003" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="70" id="Mcv-LT-QLH"/>
                             <constraint firstAttribute="width" constant="70" id="aie-ZA-eq2"/>
@@ -74,6 +73,7 @@
         </tableViewCell>
     </objects>
     <resources>
+        <image name="icon_person" width="46" height="46"/>
         <image name="right_arrow" width="8" height="13"/>
     </resources>
 </document>
