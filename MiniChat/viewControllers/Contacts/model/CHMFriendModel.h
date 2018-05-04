@@ -18,6 +18,9 @@
 
 @property (nonatomic, copy) NSString *IsOnLine;
 
+// 群组选择成员是否选中
+@property (nonatomic, assign) BOOL isCheck;
+
 
 - (instancetype)initWithUserId:(NSString *)userId nickName:(NSString *)nickName portrait:(NSString *)portrait;
 

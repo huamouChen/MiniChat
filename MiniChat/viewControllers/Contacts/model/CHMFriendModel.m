@@ -15,6 +15,7 @@
         _NickName = nickName;
         _HeaderImage = portrait;
         _IsOnLine = @"01";
+        _isCheck = NO;
     }
     return self;
 }

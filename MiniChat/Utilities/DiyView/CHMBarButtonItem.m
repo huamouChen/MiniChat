@@ -70,6 +70,7 @@
         [self.button setTitle:buttonTitle forState:UIControlStateNormal];
         [self.button setTitleColor:titleColor forState:UIControlStateNormal];
         [self.button addTarget:target action:method forControlEvents:UIControlEventTouchUpInside];
+        self.button.titleLabel.font = [UIFont systemFontOfSize:16];
         self.customView = self.button;
     }
     

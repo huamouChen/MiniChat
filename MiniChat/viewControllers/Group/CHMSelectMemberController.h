@@ -8,6 +8,6 @@
 
 #import "CHMContactsController.h"
 
-@interface CHMSelectMemberController : CHMContactsController
+@interface CHMSelectMemberController : UIViewController
 
 @end
