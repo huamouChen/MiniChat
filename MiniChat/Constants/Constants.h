@@ -36,6 +36,7 @@
 
 #define KTouchBarHeight 34.0f
 #define KIsiPhoneX ([UIScreen instancesRespondToSelector:@selector(currentMode)] ? CGSizeEqualToSize(CGSizeMake(1125, 2436), [[UIScreen mainScreen] currentMode].size) : NO)
+#define IOS_FSystenVersion ([[[UIDevice currentDevice] systemVersion] floatValue])
 
 #define KNavigationBar88    88.0
 #define KNavigationBar64    64.0

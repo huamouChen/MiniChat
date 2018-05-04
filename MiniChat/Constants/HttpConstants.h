@@ -28,7 +28,22 @@
 
 
 // 获取用户关系列表
-#define GetUserRelationshipListsURL       @"api/Im/ListFriends"
+#define GetUserRelationshipListsURL      @"api/Im/ListFriends"
+
+// 创建群组
+#define CreateGroupURL                   @"api/Im/CreateGroup"
+// 获取某个群组信息
+#define GetGroupInfoURL                  @"api/Im/GetGroup"
+// 获取群组列表
+#define GetGroupListURL                  @"api/Im/ListGroups"
+// 邀请加入群组
+#define InviteIntoGroupURL               @"api/Im/InviteGroup"
+// 离开群组
+#define QuitGroupURL                     @"api/Im/QuitGroup"
+// 群组踢人
+#define KickGroupMemberURL               @"api/Im/KickGroup"
+// 群组成员
+#define GetGroupMembersURL               @"api/Im/ListGroupUsers"
 
 
 

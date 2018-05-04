@@ -25,6 +25,11 @@
 		C066EDB9209A9C8F00CB87FC /* CHMContactHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = C066EDB8209A9C8F00CB87FC /* CHMContactHeaderView.xib */; };
 		C066EDBD209AB6E300CB87FC /* CHMUserDetailFooter.m in Sources */ = {isa = PBXBuildFile; fileRef = C066EDBC209AB6E300CB87FC /* CHMUserDetailFooter.m */; };
 		C066EDBF209AB6EE00CB87FC /* CHMUserDetailFooter.xib in Resources */ = {isa = PBXBuildFile; fileRef = C066EDBE209AB6EE00CB87FC /* CHMUserDetailFooter.xib */; };
+		C066EDC4209BDCEB00CB87FC /* CHMSelectMemberController.m in Sources */ = {isa = PBXBuildFile; fileRef = C066EDC2209BDCEB00CB87FC /* CHMSelectMemberController.m */; };
+		C066EDC5209BDCEB00CB87FC /* CHMSelectMemberController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C066EDC3209BDCEB00CB87FC /* CHMSelectMemberController.xib */; };
+		C066EDC8209BDE5800CB87FC /* CHMBarButtonItem.m in Sources */ = {isa = PBXBuildFile; fileRef = C066EDC7209BDE5800CB87FC /* CHMBarButtonItem.m */; };
+		C066EDCC209BE31600CB87FC /* KxMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = C066EDCA209BE31600CB87FC /* KxMenu.m */; };
+		C066EDD0209BE4AD00CB87FC /* UIImage+CHMImage.m in Sources */ = {isa = PBXBuildFile; fileRef = C066EDCF209BE4AD00CB87FC /* UIImage+CHMImage.m */; };
 		C0EAA5D72097E8210046F05C /* CHMHttpTool.m in Sources */ = {isa = PBXBuildFile; fileRef = C0EAA5D62097E8210046F05C /* CHMHttpTool.m */; };
 		C0EAA5ED20981EE70046F05C /* CHMLoginController.m in Sources */ = {isa = PBXBuildFile; fileRef = C0EAA5EB20981EE70046F05C /* CHMLoginController.m */; };
 		C0EAA5EE20981EE70046F05C /* CHMLoginController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C0EAA5EC20981EE70046F05C /* CHMLoginController.xib */; };
@@ -89,6 +94,15 @@
 		C066EDBB209AB6E300CB87FC /* CHMUserDetailFooter.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CHMUserDetailFooter.h; sourceTree = "<group>"; };
 		C066EDBC209AB6E300CB87FC /* CHMUserDetailFooter.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CHMUserDetailFooter.m; sourceTree = "<group>"; };
 		C066EDBE209AB6EE00CB87FC /* CHMUserDetailFooter.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CHMUserDetailFooter.xib; sourceTree = "<group>"; };
+		C066EDC1209BDCEB00CB87FC /* CHMSelectMemberController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CHMSelectMemberController.h; sourceTree = "<group>"; };
+		C066EDC2209BDCEB00CB87FC /* CHMSelectMemberController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CHMSelectMemberController.m; sourceTree = "<group>"; };
+		C066EDC3209BDCEB00CB87FC /* CHMSelectMemberController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CHMSelectMemberController.xib; sourceTree = "<group>"; };
+		C066EDC6209BDE5800CB87FC /* CHMBarButtonItem.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CHMBarButtonItem.h; sourceTree = "<group>"; };
+		C066EDC7209BDE5800CB87FC /* CHMBarButtonItem.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CHMBarButtonItem.m; sourceTree = "<group>"; };
+		C066EDCA209BE31600CB87FC /* KxMenu.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KxMenu.m; sourceTree = "<group>"; };
+		C066EDCB209BE31600CB87FC /* KxMenu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KxMenu.h; sourceTree = "<group>"; };
+		C066EDCE209BE4AD00CB87FC /* UIImage+CHMImage.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIImage+CHMImage.h"; sourceTree = "<group>"; };
+		C066EDCF209BE4AD00CB87FC /* UIImage+CHMImage.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIImage+CHMImage.m"; sourceTree = "<group>"; };
 		C0EAA5D52097E8210046F05C /* CHMHttpTool.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CHMHttpTool.h; sourceTree = "<group>"; };
 		C0EAA5D62097E8210046F05C /* CHMHttpTool.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CHMHttpTool.m; sourceTree = "<group>"; };
 		C0EAA5E120980AE30046F05C /* HttpConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HttpConstants.h; sourceTree = "<group>"; };
@@ -168,6 +182,7 @@
 		C00427562097053200BE24C1 /* viewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				C066EDC0209BDC6200CB87FC /* Group */,
 				C0EAA60420985DAF0046F05C /* ChatRoom */,
 				C0EAA60220985DAE0046F05C /* Contacts */,
 				C0EAA60520985DAF0046F05C /* Conversation */,
@@ -266,6 +281,34 @@
 				C066EDBE209AB6EE00CB87FC /* CHMUserDetailFooter.xib */,
 			);
 			path = view;
+			sourceTree = "<group>";
+		};
+		C066EDC0209BDC6200CB87FC /* Group */ = {
+			isa = PBXGroup;
+			children = (
+				C066EDC1209BDCEB00CB87FC /* CHMSelectMemberController.h */,
+				C066EDC2209BDCEB00CB87FC /* CHMSelectMemberController.m */,
+				C066EDC3209BDCEB00CB87FC /* CHMSelectMemberController.xib */,
+			);
+			path = Group;
+			sourceTree = "<group>";
+		};
+		C066EDC9209BE31600CB87FC /* KxMenu */ = {
+			isa = PBXGroup;
+			children = (
+				C066EDCA209BE31600CB87FC /* KxMenu.m */,
+				C066EDCB209BE31600CB87FC /* KxMenu.h */,
+			);
+			path = KxMenu;
+			sourceTree = "<group>";
+		};
+		C066EDCD209BE49E00CB87FC /* Image */ = {
+			isa = PBXGroup;
+			children = (
+				C066EDCE209BE4AD00CB87FC /* UIImage+CHMImage.h */,
+				C066EDCF209BE4AD00CB87FC /* UIImage+CHMImage.m */,
+			);
+			path = Image;
 			sourceTree = "<group>";
 		};
 		C0EAA5C82097123C0046F05C /* Utilities */ = {
@@ -382,6 +425,7 @@
 		C0EAA613209866B20046F05C /* Category */ = {
 			isa = PBXGroup;
 			children = (
+				C066EDCD209BE49E00CB87FC /* Image */,
 				C066EDA7209A803F00CB87FC /* Label */,
 				C0EAA6382098819F0046F05C /* ImageView */,
 				C0EAA614209866B20046F05C /* Color */,
@@ -411,10 +455,13 @@
 		C0EAA61C209870E10046F05C /* DiyView */ = {
 			isa = PBXGroup;
 			children = (
+				C066EDC9209BE31600CB87FC /* KxMenu */,
 				C0EAA61E209870E10046F05C /* CHMTableViewController.h */,
 				C0EAA620209870E10046F05C /* CHMTableViewController.m */,
 				C0EAA61F209870E10046F05C /* RCUnderlineTextField.h */,
 				C0EAA61D209870E10046F05C /* RCUnderlineTextField.m */,
+				C066EDC6209BDE5800CB87FC /* CHMBarButtonItem.h */,
+				C066EDC7209BDE5800CB87FC /* CHMBarButtonItem.m */,
 			);
 			path = DiyView;
 			sourceTree = "<group>";
@@ -561,6 +608,7 @@
 			files = (
 				C0EAA5F3209823F40046F05C /* CHMRegisterController.xib in Resources */,
 				C0EAA6412098B63D0046F05C /* CHMChatRoomCell.xib in Resources */,
+				C066EDC5209BDCEB00CB87FC /* CHMSelectMemberController.xib in Resources */,
 				C066EDB4209A862300CB87FC /* CHMUserDetailController.xib in Resources */,
 				C0EAA5EE20981EE70046F05C /* CHMLoginController.xib in Resources */,
 				C066EDBF209AB6EE00CB87FC /* CHMUserDetailFooter.xib in Resources */,
@@ -671,7 +719,9 @@
 				C066EDB7209A9C7E00CB87FC /* CHMContactHeaderView.m in Sources */,
 				C066ED8B2099C98F00CB87FC /* CHMConversationController.m in Sources */,
 				C0EAA60820985DCC0046F05C /* CHMChatRoomController.m in Sources */,
+				C066EDC4209BDCEB00CB87FC /* CHMSelectMemberController.m in Sources */,
 				C066ED912099E2C500CB87FC /* CHMAccountSettingController.m in Sources */,
+				C066EDC8209BDE5800CB87FC /* CHMBarButtonItem.m in Sources */,
 				C0EAA621209870E10046F05C /* RCUnderlineTextField.m in Sources */,
 				C066EDBD209AB6E300CB87FC /* CHMUserDetailFooter.m in Sources */,
 				C0EAA6442098B7C80046F05C /* CHMChatRoomModel.m in Sources */,
@@ -690,6 +740,8 @@
 				C0EAA622209870E10046F05C /* CHMTableViewController.m in Sources */,
 				C0EAA5F92098270B0046F05C /* CHMProgressHUD.m in Sources */,
 				C0EAA5F62098259D0046F05C /* CHMRongTokenResponse.m in Sources */,
+				C066EDD0209BE4AD00CB87FC /* UIImage+CHMImage.m in Sources */,
+				C066EDCC209BE31600CB87FC /* KxMenu.m in Sources */,
 				C0EAA6252098713E0046F05C /* CHMMineController.m in Sources */,
 				C0EAA5FE20984F2D0046F05C /* CHMMainController.m in Sources */,
 			);
