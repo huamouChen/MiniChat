@@ -9,6 +9,10 @@
 /* Begin PBXBuildFile section */
 		C0017781209D99BE001B44DE /* CHMPlayHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = C001777F209D99BE001B44DE /* CHMPlayHeaderView.m */; };
 		C0017782209D99BE001B44DE /* CHMPlayHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = C0017780209D99BE001B44DE /* CHMPlayHeaderView.xib */; };
+		C001778D209DE44C001B44DE /* CHMNewFriendsController.m in Sources */ = {isa = PBXBuildFile; fileRef = C001778B209DE44C001B44DE /* CHMNewFriendsController.m */; };
+		C001778E209DE44C001B44DE /* CHMNewFriendsController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C001778C209DE44C001B44DE /* CHMNewFriendsController.xib */; };
+		C0017792209DE460001B44DE /* CHMGroupListController.m in Sources */ = {isa = PBXBuildFile; fileRef = C0017790209DE460001B44DE /* CHMGroupListController.m */; };
+		C0017793209DE460001B44DE /* CHMGroupListController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C0017791209DE460001B44DE /* CHMGroupListController.xib */; };
 		C066ED8B2099C98F00CB87FC /* CHMConversationController.m in Sources */ = {isa = PBXBuildFile; fileRef = C066ED892099C98F00CB87FC /* CHMConversationController.m */; };
 		C066ED8C2099C98F00CB87FC /* CHMConversationController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C066ED8A2099C98F00CB87FC /* CHMConversationController.xib */; };
 		C066ED912099E2C500CB87FC /* CHMAccountSettingController.m in Sources */ = {isa = PBXBuildFile; fileRef = C066ED8F2099E2C500CB87FC /* CHMAccountSettingController.m */; };
@@ -77,6 +81,12 @@
 		C001777E209D99BE001B44DE /* CHMPlayHeaderView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CHMPlayHeaderView.h; sourceTree = "<group>"; };
 		C001777F209D99BE001B44DE /* CHMPlayHeaderView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CHMPlayHeaderView.m; sourceTree = "<group>"; };
 		C0017780209D99BE001B44DE /* CHMPlayHeaderView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CHMPlayHeaderView.xib; sourceTree = "<group>"; };
+		C001778A209DE44C001B44DE /* CHMNewFriendsController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CHMNewFriendsController.h; sourceTree = "<group>"; };
+		C001778B209DE44C001B44DE /* CHMNewFriendsController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CHMNewFriendsController.m; sourceTree = "<group>"; };
+		C001778C209DE44C001B44DE /* CHMNewFriendsController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CHMNewFriendsController.xib; sourceTree = "<group>"; };
+		C001778F209DE460001B44DE /* CHMGroupListController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CHMGroupListController.h; sourceTree = "<group>"; };
+		C0017790209DE460001B44DE /* CHMGroupListController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CHMGroupListController.m; sourceTree = "<group>"; };
+		C0017791209DE460001B44DE /* CHMGroupListController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CHMGroupListController.xib; sourceTree = "<group>"; };
 		C00427532095CC7600BE24C1 /* PrefixHeader.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
 		C066ED882099C98F00CB87FC /* CHMConversationController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CHMConversationController.h; sourceTree = "<group>"; };
 		C066ED892099C98F00CB87FC /* CHMConversationController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CHMConversationController.m; sourceTree = "<group>"; };
@@ -203,6 +213,26 @@
 				6621D17447B24B984234EF83 /* Pods_MiniChat.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		C0017788209DE42D001B44DE /* GroupList */ = {
+			isa = PBXGroup;
+			children = (
+				C001778F209DE460001B44DE /* CHMGroupListController.h */,
+				C0017790209DE460001B44DE /* CHMGroupListController.m */,
+				C0017791209DE460001B44DE /* CHMGroupListController.xib */,
+			);
+			path = GroupList;
+			sourceTree = "<group>";
+		};
+		C0017789209DE439001B44DE /* NewFriend */ = {
+			isa = PBXGroup;
+			children = (
+				C001778A209DE44C001B44DE /* CHMNewFriendsController.h */,
+				C001778B209DE44C001B44DE /* CHMNewFriendsController.m */,
+				C001778C209DE44C001B44DE /* CHMNewFriendsController.xib */,
+			);
+			path = NewFriend;
 			sourceTree = "<group>";
 		};
 		C00427562097053200BE24C1 /* viewControllers */ = {
@@ -412,6 +442,8 @@
 		C0EAA60220985DAE0046F05C /* Contacts */ = {
 			isa = PBXGroup;
 			children = (
+				C0017789209DE439001B44DE /* NewFriend */,
+				C0017788209DE42D001B44DE /* GroupList */,
 				C066EDAF209A860500CB87FC /* UserDetail */,
 				C066EDAB209A82CC00CB87FC /* model */,
 				C066ED9E209A7B5B00CB87FC /* view */,
@@ -680,6 +712,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C0017793209DE460001B44DE /* CHMGroupListController.xib in Resources */,
 				C0EAA5F3209823F40046F05C /* CHMRegisterController.xib in Resources */,
 				C0EFDBAE209C8FE400848710 /* CHMPalyCell.xib in Resources */,
 				C0EAA6412098B63D0046F05C /* CHMChatRoomCell.xib in Resources */,
@@ -687,6 +720,7 @@
 				C0EAA5EE20981EE70046F05C /* CHMLoginController.xib in Resources */,
 				C066EDBF209AB6EE00CB87FC /* CHMUserDetailFooter.xib in Resources */,
 				C066EDA3209A7B7300CB87FC /* CHMContactCell.xib in Resources */,
+				C001778E209DE44C001B44DE /* CHMNewFriendsController.xib in Resources */,
 				C066EDB9209A9C8F00CB87FC /* CHMContactHeaderView.xib in Resources */,
 				C0EAA62B2098723B0046F05C /* CHMMineDetailCell.xib in Resources */,
 				C0EFDB9D209C050100848710 /* CHMSelectMemberCell.xib in Resources */,
@@ -807,6 +841,7 @@
 				C066EDBD209AB6E300CB87FC /* CHMUserDetailFooter.m in Sources */,
 				C0EAA6442098B7C80046F05C /* CHMChatRoomModel.m in Sources */,
 				C0EAA5F2209823F40046F05C /* CHMRegisterController.m in Sources */,
+				C0017792209DE460001B44DE /* CHMGroupListController.m in Sources */,
 				C0EAA62F209872520046F05C /* CHMMineItemCell.m in Sources */,
 				C0EFDBAD209C8FE400848710 /* CHMPalyCell.m in Sources */,
 				C066ED9C2099E47600CB87FC /* CHMLogoutCell.m in Sources */,
@@ -816,6 +851,7 @@
 				C0EAA60E20985DEE0046F05C /* CHMConversationListController.m in Sources */,
 				C0EFDBA1209C142500848710 /* CHMCreateGroupController.m in Sources */,
 				C0F25A642095BC1900C6BCA6 /* main.m in Sources */,
+				C001778D209DE44C001B44DE /* CHMNewFriendsController.m in Sources */,
 				C0017781209D99BE001B44DE /* CHMPlayHeaderView.m in Sources */,
 				C0F25A562095BC1800C6BCA6 /* AppDelegate.m in Sources */,
 				C066ED972099E45500CB87FC /* CHMAccountSettingCell.m in Sources */,
