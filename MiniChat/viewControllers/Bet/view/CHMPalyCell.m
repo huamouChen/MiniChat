@@ -19,7 +19,6 @@
 - (void)setPlayItemModel:(CHMPlayItemModel *)playItemModel {
     _playItemModel = playItemModel;
     _itemButton.titleLabel.text = _playItemModel.playName;
-    NSLog(@"-----%@",_itemButton.titleLabel.text);
     [_itemButton setSelected:_playItemModel.isCheck];
     _itemButton.layer.borderColor = _playItemModel.isCheck ? [UIColor chm_colorWithHexString:KMainColor alpha:1.0].CGColor : [UIColor chm_colorWithHexString:KSeparatorColor alpha:1.0].CGColor;
     

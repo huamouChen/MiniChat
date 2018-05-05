@@ -22,12 +22,17 @@ static NSString *const playCellReuseId = @"CHMPalyCell";
 @property (strong, nonatomic) NSMutableArray *playArray;
 // 上一个选中的玩法item
 @property (nonatomic, strong) NSIndexPath *preIndexpath;
+
 // 上一个选中的固定金额按钮
 @property (nonatomic, strong) UIButton *preButton;
 @property (weak, nonatomic) IBOutlet UIButton *button10;
 @property (weak, nonatomic) IBOutlet UIButton *button100;
 @property (weak, nonatomic) IBOutlet UIButton *button500;
 @property (weak, nonatomic) IBOutlet UIButton *button1000;
+// 下注金额
+@property (nonatomic, copy) NSString *bettingMoneyString;
+// 玩法选择
+@property (nonatomic, copy) NSString *playItemString;
 @end
 
 @implementation CHMBettingController
@@ -51,14 +56,6 @@ static NSString *const playCellReuseId = @"CHMPalyCell";
         selectedModel.isCheck = NO;
         [self.playArray replaceObjectAtIndex:_preIndexpath.item withObject:selectedModel];
     }
-    
-//    if (_preIndexpath.item == indexPath.row) { // 如果选中是同一个
-//        _preIndexpath = indexPath;
-//        [self.playCollectionView reloadItemsAtIndexPaths:@[_preIndexpath]];
-//    }
-    
-    
-    
     // 替换原来的数据
     CHMPlayItemModel *selectedModel = self.playArray[indexPath.item];
     selectedModel.isCheck = !selectedModel.isCheck;
@@ -69,6 +66,9 @@ static NSString *const playCellReuseId = @"CHMPalyCell";
     } else {
         [self.playCollectionView reloadItemsAtIndexPaths:@[indexPath]];
     }
+    // 玩法
+    CHMPlayItemModel *playItemModel = self.playArray[indexPath.item];
+    self.playItemString = playItemModel.playName;
     
     _preIndexpath = indexPath;
 }
@@ -76,12 +76,23 @@ static NSString *const playCellReuseId = @"CHMPalyCell";
 
 
 #pragma mark - 点击事件
+- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
+    if ([self.moneyTextField isEditing]) {
+        [self.view endEditing:YES];
+    } else {
+        [self dismissViewControllerAnimated:YES completion:nil];
+    }
+}
+
 /**
  点击固定金额按钮
-
+ 
  @param sender 固定金额按钮
  */
 - (IBAction)fixedMoneyButtonClick:(UIButton *)sender {
+    // 清空输入框
+    _moneyTextField.text = @"";
+    // 取消上一个按钮选中状态
     if (_preButton) {
         [_preButton setSelected:NO];
         _preButton.layer.borderColor =  [UIColor chm_colorWithHexString:KSeparatorColor alpha:1.0].CGColor;
@@ -89,12 +100,14 @@ static NSString *const playCellReuseId = @"CHMPalyCell";
     // 选中状态取反
     [sender setSelected:!sender.isSelected];
     sender.layer.borderColor = sender.isSelected ? [UIColor chm_colorWithHexString:KMainColor alpha:1.0].CGColor : [UIColor chm_colorWithHexString:KSeparatorColor alpha:1.0].CGColor;
+    // 下注金额
+    self.bettingMoneyString = [sender.titleLabel.text substringToIndex:sender.titleLabel.text.length - 1];
     _preButton = sender;
 }
 
 /**
  点击遮罩视图
-
+ 
  @param sender tap 手势
  */
 - (IBAction)tapMaskView:(id)sender {
@@ -106,7 +119,33 @@ static NSString *const playCellReuseId = @"CHMPalyCell";
  点击确定按钮
  */
 - (IBAction)comfirmButtonClick {
+    
+    if (!_playItemString || [_playItemString isEqualToString:@""]) {
+        [CHMProgressHUD showErrorWithInfo:@"玩法不能为空"];
+        return;
+    }
+    
+    if (!_bettingMoneyString || [_bettingMoneyString isEqualToString:@""]) {
+        [CHMProgressHUD showErrorWithInfo:@"金额不能为空"];
+        return;
+    }
+    
     [self dismissViewControllerAnimated:YES completion:nil];
+    NSLog(@"玩法----%@------金额%@",_playItemString, _bettingMoneyString);
+    NSString *bettingMsg = [NSString stringWithFormat:@"%@%@",_playItemString, _bettingMoneyString];
+    [CHMHttpTool postTxtMessageToServiceWithMessage:bettingMsg groupId:_targetId success:^(id response) {
+        NSLog(@"------%@",response);
+    } failure:^(NSError *error) {
+        NSLog(@"------%zd",error.code);
+    }];
+    
+    // 发送一条文本消息
+    RCTextMessage *txtMsg = [RCTextMessage messageWithContent:bettingMsg];
+    [[RCIM sharedRCIM] sendMessage:_conversationType targetId:_targetId content:txtMsg pushContent:@"您有一条新的消息" pushData:@"您有一条新的消息" success:^(long messageId) {
+        NSLog(@"------------%lu", messageId);
+    } error:^(RCErrorCode nErrorCode, long messageId) {
+        NSLog(@"------------%lu----%zd", messageId, nErrorCode);
+    }];
 }
 
 
@@ -146,15 +185,29 @@ static NSString *const playCellReuseId = @"CHMPalyCell";
     self.flowLayout.minimumLineSpacing = 0.0;
     self.flowLayout.minimumInteritemSpacing = 0.0;
     
+    [self.moneyTextField addTarget:self action:@selector(textDidChangeForTextField:) forControlEvents:UIControlEventEditingChanged];
+    
     _button10.layer.borderColor = [UIColor chm_colorWithHexString:KSeparatorColor alpha:1.0].CGColor;
     _button100.layer.borderColor = [UIColor chm_colorWithHexString:KSeparatorColor alpha:1.0].CGColor;
     _button500.layer.borderColor = [UIColor chm_colorWithHexString:KSeparatorColor alpha:1.0].CGColor;
     _button1000.layer.borderColor = [UIColor chm_colorWithHexString:KSeparatorColor alpha:1.0].CGColor;
 }
 
+
+/**
+ 输入金额输入框变化监听
+ 
+ @param textField 输入金额输入框
+ */
+- (void)textDidChangeForTextField:(UITextField *)textField {
+    self.bettingMoneyString = textField.text;
+    [_preButton setSelected:NO];
+    _preButton.layer.borderColor =  [UIColor chm_colorWithHexString:KSeparatorColor alpha:1.0].CGColor;
+}
+
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-//    self.maskView.backgroundColor = [UIColor chm_colorWithHexString:@"#000000" alpha:0.4];
+    //    self.maskView.backgroundColor = [UIColor chm_colorWithHexString:@"#000000" alpha:0.4];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -163,13 +216,13 @@ static NSString *const playCellReuseId = @"CHMPalyCell";
 }
 
 /*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
+ #pragma mark - Navigation
+ 
+ // In a storyboard-based application, you will often want to do a little preparation before navigation
+ - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+ // Get the new view controller using [segue destinationViewController].
+ // Pass the selected object to the new view controller.
+ }
+ */
 
 @end

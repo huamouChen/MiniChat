@@ -7,6 +7,9 @@
 //
 
 #import "CHMConversationController.h"
+#import "CHMBettingController.h"
+
+static NSInteger const bettingTag = 2000;
 
 @interface CHMConversationController ()
 
@@ -17,7 +20,46 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    // 
+    // 添加拓展框的插件
+    [self.chatSessionInputBarControl.pluginBoardView insertItemWithImage:[UIImage imageNamed:@"AddPhotoDefault"] title:@"玩法" atIndex:0 tag:bettingTag];
+}
+
+- (void)pluginBoardView:(RCPluginBoardView *)pluginBoardView clickedItemWithTag:(NSInteger)tag {
+    [super pluginBoardView:pluginBoardView clickedItemWithTag:tag];
+    
+    // 玩法
+    if (tag == bettingTag) {
+        CHMBettingController *bettingController = [CHMBettingController new];
+        bettingController.targetId = self.targetId;
+        bettingController.conversationType = self.conversationType;
+        [self presentViewController:bettingController animated:YES completion:nil];
+    }
+}
+
+
+
+#pragma mark - 发送消息
+// 发送消息
+- (void)sendMessage:(RCMessageContent *)messageContent pushContent:(NSString *)pushContent {
+    [super sendMessage:messageContent pushContent:pushContent];
+    if (self.conversationType == ConversationType_GROUP || self.conversationType == ConversationType_CHATROOM) {
+        if ([messageContent isKindOfClass:[RCTextMessage class]]) {
+            RCTextMessage *txtMsg = (RCTextMessage *)messageContent;
+            // 把文本消息都发送到服务器
+            [CHMHttpTool postTxtMessageToServiceWithMessage:txtMsg.content groupId:self.targetId success:^(id response) {
+                NSLog(@"--------%@",response);
+            } failure:^(NSError *error) {
+                NSLog(@"--------%zd",error.code);
+            }];
+        }
+    }
+
+}
+
+// 发送消息回调
+- (void)didSendMessage:(NSInteger)status content:(RCMessageContent *)messageContent {
+    if (status == 0) { // 发送成功
+    }
 }
 
 - (void)didReceiveMemoryWarning {
@@ -25,14 +67,5 @@
     // Dispose of any resources that can be recreated.
 }
 
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end

@@ -29,6 +29,11 @@
     
     // 初始化融云
     [[RCIM sharedRCIM] initWithAppKey:RongCloudAppKey];
+    // 发送消息携带用户信息
+    [RCIM sharedRCIM].enableMessageAttachUserInfo = YES;
+    
+    
+    [[RCIM sharedRCIM] refreshGroupInfoCache:[[RCGroup alloc] initWithGroupId:@"3867" groupName:@"iosGroup" portraitUri:@""] withGroupId:@"3867"];
     
     [self setupBarAppearance];
     

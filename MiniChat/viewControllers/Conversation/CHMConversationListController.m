@@ -33,21 +33,39 @@
                                         @(ConversationType_SYSTEM)]];
     
     
+    
+    // 网络不可用的时候，显示网络不可用
+    self.isShowNetworkIndicatorView = YES;
+    
+    
+    // IMLib 库获取会话列表
+    NSArray *conversationList = [[RCIMClient sharedRCIMClient]
+                                 getConversationList:@[@(ConversationType_PRIVATE),
+                                                       @(ConversationType_DISCUSSION),
+                                                       @(ConversationType_GROUP),
+                                                       @(ConversationType_SYSTEM),
+                                                       @(ConversationType_APPSERVICE),
+                                                       @(ConversationType_PUBLICSERVICE)]];
+    for (RCConversation *conversation in conversationList) {
+        NSLog(@"会话类型：%lu，目标会话ID：%@", (unsigned long)conversation.conversationType, conversation.targetId);
+    }
+    
 }
 
+
+#pragma mark - 即将刷新会话列表数据
+- (NSMutableArray *)willReloadTableData:(NSMutableArray *)dataSource {
+    [super willReloadTableData:dataSource];
+    for (RCConversation *conversation in dataSource) {
+        NSLog(@"会话类型：%lu，目标会话ID：%@", (unsigned long)conversation.conversationType, conversation.targetId);
+    }
+    return dataSource;
+}
 
 /**
  设置外观
  */
 - (void)setupAppearance {
-    //    // 隐藏table view 分割线
-    //    [self.view.subviews enumerateObjectsUsingBlock:^(__kindof UIView * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-    //        if ([obj isKindOfClass:[UITableView class]]) {
-    //            UITableView *tableView = obj;
-    //            tableView.tableFooterView = [UIView new];
-    //        }
-    //    }];
-    
     self.conversationListTableView.tableFooterView= [UIView new];
     
     // navigationBar right item
@@ -135,18 +153,21 @@
 
 // 点击cell，进入聊天界面
 - (void)onSelectedTableRow:(RCConversationModelType)conversationModelType conversationModel:(RCConversationModel *)model atIndexPath:(NSIndexPath *)indexPath {
+    // 从会话列表中拿出会话模型
+    RCConversation *conversation =  self.conversationListDataSource[indexPath.row];
+    
     //新建一个聊天会话View Controller对象,建议这样初始化
     CHMConversationController *chatController = [[CHMConversationController alloc] initWithConversationType:ConversationType_PRIVATE
-                                                                                                   targetId:@"baikaitest"];
+                                                                                                   targetId:conversation.targetId];
     [chatController setHidesBottomBarWhenPushed:YES];
     
     //设置会话的类型，如单聊、讨论组、群聊、聊天室、客服、公众服务会话等
-    chatController.conversationType = ConversationType_PRIVATE;
+    chatController.conversationType = conversation.conversationType;
     //设置会话的目标会话ID。（单聊、客服、公众服务会话为对方的ID，讨论组、群聊、聊天室为会话的ID）
-    chatController.targetId = @"baikaitest";
+    chatController.targetId = conversation.targetId;
     
     //设置聊天会话界面要显示的标题
-    chatController.title = @"感觉有点冷";
+    chatController.title =[conversation.conversationTitle isEqualToString:@""] ? conversation.targetId : conversation.conversationTitle;
     //显示聊天会话界面
     [self.navigationController pushViewController:chatController animated:YES];
 }
