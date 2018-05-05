@@ -8,6 +8,7 @@
 
 #import "CHMContactCell.h"
 #import "CHMFriendModel.h"
+#import "CHMGroupModel.h"
 
 @interface CHMContactCell ()
 @property (weak, nonatomic) IBOutlet UIImageView *portraitImageView;
@@ -20,6 +21,12 @@
     _friendModel = friendModel;
     [_portraitImageView chm_imageViewWithURL:_friendModel.HeaderImage placeholder:@"icon_person"];
     _nameLabel.text = _friendModel.NickName;
+}
+
+- (void)setGroupModel:(CHMGroupModel *)groupModel {
+    _groupModel = groupModel;
+    [_portraitImageView chm_imageViewWithURL:_groupModel.GroupName placeholder:@"icon_person"];
+    _nameLabel.text = _groupModel.GroupName;
 }
 
 - (void)awakeFromNib {

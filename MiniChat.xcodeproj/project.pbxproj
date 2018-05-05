@@ -13,6 +13,8 @@
 		C001778E209DE44C001B44DE /* CHMNewFriendsController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C001778C209DE44C001B44DE /* CHMNewFriendsController.xib */; };
 		C0017792209DE460001B44DE /* CHMGroupListController.m in Sources */ = {isa = PBXBuildFile; fileRef = C0017790209DE460001B44DE /* CHMGroupListController.m */; };
 		C0017793209DE460001B44DE /* CHMGroupListController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C0017791209DE460001B44DE /* CHMGroupListController.xib */; };
+		C0017797209DED2E001B44DE /* CHMGroupModel.m in Sources */ = {isa = PBXBuildFile; fileRef = C0017796209DED2E001B44DE /* CHMGroupModel.m */; };
+		C00177A0209DF570001B44DE /* CHMGroupFooter.m in Sources */ = {isa = PBXBuildFile; fileRef = C001779F209DF570001B44DE /* CHMGroupFooter.m */; };
 		C066ED8B2099C98F00CB87FC /* CHMConversationController.m in Sources */ = {isa = PBXBuildFile; fileRef = C066ED892099C98F00CB87FC /* CHMConversationController.m */; };
 		C066ED8C2099C98F00CB87FC /* CHMConversationController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C066ED8A2099C98F00CB87FC /* CHMConversationController.xib */; };
 		C066ED912099E2C500CB87FC /* CHMAccountSettingController.m in Sources */ = {isa = PBXBuildFile; fileRef = C066ED8F2099E2C500CB87FC /* CHMAccountSettingController.m */; };
@@ -87,6 +89,10 @@
 		C001778F209DE460001B44DE /* CHMGroupListController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CHMGroupListController.h; sourceTree = "<group>"; };
 		C0017790209DE460001B44DE /* CHMGroupListController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CHMGroupListController.m; sourceTree = "<group>"; };
 		C0017791209DE460001B44DE /* CHMGroupListController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CHMGroupListController.xib; sourceTree = "<group>"; };
+		C0017795209DED2E001B44DE /* CHMGroupModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CHMGroupModel.h; sourceTree = "<group>"; };
+		C0017796209DED2E001B44DE /* CHMGroupModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CHMGroupModel.m; sourceTree = "<group>"; };
+		C001779E209DF570001B44DE /* CHMGroupFooter.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CHMGroupFooter.h; sourceTree = "<group>"; };
+		C001779F209DF570001B44DE /* CHMGroupFooter.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CHMGroupFooter.m; sourceTree = "<group>"; };
 		C00427532095CC7600BE24C1 /* PrefixHeader.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
 		C066ED882099C98F00CB87FC /* CHMConversationController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CHMConversationController.h; sourceTree = "<group>"; };
 		C066ED892099C98F00CB87FC /* CHMConversationController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CHMConversationController.m; sourceTree = "<group>"; };
@@ -218,6 +224,8 @@
 		C0017788209DE42D001B44DE /* GroupList */ = {
 			isa = PBXGroup;
 			children = (
+				C0017798209DF514001B44DE /* view */,
+				C0017794209DED1D001B44DE /* Model */,
 				C001778F209DE460001B44DE /* CHMGroupListController.h */,
 				C0017790209DE460001B44DE /* CHMGroupListController.m */,
 				C0017791209DE460001B44DE /* CHMGroupListController.xib */,
@@ -233,6 +241,24 @@
 				C001778C209DE44C001B44DE /* CHMNewFriendsController.xib */,
 			);
 			path = NewFriend;
+			sourceTree = "<group>";
+		};
+		C0017794209DED1D001B44DE /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				C0017795209DED2E001B44DE /* CHMGroupModel.h */,
+				C0017796209DED2E001B44DE /* CHMGroupModel.m */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		C0017798209DF514001B44DE /* view */ = {
+			isa = PBXGroup;
+			children = (
+				C001779E209DF570001B44DE /* CHMGroupFooter.h */,
+				C001779F209DF570001B44DE /* CHMGroupFooter.m */,
+			);
+			path = view;
 			sourceTree = "<group>";
 		};
 		C00427562097053200BE24C1 /* viewControllers */ = {
@@ -833,6 +859,7 @@
 				C0EAA62A2098723B0046F05C /* CHMMineDetailCell.m in Sources */,
 				C066EDB7209A9C7E00CB87FC /* CHMContactHeaderView.m in Sources */,
 				C066ED8B2099C98F00CB87FC /* CHMConversationController.m in Sources */,
+				C0017797209DED2E001B44DE /* CHMGroupModel.m in Sources */,
 				C0EAA60820985DCC0046F05C /* CHMChatRoomController.m in Sources */,
 				C066EDC4209BDCEB00CB87FC /* CHMSelectMemberController.m in Sources */,
 				C066ED912099E2C500CB87FC /* CHMAccountSettingController.m in Sources */,
@@ -841,6 +868,7 @@
 				C066EDBD209AB6E300CB87FC /* CHMUserDetailFooter.m in Sources */,
 				C0EAA6442098B7C80046F05C /* CHMChatRoomModel.m in Sources */,
 				C0EAA5F2209823F40046F05C /* CHMRegisterController.m in Sources */,
+				C00177A0209DF570001B44DE /* CHMGroupFooter.m in Sources */,
 				C0017792209DE460001B44DE /* CHMGroupListController.m in Sources */,
 				C0EAA62F209872520046F05C /* CHMMineItemCell.m in Sources */,
 				C0EFDBAD209C8FE400848710 /* CHMPalyCell.m in Sources */,

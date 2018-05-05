@@ -85,46 +85,7 @@ static CHMHttpTool *instanse = nil;
     }
 }
 
-
-/**
- 上传图片
- 
- @param urlString 上传地址
- @param params 参数
- @param image 图片
- @param imageName 图片名称
- @param success 成功
- @param failure 失败
- */
-+ (void)postWithURLString:(NSString *)urlString params:(NSDictionary *)params image:(UIImage *)image imageName:(NSString *)imageName success:(successBlock)success failure:(failureBlock)failure {
-    NSData *data = UIImageJPEGRepresentation(image, 0.2);
-    
-    
-    NSString *tokenString = [[NSUserDefaults standardUserDefaults] objectForKey:KLoginToken];
-    if (tokenString) {
-        [[CHMHttpTool shareManager].sessionManager.requestSerializer setValue:[NSString stringWithFormat:@"Bearer %@", tokenString] forHTTPHeaderField:@"Authorization"];
-    }
-    
-    [[CHMHttpTool shareManager].sessionManager POST:urlString parameters:params constructingBodyWithBlock:^(id<AFMultipartFormData>  _Nonnull formData) {
-        
-        [formData appendPartWithFileData:data name:imageName fileName:@"file" mimeType:@"image/jpg"];
-        
-    } progress:^(NSProgress * _Nonnull uploadProgress) {}
-                                            success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-                                                NSLog(@"上传文件---%@",responseObject);
-                                                NSString *desc = responseObject[@"type"];
-                                                if ([desc isEqualToString:@"SUCCESS"]) {
-                                                    success(responseObject);
-                                                }else{
-                                                    failure(responseObject[@"desc"]);
-                                                }
-                                            } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-                                                failure(error);
-                                            }];
-    
-}
-
-
+#pragma mark - 登录相关
 /**
  登录
  
@@ -181,6 +142,7 @@ static CHMHttpTool *instanse = nil;
 }
 
 
+#pragma mark - 群组相关
 /**
  创建群组
  
@@ -196,6 +158,17 @@ static CHMHttpTool *instanse = nil;
     NSString *imgDataString = [UIImageJPEGRepresentation(groupPortrait, 0.5) base64EncodedStringWithOptions:NSDataBase64Encoding64CharacterLineLength];
     NSDictionary *params = @{@"Owner": groupOwner, @"GroupName": groupName, @"GroupImgStream": imgDataString, @"Members":groupMembers };
     [CHMHttpTool requestWithMethod:RequestMethodTypePost url:CreateGroupURL params:params success:success failure:failure];
+}
+
+
+/**
+ 获取群聊列表
+
+ @param success 成功
+ @param failure 失败
+ */
++ (void)getGroupListWithSuccess:(successBlock)success failure:(failureBlock)failure {
+    [CHMHttpTool requestWithMethod:RequestMethodTypeGet url:GetGroupListURL params:@{} success:success failure:failure];
 }
 
 
@@ -232,6 +205,7 @@ static CHMHttpTool *instanse = nil;
 }
 
 
+#pragma mark - 玩法相关
 /**
  把文本消息发送到服务器
 

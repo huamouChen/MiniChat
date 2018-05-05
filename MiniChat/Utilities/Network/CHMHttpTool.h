@@ -89,17 +89,6 @@ typedef void(^failureBlock)(NSError *error);
  */
 + (void)createGroupWtihGroupName:(NSString *)groupName groupMembers:(NSArray *)groupMembers groupPortrait:(UIImage *)groupPortrait success:(successBlock)success failure:(failureBlock)failure;
 
-/**
- 上传图片
- 
- @param urlString 上传地址
- @param params 参数
- @param image 图片
- @param imageName 图片名称
- @param success 成功
- @param failure 失败
- */
-+ (void)postWithURLString:(NSString *)urlString params:(NSDictionary *)params image:(UIImage *)image imageName:(NSString *)imageName success:(successBlock)success failure:(failureBlock)failure;
 
 /**
  修改群组头像
@@ -110,6 +99,15 @@ typedef void(^failureBlock)(NSError *error);
  @param failure 失败
  */
 + (void)setGroupPortraitWithGroupId:(NSString *)groupId groupPortrait:(UIImage *)image success:(successBlock)success failure:(failureBlock)failure;
+
+/**
+ 获取群聊列表
+ 
+ @param success 成功
+ @param failure 失败
+ */
++ (void)getGroupListWithSuccess:(successBlock)success failure:(failureBlock)failure;
+
 
 /**
  把文本消息发送到服务器

@@ -7,8 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
-@class CHMFriendModel;
+@class CHMFriendModel, CHMGroupModel;
 
 @interface CHMContactCell : UITableViewCell
 @property (nonatomic, strong) CHMFriendModel *friendModel;
+@property (nonatomic, strong) CHMGroupModel *groupModel;
 @end

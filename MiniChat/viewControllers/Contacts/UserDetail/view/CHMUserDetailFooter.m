@@ -22,7 +22,6 @@ static NSString *const reuseIdentifier = @"reuseIdentifier";
  点击发送消息
  */
 - (IBAction)sendMessageButtonClick {
-    NSLog(@"------------UserDetailController send message");
     if (self.sendMessageBlock) {
         self.sendMessageBlock();
     }

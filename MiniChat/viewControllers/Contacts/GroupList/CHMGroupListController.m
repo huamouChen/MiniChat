@@ -7,23 +7,98 @@
 //
 
 #import "CHMGroupListController.h"
+#import "CHMContactCell.h"
+#import "CHMGroupModel.h"
+#import "CHMConversationController.h"
+#import "CHMGroupFooter.h"
+
+static NSString *const groupCellReuseId = @"CHMContactCell";
 
 @interface CHMGroupListController ()
+// 群聊列表数组
+@property (nonatomic, strong) NSMutableArray *groupArray;
 
+@property (nonatomic, strong) CHMGroupFooter *footer;
 @end
 
 @implementation CHMGroupListController
 
+#pragma mark - 获取数据
+/**
+ 获取群组列表
+ */
+- (void)fetchGroupList {
+    [CHMHttpTool getGroupListWithSuccess:^(id response) {
+        NSLog(@"------------%@", response);
+        __weak typeof(self) weakSelf = self;
+        NSNumber *codeId = response[@"Code"][@"CodeId"];
+        if (codeId.integerValue == 100) {
+            NSArray *groupList = [CHMGroupModel mj_objectArrayWithKeyValuesArray:response[@"Value"]];
+            weakSelf.groupArray = [NSMutableArray arrayWithArray:groupList];
+            // 刷新数据
+            weakSelf.footer.footerTitleLabel.text = [NSString stringWithFormat:@"%zd个群聊",weakSelf.groupArray.count];
+            [weakSelf.tableView reloadData];
+        }
+        
+    } failure:^(NSError *error) {
+        NSLog(@"-------%zd", error.code);
+    }];
+}
+
+#pragma mark - table view delegate
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    CHMGroupModel *groupModel = _groupArray[indexPath.row];
+    //新建一个聊天会话View Controller对象,建议这样初始化
+    CHMConversationController *chatController = [[CHMConversationController alloc] initWithConversationType:ConversationType_GROUP targetId:groupModel.GroupId];
+    //设置聊天会话界面要显示的标题
+    chatController.title = groupModel.GroupName;
+    [chatController setHidesBottomBarWhenPushed:YES];
+    //显示聊天会话界面
+    [self.navigationController pushViewController:chatController animated:YES];
+}
+
+#pragma mark - Table view data source
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    return _groupArray.count;
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    CHMContactCell *cell = [tableView dequeueReusableCellWithIdentifier:groupCellReuseId];
+    cell.groupModel = _groupArray[indexPath.row];
+    return cell;
+}
+
+#pragma mark - view life cycle
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    // 获取数据
+    [self fetchData];
+    
+    // 设置外观
+    [self setupAppearance];
+}
+
+
+/**
+ 获取数据
+ */
+- (void)fetchData {
+    [self fetchGroupList];
+}
+
+/**
+ 设置外观
+ */
+- (void)setupAppearance {
     self.title = @"群聊";
-    
-    // Uncomment the following line to preserve selection between presentations.
-    // self.clearsSelectionOnViewWillAppear = NO;
-    
-    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+    // register cell
+    [self.tableView registerNib:[UINib nibWithNibName:NSStringFromClass([CHMContactCell class]) bundle:nil] forCellReuseIdentifier:groupCellReuseId];
+    // table footer
+    CHMGroupFooter *footer = [CHMGroupFooter footerWithTableView:self.tableView];
+    self.tableView.tableFooterView = footer;
+    self.footer = footer;
 }
 
 - (instancetype)init {
@@ -35,89 +110,6 @@
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
-
-#pragma mark - Table view data source
-
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-#warning Incomplete implementation, return the number of sections
-    return 0;
-}
-
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-#warning Incomplete implementation, return the number of rows
-    return 0;
-}
-
-/*
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:<#@"reuseIdentifier"#> forIndexPath:indexPath];
-    
-    // Configure the cell...
-    
-    return cell;
-}
-*/
-
-/*
-// Override to support conditional editing of the table view.
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
-    // Return NO if you do not want the specified item to be editable.
-    return YES;
-}
-*/
-
-/*
-// Override to support editing the table view.
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (editingStyle == UITableViewCellEditingStyleDelete) {
-        // Delete the row from the data source
-        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-    } else if (editingStyle == UITableViewCellEditingStyleInsert) {
-        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-    }   
-}
-*/
-
-/*
-// Override to support rearranging the table view.
-- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath {
-}
-*/
-
-/*
-// Override to support conditional rearranging of the table view.
-- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath {
-    // Return NO if you do not want the item to be re-orderable.
-    return YES;
-}
-*/
-
-/*
-#pragma mark - Table view delegate
-
-// In a xib-based application, navigation from a table can be handled in -tableView:didSelectRowAtIndexPath:
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    // Navigation logic may go here, for example:
-    // Create the next view controller.
-    <#DetailViewController#> *detailViewController = [[<#DetailViewController#> alloc] initWithNibName:<#@"Nib name"#> bundle:nil];
-    
-    // Pass the selected object to the new view controller.
-    
-    // Push the view controller.
-    [self.navigationController pushViewController:detailViewController animated:YES];
-}
-*/
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end
