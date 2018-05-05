@@ -57,7 +57,7 @@
 - (NSMutableArray *)willReloadTableData:(NSMutableArray *)dataSource {
     [super willReloadTableData:dataSource];
     for (RCConversation *conversation in dataSource) {
-        NSLog(@"会话类型：%lu，目标会话ID：%@", (unsigned long)conversation.conversationType, conversation.targetId);
+//        NSLog(@"会话类型：%lu，目标会话ID：%@", (unsigned long)conversation.conversationType, conversation.targetId);
     }
     return dataSource;
 }

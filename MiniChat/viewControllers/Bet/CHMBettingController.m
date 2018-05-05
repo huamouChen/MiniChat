@@ -9,8 +9,10 @@
 #import "CHMBettingController.h"
 #import "CHMPalyCell.h"
 #import "CHMPlayItemModel.h"
+#import "CHMPlayHeaderView.h"
 
 static NSString *const playCellReuseId = @"CHMPalyCell";
+static NSString *const headerReuseId = @"CHMPlayHeaderView";
 
 @interface CHMBettingController () <UICollectionViewDelegate, UICollectionViewDataSource>
 @property (weak, nonatomic) IBOutlet UIView *maskView;
@@ -48,6 +50,12 @@ static NSString *const playCellReuseId = @"CHMPalyCell";
     return cell;
 }
 
+- (UICollectionReusableView *)collectionView:(UICollectionView *)collectionView viewForSupplementaryElementOfKind:(NSString *)kind atIndexPath:(NSIndexPath *)indexPath {
+    CHMPlayHeaderView *header = [collectionView dequeueReusableSupplementaryViewOfKind:kind withReuseIdentifier:headerReuseId forIndexPath:indexPath];
+    
+    return header;
+}
+
 #pragma mark - collection view delegate
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
     // 如果有上一个，就把上一个选为未选中
@@ -61,11 +69,7 @@ static NSString *const playCellReuseId = @"CHMPalyCell";
     selectedModel.isCheck = !selectedModel.isCheck;
     [self.playArray replaceObjectAtIndex:indexPath.item withObject:selectedModel];
     // 刷新数据
-    if (_preIndexpath) {
-        [self.playCollectionView reloadItemsAtIndexPaths:@[indexPath, _preIndexpath]];
-    } else {
-        [self.playCollectionView reloadItemsAtIndexPaths:@[indexPath]];
-    }
+    [collectionView reloadData];
     // 玩法
     CHMPlayItemModel *playItemModel = self.playArray[indexPath.item];
     self.playItemString = playItemModel.playName;
@@ -74,15 +78,6 @@ static NSString *const playCellReuseId = @"CHMPalyCell";
 }
 
 
-
-#pragma mark - 点击事件
-- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
-    if ([self.moneyTextField isEditing]) {
-        [self.view endEditing:YES];
-    } else {
-        [self dismissViewControllerAnimated:YES completion:nil];
-    }
-}
 
 /**
  点击固定金额按钮
@@ -111,7 +106,11 @@ static NSString *const playCellReuseId = @"CHMPalyCell";
  @param sender tap 手势
  */
 - (IBAction)tapMaskView:(id)sender {
-    [self dismissViewControllerAnimated:YES completion:nil];
+    if ([self.moneyTextField isEditing]) {
+        [self.view endEditing:YES];
+    } else {
+        [self dismissViewControllerAnimated:YES completion:nil];
+    }
 }
 
 
@@ -156,6 +155,9 @@ static NSString *const playCellReuseId = @"CHMPalyCell";
     [self initLocalData];
     
     [self setupAppearance];
+    
+
+
 }
 
 /**
@@ -168,6 +170,8 @@ static NSString *const playCellReuseId = @"CHMPalyCell";
         CHMPlayItemModel *playModel = [[CHMPlayItemModel alloc] initWithPlayName:playItemNameArray[i] isCheck:NO];
         [self.playArray addObject:playModel];
     }
+    
+    [self.playCollectionView reloadData];
 }
 
 /**
@@ -179,6 +183,9 @@ static NSString *const playCellReuseId = @"CHMPalyCell";
     
     // register cell
     [self.playCollectionView registerNib:[UINib nibWithNibName:NSStringFromClass([CHMPalyCell class]) bundle:nil] forCellWithReuseIdentifier:playCellReuseId];
+    // register header
+    [self.playCollectionView registerNib:[UINib nibWithNibName:NSStringFromClass([CHMPlayHeaderView class]) bundle:nil] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:headerReuseId];
+    self.flowLayout.headerReferenceSize = CGSizeMake(SCREEN_WIDTH, 44);
     
     // 每个item的大小
     self.flowLayout.itemSize = CGSizeMake(SCREEN_WIDTH / 4.0, 41.0);

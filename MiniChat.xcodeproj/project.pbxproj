@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		C0017781209D99BE001B44DE /* CHMPlayHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = C001777F209D99BE001B44DE /* CHMPlayHeaderView.m */; };
+		C0017782209D99BE001B44DE /* CHMPlayHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = C0017780209D99BE001B44DE /* CHMPlayHeaderView.xib */; };
 		C066ED8B2099C98F00CB87FC /* CHMConversationController.m in Sources */ = {isa = PBXBuildFile; fileRef = C066ED892099C98F00CB87FC /* CHMConversationController.m */; };
 		C066ED8C2099C98F00CB87FC /* CHMConversationController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C066ED8A2099C98F00CB87FC /* CHMConversationController.xib */; };
 		C066ED912099E2C500CB87FC /* CHMAccountSettingController.m in Sources */ = {isa = PBXBuildFile; fileRef = C066ED8F2099E2C500CB87FC /* CHMAccountSettingController.m */; };
@@ -72,6 +74,9 @@
 /* Begin PBXFileReference section */
 		6621D17447B24B984234EF83 /* Pods_MiniChat.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MiniChat.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		79BE6016547BAA125EC667D1 /* Pods-MiniChat.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MiniChat.release.xcconfig"; path = "Pods/Target Support Files/Pods-MiniChat/Pods-MiniChat.release.xcconfig"; sourceTree = "<group>"; };
+		C001777E209D99BE001B44DE /* CHMPlayHeaderView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CHMPlayHeaderView.h; sourceTree = "<group>"; };
+		C001777F209D99BE001B44DE /* CHMPlayHeaderView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CHMPlayHeaderView.m; sourceTree = "<group>"; };
+		C0017780209D99BE001B44DE /* CHMPlayHeaderView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CHMPlayHeaderView.xib; sourceTree = "<group>"; };
 		C00427532095CC7600BE24C1 /* PrefixHeader.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
 		C066ED882099C98F00CB87FC /* CHMConversationController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CHMConversationController.h; sourceTree = "<group>"; };
 		C066ED892099C98F00CB87FC /* CHMConversationController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CHMConversationController.m; sourceTree = "<group>"; };
@@ -551,6 +556,9 @@
 				C0EFDBAA209C8FE400848710 /* CHMPalyCell.h */,
 				C0EFDBAB209C8FE400848710 /* CHMPalyCell.m */,
 				C0EFDBAC209C8FE400848710 /* CHMPalyCell.xib */,
+				C001777E209D99BE001B44DE /* CHMPlayHeaderView.h */,
+				C001777F209D99BE001B44DE /* CHMPlayHeaderView.m */,
+				C0017780209D99BE001B44DE /* CHMPlayHeaderView.xib */,
 			);
 			path = view;
 			sourceTree = "<group>";
@@ -688,6 +696,7 @@
 				C0EFDBA8209C82FE00848710 /* CHMBettingController.xib in Resources */,
 				C066ED9D2099E47600CB87FC /* CHMLogoutCell.xib in Resources */,
 				C0F25A5E2095BC1900C6BCA6 /* Assets.xcassets in Resources */,
+				C0017782209D99BE001B44DE /* CHMPlayHeaderView.xib in Resources */,
 				C0EFDBA2209C142500848710 /* CHMCreateGroupController.xib in Resources */,
 				C066ED982099E45500CB87FC /* CHMAccountSettingCell.xib in Resources */,
 				C066ED8C2099C98F00CB87FC /* CHMConversationController.xib in Resources */,
@@ -807,6 +816,7 @@
 				C0EAA60E20985DEE0046F05C /* CHMConversationListController.m in Sources */,
 				C0EFDBA1209C142500848710 /* CHMCreateGroupController.m in Sources */,
 				C0F25A642095BC1900C6BCA6 /* main.m in Sources */,
+				C0017781209D99BE001B44DE /* CHMPlayHeaderView.m in Sources */,
 				C0F25A562095BC1800C6BCA6 /* AppDelegate.m in Sources */,
 				C066ED972099E45500CB87FC /* CHMAccountSettingCell.m in Sources */,
 				C0EAA5D72097E8210046F05C /* CHMHttpTool.m in Sources */,

@@ -32,6 +32,8 @@ static NSInteger const bettingTag = 2000;
         CHMBettingController *bettingController = [CHMBettingController new];
         bettingController.targetId = self.targetId;
         bettingController.conversationType = self.conversationType;
+        // 设置样式才能设置透明
+        bettingController.modalPresentationStyle = UIModalPresentationOverCurrentContext;
         [self presentViewController:bettingController animated:YES completion:nil];
     }
 }
@@ -53,7 +55,7 @@ static NSInteger const bettingTag = 2000;
             }];
         }
     }
-
+    
 }
 
 // 发送消息回调

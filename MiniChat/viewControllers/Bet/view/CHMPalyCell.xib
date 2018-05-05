@@ -19,25 +19,22 @@
                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 <subviews>
                     <button opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QHn-L1-7Ei">
-                        <rect key="frame" x="4" y="4" width="164" height="94"/>
+                        <rect key="frame" x="6" y="6" width="160" height="90"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <state key="normal">
-                            <color key="titleColor" red="0.40000000000000002" green="0.40000000000000002" blue="0.40000000000000002" alpha="1" colorSpace="calibratedRGB"/>
+                            <color key="titleColor" red="0.40000000000000002" green="0.40000000000000002" blue="0.40000000000000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         </state>
                         <state key="selected">
-                            <color key="titleColor" red="0.0039215686269999999" green="0.58431372550000005" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                        </state>
-                        <state key="highlighted">
                             <color key="titleColor" red="0.0039215686269999999" green="0.58431372550000005" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         </state>
                     </button>
                 </subviews>
             </view>
             <constraints>
-                <constraint firstAttribute="bottom" secondItem="QHn-L1-7Ei" secondAttribute="bottom" constant="4" id="FSb-yZ-qCo"/>
-                <constraint firstItem="QHn-L1-7Ei" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="4" id="HNf-Er-hJn"/>
-                <constraint firstAttribute="trailing" secondItem="QHn-L1-7Ei" secondAttribute="trailing" constant="4" id="XwZ-LZ-E7e"/>
-                <constraint firstItem="QHn-L1-7Ei" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" constant="4" id="cYd-0N-CJB"/>
+                <constraint firstAttribute="bottom" secondItem="QHn-L1-7Ei" secondAttribute="bottom" constant="6" id="FSb-yZ-qCo"/>
+                <constraint firstItem="QHn-L1-7Ei" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="6" id="HNf-Er-hJn"/>
+                <constraint firstAttribute="trailing" secondItem="QHn-L1-7Ei" secondAttribute="trailing" constant="6" id="XwZ-LZ-E7e"/>
+                <constraint firstItem="QHn-L1-7Ei" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" constant="6" id="cYd-0N-CJB"/>
             </constraints>
             <size key="customSize" width="172" height="102"/>
             <connections>
