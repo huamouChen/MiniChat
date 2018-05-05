@@ -231,4 +231,18 @@ static CHMHttpTool *instanse = nil;
     }];
 }
 
+
+/**
+ 把文本消息发送到服务器
+
+ @param message 要发送的文本消息
+ @param groupId 群组ID
+ @param success 成功
+ @param failure 失败
+ */
++ (void)postTxtMessageToServiceWithMessage:(NSString *)message groupId:(NSString *)groupId success:(successBlock)success failure:(failureBlock)failure {
+    NSDictionary *params = @{@"BettingMsg": message, @"GroupId": groupId};
+    [CHMHttpTool requestWithMethod:RequestMethodTypePost url:BettingMessageURL params:params success:success failure:false];
+}
+
 @end

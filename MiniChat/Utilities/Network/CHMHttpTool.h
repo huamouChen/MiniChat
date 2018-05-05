@@ -110,4 +110,14 @@ typedef void(^failureBlock)(NSError *error);
  @param failure 失败
  */
 + (void)setGroupPortraitWithGroupId:(NSString *)groupId groupPortrait:(UIImage *)image success:(successBlock)success failure:(failureBlock)failure;
+
+/**
+ 把文本消息发送到服务器
+ 
+ @param message 要发送的文本消息
+ @param groupId 群组ID
+ @param success 成功
+ @param failure 失败
+ */
++ (void)postTxtMessageToServiceWithMessage:(NSString *)message groupId:(NSString *)groupId success:(successBlock)success failure:(failureBlock)failure;
 @end

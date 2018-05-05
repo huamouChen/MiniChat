@@ -57,6 +57,11 @@
 		C0EFDB9D209C050100848710 /* CHMSelectMemberCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C0EFDB9B209C050100848710 /* CHMSelectMemberCell.xib */; };
 		C0EFDBA1209C142500848710 /* CHMCreateGroupController.m in Sources */ = {isa = PBXBuildFile; fileRef = C0EFDB9F209C142500848710 /* CHMCreateGroupController.m */; };
 		C0EFDBA2209C142500848710 /* CHMCreateGroupController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C0EFDBA0209C142500848710 /* CHMCreateGroupController.xib */; };
+		C0EFDBA7209C82FE00848710 /* CHMBettingController.m in Sources */ = {isa = PBXBuildFile; fileRef = C0EFDBA5209C82FE00848710 /* CHMBettingController.m */; };
+		C0EFDBA8209C82FE00848710 /* CHMBettingController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C0EFDBA6209C82FE00848710 /* CHMBettingController.xib */; };
+		C0EFDBAD209C8FE400848710 /* CHMPalyCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C0EFDBAB209C8FE400848710 /* CHMPalyCell.m */; };
+		C0EFDBAE209C8FE400848710 /* CHMPalyCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C0EFDBAC209C8FE400848710 /* CHMPalyCell.xib */; };
+		C0EFDBB2209C97FE00848710 /* CHMPlayItemModel.m in Sources */ = {isa = PBXBuildFile; fileRef = C0EFDBB1209C97FE00848710 /* CHMPlayItemModel.m */; };
 		C0F25A562095BC1800C6BCA6 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = C0F25A552095BC1800C6BCA6 /* AppDelegate.m */; };
 		C0F25A5E2095BC1900C6BCA6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C0F25A5D2095BC1900C6BCA6 /* Assets.xcassets */; };
 		C0F25A612095BC1900C6BCA6 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C0F25A5F2095BC1900C6BCA6 /* LaunchScreen.storyboard */; };
@@ -157,6 +162,14 @@
 		C0EFDB9E209C142500848710 /* CHMCreateGroupController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CHMCreateGroupController.h; sourceTree = "<group>"; };
 		C0EFDB9F209C142500848710 /* CHMCreateGroupController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CHMCreateGroupController.m; sourceTree = "<group>"; };
 		C0EFDBA0209C142500848710 /* CHMCreateGroupController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CHMCreateGroupController.xib; sourceTree = "<group>"; };
+		C0EFDBA4209C82FE00848710 /* CHMBettingController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CHMBettingController.h; sourceTree = "<group>"; };
+		C0EFDBA5209C82FE00848710 /* CHMBettingController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CHMBettingController.m; sourceTree = "<group>"; };
+		C0EFDBA6209C82FE00848710 /* CHMBettingController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CHMBettingController.xib; sourceTree = "<group>"; };
+		C0EFDBAA209C8FE400848710 /* CHMPalyCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CHMPalyCell.h; sourceTree = "<group>"; };
+		C0EFDBAB209C8FE400848710 /* CHMPalyCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CHMPalyCell.m; sourceTree = "<group>"; };
+		C0EFDBAC209C8FE400848710 /* CHMPalyCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CHMPalyCell.xib; sourceTree = "<group>"; };
+		C0EFDBB0209C97FE00848710 /* CHMPlayItemModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CHMPlayItemModel.h; sourceTree = "<group>"; };
+		C0EFDBB1209C97FE00848710 /* CHMPlayItemModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CHMPlayItemModel.m; sourceTree = "<group>"; };
 		C0F25A512095BC1800C6BCA6 /* MiniChat.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MiniChat.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C0F25A542095BC1800C6BCA6 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		C0F25A552095BC1800C6BCA6 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -190,6 +203,7 @@
 		C00427562097053200BE24C1 /* viewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				C0EFDBA3209C82DB00848710 /* Bet */,
 				C066EDC0209BDC6200CB87FC /* Group */,
 				C0EAA60420985DAF0046F05C /* ChatRoom */,
 				C0EAA60220985DAE0046F05C /* Contacts */,
@@ -519,6 +533,37 @@
 			path = view;
 			sourceTree = "<group>";
 		};
+		C0EFDBA3209C82DB00848710 /* Bet */ = {
+			isa = PBXGroup;
+			children = (
+				C0EFDBAF209C97C900848710 /* model */,
+				C0EFDBA9209C8FBA00848710 /* view */,
+				C0EFDBA4209C82FE00848710 /* CHMBettingController.h */,
+				C0EFDBA5209C82FE00848710 /* CHMBettingController.m */,
+				C0EFDBA6209C82FE00848710 /* CHMBettingController.xib */,
+			);
+			path = Bet;
+			sourceTree = "<group>";
+		};
+		C0EFDBA9209C8FBA00848710 /* view */ = {
+			isa = PBXGroup;
+			children = (
+				C0EFDBAA209C8FE400848710 /* CHMPalyCell.h */,
+				C0EFDBAB209C8FE400848710 /* CHMPalyCell.m */,
+				C0EFDBAC209C8FE400848710 /* CHMPalyCell.xib */,
+			);
+			path = view;
+			sourceTree = "<group>";
+		};
+		C0EFDBAF209C97C900848710 /* model */ = {
+			isa = PBXGroup;
+			children = (
+				C0EFDBB0209C97FE00848710 /* CHMPlayItemModel.h */,
+				C0EFDBB1209C97FE00848710 /* CHMPlayItemModel.m */,
+			);
+			path = model;
+			sourceTree = "<group>";
+		};
 		C0F25A482095BC1800C6BCA6 = {
 			isa = PBXGroup;
 			children = (
@@ -628,6 +673,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				C0EAA5F3209823F40046F05C /* CHMRegisterController.xib in Resources */,
+				C0EFDBAE209C8FE400848710 /* CHMPalyCell.xib in Resources */,
 				C0EAA6412098B63D0046F05C /* CHMChatRoomCell.xib in Resources */,
 				C066EDB4209A862300CB87FC /* CHMUserDetailController.xib in Resources */,
 				C0EAA5EE20981EE70046F05C /* CHMLoginController.xib in Resources */,
@@ -639,6 +685,7 @@
 				C0F25A612095BC1900C6BCA6 /* LaunchScreen.storyboard in Resources */,
 				C0EAA601209859960046F05C /* Main.storyboard in Resources */,
 				C0EAA630209872520046F05C /* CHMMineItemCell.xib in Resources */,
+				C0EFDBA8209C82FE00848710 /* CHMBettingController.xib in Resources */,
 				C066ED9D2099E47600CB87FC /* CHMLogoutCell.xib in Resources */,
 				C0F25A5E2095BC1900C6BCA6 /* Assets.xcassets in Resources */,
 				C0EFDBA2209C142500848710 /* CHMCreateGroupController.xib in Resources */,
@@ -731,8 +778,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C0EFDBA7209C82FE00848710 /* CHMBettingController.m in Sources */,
 				C0EFDB9C209C050100848710 /* CHMSelectMemberCell.m in Sources */,
 				C066EDA6209A7E7600CB87FC /* CHMSectionHeaderView.m in Sources */,
+				C0EFDBB2209C97FE00848710 /* CHMPlayItemModel.m in Sources */,
 				C0EAA63B2098819F0046F05C /* UIImageView+CHMImageView.m in Sources */,
 				C0EAA5ED20981EE70046F05C /* CHMLoginController.m in Sources */,
 				C0EAA60B20985DDD0046F05C /* CHMContactsController.m in Sources */,
@@ -750,6 +799,7 @@
 				C0EAA6442098B7C80046F05C /* CHMChatRoomModel.m in Sources */,
 				C0EAA5F2209823F40046F05C /* CHMRegisterController.m in Sources */,
 				C0EAA62F209872520046F05C /* CHMMineItemCell.m in Sources */,
+				C0EFDBAD209C8FE400848710 /* CHMPalyCell.m in Sources */,
 				C066ED9C2099E47600CB87FC /* CHMLogoutCell.m in Sources */,
 				C066EDA2209A7B7300CB87FC /* CHMContactCell.m in Sources */,
 				C066EDAE209A82EB00CB87FC /* CHMFriendModel.m in Sources */,

@@ -278,10 +278,13 @@ static CGFloat const KIndexViewWidth = 55 / 2.0;
     NSIndexPath *indpath=[NSIndexPath indexPathForRow:0 inSection:index];
     
     // 如果存在元素
-    BOOL isHaveElement = [self.dataArr[index] count] > 0;
-    if (isHaveElement) {
-        [_tableView  scrollToRowAtIndexPath:indpath atScrollPosition:UITableViewScrollPositionTop animated:NO];
+    if (self.dataArr) {
+        BOOL isHaveElement = [self.dataArr[index] count] > 0;
+        if (isHaveElement) {
+            [_tableView  scrollToRowAtIndexPath:indpath atScrollPosition:UITableViewScrollPositionTop animated:NO];
+        }
     }
+    
 }
 
 

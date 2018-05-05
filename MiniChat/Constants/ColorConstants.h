@@ -15,7 +15,12 @@
 
 #define KSectionBgColor   @"#eaeaea"
 
+#define KColor3   @"#333333"
+#define KColor6   @"#666666"
 #define KColor7   @"#777777"
+#define KColor9   @"#999999"
+
+#define KSeparatorColor  @"#e9e9e9"
 
 #define kRGBColor(r, g, b)    [UIColor colorWithRed:(r)/255.0 green:(g)/255.0 blue:(b)/255.0 alpha:1.0]
 

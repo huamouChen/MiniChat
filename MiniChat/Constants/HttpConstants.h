@@ -48,6 +48,9 @@
 #define SetGroupPortraitURL               @"api/Im/SetGroupImg"
 
 
+// 发送文本消息到服务器
+#define BettingMessageURL                  @"api/Lottery/BettingIm"
+
 
 
 

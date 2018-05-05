@@ -13,7 +13,7 @@
 #import "CHMMainController.h"
 
 
-@interface AppDelegate ()
+@interface AppDelegate () <RCIMReceiveMessageDelegate>
 
 @end
 
@@ -38,7 +38,7 @@
     
     [self switchRootViewController];
     
-    
+    [RCIM sharedRCIM].receiveMessageDelegate = self;
     
     
     // IQKeyBoard 关闭toolBar
@@ -48,6 +48,10 @@
     return YES;
 }
 
+
+- (void)onRCIMReceiveMessage:(RCMessage *)message left:(int)left {
+    NSLog(@"-----------%@",message);
+}
 
 
 
