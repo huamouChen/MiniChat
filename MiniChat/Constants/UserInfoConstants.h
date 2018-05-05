@@ -13,6 +13,10 @@
 
 #define KSwitchRootViewController   @"switchRootViewController"
 
+
+#define KSyscuser        @"syscuser"            // 官方客服
+#define KSyscaper            @"syscaper"        // 资金助手
+
 #define KAccount        @"account"
 #define KPassword            @"Password"
 #define KLoginToken           @"loginToken"

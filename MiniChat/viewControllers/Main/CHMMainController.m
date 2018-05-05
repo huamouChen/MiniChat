@@ -34,6 +34,9 @@
     [[RCIM sharedRCIM] connectWithToken:rongCloudToken success:^(NSString *userId) {
         NSLog(@"----连接成功%@",userId);
         [self setCurrentUserInfo];
+        
+        [self refreshOfficeAccount];
+        
     } error:^(RCConnectErrorCode status) {
         NSLog(@"----连接失败%ld",(long)status);
     } tokenIncorrect:^{
@@ -58,6 +61,20 @@
 
 #pragma mark - 用户信息提供者
 - (void)getUserInfoWithUserId:(NSString *)userId completion:(void (^)(RCUserInfo *))completion {
+    RCUserInfo *syscuserInfo = [[RCUserInfo alloc] initWithUserId:KSyscuser name:@"官方客服" portrait:@""];
+    RCUserInfo *syscaperInfo = [[RCUserInfo alloc] initWithUserId:KSyscaper name:@"资金助手" portrait:@""];
+    
+    [[RCIM sharedRCIM] refreshUserInfoCache:syscuserInfo withUserId:KSyscuser];
+    [[RCIM sharedRCIM] refreshUserInfoCache:syscaperInfo withUserId:KSyscaper];
+    
+    
+}
+
+
+/**
+ 刷新 官方客服 和 资金助手
+ */
+- (void)refreshOfficeAccount {
     
 }
 

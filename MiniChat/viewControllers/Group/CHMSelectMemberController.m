@@ -15,6 +15,9 @@
 #import "CHMCreateGroupController.h"
 
 static NSString *const selectMemberReuseId = @"CHMSelectMemberCell";
+
+
+
 static int const rowHeight = 55;
 static int const sectionHeaderHeight = 28;
 static CGFloat const KIndexViewWidth = 55 / 2.0;
@@ -89,8 +92,16 @@ static CGFloat const KIndexViewWidth = 55 / 2.0;
         NSNumber *codeId = response[@"Code"][@"CodeId"];
         if (codeId.integerValue == 100) {
             NSMutableArray *friendsArray = [CHMFriendModel mj_objectArrayWithKeyValuesArray:response[@"Value"]];
+            NSMutableArray *filterArray = [NSMutableArray array];
+            // 过滤官方客服和资金助手
+            for (CHMFriendModel *friendModel in friendsArray) {
+                if ([friendModel.UserName isEqualToString:KSyscaper] || [friendModel.UserName isEqualToString:KSyscuser]) {
+                    continue;
+                }
+                [filterArray addObject:friendModel];
+            }
             // 排序
-            [weakSelf.dataArr addObjectsFromArray:[weakSelf testSortWithArray:friendsArray]];
+            [weakSelf.dataArr addObjectsFromArray:[weakSelf testSortWithArray:filterArray]];
             [weakSelf.tableView reloadData];
         } else {
             // 失败暂时不提醒
@@ -260,7 +271,7 @@ static CGFloat const KIndexViewWidth = 55 / 2.0;
 #pragma mark - touch方法
 - (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
     // 没有数据， 防止崩溃
-    if (self.dataArr.count <= 0) {
+    if (!self.dataArr || self.dataArr.count <= 0) {
         return;
     }
     [self myTouch:touches];
