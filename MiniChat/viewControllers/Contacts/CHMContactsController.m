@@ -12,6 +12,8 @@
 #import "CHMSectionHeaderView.h"
 #import "CHMUserDetailController.h"
 #import "CHMContactHeaderView.h"
+#import "CHMNewFriendsController.h"
+#import "CHMGroupListController.h"
 
 static NSString *const contactReuseId = @"CHMContactCell";
 static int const rowHeight = 55;
@@ -156,6 +158,18 @@ static CGFloat const KIndexViewWidth = 55 / 2.0;
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     CHMFriendModel *model = self.dataArr[indexPath.section][indexPath.row];
+    // 新的朋友
+    if ([model.UserName isEqualToString:KNewFriend]) {
+        [self.navigationController pushViewController:[CHMNewFriendsController new] animated:YES];
+        return;
+    }
+    // 群组列表
+    if ([model.UserName isEqualToString:KGroupList]) {
+        [self.navigationController pushViewController:[CHMGroupListController new] animated:YES];
+        return;
+    }
+    
+    // 好友详情
     CHMUserDetailController *userDetailController = [CHMUserDetailController new];
     userDetailController.friendModel = model;
     [userDetailController setHidesBottomBarWhenPushed:YES];
@@ -303,9 +317,9 @@ static CGFloat const KIndexViewWidth = 55 / 2.0;
     if (!_dataArr) {
         _dataArr = [NSMutableArray array];
         // 新的朋友
-        CHMFriendModel *newFriendModel = [[CHMFriendModel alloc] initWithUserId:@"100000000" nickName:@"新的朋友" portrait:@"newFriend"];
+        CHMFriendModel *newFriendModel = [[CHMFriendModel alloc] initWithUserId:KNewFriend nickName:@"新的朋友" portrait:@"newFriend"];
         // 群聊
-        CHMFriendModel *groupFriendModel = [[CHMFriendModel alloc] initWithUserId:@"200000000" nickName:@"群聊" portrait:@"defaultGroup"];
+        CHMFriendModel *groupFriendModel = [[CHMFriendModel alloc] initWithUserId:KGroupList nickName:@"群聊" portrait:@"defaultGroup"];
         NSArray *headerArray = @[newFriendModel, groupFriendModel];
         [_dataArr addObject:headerArray];
     }

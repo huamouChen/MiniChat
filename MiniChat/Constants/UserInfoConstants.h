@@ -16,6 +16,9 @@
 
 #define KSyscuser        @"syscuser"            // 官方客服
 #define KSyscaper            @"syscaper"        // 资金助手
+#define KNewFriend        @"eewFriend"            // 新的朋友
+#define KGroupList            @"groupList"        // 群组
+
 
 #define KAccount        @"account"
 #define KPassword            @"Password"
