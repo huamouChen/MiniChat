@@ -13,6 +13,7 @@
 #import <AVFoundation/AVMediaFormat.h>
 #import <AssetsLibrary/AssetsLibrary.h>
 #import <Photos/Photos.h>
+#import "CHMConversationController.h"
 
 
 @interface CHMCreateGroupController () <UIImagePickerControllerDelegate, UINavigationControllerDelegate>
@@ -107,7 +108,8 @@
     // 隐藏picker controller
     [self imagePickerControllerDidCancel:picker];
     // 获取选择的照片
-    UIImage *selectedImage = info[UIImagePickerControllerEditedImage];
+    UIImage *selectedImage = nil;
+    selectedImage = [picker allowsEditing] ? info[UIImagePickerControllerEditedImage] : info[UIImagePickerControllerOriginalImage];
     self.addImg.image = selectedImage;
 }
 
@@ -115,37 +117,59 @@
  点击创建群组按钮
  */
 - (IBAction)createGroupButtonClick {
+    [self.view endEditing:YES];
+    [CHMProgressHUD showWithInfo:@"正在创建中..." isHaveMask:YES];
     NSArray *groupMemberArray = [self dealWithGroupMemberId];
-//    [CHMHttpTool createGroupWtihGroupName:_nameTextField.text
-//                             groupMembers:groupMemberArray
-//                            groupPortrait:_addImg.image
-//                                  success:^(id response) {
-//                                      NSLog(@"---------%@", response);
-//                                  } failure:^(NSError *error) {
-//                                      [CHMProgressHUD showErrorWithInfo:[NSString stringWithFormat:@"%zd", error.code]];
-//                                  }];
+    [CHMHttpTool createGroupWtihGroupName:_nameTextField.text
+                             groupMembers:groupMemberArray
+                            groupPortrait:_addImg.image
+                                  success:^(id response) {
+                                      [CHMProgressHUD dismissHUD];
+                                      NSLog(@"---------%@", response);
+                                      NSNumber *codeId = response[@"Code"][@"CodeId"];
+                                      NSString *responseDescripton = response[@"Code"][@"Description"];
+                                      if (codeId.integerValue == 100) {
+                                          // 刷新群组信息
+                                          NSString *groupId = [NSString stringWithFormat:@"%@",response[@"Value"][@"GroupId"]];
+                                          NSString *groupPortrait = [NSString stringWithFormat:@"%@%@",BaseURL, response[@"Value"][@"GroupImage"]];
+                                          NSString *groupName = response[@"Value"][@"GroupName"];
+                                          RCGroup *groupInfo = [[RCGroup alloc] initWithGroupId:groupId groupName:groupName portraitUri:groupPortrait];
+                                          [[RCIM sharedRCIM] refreshGroupInfoCache:groupInfo withGroupId:groupId];
+                                          // 开启新会话，先清空栈，再push
+
+                                          // push
+                                          [self starGroupConversationWithGroupInfo:groupInfo];
+                                          
+                                      } else {
+                                          [CHMProgressHUD showErrorWithInfo: responseDescripton];
+                                      }
+                        
+                                  } failure:^(NSError *error) {
+                                      [CHMProgressHUD showErrorWithInfo:[NSString stringWithFormat:@"%zd", error.code]];
+                                  }];
+}
+
+
+/**
+ 开启群组会话
+ */
+- (void)starGroupConversationWithGroupInfo:(RCGroup *)group {
+    //新建一个聊天会话View Controller对象,建议这样初始化
+    CHMConversationController *chatController = [[CHMConversationController alloc] initWithConversationType:ConversationType_GROUP
+                                                                                                   targetId:group.groupId];
+    [chatController setHidesBottomBarWhenPushed:YES];
     
-    // 参数
-//    NSString *groupOwner = [[NSUserDefaults standardUserDefaults] valueForKey:KAccount];
-//    NSData *imgData = UIImageJPEGRepresentation(_addImg.image, 0.5);
-//    NSDictionary *params = @{@"GroupName": _nameTextField.text, @"GroupImgStream": imgData, @"Members":groupMemberArray };
-//    [CHMHttpTool postWithURLString:CreateGroupURL params:params image:_addImg.image imageName:@"file" success:^(id response) {
-//        NSLog(@"%@", response);
-//    } failure:^(NSError *error) {
-//        NSLog(@"%@", error);
-//        [CHMProgressHUD showErrorWithInfo:[NSString stringWithFormat:@"%zd", error.code]];
-//    }];
+    //设置会话的类型，如单聊、讨论组、群聊、聊天室、客服、公众服务会话等
+    chatController.conversationType = ConversationType_GROUP;
+    //设置会话的目标会话ID。（单聊、客服、公众服务会话为对方的ID，讨论组、群聊、聊天室为会话的ID）
+    chatController.targetId = group.groupId;
     
-    
-    
-    // 3867
-    [CHMHttpTool setGroupPortraitWithGroupId:@"3867" groupPortrait:_addImg.image success:^(id response) {
-        NSLog(@"---------%@", response);
-    } failure:^(NSError *error) {
-        NSLog(@"---------%@", error);
-    }];
-    
-    
+    //设置聊天会话界面要显示的标题
+    chatController.title = group.groupName;
+    //显示聊天会话界面
+    UIViewController *rootViewController = self.navigationController.viewControllers.firstObject; //拿到根控制器
+    [self.navigationController popToRootViewControllerAnimated:NO];
+    [rootViewController.navigationController pushViewController:chatController animated:YES];
 }
 
 

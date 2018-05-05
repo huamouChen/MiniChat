@@ -69,7 +69,6 @@
     self.conversationListTableView.tableFooterView= [UIView new];
     
     // navigationBar right item
-    //自定义rightBarButtonItem
     CHMBarButtonItem *rightBtn = [[CHMBarButtonItem alloc] initContainImage:[UIImage imageNamed:@"add"]
                                                              imageViewFrame:CGRectMake(0, 0, 17, 17)
                                                                 buttonTitle:nil
@@ -157,7 +156,7 @@
     RCConversation *conversation =  self.conversationListDataSource[indexPath.row];
     
     //新建一个聊天会话View Controller对象,建议这样初始化
-    CHMConversationController *chatController = [[CHMConversationController alloc] initWithConversationType:ConversationType_PRIVATE
+    CHMConversationController *chatController = [[CHMConversationController alloc] initWithConversationType:conversation.conversationType
                                                                                                    targetId:conversation.targetId];
     [chatController setHidesBottomBarWhenPushed:YES];
     

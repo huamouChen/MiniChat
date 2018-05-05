@@ -193,8 +193,8 @@ static CHMHttpTool *instanse = nil;
 + (void)createGroupWtihGroupName:(NSString *)groupName groupMembers:(NSArray *)groupMembers groupPortrait:(UIImage *)groupPortrait success:(successBlock)success failure:(failureBlock)failure {
     // 参数
     NSString *groupOwner = [[NSUserDefaults standardUserDefaults] valueForKey:KAccount];
-    NSData *imgData = UIImageJPEGRepresentation(groupPortrait, 0.5);
-    NSDictionary *params = @{@"Owner": groupOwner, @"GroupName": groupName, @"GroupImgStream": imgData, @"Members":groupMembers };
+    NSString *imgDataString = [UIImageJPEGRepresentation(groupPortrait, 0.5) base64EncodedStringWithOptions:NSDataBase64Encoding64CharacterLineLength];
+    NSDictionary *params = @{@"Owner": groupOwner, @"GroupName": groupName, @"GroupImgStream": imgDataString, @"Members":groupMembers };
     [CHMHttpTool requestWithMethod:RequestMethodTypePost url:CreateGroupURL params:params success:success failure:failure];
 }
 
