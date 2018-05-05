@@ -20,8 +20,16 @@ static NSInteger const bettingTag = 2000;
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    // 添加拓展框的插件
-    [self.chatSessionInputBarControl.pluginBoardView insertItemWithImage:[UIImage imageNamed:@"AddPhotoDefault"] title:@"玩法" atIndex:0 tag:bettingTag];
+    if (self.conversationType == ConversationType_GROUP || self.conversationType == ConversationType_CHATROOM) {
+        // 添加拓展框的插件
+        [self.chatSessionInputBarControl.pluginBoardView insertItemWithImage:[UIImage imageNamed:@"AddPhotoDefault"] title:@"玩法" atIndex:0 tag:bettingTag];
+    } else { // 其他会话不显示玩法
+        if ([self.chatSessionInputBarControl.pluginBoardView viewWithTag:bettingTag]) {
+            [self.chatSessionInputBarControl.pluginBoardView removeItemWithTag:bettingTag];
+        }
+    }
+    
+    
 }
 
 - (void)pluginBoardView:(RCPluginBoardView *)pluginBoardView clickedItemWithTag:(NSInteger)tag {
@@ -55,7 +63,6 @@ static NSInteger const bettingTag = 2000;
             }];
         }
     }
-    
 }
 
 // 发送消息回调
