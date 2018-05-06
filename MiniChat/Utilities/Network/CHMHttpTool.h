@@ -44,6 +44,18 @@ typedef void(^failureBlock)(NSError *error);
  */
 + (void)loginWithAccount:(NSString *)account password:(NSString *)password success:(successBlock)success failure:(failureBlock)failure;
 
+/**
+ 注册
+ 
+ @param account 账号
+ @param password 密码
+ @param bounds 返水
+ @param userType 用户类型
+ @param success 成功
+ @param failure 失败
+ */
++ (void)registerWithAccount:(NSString *)account password:(NSString *)password bounds:(NSString *)bounds userType:(NSString *)userType success:(successBlock)success failure:(failureBlock)failure;
+
 
 /**
  获取融云 token

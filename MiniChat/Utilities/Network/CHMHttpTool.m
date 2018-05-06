@@ -101,6 +101,21 @@ static CHMHttpTool *instanse = nil;
 
 
 /**
+ 注册
+
+ @param account 账号
+ @param password 密码
+ @param bounds 返水
+ @param userType 用户类型
+ @param success 成功
+ @param failure 失败
+ */
++ (void)registerWithAccount:(NSString *)account password:(NSString *)password bounds:(NSString *)bounds userType:(NSString *)userType success:(successBlock)success failure:(failureBlock)failure {
+    NSDictionary *params = @{@"UserName": account, @"UserPassword": password, @"Bonus": bounds, @"UserType": userType};
+    [CHMHttpTool requestWithMethod:RequestMethodTypePost url:RegisterURL params:params success:success failure:failure];
+}
+
+/**
  获取融云token
  
  @param success 成功

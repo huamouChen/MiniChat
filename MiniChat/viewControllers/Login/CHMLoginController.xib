@@ -72,7 +72,9 @@
                         <constraint firstAttribute="height" constant="46" id="POV-XK-yrK"/>
                         <constraint firstAttribute="width" constant="60" id="zQu-af-1II"/>
                     </constraints>
-                    <state key="normal" title="新用户"/>
+                    <state key="normal" title="新用户">
+                        <color key="titleColor" red="0.91764705882352937" green="0.91764705882352937" blue="0.91764705882352937" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    </state>
                     <connections>
                         <action selector="clickRegisterButton" destination="-1" eventType="touchUpInside" id="scg-33-S0e"/>
                     </connections>

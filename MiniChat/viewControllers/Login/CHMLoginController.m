@@ -30,6 +30,7 @@
  点击登录按钮
  */
 - (IBAction)clickLoginButton {
+    [self.view endEditing:YES];
     [CHMProgressHUD showWithInfo:@"正在登录中..." isHaveMask:YES];
     [CHMHttpTool loginWithAccount:_accountTextField.text password:_passwordTextField.text success:^(id response) {
         NSLog(@"----------%@", response );
@@ -157,8 +158,6 @@
     [_passwordTextField setSecureTextEntry:YES];
     _passwordTextField.delegate = self;
     _accountTextField.returnKeyType = UIReturnKeyDone;
-    
-    [_registerButton setTitleColor:[UIColor colorWithRed:153 green:153 blue:153 alpha:0.5] forState:UIControlStateNormal];
 }
 
 
@@ -168,7 +167,7 @@
 
 #pragma mark - text field delegate
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
-    if (textField.tag == 100) {
+    if (textField.tag == 1000) {
         [_accountTextField resignFirstResponder];
         [_passwordTextField becomeFirstResponder];
     } else {
