@@ -13,6 +13,7 @@ pod 'Masonry'
 pod 'IQKeyboardManager'
 pod 'MJExtension'
 pod 'MJRefresh'
+pod 'SAMKeychain'
 
 
 end

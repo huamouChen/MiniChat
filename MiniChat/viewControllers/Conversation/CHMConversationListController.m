@@ -24,6 +24,8 @@
     [self setupAppearance];
     
     
+
+    
     // 设置需要显示那些类型的会话
     [self setDisplayConversationTypes:@[@(ConversationType_PRIVATE),
                                         @(ConversationType_DISCUSSION),
@@ -56,9 +58,9 @@
 #pragma mark - 即将刷新会话列表数据
 - (NSMutableArray *)willReloadTableData:(NSMutableArray *)dataSource {
     [super willReloadTableData:dataSource];
-    for (RCConversation *conversation in dataSource) {
+//    for (RCConversation *conversation in dataSource) {
 //        NSLog(@"会话类型：%lu，目标会话ID：%@", (unsigned long)conversation.conversationType, conversation.targetId);
-    }
+//    }
     return dataSource;
 }
 

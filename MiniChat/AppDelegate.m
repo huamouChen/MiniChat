@@ -32,6 +32,8 @@
     // 发送消息携带用户信息
     [RCIM sharedRCIM].enableMessageAttachUserInfo = YES;
     
+    [self setIMInfoProvider];
+    
     
     [[RCIM sharedRCIM] refreshGroupInfoCache:[[RCGroup alloc] initWithGroupId:@"3867" groupName:@"iosGroup" portraitUri:@""] withGroupId:@"3867"];
     
@@ -51,6 +53,23 @@
     
     
     return YES;
+}
+
+#pragma mark - 信息提供者
+- (void)setIMInfoProvider {
+    // 从沙盒中取登录时保存的用户信息
+    NSString *nickName = [[NSUserDefaults standardUserDefaults] valueForKey:KNickName];
+    NSString *account = [[NSUserDefaults standardUserDefaults] valueForKey:KAccount];
+    NSString *portrait = [[NSUserDefaults standardUserDefaults] valueForKey:KPortrait];
+    portrait = [NSString stringWithFormat:@"%@%@",BaseURL, portrait];
+    [RCIM sharedRCIM].currentUserInfo = [[RCUserInfo alloc] initWithUserId:account name:nickName portrait:portrait];
+    
+    //设置用户信息源和群组信息源
+    [RCIM sharedRCIM].userInfoDataSource = CHMIMDataSourece;
+    [RCIM sharedRCIM].groupInfoDataSource = CHMIMDataSourece;
+    
+    //群成员数据源
+    [RCIM sharedRCIM].groupMemberDataSource = CHMIMDataSourece;
 }
 
 
@@ -87,6 +106,16 @@
     [[UINavigationBar appearance] setTintColor:[UIColor whiteColor]];
     // tabBar
     [[UITabBar appearance] setTintColor:[UIColor chm_colorWithHexString:KMainColor alpha:1.0]];
+    
+    UIImage *tmpImage = [UIImage imageNamed:@"back"];
+    
+    CGSize newSize = CGSizeMake(12, 20);
+    UIGraphicsBeginImageContextWithOptions(newSize, NO, 0.0f);
+    [tmpImage drawInRect:CGRectMake(2, -2, newSize.width, newSize.height)];
+    UIImage *backButtonImage = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    [[UINavigationBar appearance] setBackIndicatorImage:backButtonImage];
+    [[UINavigationBar appearance] setBackIndicatorTransitionMaskImage:backButtonImage];
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application {

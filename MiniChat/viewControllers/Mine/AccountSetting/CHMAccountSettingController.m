@@ -116,7 +116,6 @@ static int const sectionHeaderHeight = 15;
 - (void)logout {
     // 清空保存的数据
     [[NSUserDefaults standardUserDefaults] setObject:nil forKey:KRongCloudToken];
-    [[NSUserDefaults standardUserDefaults] setObject:nil forKey:KAccount];
     [[NSUserDefaults standardUserDefaults] setObject:nil forKey:KLoginToken];
     
     [CHMProgressHUD showWithInfo:@"正在退出登录..." isHaveMask:YES];

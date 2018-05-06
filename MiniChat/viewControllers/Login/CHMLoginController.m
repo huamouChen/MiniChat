@@ -9,8 +9,9 @@
 #import "CHMLoginController.h"
 #import "RCUnderlineTextField.h"
 #import "CHMRegisterController.h"
+#import <SAMKeychain/SAMKeychain.h>
 
-
+static NSString *const IMServices = @"IMServices";
 
 
 @interface CHMLoginController ()<UITextFieldDelegate>
@@ -101,11 +102,14 @@
             NSString *headerImg = response[@"HeaderImage"];
             NSString *phoneNum = response[@"PhoneNum"];
             nicknName = nicknName ? nicknName : userName;
+            headerImg = headerImg ? headerImg : @"icon_person";
             // 保存用户信息
             [[NSUserDefaults standardUserDefaults] setObject:userName forKey:KAccount];
             [[NSUserDefaults standardUserDefaults] setObject:nicknName forKey:KNickName];
             [[NSUserDefaults standardUserDefaults] setObject:headerImg forKey:KPortrait];
             [[NSUserDefaults standardUserDefaults] setObject:phoneNum forKey:KPhoneNum];
+            // 保存账号密码
+            [SAMKeychain setPassword:self->_passwordTextField.text forService:IMServices account:userName];
             
             // 切换根控制器
             dispatch_async(dispatch_get_main_queue(), ^{
@@ -143,6 +147,12 @@
     
     [self initAppearance];
     
+    // 从沙盒获取账号 密码
+    NSString *account = [[NSUserDefaults standardUserDefaults] valueForKey:KAccount];
+    self.accountTextField.text = account;
+    // 密码
+    NSString *password = [SAMKeychain passwordForService:IMServices account:account];
+    self.passwordTextField.text = password;
     
 }
 

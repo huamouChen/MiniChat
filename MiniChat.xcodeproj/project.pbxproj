@@ -22,6 +22,7 @@
 		C00177C4209EB2F5001B44DE /* CHMGroupSettingHeaderCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C00177BE209EB2F5001B44DE /* CHMGroupSettingHeaderCell.m */; };
 		C00177C7209EB780001B44DE /* CHMGroupSettingFooter.m in Sources */ = {isa = PBXBuildFile; fileRef = C00177C6209EB780001B44DE /* CHMGroupSettingFooter.m */; };
 		C00177CB209EBD76001B44DE /* CHMGroupMemberModel.m in Sources */ = {isa = PBXBuildFile; fileRef = C00177CA209EBD76001B44DE /* CHMGroupMemberModel.m */; };
+		C0137A5B209F385E004D8358 /* CHMInfoProvider.m in Sources */ = {isa = PBXBuildFile; fileRef = C0137A5A209F385E004D8358 /* CHMInfoProvider.m */; };
 		C066ED8B2099C98F00CB87FC /* CHMConversationController.m in Sources */ = {isa = PBXBuildFile; fileRef = C066ED892099C98F00CB87FC /* CHMConversationController.m */; };
 		C066ED8C2099C98F00CB87FC /* CHMConversationController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C066ED8A2099C98F00CB87FC /* CHMConversationController.xib */; };
 		C066ED912099E2C500CB87FC /* CHMAccountSettingController.m in Sources */ = {isa = PBXBuildFile; fileRef = C066ED8F2099E2C500CB87FC /* CHMAccountSettingController.m */; };
@@ -113,6 +114,8 @@
 		C00177C9209EBD76001B44DE /* CHMGroupMemberModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CHMGroupMemberModel.h; sourceTree = "<group>"; };
 		C00177CA209EBD76001B44DE /* CHMGroupMemberModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CHMGroupMemberModel.m; sourceTree = "<group>"; };
 		C00427532095CC7600BE24C1 /* PrefixHeader.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
+		C0137A59209F385E004D8358 /* CHMInfoProvider.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CHMInfoProvider.h; sourceTree = "<group>"; };
+		C0137A5A209F385E004D8358 /* CHMInfoProvider.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CHMInfoProvider.m; sourceTree = "<group>"; };
 		C066ED882099C98F00CB87FC /* CHMConversationController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CHMConversationController.h; sourceTree = "<group>"; };
 		C066ED892099C98F00CB87FC /* CHMConversationController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CHMConversationController.m; sourceTree = "<group>"; };
 		C066ED8A2099C98F00CB87FC /* CHMConversationController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CHMConversationController.xib; sourceTree = "<group>"; };
@@ -343,6 +346,15 @@
 			path = Login;
 			sourceTree = "<group>";
 		};
+		C0137A58209F3849004D8358 /* InfoProvider */ = {
+			isa = PBXGroup;
+			children = (
+				C0137A59209F385E004D8358 /* CHMInfoProvider.h */,
+				C0137A5A209F385E004D8358 /* CHMInfoProvider.m */,
+			);
+			path = InfoProvider;
+			sourceTree = "<group>";
+		};
 		C066ED8D2099E2A500CB87FC /* AccountSetting */ = {
 			isa = PBXGroup;
 			children = (
@@ -484,6 +496,7 @@
 		C0EAA5DC209802240046F05C /* Service */ = {
 			isa = PBXGroup;
 			children = (
+				C0137A58209F3849004D8358 /* InfoProvider */,
 				C0EAA5DD2098023F0046F05C /* response */,
 			);
 			path = Service;
@@ -861,6 +874,7 @@
 				"${BUILT_PRODUCTS_DIR}/MJExtension/MJExtension.framework",
 				"${BUILT_PRODUCTS_DIR}/MJRefresh/MJRefresh.framework",
 				"${BUILT_PRODUCTS_DIR}/Masonry/Masonry.framework",
+				"${BUILT_PRODUCTS_DIR}/SAMKeychain/SAMKeychain.framework",
 				"${BUILT_PRODUCTS_DIR}/SDWebImage/SDWebImage.framework",
 				"${BUILT_PRODUCTS_DIR}/SVProgressHUD/SVProgressHUD.framework",
 			);
@@ -871,6 +885,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MJExtension.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MJRefresh.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Masonry.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SAMKeychain.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SDWebImage.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SVProgressHUD.framework",
 			);
@@ -930,6 +945,7 @@
 				C0EAA5F2209823F40046F05C /* CHMRegisterController.m in Sources */,
 				C00177A0209DF570001B44DE /* CHMGroupFooter.m in Sources */,
 				C0017792209DE460001B44DE /* CHMGroupListController.m in Sources */,
+				C0137A5B209F385E004D8358 /* CHMInfoProvider.m in Sources */,
 				C0EAA62F209872520046F05C /* CHMMineItemCell.m in Sources */,
 				C0EFDBAD209C8FE400848710 /* CHMPalyCell.m in Sources */,
 				C00177C0209EB2F5001B44DE /* CHMGroupSettingCell.m in Sources */,
@@ -1092,10 +1108,7 @@
 				GCC_PREFIX_HEADER = /Users/chenhuamou/Desktop/miniChat/MiniChat/MiniChat/PrefixHeader.pch;
 				INFOPLIST_FILE = MiniChat/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-				);
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = info.huamouchen.MiniChat;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "";
@@ -1117,10 +1130,7 @@
 				GCC_PREFIX_HEADER = /Users/chenhuamou/Desktop/miniChat/MiniChat/MiniChat/PrefixHeader.pch;
 				INFOPLIST_FILE = MiniChat/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-				);
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = info.huamouchen.MiniChat;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "";

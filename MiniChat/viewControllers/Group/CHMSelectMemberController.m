@@ -347,7 +347,9 @@ static CGFloat const KIndexViewWidth = 55 / 2.0;
     
     // 获取数据
     if (_isDeleteMember) {
-        self.dataArr = [NSMutableArray arrayWithArray:[self testSortWithArray:self.sourceArrar]];
+        // 处理昵称为空
+        NSMutableArray *dealArray = [self dealWithNickNameWithArray:self.sourceArrar];
+        self.dataArr = [NSMutableArray arrayWithArray:[self testSortWithArray:dealArray]];
     } else {
         [self fetchFriendList];
     }

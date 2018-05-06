@@ -83,7 +83,7 @@ static NSString *const detailReuseablId = @"CHMMineDetailCell";
     }
     
     if (_groupMemberModel) {
-        self.datasArray = @[@[@{KPortrait:_groupMemberModel.HeaderImage, KNickName: _groupMemberModel.NickName, KAccount: _groupMemberModel.UserName}]];
+        self.datasArray = @[@[@{KPortrait:_groupMemberModel.HeaderImage, KNickName: _groupMemberModel.NickName == nil ? _groupMemberModel.UserName : _groupMemberModel.NickName, KAccount: _groupMemberModel.UserName}]];
     }
     
 }

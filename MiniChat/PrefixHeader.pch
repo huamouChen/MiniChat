@@ -20,14 +20,14 @@
 #import "UIColor+CHMColor.h"
 #import "UIImageView+CHMImageView.h"
 #import "UILabel+CHMLabel.h"
-
 #import "CHMBarButtonItem.h"
-
 #import "CHMProgressHUD.h"
 #import "MJExtension.h"
 #import <RongIMKit/RongIMKit.h>
 
 #import "CHMHttpTool.h"
+
+#import "CHMInfoProvider.h"
 
 
 

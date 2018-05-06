@@ -15,7 +15,7 @@
 #ifdef DEBUG
 #define RongCloudAppKey   @"cpj2xarlc74vn"
 #else
-#define RongCloudAppKey   @"cpj2xarlc74vn"
+#define RongCloudAppKey   @"pgyu6atqpefzu"
 #endif
 
 
