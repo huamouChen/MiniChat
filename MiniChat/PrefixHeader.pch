@@ -21,6 +21,8 @@
 #import "UIImageView+CHMImageView.h"
 #import "UILabel+CHMLabel.h"
 
+#import "CHMBarButtonItem.h"
+
 #import "CHMProgressHUD.h"
 #import "MJExtension.h"
 #import <RongIMKit/RongIMKit.h>

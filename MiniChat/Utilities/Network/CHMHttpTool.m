@@ -220,6 +220,71 @@ static CHMHttpTool *instanse = nil;
 }
 
 
+/**
+ 获取群组的成员列表
+
+ @param groupId 要获取的群组ID
+ @param success 成功
+ @param failure 失败
+ */
++ (void)getGroupMembersWithGroupId:(NSString *)groupId success:(successBlock)success failure:(failureBlock)failure {
+    NSDictionary *params = @{@"groupId": groupId};
+    [CHMHttpTool requestWithMethod:RequestMethodTypeGet url:GetGroupMembersURL params:params success:success failure:false];
+}
+
+
+/**
+ 邀请加入群组
+
+ @param groupId 群组ID
+ @param groupName 群组名称
+ @param memberArray 成员ID数组
+ @param success 成功
+ @param failure 失败
+ */
++ (void)inviteMemberToGroup:(NSString *)groupId groupName:(NSString *)groupName members:(NSArray *)memberArray success:(successBlock)success failure:(failureBlock)failure {
+    NSDictionary *param = @{@"GroupId": groupId, @"GroupName": groupName, @"Members": memberArray};
+    [CHMHttpTool requestWithMethod:RequestMethodTypePost url:InviteIntoGroupURL params:param success:success failure:failure];
+}
+
+/**
+ 群组踢人，只有群主才可以
+ 
+ @param groupId 群组ID
+ @param memberArray 成员ID数组
+ @param success 成功
+ @param failure 失败
+ */
++ (void)kickMemberFromGroup:(NSString *)groupId  members:(NSArray *)memberArray success:(successBlock)success failure:(failureBlock)failure {
+    NSDictionary *param = @{@"GroupId": groupId, @"KickUsers": memberArray};
+    [CHMHttpTool requestWithMethod:RequestMethodTypePost url:KickGroupMemberURL params:param success:success failure:failure];
+}
+
+/**
+ 离开群组
+ 
+ @param groupId 群组ID
+ @param success 成功
+ @param failure 失败
+ */
++ (void)quitFromGroup:(NSString *)groupId success:(successBlock)success failure:(failureBlock)failure {
+    NSDictionary *param = @{@"groupId": groupId};
+    [CHMHttpTool requestWithMethod:RequestMethodTypePost url:QuitGroupURL params:param success:success failure:failure];
+}
+
+/**
+ 创建者解散群组
+ 
+ @param groupId 群组ID
+ @param success 成功
+ @param failure 失败
+ */
++ (void)dismissGroup:(NSString *)groupId success:(successBlock)success failure:(failureBlock)failure {
+    NSDictionary *param = @{@"groupId": groupId};
+    [CHMHttpTool requestWithMethod:RequestMethodTypePost url:DismissGroupURL params:param success:success failure:failure];
+}
+
+
 #pragma mark - 玩法相关
 /**
  把文本消息发送到服务器

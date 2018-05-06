@@ -9,6 +9,7 @@
 #import "CHMUserDetailController.h"
 #import "CHMMineDetailCell.h"
 #import "CHMFriendModel.h"
+#import "CHMGroupMemberModel.h"
 #import "CHMUserDetailFooter.h"
 #import "CHMConversationController.h"
 
@@ -77,7 +78,14 @@ static NSString *const detailReuseablId = @"CHMMineDetailCell";
  初始化数据
  */
 - (void)initData {
+    if (_friendModel) {
     self.datasArray = @[@[@{KPortrait:_friendModel.HeaderImage, KNickName: _friendModel.NickName, KAccount: _friendModel.UserName}]];
+    }
+    
+    if (_groupMemberModel) {
+        self.datasArray = @[@[@{KPortrait:_groupMemberModel.HeaderImage, KNickName: _groupMemberModel.NickName, KAccount: _groupMemberModel.UserName}]];
+    }
+    
 }
 
 

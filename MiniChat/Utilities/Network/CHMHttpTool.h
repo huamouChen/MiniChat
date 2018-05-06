@@ -113,6 +113,15 @@ typedef void(^failureBlock)(NSError *error);
 + (void)setGroupPortraitWithGroupId:(NSString *)groupId groupPortrait:(UIImage *)image success:(successBlock)success failure:(failureBlock)failure;
 
 /**
+ 获取群组的成员列表
+ 
+ @param groupId 要获取的群组ID
+ @param success 成功
+ @param failure 失败
+ */
++ (void)getGroupMembersWithGroupId:(NSString *)groupId success:(successBlock)success failure:(failureBlock)failure;
+
+/**
  获取群聊列表
  
  @param success 成功
@@ -120,6 +129,42 @@ typedef void(^failureBlock)(NSError *error);
  */
 + (void)getGroupListWithSuccess:(successBlock)success failure:(failureBlock)failure;
 
+/**
+ 邀请加入群组
+ 
+ @param groupId 群组ID
+ @param groupName 群组名称
+ @param memberArray 成员ID数组
+ @param success 成功
+ @param failure 失败
+ */
++ (void)inviteMemberToGroup:(NSString *)groupId groupName:(NSString *)groupName members:(NSArray *)memberArray success:(successBlock)success failure:(failureBlock)failure;
+/**
+ 群组踢人，只有群主才可以
+ 
+ @param groupId 群组ID
+ @param memberArray 成员ID数组
+ @param success 成功
+ @param failure 失败
+ */
++ (void)kickMemberFromGroup:(NSString *)groupId  members:(NSArray *)memberArray success:(successBlock)success failure:(failureBlock)failure;
+/**
+ 离开群组
+ 
+ @param groupId 群组ID
+ @param success 成功
+ @param failure 失败
+ */
++ (void)quitFromGroup:(NSString *)groupId success:(successBlock)success failure:(failureBlock)failure;
+
+/**
+ 创建者解散群组
+ 
+ @param groupId 群组ID
+ @param success 成功
+ @param failure 失败
+ */
++ (void)dismissGroup:(NSString *)groupId success:(successBlock)success failure:(failureBlock)failure;
 
 /**
  把文本消息发送到服务器

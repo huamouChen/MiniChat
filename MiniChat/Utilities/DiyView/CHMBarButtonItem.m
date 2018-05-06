@@ -19,7 +19,7 @@
     if (title.length == 0) {
         titleFrame = CGRectZero;
     }
-    return [self initContainImage:[UIImage imageNamed:@"navigator_btn_back"] imageViewFrame:CGRectMake(0, 4, 10, 17) buttonTitle:title titleColor:[UIColor chm_colorWithHexString:@"#ffffff" alpha:1.0] titleFrame:CGRectMake(15, 4, 85, 17) buttonFrame:CGRectMake(-4, 0, 87, 23) target:target action:method];
+    return [self initContainImage:[UIImage imageNamed:@"back"] imageViewFrame:CGRectMake(0, 4, 10, 17) buttonTitle:title titleColor:[UIColor chm_colorWithHexString:@"#ffffff" alpha:1.0] titleFrame:CGRectMake(15, 4, 85, 17) buttonFrame:CGRectMake(-4, 0, 87, 23) target:target action:method];
 }
 
 

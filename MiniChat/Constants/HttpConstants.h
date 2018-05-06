@@ -34,6 +34,8 @@
 
 // 创建群组
 #define CreateGroupURL                   @"api/Im/CreateGroup"
+// 解散群组
+#define DismissGroupURL                   @"api/Im/DismissGroup"
 // 获取某个群组信息
 #define GetGroupInfoURL                  @"api/Im/GetGroup"
 // 获取群组列表

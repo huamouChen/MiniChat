@@ -63,15 +63,17 @@ static CGFloat const KIndexViewWidth = 55 / 2.0;
         NSNumber *codeId = response[@"Code"][@"CodeId"];
         if (codeId.integerValue == 100) {
             NSMutableArray *friendsArray = [CHMFriendModel mj_objectArrayWithKeyValuesArray:response[@"Value"]];
+            // 处理没有昵称的问题
+            NSMutableArray *filterArray = [self dealWithNickNameWithArray:friendsArray];
             // 把当前用户也作为一个好友添加进去
             // 从沙盒中取登录时保存的用户信息
             NSString *nickName = [[NSUserDefaults standardUserDefaults] valueForKey:KNickName];
             NSString *account = [[NSUserDefaults standardUserDefaults] valueForKey:KAccount];
             NSString *portrait = [[NSUserDefaults standardUserDefaults] valueForKey:KPortrait];
             CHMFriendModel *currentuser = [[CHMFriendModel alloc] initWithUserId:account nickName:nickName portrait:portrait];
-            [friendsArray addObject:currentuser];
+            [filterArray addObject:currentuser];
             // 排序
-            [weakSelf.dataArr addObjectsFromArray:[weakSelf testSortWithArray:friendsArray]];
+            [weakSelf.dataArr addObjectsFromArray:[weakSelf testSortWithArray:filterArray]];
             [weakSelf.tableView reloadData];
         } else {
             // 失败暂时不提醒
@@ -79,6 +81,25 @@ static CGFloat const KIndexViewWidth = 55 / 2.0;
     } failure:^(NSError *error) {
         [CHMProgressHUD showErrorWithInfo:[NSString stringWithFormat:@"错误码--%zd", error.code]];
     }];
+}
+
+
+/**
+ 处理头像 或者昵称为空
+ */
+- (NSMutableArray *)dealWithNickNameWithArray:(NSArray *)array {
+    NSMutableArray *resultArray = [NSMutableArray array];
+    for (CHMFriendModel *itemModel in array) {
+        if (itemModel.NickName == nil || [itemModel.NickName isEqualToString:@""]) {
+            itemModel.NickName = itemModel.UserName;
+        }
+        if (itemModel.HeaderImage == nil || [itemModel.HeaderImage isEqualToString:@""]) {
+            itemModel.HeaderImage = @"icon_person";
+        }
+        
+        [resultArray addObject:itemModel];
+    }
+    return resultArray;
 }
 
 #pragma mark - 排序
@@ -120,7 +141,6 @@ static CGFloat const KIndexViewWidth = 55 / 2.0;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    NSLog(@"-------------%zd",section);
     NSArray *sectionArray = self.dataArr[section];
     if (sectionArray) {
         return [self.dataArr[section] count];

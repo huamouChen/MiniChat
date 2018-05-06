@@ -8,6 +8,7 @@
 
 #import "CHMConversationController.h"
 #import "CHMBettingController.h"
+#import "CHMGroupSettingController.h"
 
 static NSInteger const bettingTag = 2000;
 
@@ -20,6 +21,8 @@ static NSInteger const bettingTag = 2000;
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    [self setupRightBarButton];
+    
     if (self.conversationType == ConversationType_GROUP || self.conversationType == ConversationType_CHATROOM) {
         // 添加拓展框的插件
         [self.chatSessionInputBarControl.pluginBoardView insertItemWithImage:[UIImage imageNamed:@"AddPhotoDefault"] title:@"玩法" atIndex:0 tag:bettingTag];
@@ -29,9 +32,13 @@ static NSInteger const bettingTag = 2000;
         }
     }
     
-    
 }
 
+
+
+/**
+ 扩展框方法响应
+ */
 - (void)pluginBoardView:(RCPluginBoardView *)pluginBoardView clickedItemWithTag:(NSInteger)tag {
     [super pluginBoardView:pluginBoardView clickedItemWithTag:tag];
     
@@ -70,6 +77,137 @@ static NSInteger const bettingTag = 2000;
     if (status == 0) { // 发送成功
     }
 }
+
+- (void)setupRightBarButton {
+    if (self.conversationType != ConversationType_CHATROOM) {
+        if (self.conversationType == ConversationType_DISCUSSION) {
+            [[RCIMClient sharedRCIMClient]
+             getDiscussion:self.targetId
+             success:^(RCDiscussion *discussion) {
+                 if (discussion != nil && discussion.memberIdList.count > 0) {
+                     if ([discussion.memberIdList
+                          containsObject:[RCIMClient sharedRCIMClient].currentUserInfo.userId]) {
+                         [self setRightNavigationItem:[UIImage imageNamed:@"Private_Setting"]
+                                            withFrame:CGRectMake(0 , 0, 16, 18.5)];
+                     } else {
+                         self.navigationItem.rightBarButtonItem = nil;
+                     }
+                 }
+             }
+             error:^(RCErrorCode status){
+                 
+             }];
+        } else if (self.conversationType == ConversationType_GROUP) {
+            [self setRightNavigationItem:[UIImage imageNamed:@"Group_Setting"] withFrame:CGRectMake(0,0, 21, 19.5)];
+        } else {
+            [self setRightNavigationItem:[UIImage imageNamed:@"Private_Setting"]
+                               withFrame:CGRectMake(0, 0, 16, 18.5)];
+        }
+        
+    } else {
+        self.navigationItem.rightBarButtonItem = nil;
+    }
+}
+
+- (void)setRightNavigationItem:(UIImage *)image withFrame:(CGRect)frame {
+     CHMBarButtonItem *rightBtn = [[CHMBarButtonItem alloc] initContainImage:image imageViewFrame:frame buttonTitle:nil
+                                                                     titleColor:nil
+                                                                     titleFrame:CGRectZero
+                                                                    buttonFrame:frame
+                                                                         target:self
+                                                                         action:@selector(rightBarButtonItemClicked:)];
+    self.navigationItem.rightBarButtonItem = rightBtn;
+}
+
+/**
+ *  此处使用自定义设置，开发者可以根据需求自己实现
+ *  不添加rightBarButtonItemClicked事件，则使用默认实现。
+ */
+- (void)rightBarButtonItemClicked:(id)sender {
+    
+    if (self.conversationType == ConversationType_PRIVATE) {
+//        RCDUserInfo *friendInfo = [[RCDataBaseManager shareInstance] getFriendInfo:self.targetId];
+//        if (![friendInfo.status isEqualToString:@"20"]) {
+//            RCDAddFriendViewController *vc = [[RCDAddFriendViewController alloc] init];
+//            vc.targetUserInfo = friendInfo;
+//            [self.navigationController pushViewController:vc animated:YES];
+//        } else {
+//            RCDPrivateSettingsTableViewController *settingsVC =
+//            [RCDPrivateSettingsTableViewController privateSettingsTableViewController];
+//            settingsVC.userId = self.targetId;
+//            [self.navigationController pushViewController:settingsVC animated:YES];
+//        }
+        
+    } else if (self.conversationType == ConversationType_DISCUSSION) {
+//        RCDDiscussGroupSettingViewController *settingVC = [[RCDDiscussGroupSettingViewController alloc] init];
+//        settingVC.conversationType = self.conversationType;
+//        settingVC.targetId = self.targetId;
+//        settingVC.conversationTitle = self.userName;
+//        //设置讨论组标题时，改变当前会话页面的标题
+//        settingVC.setDiscussTitleCompletion = ^(NSString *discussTitle) {
+//            self.title = discussTitle;
+//        };
+//        //清除聊天记录之后reload data
+//        __weak RCDChatViewController *weakSelf = self;
+//        settingVC.clearHistoryCompletion = ^(BOOL isSuccess) {
+//            if (isSuccess) {
+//                [weakSelf.conversationDataRepository removeAllObjects];
+//                dispatch_async(dispatch_get_main_queue(), ^{
+//                    [weakSelf.conversationMessageCollectionView reloadData];
+//                });
+//            }
+//        };
+//
+//        [self.navigationController pushViewController:settingVC animated:YES];
+    }
+    
+    //群组设置
+    else if (self.conversationType == ConversationType_GROUP) {
+        
+        CHMGroupSettingController *settingVC = [CHMGroupSettingController new];
+        settingVC.groupId = self.targetId;
+        [self.navigationController pushViewController:settingVC animated:YES];
+        
+//        RCDGroupSettingsTableViewController *settingsVC =
+//        [RCDGroupSettingsTableViewController groupSettingsTableViewController];
+//        if (_groupInfo == nil) {
+//            settingsVC.Group = [[RCDataBaseManager shareInstance] getGroupByGroupId:self.targetId];
+//        } else {
+//            settingsVC.Group = _groupInfo;
+//        }
+//        [self.navigationController pushViewController:settingsVC animated:YES];
+    }
+    
+    //客服设置
+    else if (self.conversationType == ConversationType_CUSTOMERSERVICE ||
+             self.conversationType == ConversationType_SYSTEM) {
+//        RCDSettingBaseViewController *settingVC = [[RCDSettingBaseViewController alloc] init];
+//        settingVC.conversationType = self.conversationType;
+//        settingVC.targetId = self.targetId;
+//        //清除聊天记录之后reload data
+//        __weak RCDChatViewController *weakSelf = self;
+//        settingVC.clearHistoryCompletion = ^(BOOL isSuccess) {
+//            if (isSuccess) {
+//                [weakSelf.conversationDataRepository removeAllObjects];
+//                dispatch_async(dispatch_get_main_queue(), ^{
+//                    [weakSelf.conversationMessageCollectionView reloadData];
+//                });
+//            }
+//        };
+//        [self.navigationController pushViewController:settingVC animated:YES];
+    } else if (ConversationType_APPSERVICE == self.conversationType ||
+               ConversationType_PUBLICSERVICE == self.conversationType) {
+        RCPublicServiceProfile *serviceProfile =
+        [[RCIMClient sharedRCIMClient] getPublicServiceProfile:(RCPublicServiceType)self.conversationType
+                                               publicServiceId:self.targetId];
+        
+        RCPublicServiceProfileViewController *infoVC = [[RCPublicServiceProfileViewController alloc] init];
+        infoVC.serviceProfile = serviceProfile;
+        infoVC.fromConversation = YES;
+        [self.navigationController pushViewController:infoVC animated:YES];
+    }
+}
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

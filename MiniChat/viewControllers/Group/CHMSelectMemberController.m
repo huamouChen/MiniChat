@@ -13,6 +13,7 @@
 #import "CHMSectionHeaderView.h"
 #import "CHMBarButtonItem.h"
 #import "CHMCreateGroupController.h"
+#import "CHMGroupMemberModel.h"
 
 static NSString *const selectMemberReuseId = @"CHMSelectMemberCell";
 
@@ -54,16 +55,62 @@ static CGFloat const KIndexViewWidth = 55 / 2.0;
 
 #pragma mark - 点击右边确定按钮
 - (void)comfirmButtonClick {
+    
+    if (_isDeleteMember) {
+        [self deleteMemberFromGroup];
+        return;
+    }
+    
     // 调到创建群组界面
     CHMCreateGroupController *createGroupController = [CHMCreateGroupController new];
     createGroupController.selectedMembersArray = [self dealWithSelectedArray];
     [self.navigationController pushViewController:createGroupController animated:YES];
 }
 
+#pragma mark - 删除成员
+/**
+ 剔除群组成员
+ */
+- (void)deleteMemberFromGroup {
+    [CHMProgressHUD showWithInfo:@"" isHaveMask:YES];
+    __weak typeof(self) weakSelf = self;
+    NSMutableArray *memberIdArray = [self dealWithDeleteMemberForArray:_sourceArrar];
+    [CHMHttpTool kickMemberFromGroup:_groupId members:memberIdArray success:^(id response) {
+        NSLog(@"---------%@",response);
+        NSNumber *codeId = response[@"Code"][@"CodeId"];
+        if (codeId.integerValue == 100) {
+            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                [CHMProgressHUD dismissHUD];
+                if (weakSelf.deleteMemberBlock) {
+                 weakSelf.deleteMemberBlock(weakSelf.dataArr);
+                }
+                [self.navigationController popViewControllerAnimated:YES];
+            });
+        } else {
+            [CHMProgressHUD showErrorWithInfo:response[@"Code"][@"Description"]];
+        }
+    } failure:^(NSError *error) {
+        [CHMProgressHUD showErrorWithInfo:[NSString stringWithFormat:@"错误码--%zd", error.code]];
+    }];
+}
+/**
+ 获得成员ID
+ 
+ @param array 成员的数组
+ @return 成员ID的数组
+ */
+- (NSMutableArray *)dealWithDeleteMemberForArray:(NSArray *)array {
+    NSMutableArray *memberIdArray = [NSMutableArray array];
+    for (CHMGroupMemberModel *memberModel in array) {
+        [memberIdArray addObject:memberModel.UserName];
+    }
+    return memberIdArray;
+}
+
 
 /**
  处理选中的成员数据
-
+ 
  @return 处理好的数组
  */
 - (NSMutableArray *)dealWithSelectedArray {
@@ -92,14 +139,7 @@ static CGFloat const KIndexViewWidth = 55 / 2.0;
         NSNumber *codeId = response[@"Code"][@"CodeId"];
         if (codeId.integerValue == 100) {
             NSMutableArray *friendsArray = [CHMFriendModel mj_objectArrayWithKeyValuesArray:response[@"Value"]];
-            NSMutableArray *filterArray = [NSMutableArray array];
-            // 过滤官方客服和资金助手
-            for (CHMFriendModel *friendModel in friendsArray) {
-                if ([friendModel.UserName isEqualToString:KSyscaper] || [friendModel.UserName isEqualToString:KSyscuser]) {
-                    continue;
-                }
-                [filterArray addObject:friendModel];
-            }
+            NSMutableArray *filterArray = [self dealWithNickNameWithArray:friendsArray];
             // 排序
             [weakSelf.dataArr addObjectsFromArray:[weakSelf testSortWithArray:filterArray]];
             [weakSelf.tableView reloadData];
@@ -109,6 +149,30 @@ static CGFloat const KIndexViewWidth = 55 / 2.0;
     } failure:^(NSError *error) {
         [CHMProgressHUD showErrorWithInfo:[NSString stringWithFormat:@"错误码--%zd", error.code]];
     }];
+}
+
+/**
+ 处理头像 或者昵称为空
+ */
+- (NSMutableArray *)dealWithNickNameWithArray:(NSArray *)array {
+    NSMutableArray *resultArray = [NSMutableArray array];
+    for (CHMFriendModel *itemModel in array) {
+        // 过滤官方客服和资金助手
+        if ([itemModel.UserName isEqualToString:KSyscaper] || [itemModel.UserName isEqualToString:KSyscuser]) {
+            continue;
+        }
+        
+        if (itemModel.NickName == nil || [itemModel.NickName isEqualToString:@""]) {
+            itemModel.NickName = itemModel.UserName;
+        }
+        
+        if (itemModel.HeaderImage == nil || [itemModel.HeaderImage isEqualToString:@""]) {
+            itemModel.HeaderImage = @"icon_person";
+        }
+        
+        [resultArray addObject:itemModel];
+    }
+    return resultArray;
 }
 
 #pragma mark - 排序
@@ -144,6 +208,7 @@ static CGFloat const KIndexViewWidth = 55 / 2.0;
     return [NSArray arrayWithArray:sectionArr];
 }
 
+
 #pragma mark - Table View Data Source
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     return self.dataArr.count;
@@ -160,7 +225,12 @@ static CGFloat const KIndexViewWidth = 55 / 2.0;
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     CHMSelectMemberCell *cell = [tableView dequeueReusableCellWithIdentifier:selectMemberReuseId];
-    cell.friendModel = self.dataArr[indexPath.section][indexPath.row];
+    if (_isDeleteMember) {
+        cell.groupMemberModel = self.dataArr[indexPath.section][indexPath.row];
+    } else {
+        cell.friendModel = self.dataArr[indexPath.section][indexPath.row];
+    }
+    
     return cell;
 }
 
@@ -203,7 +273,11 @@ static CGFloat const KIndexViewWidth = 55 / 2.0;
     [super viewDidLoad];
     
     // 获取数据
-    [self fetchFriendList];
+    if (_isDeleteMember) {
+        self.dataArr = [NSMutableArray arrayWithArray:[self testSortWithArray:self.sourceArrar]];
+    } else {
+        [self fetchFriendList];
+    }
     
     // 获取本地数据
     [self initLocalData];
@@ -382,6 +456,10 @@ static CGFloat const KIndexViewWidth = 55 / 2.0;
         _indexContentView = [[UIView alloc] initWithFrame:CGRectMake(SCREEN_WIDTH - KIndexViewWidth, navigationBarHeight, KIndexViewWidth, SCREEN_HEIGHT - navigationBarHeight - tabBarHeight)];
     }
     return _indexContentView;
+}
+
+- (void)setDeleteMemberBlock:(DeleteMemberBlock)deleteMemberBlock {
+    _deleteMemberBlock = deleteMemberBlock;
 }
 
 - (void)didReceiveMemoryWarning {

@@ -8,6 +8,7 @@
 
 #import "CHMSelectMemberCell.h"
 #import "CHMFriendModel.h"
+#import "CHMGroupMemberModel.h"
 
 
 @interface CHMSelectMemberCell ()
@@ -25,6 +26,13 @@
     [_portraitImg chm_imageViewWithURL:_friendModel.HeaderImage placeholder:@"icon_person"];
     _nameLabel.text = _friendModel.NickName;
     [_checkButton setSelected:_friendModel.isCheck];
+}
+
+- (void)setGroupMemberModel:(CHMGroupMemberModel *)groupMemberModel {
+    _groupMemberModel = groupMemberModel;
+    [_portraitImg chm_imageViewWithURL:_groupMemberModel.HeaderImage placeholder:@"icon_person"];
+    _nameLabel.text = _groupMemberModel.NickName;
+    [_checkButton setSelected:_groupMemberModel.isCheck];
 }
 
 - (void)awakeFromNib {
