@@ -221,6 +221,19 @@ static CHMHttpTool *instanse = nil;
 
 
 /**
+ 获取指定群组的信息
+
+ @param groupId 要获取的群组ID
+ @param success 成功
+ @param failure 失败
+ */
++ (void)getGroupInfoWithGroupId:(NSString *)groupId success:(successBlock)success failure:(failureBlock)failure {
+    NSDictionary *params = @{@"groupId": groupId};
+    [CHMHttpTool requestWithMethod:RequestMethodTypeGet url:GetGroupInfoURL params:params success:success failure:failure];
+}
+
+
+/**
  获取群组的成员列表
 
  @param groupId 要获取的群组ID

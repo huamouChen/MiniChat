@@ -55,9 +55,14 @@ static CGFloat const KIndexViewWidth = 55 / 2.0;
 
 #pragma mark - 点击右边确定按钮
 - (void)comfirmButtonClick {
-    
+    // 删除群组成员
     if (_isDeleteMember) {
         [self deleteMemberFromGroup];
+        return;
+    }
+    // 添加群组成员
+    if (_isAddMember) {
+        [self addGroupmember];
         return;
     }
     
@@ -67,22 +72,25 @@ static CGFloat const KIndexViewWidth = 55 / 2.0;
     [self.navigationController pushViewController:createGroupController animated:YES];
 }
 
-#pragma mark - 删除成员
+#pragma mark - 添加成员
 /**
- 剔除群组成员
+ 添加群组成员
  */
-- (void)deleteMemberFromGroup {
-    [CHMProgressHUD showWithInfo:@"" isHaveMask:YES];
+- (void)addGroupmember {
+    [CHMProgressHUD showWithInfo:@"       " isHaveMask:YES];
     __weak typeof(self) weakSelf = self;
-    NSMutableArray *memberIdArray = [self dealWithDeleteMemberForArray:_sourceArrar];
-    [CHMHttpTool kickMemberFromGroup:_groupId members:memberIdArray success:^(id response) {
+    // 获得选取的成员数组
+    NSArray *selectedMemberArray = [self dealWithSelectedArray];
+    // 获得选取成员的ID数组
+    NSArray *seletedIdArray = [self addMemberIdForArray:selectedMemberArray];
+    [CHMHttpTool inviteMemberToGroup:_groupId groupName:_groupName members:seletedIdArray success:^(id response) {
         NSLog(@"---------%@",response);
         NSNumber *codeId = response[@"Code"][@"CodeId"];
         if (codeId.integerValue == 100) {
             dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
                 [CHMProgressHUD dismissHUD];
-                if (weakSelf.deleteMemberBlock) {
-                 weakSelf.deleteMemberBlock(weakSelf.dataArr);
+                if (weakSelf.addMemberBlock) {
+                    weakSelf.addMemberBlock([self dealWithAddMember]);
                 }
                 [self.navigationController popViewControllerAnimated:YES];
             });
@@ -94,18 +102,83 @@ static CGFloat const KIndexViewWidth = 55 / 2.0;
     }];
 }
 /**
- 获得成员ID
+ 添加成员 获得成员ID
  
  @param array 成员的数组
  @return 成员ID的数组
  */
-- (NSMutableArray *)dealWithDeleteMemberForArray:(NSArray *)array {
+- (NSMutableArray *)addMemberIdForArray:(NSArray *)array {
+    NSMutableArray *memberIdArray = [NSMutableArray array];
+    for (CHMFriendModel *memberModel in array) {
+        [memberIdArray addObject:memberModel.UserName];
+    }
+    return memberIdArray;
+}
+
+
+/**
+ 处理添加成员的数组
+ 
+ @return 处理好的，装在GroupMemberMode 的数组
+ */
+- (NSMutableArray *)dealWithAddMember {
+    NSMutableArray *resultArray = [NSMutableArray array];
+    for (int i = 0; i < _dataArr.count; i++) {
+        NSArray *sectionArray =_dataArr[i];
+        for (CHMFriendModel *friendModel in sectionArray) {
+            if (friendModel.isCheck) {
+                CHMGroupMemberModel *groupMemberModel = [[CHMGroupMemberModel alloc] initWithUserName:friendModel.UserName nickName:friendModel.NickName headerImage:friendModel.HeaderImage groupId:_groupId];
+                [resultArray addObject:groupMemberModel];
+            }
+        }
+    }
+    return resultArray;
+}
+
+
+
+
+#pragma mark - 删除成员
+/**
+ 剔除群组成员
+ */
+- (void)deleteMemberFromGroup {
+    [CHMProgressHUD showWithInfo:@"       " isHaveMask:YES];
+    __weak typeof(self) weakSelf = self;
+    NSMutableArray *memberIdArray = [self getMemberIdForArray:_sourceArrar];
+    [CHMHttpTool kickMemberFromGroup:_groupId members:memberIdArray success:^(id response) {
+        NSLog(@"---------%@",response);
+        NSNumber *codeId = response[@"Code"][@"CodeId"];
+        if (codeId.integerValue == 100) {
+            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                [CHMProgressHUD dismissHUD];
+                if (weakSelf.deleteMemberBlock) {
+                    weakSelf.deleteMemberBlock(weakSelf.dataArr);
+                }
+                [self.navigationController popViewControllerAnimated:YES];
+            });
+        } else {
+            [CHMProgressHUD showErrorWithInfo:response[@"Code"][@"Description"]];
+        }
+    } failure:^(NSError *error) {
+        [CHMProgressHUD showErrorWithInfo:[NSString stringWithFormat:@"错误码--%zd", error.code]];
+    }];
+}
+/**
+ 删除成员 获得成员ID
+ 
+ @param array 成员的数组
+ @return 成员ID的数组
+ */
+- (NSMutableArray *)getMemberIdForArray:(NSArray *)array {
     NSMutableArray *memberIdArray = [NSMutableArray array];
     for (CHMGroupMemberModel *memberModel in array) {
         [memberIdArray addObject:memberModel.UserName];
     }
     return memberIdArray;
 }
+
+
 
 
 /**

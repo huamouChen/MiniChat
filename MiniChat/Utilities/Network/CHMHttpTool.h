@@ -90,6 +90,7 @@ typedef void(^failureBlock)(NSError *error);
  */
 + (void)getUserRelationShipListWithSuccess:(successBlock)success failure:(failureBlock)failure;
 
+#pragma mark - 群组相关
 /**
  创建群组
  
@@ -101,6 +102,14 @@ typedef void(^failureBlock)(NSError *error);
  */
 + (void)createGroupWtihGroupName:(NSString *)groupName groupMembers:(NSArray *)groupMembers groupPortrait:(UIImage *)groupPortrait success:(successBlock)success failure:(failureBlock)failure;
 
+/**
+ 获取指定群组的信息
+ 
+ @param groupId 要获取的群组ID
+ @param success 成功
+ @param failure 失败
+ */
++ (void)getGroupInfoWithGroupId:(NSString *)groupId success:(successBlock)success failure:(failureBlock)failure;
 
 /**
  修改群组头像

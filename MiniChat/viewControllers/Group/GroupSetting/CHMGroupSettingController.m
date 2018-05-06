@@ -69,11 +69,49 @@ static NSString *const deleteMember = @"GroupCutdown";    // 删除成员
 
 
 /**
+ 获取群组消息
+ */
+- (void)getGroupInfo {
+    [CHMHttpTool getGroupInfoWithGroupId:_groupId success:^(id response) {
+        NSLog(@"--------%@",response);
+        NSNumber *codeId = response[@"Code"][@"CodeId"];
+        if (codeId.integerValue == 100) {
+            self.groupName = response[@"Value"][@"GroupName"];
+        } else {
+            [CHMProgressHUD showErrorWithInfo:response[@"Code"][@"Description"]];
+        }
+    } failure:^(NSError *error) {
+        [CHMProgressHUD showErrorWithInfo:[NSString stringWithFormat:@"错误码--%zd", error.code]];
+    }];
+}
+
+
+/**
  点击底部退出按钮 或者解散按钮
  */
 - (void)tableViewFooterViewDismissButtongClick {
     NSLog(@"--------退出或者解散");
 }
+
+
+/**
+ 群组添加成员
+ */
+- (void)addGroupMember {
+    __weak typeof(self) weakSelf = self;
+    CHMSelectMemberController *selectMemberVC = [CHMSelectMemberController new];
+    selectMemberVC.isAddMember = YES;
+    selectMemberVC.sourceArrar = self.collectionViewResource;
+    selectMemberVC.groupId = self.groupId;
+    selectMemberVC.groupName = self.groupName == nil ? @"" : self.groupName;
+    selectMemberVC.addMemberBlock = ^(NSArray *groupMemberArray) {
+        [weakSelf.collectionViewResource addObjectsFromArray:groupMemberArray];
+        [weakSelf.headerView reloadData];
+    };
+    self.deleteVC = selectMemberVC;
+    [self.navigationController pushViewController:selectMemberVC animated:YES];
+}
+
 
 /**
  群组踢人
@@ -118,8 +156,7 @@ static NSString *const deleteMember = @"GroupCutdown";    // 删除成员
     // 拿出模型
     CHMGroupMemberModel *groupMemberModel = _collectionViewResource[indexPath.item];
     if ([groupMemberModel.UserName isEqualToString:addMember] ) {
-        CHMSelectMemberController *selectMemberVC = [CHMSelectMemberController new];
-        [self.navigationController pushViewController:selectMemberVC animated:YES];
+        [self addGroupMember];
         return;
     }
     if ([groupMemberModel.UserName isEqualToString:deleteMember] ) {
@@ -173,6 +210,8 @@ static NSString *const deleteMember = @"GroupCutdown";    // 删除成员
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self setupAppearance];
+    
+    [self getGroupInfo];
 }
 
 

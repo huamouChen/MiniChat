@@ -11,4 +11,5 @@
 
 @interface CHMGroupSettingController : CHMTableViewController
 @property (nonatomic, copy) NSString *groupId;
+@property (nonatomic, copy) NSString *groupName;
 @end
