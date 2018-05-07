@@ -24,7 +24,6 @@
     [self setupAppearance];
     
     
-
     
     // 设置需要显示那些类型的会话
     [self setDisplayConversationTypes:@[@(ConversationType_PRIVATE),
@@ -68,6 +67,12 @@
  设置外观
  */
 - (void)setupAppearance {
+    
+    CGRect oldFrame = self.emptyConversationView.frame;
+    oldFrame.origin.y = (self.view.bounds.size.height) / 2.0  - (oldFrame.size.height);
+    self.emptyConversationView.frame = oldFrame;
+    
+    
     self.conversationListTableView.tableFooterView= [UIView new];
     
     // navigationBar right item

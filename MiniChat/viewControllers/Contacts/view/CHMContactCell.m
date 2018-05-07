@@ -25,7 +25,7 @@
 
 - (void)setGroupModel:(CHMGroupModel *)groupModel {
     _groupModel = groupModel;
-    [_portraitImageView chm_imageViewWithURL:_groupModel.GroupName placeholder:@"icon_person"];
+    [_portraitImageView chm_imageViewWithURL:_groupModel.GroupImage placeholder:@"icon_person"];
     _nameLabel.text = _groupModel.GroupName;
 }
 

@@ -65,11 +65,11 @@
     [RCIM sharedRCIM].currentUserInfo = [[RCUserInfo alloc] initWithUserId:account name:nickName portrait:portrait];
     
     //设置用户信息源和群组信息源
-    [RCIM sharedRCIM].userInfoDataSource = CHMIMDataSourece;
-    [RCIM sharedRCIM].groupInfoDataSource = CHMIMDataSourece;
-    
-    //群成员数据源
-    [RCIM sharedRCIM].groupMemberDataSource = CHMIMDataSourece;
+//    [RCIM sharedRCIM].userInfoDataSource = CHMIMDataSourece;
+//    [RCIM sharedRCIM].groupInfoDataSource = CHMIMDataSourece;
+//
+//    //群成员数据源
+//    [RCIM sharedRCIM].groupMemberDataSource = CHMIMDataSourece;
 }
 
 

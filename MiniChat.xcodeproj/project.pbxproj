@@ -23,6 +23,7 @@
 		C00177C7209EB780001B44DE /* CHMGroupSettingFooter.m in Sources */ = {isa = PBXBuildFile; fileRef = C00177C6209EB780001B44DE /* CHMGroupSettingFooter.m */; };
 		C00177CB209EBD76001B44DE /* CHMGroupMemberModel.m in Sources */ = {isa = PBXBuildFile; fileRef = C00177CA209EBD76001B44DE /* CHMGroupMemberModel.m */; };
 		C0137A5B209F385E004D8358 /* CHMInfoProvider.m in Sources */ = {isa = PBXBuildFile; fileRef = C0137A5A209F385E004D8358 /* CHMInfoProvider.m */; };
+		C02376F0209FF2020007AEAC /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C02376EF209FF2020007AEAC /* Launch Screen.storyboard */; };
 		C066ED8B2099C98F00CB87FC /* CHMConversationController.m in Sources */ = {isa = PBXBuildFile; fileRef = C066ED892099C98F00CB87FC /* CHMConversationController.m */; };
 		C066ED8C2099C98F00CB87FC /* CHMConversationController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C066ED8A2099C98F00CB87FC /* CHMConversationController.xib */; };
 		C066ED912099E2C500CB87FC /* CHMAccountSettingController.m in Sources */ = {isa = PBXBuildFile; fileRef = C066ED8F2099E2C500CB87FC /* CHMAccountSettingController.m */; };
@@ -45,6 +46,7 @@
 		C066EDC8209BDE5800CB87FC /* CHMBarButtonItem.m in Sources */ = {isa = PBXBuildFile; fileRef = C066EDC7209BDE5800CB87FC /* CHMBarButtonItem.m */; };
 		C066EDCC209BE31600CB87FC /* KxMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = C066EDCA209BE31600CB87FC /* KxMenu.m */; };
 		C066EDD0209BE4AD00CB87FC /* UIImage+CHMImage.m in Sources */ = {isa = PBXBuildFile; fileRef = C066EDCF209BE4AD00CB87FC /* UIImage+CHMImage.m */; };
+		C0CCCF4B209FF82B00DD46B2 /* splash.png in Resources */ = {isa = PBXBuildFile; fileRef = C0CCCF4A209FF82A00DD46B2 /* splash.png */; };
 		C0EAA5D72097E8210046F05C /* CHMHttpTool.m in Sources */ = {isa = PBXBuildFile; fileRef = C0EAA5D62097E8210046F05C /* CHMHttpTool.m */; };
 		C0EAA5ED20981EE70046F05C /* CHMLoginController.m in Sources */ = {isa = PBXBuildFile; fileRef = C0EAA5EB20981EE70046F05C /* CHMLoginController.m */; };
 		C0EAA5EE20981EE70046F05C /* CHMLoginController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C0EAA5EC20981EE70046F05C /* CHMLoginController.xib */; };
@@ -80,7 +82,6 @@
 		C0EFDBB2209C97FE00848710 /* CHMPlayItemModel.m in Sources */ = {isa = PBXBuildFile; fileRef = C0EFDBB1209C97FE00848710 /* CHMPlayItemModel.m */; };
 		C0F25A562095BC1800C6BCA6 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = C0F25A552095BC1800C6BCA6 /* AppDelegate.m */; };
 		C0F25A5E2095BC1900C6BCA6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C0F25A5D2095BC1900C6BCA6 /* Assets.xcassets */; };
-		C0F25A612095BC1900C6BCA6 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C0F25A5F2095BC1900C6BCA6 /* LaunchScreen.storyboard */; };
 		C0F25A642095BC1900C6BCA6 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = C0F25A632095BC1900C6BCA6 /* main.m */; };
 		ED891324062D28F94FBC2561 /* Pods_MiniChat.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6621D17447B24B984234EF83 /* Pods_MiniChat.framework */; };
 /* End PBXBuildFile section */
@@ -116,6 +117,7 @@
 		C00427532095CC7600BE24C1 /* PrefixHeader.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
 		C0137A59209F385E004D8358 /* CHMInfoProvider.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CHMInfoProvider.h; sourceTree = "<group>"; };
 		C0137A5A209F385E004D8358 /* CHMInfoProvider.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CHMInfoProvider.m; sourceTree = "<group>"; };
+		C02376EF209FF2020007AEAC /* Launch Screen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
 		C066ED882099C98F00CB87FC /* CHMConversationController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CHMConversationController.h; sourceTree = "<group>"; };
 		C066ED892099C98F00CB87FC /* CHMConversationController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CHMConversationController.m; sourceTree = "<group>"; };
 		C066ED8A2099C98F00CB87FC /* CHMConversationController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CHMConversationController.xib; sourceTree = "<group>"; };
@@ -153,6 +155,7 @@
 		C066EDCB209BE31600CB87FC /* KxMenu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KxMenu.h; sourceTree = "<group>"; };
 		C066EDCE209BE4AD00CB87FC /* UIImage+CHMImage.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIImage+CHMImage.h"; sourceTree = "<group>"; };
 		C066EDCF209BE4AD00CB87FC /* UIImage+CHMImage.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIImage+CHMImage.m"; sourceTree = "<group>"; };
+		C0CCCF4A209FF82A00DD46B2 /* splash.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = splash.png; sourceTree = "<group>"; };
 		C0EAA5D52097E8210046F05C /* CHMHttpTool.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CHMHttpTool.h; sourceTree = "<group>"; };
 		C0EAA5D62097E8210046F05C /* CHMHttpTool.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CHMHttpTool.m; sourceTree = "<group>"; };
 		C0EAA5E120980AE30046F05C /* HttpConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HttpConstants.h; sourceTree = "<group>"; };
@@ -217,7 +220,6 @@
 		C0F25A542095BC1800C6BCA6 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		C0F25A552095BC1800C6BCA6 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		C0F25A5D2095BC1900C6BCA6 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		C0F25A602095BC1900C6BCA6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		C0F25A622095BC1900C6BCA6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		C0F25A632095BC1900C6BCA6 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		C55E4F23FBEA5E9FC8BF1C94 /* Pods-MiniChat.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MiniChat.debug.xcconfig"; path = "Pods/Target Support Files/Pods-MiniChat/Pods-MiniChat.debug.xcconfig"; sourceTree = "<group>"; };
@@ -726,7 +728,8 @@
 				C0F25A542095BC1800C6BCA6 /* AppDelegate.h */,
 				C0F25A552095BC1800C6BCA6 /* AppDelegate.m */,
 				C0F25A5D2095BC1900C6BCA6 /* Assets.xcassets */,
-				C0F25A5F2095BC1900C6BCA6 /* LaunchScreen.storyboard */,
+				C0CCCF4A209FF82A00DD46B2 /* splash.png */,
+				C02376EF209FF2020007AEAC /* Launch Screen.storyboard */,
 				C0EAA600209859960046F05C /* Main.storyboard */,
 				C00427532095CC7600BE24C1 /* PrefixHeader.pch */,
 				C0F25A622095BC1900C6BCA6 /* Info.plist */,
@@ -815,16 +818,17 @@
 				C0EAA5EE20981EE70046F05C /* CHMLoginController.xib in Resources */,
 				C066EDBF209AB6EE00CB87FC /* CHMUserDetailFooter.xib in Resources */,
 				C066EDA3209A7B7300CB87FC /* CHMContactCell.xib in Resources */,
+				C0CCCF4B209FF82B00DD46B2 /* splash.png in Resources */,
 				C001778E209DE44C001B44DE /* CHMNewFriendsController.xib in Resources */,
 				C066EDB9209A9C8F00CB87FC /* CHMContactHeaderView.xib in Resources */,
 				C0EAA62B2098723B0046F05C /* CHMMineDetailCell.xib in Resources */,
 				C0EFDB9D209C050100848710 /* CHMSelectMemberCell.xib in Resources */,
-				C0F25A612095BC1900C6BCA6 /* LaunchScreen.storyboard in Resources */,
 				C0EAA601209859960046F05C /* Main.storyboard in Resources */,
 				C0EAA630209872520046F05C /* CHMMineItemCell.xib in Resources */,
 				C00177C2209EB2F5001B44DE /* CHMGroupSettingHeaderCell.xib in Resources */,
 				C0EFDBA8209C82FE00848710 /* CHMBettingController.xib in Resources */,
 				C066ED9D2099E47600CB87FC /* CHMLogoutCell.xib in Resources */,
+				C02376F0209FF2020007AEAC /* Launch Screen.storyboard in Resources */,
 				C0F25A5E2095BC1900C6BCA6 /* Assets.xcassets in Resources */,
 				C0017782209D99BE001B44DE /* CHMPlayHeaderView.xib in Resources */,
 				C0EFDBA2209C142500848710 /* CHMCreateGroupController.xib in Resources */,
@@ -975,17 +979,6 @@
 		};
 /* End PBXSourcesBuildPhase section */
 
-/* Begin PBXVariantGroup section */
-		C0F25A5F2095BC1900C6BCA6 /* LaunchScreen.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				C0F25A602095BC1900C6BCA6 /* Base */,
-			);
-			name = LaunchScreen.storyboard;
-			sourceTree = "<group>";
-		};
-/* End PBXVariantGroup section */
-
 /* Begin XCBuildConfiguration section */
 		C0F25A652095BC1900C6BCA6 /* Debug */ = {
 			isa = XCBuildConfiguration;
@@ -1108,7 +1101,10 @@
 				GCC_PREFIX_HEADER = /Users/chenhuamou/Desktop/miniChat/MiniChat/MiniChat/PrefixHeader.pch;
 				INFOPLIST_FILE = MiniChat/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = info.huamouchen.MiniChat;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "";
@@ -1130,7 +1126,10 @@
 				GCC_PREFIX_HEADER = /Users/chenhuamou/Desktop/miniChat/MiniChat/MiniChat/PrefixHeader.pch;
 				INFOPLIST_FILE = MiniChat/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = info.huamouchen.MiniChat;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "";

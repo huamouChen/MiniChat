@@ -200,7 +200,7 @@
             </objects>
             <point key="canvasLocation" x="-787" y="-512"/>
         </scene>
-        <!--微小信-->
+        <!--会话-->
         <scene sceneID="8yj-kH-nud">
             <objects>
                 <viewController id="kz6-tG-2wg" customClass="CHMConversationListController" sceneMemberID="viewController">
@@ -210,7 +210,7 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="sdZ-Yk-DlE"/>
                     </view>
-                    <navigationItem key="navigationItem" title="微小信" id="mOZ-6E-jhj"/>
+                    <navigationItem key="navigationItem" title="会话" id="mOZ-6E-jhj"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="2PN-tT-EsA" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

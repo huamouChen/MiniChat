@@ -129,4 +129,11 @@ static int const sectionHeaderHeight = 15;
     
 }
 
+- (instancetype)init {
+    if (self = [super init]) {
+        self.hidesBottomBarWhenPushed = YES;
+    }
+    return self;
+}
+
 @end
