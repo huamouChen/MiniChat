@@ -7,6 +7,7 @@
 //
 
 #import "CHMMineDetailCell.h"
+#import "CHMFriendModel.h"
 
 
 
@@ -21,6 +22,13 @@
 
 
 @implementation CHMMineDetailCell
+
+- (void)setFriendModel:(CHMFriendModel *)friendModel {
+    _friendModel = friendModel;
+    [_headerImg chm_imageViewWithURL:_friendModel.HeaderImage placeholder:@"icon_person"];
+    _nicknameLabel.text = [NSString stringWithFormat:@"昵称：%@", _friendModel.NickName];
+    _accountLabel.text = [NSString stringWithFormat:@"iM账号：%@",_friendModel.UserName];
+}
 
 - (void)setInfoDict:(NSDictionary *)infoDict {
     _infoDict = infoDict;

@@ -65,6 +65,14 @@ typedef void(^failureBlock)(NSError *error);
  */
 + (void)getRongCloudTokenWithSuccess:(successBlock)success failure:(failureBlock)failure;
 
+/**
+ 查询用户信息
+ 
+ @param userId 用户ID
+ @param success 成功
+ @param failure 失败
+ */
++ (void)searchUserInfoWithUserId:(NSString *)userId success:(successBlock)success failure:(failureBlock)failure;
 
 /**
  获取用户信息
@@ -73,6 +81,16 @@ typedef void(^failureBlock)(NSError *error);
  @param failure 失败
  */
 + (void)getUserInfoWithSuccess:(successBlock)success failure:(failureBlock)failure;
+
+/**
+ 添加好友
+ 
+ @param userId 要添加的用户ID
+ @param mark 备注信息
+ @param success 成功
+ @param failure 失败
+ */
++ (void)addFriendWithUserId:(NSString *)userId mark:(NSString *)mark success:(successBlock)success failure:(failureBlock)failure;
 
 /**
  获取聊天室列表

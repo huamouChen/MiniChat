@@ -11,6 +11,9 @@
 #import "CHMBarButtonItem.h"
 #import "KxMenu.h"
 #import "CHMSelectMemberController.h"
+#import "CHMSearchFriendController.h"
+#import "RCDChatListCell.h"
+
 
 @interface CHMConversationListController ()
 
@@ -152,7 +155,7 @@
  *  @param sender sender description
  */
 - (void)pushAddFriend:(id)sender {
-
+    [self.navigationController pushViewController:[CHMSearchFriendController new] animated:YES];
 }
 
 
@@ -176,6 +179,97 @@
     chatController.title =[conversation.conversationTitle isEqualToString:@""] ? conversation.targetId : conversation.conversationTitle;
     //显示聊天会话界面
     [self.navigationController pushViewController:chatController animated:YES];
+}
+
+#pragma mark - 自定义cell
+//自定义cell
+- (RCConversationBaseCell *)rcConversationListTableView:(UITableView *)tableView
+                                  cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    RCConversationModel *model = self.conversationListDataSource[indexPath.row];
+    
+    __block NSString *userName = nil;
+    __block NSString *portraitUri = nil;
+    RCContactNotificationMessage *_contactNotificationMsg = nil;
+    
+    __weak typeof(self) weakSelf = self;
+    //此处需要添加根据userid来获取用户信息的逻辑，extend字段不存在于DB中，当数据来自db时没有extend字段内容，只有userid
+    if (nil == model.extend) {
+        // Not finished yet, To Be Continue...
+        if (model.conversationType == ConversationType_SYSTEM &&
+            [model.lastestMessage isMemberOfClass:[RCContactNotificationMessage class]]) {
+            _contactNotificationMsg = (RCContactNotificationMessage *)model.lastestMessage;
+            if (_contactNotificationMsg.sourceUserId == nil) {
+                RCDChatListCell *cell =
+                [[RCDChatListCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@""];
+                cell.lblDetail.text = @"好友请求";
+                [cell.ivAva chm_imageViewWithURL:portraitUri placeholder:@"system_notice"];
+                return cell;
+            }
+            NSDictionary *_cache_userinfo =
+            [[NSUserDefaults standardUserDefaults] objectForKey:_contactNotificationMsg.sourceUserId];
+            if (_cache_userinfo) {
+                userName = _cache_userinfo[@"username"];
+                portraitUri = _cache_userinfo[@"portraitUri"];
+            } else {
+                NSDictionary *emptyDic = @{};
+                [[NSUserDefaults standardUserDefaults] setObject:emptyDic forKey:_contactNotificationMsg.sourceUserId];
+                [[NSUserDefaults standardUserDefaults] synchronize];
+                
+                [CHMHttpTool searchUserInfoWithUserId:_contactNotificationMsg.sourceUserId success:^(id response) {
+                    NSNumber *codeId = response[@"Code"][@"CodeId"];
+                    if (codeId.integerValue == 100) {
+                        
+                        NSString *userName = response[@"Value"][@"UserName"];
+                        NSString *nickName = response[@"Value"][@"NickName"];
+                        NSString *headimg = response[@"Value"][@"Headimg"];
+                    
+                        
+                        nickName = ([nickName isKindOfClass:[NSNull class]] ? userName : nickName);
+                        headimg = ([headimg isKindOfClass:[NSNull class] ] ? @"icon_person" : headimg);
+                        
+                        RCUserInfo *rcduserinfo_ = [RCUserInfo new];
+                        rcduserinfo_.name = nickName;
+                        rcduserinfo_.userId = userName;
+                        rcduserinfo_.portraitUri = headimg;
+                        
+                        model.extend = rcduserinfo_;
+                        
+                        // local cache for userInfo
+                        NSDictionary *userinfoDic =
+                        @{@"username" : rcduserinfo_.name, @"portraitUri" : rcduserinfo_.portraitUri};
+                        [[NSUserDefaults standardUserDefaults] setObject:userinfoDic
+                                                                  forKey:_contactNotificationMsg.sourceUserId];
+                        [[NSUserDefaults standardUserDefaults] synchronize];
+                        
+                        [weakSelf.conversationListTableView
+                         reloadRowsAtIndexPaths:@[ indexPath ]
+                         withRowAnimation:UITableViewRowAnimationAutomatic];
+                    }
+                } failure:^(NSError *error) {
+                    
+                }];
+            }
+        }
+        
+    } else {
+        RCUserInfo *user = (RCUserInfo *)model.extend;
+        userName = user.name;
+        portraitUri = user.portraitUri;
+    }
+    
+    RCDChatListCell *cell = [[RCDChatListCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@""];
+    NSString *operation = _contactNotificationMsg.operation;
+    NSString *operationContent;
+    if ([operation isEqualToString:@"Request"]) {
+        operationContent = [NSString stringWithFormat:@"来自%@的好友请求", userName];
+    } else if ([operation isEqualToString:@"AcceptResponse"]) {
+        operationContent = [NSString stringWithFormat:@"%@通过了你的好友请求", userName];
+    }
+    cell.lblDetail.text = operationContent;
+    [cell.ivAva chm_imageViewWithURL:portraitUri placeholder:@"system_notice"];
+    cell.labelTime.text = [RCKitUtility ConvertMessageTime:model.sentTime / 1000];
+    cell.model = model;
+    return cell;
 }
 
 - (void)didReceiveMemoryWarning {

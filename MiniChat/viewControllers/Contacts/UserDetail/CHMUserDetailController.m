@@ -25,9 +25,9 @@ static NSString *const detailReuseablId = @"CHMMineDetailCell";
 
 #pragma mark - 点击操作
 /**
- 点击发消息的按钮
+ 点击发消息
  */
-- (void)sendMessageButtonClick {
+- (void)sendMessage {
     //新建一个聊天会话View Controller对象,建议这样初始化
     CHMConversationController *chatController = [[CHMConversationController alloc] initWithConversationType:ConversationType_PRIVATE targetId:_friendModel.UserName];
     [chatController setHidesBottomBarWhenPushed:YES];
@@ -39,6 +39,35 @@ static NSString *const detailReuseablId = @"CHMMineDetailCell";
     chatController.title = _friendModel.NickName;
     //显示聊天会话界面
     [self.navigationController pushViewController:chatController animated:YES];
+}
+
+
+/**
+ 加为好友
+ */
+- (void)addFriend {
+    [CHMProgressHUD showWithInfo:@"正在发送..." isHaveMask:YES];
+    NSString *currentInfo = [[NSUserDefaults standardUserDefaults] valueForKey:KNickName];
+    currentInfo = ([currentInfo isEqualToString:@""] || currentInfo == nil) ? [[NSUserDefaults standardUserDefaults] valueForKey:KNickName] : currentInfo;
+    [CHMHttpTool addFriendWithUserId:_friendModel.UserName mark:[NSString stringWithFormat:@"我是%@，想加你为好友",currentInfo] success:^(id response) {
+        NSLog(@"-------%@", response);
+        NSNumber *codeId = response[@"Code"][@"CodeId"];
+        if (codeId.integerValue == 100) {
+            [CHMProgressHUD showSuccessWithInfo:@"发送成功"];
+        } else {
+            [CHMProgressHUD showErrorWithInfo:response[@"Code"][@"Description"]];
+        }
+    } failure:^(NSError *error) {
+        [CHMProgressHUD showErrorWithInfo:[NSString stringWithFormat:@"错误码--%zd",error.code]];
+    }];
+}
+
+- (void)footerButtonClick {
+    if (_isFriend) {
+        [self sendMessage];
+    } else {
+        [self addFriend];
+    }
 }
 
 #pragma mark - view life cycler
@@ -57,9 +86,10 @@ static NSString *const detailReuseablId = @"CHMMineDetailCell";
     self.title = @"用户详情";
     // 设置尾部视图
     CHMUserDetailFooter *footer = [CHMUserDetailFooter footerWithTableView:self.tableView];
+    footer.footerTitler = _isFriend ? @"发消息" : @"加为好友";
     // 点击发送消息的按钮
     footer.sendMessageBlock = ^{
-        [self sendMessageButtonClick];
+        [self footerButtonClick];
     };
     self.tableView.tableFooterView = footer;
     
@@ -79,7 +109,7 @@ static NSString *const detailReuseablId = @"CHMMineDetailCell";
  */
 - (void)initData {
     if (_friendModel) {
-    self.datasArray = @[@[@{KPortrait:_friendModel.HeaderImage, KNickName: _friendModel.NickName, KAccount: _friendModel.UserName}]];
+        self.datasArray = @[@[@{KPortrait:_friendModel.HeaderImage, KNickName: _friendModel.NickName, KAccount: _friendModel.UserName}]];
     }
     
     if (_groupMemberModel) {

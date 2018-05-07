@@ -11,6 +11,7 @@
 static NSString *const reuseIdentifier = @"reuseIdentifier";
 
 @interface CHMUserDetailFooter ()
+@property (weak, nonatomic) IBOutlet UIButton *footerButton;
 
 
 @end
@@ -28,6 +29,10 @@ static NSString *const reuseIdentifier = @"reuseIdentifier";
 }
 
 
+- (void)setFooterTitler:(NSString *)footerTitler {
+    _footerTitler = footerTitler;
+    [_footerButton setTitle:_footerTitler forState:UIControlStateNormal];
+}
 
 + (instancetype)footerWithTableView:(UITableView *)tableView {
     CHMUserDetailFooter *header = [tableView dequeueReusableHeaderFooterViewWithIdentifier:reuseIdentifier];

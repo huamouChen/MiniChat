@@ -14,6 +14,8 @@ typedef void(^SendMessageBlock)(void);
 
 + (instancetype)footerWithTableView:(UITableView *)tableView;
 
+@property (nonatomic, copy) NSString *footerTitler;
+
 // 点击发送消息的block
 @property (nonatomic, copy) SendMessageBlock sendMessageBlock;
 

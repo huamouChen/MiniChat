@@ -47,6 +47,10 @@
 		C066EDCC209BE31600CB87FC /* KxMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = C066EDCA209BE31600CB87FC /* KxMenu.m */; };
 		C066EDD0209BE4AD00CB87FC /* UIImage+CHMImage.m in Sources */ = {isa = PBXBuildFile; fileRef = C066EDCF209BE4AD00CB87FC /* UIImage+CHMImage.m */; };
 		C0CCCF4B209FF82B00DD46B2 /* splash.png in Resources */ = {isa = PBXBuildFile; fileRef = C0CCCF4A209FF82A00DD46B2 /* splash.png */; };
+		C0CCCF4F20A0051600DD46B2 /* CHMDataBaseManager.m in Sources */ = {isa = PBXBuildFile; fileRef = C0CCCF4E20A0051600DD46B2 /* CHMDataBaseManager.m */; };
+		C0CCCF5220A035BB00DD46B2 /* CHMUserInfoManager.m in Sources */ = {isa = PBXBuildFile; fileRef = C0CCCF5120A035BB00DD46B2 /* CHMUserInfoManager.m */; };
+		C0CCCF5620A0385C00DD46B2 /* CHMSearchFriendController.m in Sources */ = {isa = PBXBuildFile; fileRef = C0CCCF5520A0385C00DD46B2 /* CHMSearchFriendController.m */; };
+		C0CCCF5A20A06BD400DD46B2 /* RCDChatListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C0CCCF5920A06BD400DD46B2 /* RCDChatListCell.m */; };
 		C0EAA5D72097E8210046F05C /* CHMHttpTool.m in Sources */ = {isa = PBXBuildFile; fileRef = C0EAA5D62097E8210046F05C /* CHMHttpTool.m */; };
 		C0EAA5ED20981EE70046F05C /* CHMLoginController.m in Sources */ = {isa = PBXBuildFile; fileRef = C0EAA5EB20981EE70046F05C /* CHMLoginController.m */; };
 		C0EAA5EE20981EE70046F05C /* CHMLoginController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C0EAA5EC20981EE70046F05C /* CHMLoginController.xib */; };
@@ -156,6 +160,14 @@
 		C066EDCE209BE4AD00CB87FC /* UIImage+CHMImage.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIImage+CHMImage.h"; sourceTree = "<group>"; };
 		C066EDCF209BE4AD00CB87FC /* UIImage+CHMImage.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIImage+CHMImage.m"; sourceTree = "<group>"; };
 		C0CCCF4A209FF82A00DD46B2 /* splash.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = splash.png; sourceTree = "<group>"; };
+		C0CCCF4D20A0051600DD46B2 /* CHMDataBaseManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CHMDataBaseManager.h; sourceTree = "<group>"; };
+		C0CCCF4E20A0051600DD46B2 /* CHMDataBaseManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CHMDataBaseManager.m; sourceTree = "<group>"; };
+		C0CCCF5020A035BB00DD46B2 /* CHMUserInfoManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CHMUserInfoManager.h; sourceTree = "<group>"; };
+		C0CCCF5120A035BB00DD46B2 /* CHMUserInfoManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CHMUserInfoManager.m; sourceTree = "<group>"; };
+		C0CCCF5420A0385C00DD46B2 /* CHMSearchFriendController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CHMSearchFriendController.h; sourceTree = "<group>"; };
+		C0CCCF5520A0385C00DD46B2 /* CHMSearchFriendController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CHMSearchFriendController.m; sourceTree = "<group>"; };
+		C0CCCF5820A06BD400DD46B2 /* RCDChatListCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RCDChatListCell.h; sourceTree = "<group>"; };
+		C0CCCF5920A06BD400DD46B2 /* RCDChatListCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RCDChatListCell.m; sourceTree = "<group>"; };
 		C0EAA5D52097E8210046F05C /* CHMHttpTool.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CHMHttpTool.h; sourceTree = "<group>"; };
 		C0EAA5D62097E8210046F05C /* CHMHttpTool.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CHMHttpTool.m; sourceTree = "<group>"; };
 		C0EAA5E120980AE30046F05C /* HttpConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HttpConstants.h; sourceTree = "<group>"; };
@@ -353,6 +365,8 @@
 			children = (
 				C0137A59209F385E004D8358 /* CHMInfoProvider.h */,
 				C0137A5A209F385E004D8358 /* CHMInfoProvider.m */,
+				C0CCCF5020A035BB00DD46B2 /* CHMUserInfoManager.h */,
+				C0CCCF5120A035BB00DD46B2 /* CHMUserInfoManager.m */,
 			);
 			path = InfoProvider;
 			sourceTree = "<group>";
@@ -466,6 +480,33 @@
 			path = Image;
 			sourceTree = "<group>";
 		};
+		C0CCCF4C20A0050500DD46B2 /* DataBase */ = {
+			isa = PBXGroup;
+			children = (
+				C0CCCF4D20A0051600DD46B2 /* CHMDataBaseManager.h */,
+				C0CCCF4E20A0051600DD46B2 /* CHMDataBaseManager.m */,
+			);
+			path = DataBase;
+			sourceTree = "<group>";
+		};
+		C0CCCF5320A0378D00DD46B2 /* SearchFriend */ = {
+			isa = PBXGroup;
+			children = (
+				C0CCCF5420A0385C00DD46B2 /* CHMSearchFriendController.h */,
+				C0CCCF5520A0385C00DD46B2 /* CHMSearchFriendController.m */,
+			);
+			path = SearchFriend;
+			sourceTree = "<group>";
+		};
+		C0CCCF5720A06BB900DD46B2 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				C0CCCF5820A06BD400DD46B2 /* RCDChatListCell.h */,
+				C0CCCF5920A06BD400DD46B2 /* RCDChatListCell.m */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
 		C0EAA5C82097123C0046F05C /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
@@ -498,6 +539,7 @@
 		C0EAA5DC209802240046F05C /* Service */ = {
 			isa = PBXGroup;
 			children = (
+				C0CCCF4C20A0050500DD46B2 /* DataBase */,
 				C0137A58209F3849004D8358 /* InfoProvider */,
 				C0EAA5DD2098023F0046F05C /* response */,
 			);
@@ -538,6 +580,7 @@
 		C0EAA60220985DAE0046F05C /* Contacts */ = {
 			isa = PBXGroup;
 			children = (
+				C0CCCF5320A0378D00DD46B2 /* SearchFriend */,
 				C0017789209DE439001B44DE /* NewFriend */,
 				C0017788209DE42D001B44DE /* GroupList */,
 				C066EDAF209A860500CB87FC /* UserDetail */,
@@ -571,6 +614,7 @@
 		C0EAA60520985DAF0046F05C /* Conversation */ = {
 			isa = PBXGroup;
 			children = (
+				C0CCCF5720A06BB900DD46B2 /* View */,
 				C0EAA60C20985DEE0046F05C /* CHMConversationListController.h */,
 				C0EAA60D20985DEE0046F05C /* CHMConversationListController.m */,
 				C066ED882099C98F00CB87FC /* CHMConversationController.h */,
@@ -874,6 +918,7 @@
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-MiniChat/Pods-MiniChat-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/AFNetworking/AFNetworking.framework",
+				"${BUILT_PRODUCTS_DIR}/FMDB/FMDB.framework",
 				"${BUILT_PRODUCTS_DIR}/IQKeyboardManager/IQKeyboardManager.framework",
 				"${BUILT_PRODUCTS_DIR}/MJExtension/MJExtension.framework",
 				"${BUILT_PRODUCTS_DIR}/MJRefresh/MJRefresh.framework",
@@ -885,6 +930,7 @@
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AFNetworking.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FMDB.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/IQKeyboardManager.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MJExtension.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MJRefresh.framework",
@@ -946,6 +992,7 @@
 				C066EDBD209AB6E300CB87FC /* CHMUserDetailFooter.m in Sources */,
 				C00177CB209EBD76001B44DE /* CHMGroupMemberModel.m in Sources */,
 				C0EAA6442098B7C80046F05C /* CHMChatRoomModel.m in Sources */,
+				C0CCCF4F20A0051600DD46B2 /* CHMDataBaseManager.m in Sources */,
 				C0EAA5F2209823F40046F05C /* CHMRegisterController.m in Sources */,
 				C00177A0209DF570001B44DE /* CHMGroupFooter.m in Sources */,
 				C0017792209DE460001B44DE /* CHMGroupListController.m in Sources */,
@@ -960,7 +1007,9 @@
 				C0EAA617209866D60046F05C /* UIColor+CHMColor.m in Sources */,
 				C0EAA60E20985DEE0046F05C /* CHMConversationListController.m in Sources */,
 				C0EFDBA1209C142500848710 /* CHMCreateGroupController.m in Sources */,
+				C0CCCF5220A035BB00DD46B2 /* CHMUserInfoManager.m in Sources */,
 				C0F25A642095BC1900C6BCA6 /* main.m in Sources */,
+				C0CCCF5620A0385C00DD46B2 /* CHMSearchFriendController.m in Sources */,
 				C001778D209DE44C001B44DE /* CHMNewFriendsController.m in Sources */,
 				C0017781209D99BE001B44DE /* CHMPlayHeaderView.m in Sources */,
 				C0F25A562095BC1800C6BCA6 /* AppDelegate.m in Sources */,
@@ -971,6 +1020,7 @@
 				C0EAA5F92098270B0046F05C /* CHMProgressHUD.m in Sources */,
 				C0EAA5F62098259D0046F05C /* CHMRongTokenResponse.m in Sources */,
 				C066EDD0209BE4AD00CB87FC /* UIImage+CHMImage.m in Sources */,
+				C0CCCF5A20A06BD400DD46B2 /* RCDChatListCell.m in Sources */,
 				C066EDCC209BE31600CB87FC /* KxMenu.m in Sources */,
 				C0EAA6252098713E0046F05C /* CHMMineController.m in Sources */,
 				C0EAA5FE20984F2D0046F05C /* CHMMainController.m in Sources */,

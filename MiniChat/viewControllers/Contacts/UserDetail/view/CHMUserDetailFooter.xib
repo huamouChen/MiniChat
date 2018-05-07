@@ -22,7 +22,6 @@
                     <constraints>
                         <constraint firstAttribute="height" constant="44" id="kvz-h1-bPK"/>
                     </constraints>
-                    <state key="normal" title="发消息"/>
                     <userDefinedRuntimeAttributes>
                         <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
                         <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
@@ -42,6 +41,9 @@
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
+            <connections>
+                <outlet property="footerButton" destination="ngG-g9-iq1" id="xK8-Ea-3Ne"/>
+            </connections>
             <point key="canvasLocation" x="49.5" y="-201"/>
         </view>
     </objects>

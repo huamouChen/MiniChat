@@ -25,6 +25,12 @@
 // 获取账号信息
 #define GetUserInfoURL     @"api/User/GetUserInfo"
 
+// 查询用户信息
+#define SearchUserURL      @"api/Im/FindUser"
+
+// 申请好友
+#define addFriendURL        @"api/Im/ApplyFriend"
+
 // 获取聊天室
 #define GetChatRoomListURL  @"api/Im/ListChatroom"
 

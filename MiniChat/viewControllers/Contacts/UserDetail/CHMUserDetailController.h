@@ -12,4 +12,5 @@
 @interface CHMUserDetailController : UITableViewController
 @property (nonatomic, strong) CHMFriendModel *friendModel;
 @property (nonatomic, strong) CHMGroupMemberModel *groupMemberModel;
+@property (nonatomic, assign) BOOL isFriend;
 @end
