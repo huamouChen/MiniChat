@@ -14,6 +14,8 @@
 #define KSwitchRootViewController   @"switchRootViewController"
 
 
+#define KDefaultPortrait   @"icon_person"
+
 #define KSyscuser        @"syscuser"            // 官方客服
 #define KSyscaper            @"syscaper"        // 资金助手
 #define KNewFriend        @"eewFriend"            // 新的朋友

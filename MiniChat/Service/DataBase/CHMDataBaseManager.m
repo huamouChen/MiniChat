@@ -115,7 +115,7 @@ static NSString *const groupMemberTableName = @"GROUPMEMBERTABLE";
             NSString *createTableSQL = @"CREATE TABLE FRIENDSTABLE (id integer "
             @"PRIMARY KEY autoincrement, userid "
             @"text,name text, portraitUri text, status "
-            @"text, updatedAt text, displayName text)";
+            @"text, updatedAt text)";
             [db executeUpdate:createTableSQL];
             NSString *createIndexSQL = @"CREATE unique INDEX idx_friendsId ON FRIENDSTABLE(userid);";
             [db executeUpdate:createIndexSQL];

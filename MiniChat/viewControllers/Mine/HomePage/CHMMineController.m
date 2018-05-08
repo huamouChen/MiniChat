@@ -64,7 +64,7 @@ static NSString *const itemReuseablId = @"CHMMineItemCell";
                         @[@{KPortrait:@"setting_up", KNickName: @"帐号设置"},
                           @{KPortrait:@"wallet", KNickName: @"我的钱包"}],
                         @[@{KPortrait:@"sevre_inactive", KNickName: @"意见反馈"},
-                          @{KPortrait:@"about_rongcloud", KNickName: @"关于 微小信"}]];
+                          @{KPortrait:@"about_rongcloud", KNickName: @"关于博信"}]];
 }
 
 

@@ -13,6 +13,7 @@
 #import "CHMSelectMemberController.h"
 #import "CHMSearchFriendController.h"
 #import "RCDChatListCell.h"
+#import "RCDAddressBookViewController.h"
 
 
 @interface CHMConversationListController ()
@@ -36,23 +37,16 @@
                                         @(ConversationType_APPSERVICE),
                                         @(ConversationType_SYSTEM)]];
     
+    //聚合会话类型
+    [self setCollectionConversationType:@[ @(ConversationType_SYSTEM) ]];
+    
     
     
     // 网络不可用的时候，显示网络不可用
     self.isShowNetworkIndicatorView = YES;
     
     
-    // IMLib 库获取会话列表
-    NSArray *conversationList = [[RCIMClient sharedRCIMClient]
-                                 getConversationList:@[@(ConversationType_PRIVATE),
-                                                       @(ConversationType_DISCUSSION),
-                                                       @(ConversationType_GROUP),
-                                                       @(ConversationType_SYSTEM),
-                                                       @(ConversationType_APPSERVICE),
-                                                       @(ConversationType_PUBLICSERVICE)]];
-    for (RCConversation *conversation in conversationList) {
-        NSLog(@"会话类型：%lu，目标会话ID：%@", (unsigned long)conversation.conversationType, conversation.targetId);
-    }
+   
     
 }
 
@@ -60,9 +54,9 @@
 #pragma mark - 即将刷新会话列表数据
 - (NSMutableArray *)willReloadTableData:(NSMutableArray *)dataSource {
     [super willReloadTableData:dataSource];
-//    for (RCConversation *conversation in dataSource) {
-//        NSLog(@"会话类型：%lu，目标会话ID：%@", (unsigned long)conversation.conversationType, conversation.targetId);
-//    }
+    //    for (RCConversation *conversation in dataSource) {
+    //        NSLog(@"会话类型：%lu，目标会话ID：%@", (unsigned long)conversation.conversationType, conversation.targetId);
+    //    }
     return dataSource;
 }
 
@@ -135,7 +129,7 @@
  *  @param sender sender description
  */
 - (void)pushChat:(id)sender {
-
+    
 }
 
 /**
@@ -162,6 +156,29 @@
 
 // 点击cell，进入聊天界面
 - (void)onSelectedTableRow:(RCConversationModelType)conversationModelType conversationModel:(RCConversationModel *)model atIndexPath:(NSIndexPath *)indexPath {
+    
+    //    if (conversationModelType == RC_CONVERSATION_MODEL_TYPE_NORMAL) {
+    CHMConversationController *_conversationVC = [[CHMConversationController alloc] init];
+    _conversationVC.conversationType = model.conversationType;
+    _conversationVC.targetId = model.targetId;
+    _conversationVC.title = model.conversationTitle;
+    _conversationVC.unReadMessage = model.unreadMessageCount;
+    _conversationVC.enableNewComingMessageIcon = YES; //开启消息提醒
+    _conversationVC.enableUnreadMessageIcon = YES;
+    
+    if (model.conversationType == ConversationType_SYSTEM) {
+        _conversationVC.title = @"系统消息";
+    }
+    if ([model.objectName isEqualToString:@"RC:ContactNtf"]) {
+        RCDAddressBookViewController *addressBookVC = [RCDAddressBookViewController addressBookViewController];
+        addressBookVC.needSyncFriendList = YES;
+        
+        [self.navigationController pushViewController:addressBookVC animated:YES];
+        return;
+    }
+    
+    
+    
     // 从会话列表中拿出会话模型
     RCConversation *conversation =  self.conversationListDataSource[indexPath.row];
     
@@ -179,6 +196,7 @@
     chatController.title =[conversation.conversationTitle isEqualToString:@""] ? conversation.targetId : conversation.conversationTitle;
     //显示聊天会话界面
     [self.navigationController pushViewController:chatController animated:YES];
+    //    }
 }
 
 #pragma mark - 自定义cell
@@ -222,7 +240,7 @@
                         NSString *userName = response[@"Value"][@"UserName"];
                         NSString *nickName = response[@"Value"][@"NickName"];
                         NSString *headimg = response[@"Value"][@"Headimg"];
-                    
+                        
                         
                         nickName = ([nickName isKindOfClass:[NSNull class]] ? userName : nickName);
                         headimg = ([headimg isKindOfClass:[NSNull class] ] ? @"icon_person" : headimg);
@@ -271,6 +289,7 @@
     cell.model = model;
     return cell;
 }
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

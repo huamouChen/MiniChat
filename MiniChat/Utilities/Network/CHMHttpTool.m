@@ -162,6 +162,19 @@ static CHMHttpTool *instanse = nil;
     [CHMHttpTool requestWithMethod:RequestMethodTypePost url:addFriendURL params:params success:success failure:failure];
 }
 
+
+/**
+ 同意好友申请
+
+ @param applyId 申请ID
+ @param success 成功
+ @param failure 失败
+ */
++ (void)agreeFriendWithApplyId:(NSString *)applyId success:(successBlock)success failure:(failureBlock)failure {
+    NSDictionary *params = @{@"ApplyId": applyId};
+    [CHMHttpTool requestWithMethod:RequestMethodTypePost url:agreeFriendURL params:params success:success failure:failure];
+}
+
 /**
  获取聊天室列表
  

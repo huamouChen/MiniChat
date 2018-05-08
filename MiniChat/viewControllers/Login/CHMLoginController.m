@@ -101,8 +101,8 @@ static NSString *const IMServices = @"IMServices";
             NSString *nicknName =   response[@"NickName"];
             NSString *headerImg = response[@"HeaderImage"];
             NSString *phoneNum = response[@"PhoneNum"];
-            nicknName = nicknName ? nicknName : userName;
-            headerImg = headerImg ? headerImg : @"icon_person";
+            nicknName = ([nicknName isKindOfClass:[NSNull class]] || [nicknName isEqualToString:@""]) ? userName : nicknName;
+            headerImg = ([headerImg isKindOfClass:[NSNull class]] || [headerImg isEqualToString:@""]) ? KDefaultPortrait : headerImg;
             // 保存用户信息
             [[NSUserDefaults standardUserDefaults] setObject:userName forKey:KAccount];
             [[NSUserDefaults standardUserDefaults] setObject:nicknName forKey:KNickName];

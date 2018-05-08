@@ -51,6 +51,11 @@
 		C0CCCF5220A035BB00DD46B2 /* CHMUserInfoManager.m in Sources */ = {isa = PBXBuildFile; fileRef = C0CCCF5120A035BB00DD46B2 /* CHMUserInfoManager.m */; };
 		C0CCCF5620A0385C00DD46B2 /* CHMSearchFriendController.m in Sources */ = {isa = PBXBuildFile; fileRef = C0CCCF5520A0385C00DD46B2 /* CHMSearchFriendController.m */; };
 		C0CCCF5A20A06BD400DD46B2 /* RCDChatListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C0CCCF5920A06BD400DD46B2 /* RCDChatListCell.m */; };
+		C0CCCF6320A0794C00DD46B2 /* RCDAddressBookViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C0CCCF6120A0794C00DD46B2 /* RCDAddressBookViewController.m */; };
+		C0CCCF6420A0794C00DD46B2 /* RCDAddressBookTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C0CCCF6220A0794C00DD46B2 /* RCDAddressBookTableViewCell.m */; };
+		C0CCCF6720A12F2400DD46B2 /* RCDNoFriendView.m in Sources */ = {isa = PBXBuildFile; fileRef = C0CCCF6520A12F2400DD46B2 /* RCDNoFriendView.m */; };
+		C0CCCF6B20A13CBE00DD46B2 /* CHMNewFriendCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C0CCCF6920A13CBE00DD46B2 /* CHMNewFriendCell.m */; };
+		C0CCCF6C20A13CBE00DD46B2 /* CHMNewFriendCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C0CCCF6A20A13CBE00DD46B2 /* CHMNewFriendCell.xib */; };
 		C0EAA5D72097E8210046F05C /* CHMHttpTool.m in Sources */ = {isa = PBXBuildFile; fileRef = C0EAA5D62097E8210046F05C /* CHMHttpTool.m */; };
 		C0EAA5ED20981EE70046F05C /* CHMLoginController.m in Sources */ = {isa = PBXBuildFile; fileRef = C0EAA5EB20981EE70046F05C /* CHMLoginController.m */; };
 		C0EAA5EE20981EE70046F05C /* CHMLoginController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C0EAA5EC20981EE70046F05C /* CHMLoginController.xib */; };
@@ -168,6 +173,15 @@
 		C0CCCF5520A0385C00DD46B2 /* CHMSearchFriendController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CHMSearchFriendController.m; sourceTree = "<group>"; };
 		C0CCCF5820A06BD400DD46B2 /* RCDChatListCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RCDChatListCell.h; sourceTree = "<group>"; };
 		C0CCCF5920A06BD400DD46B2 /* RCDChatListCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RCDChatListCell.m; sourceTree = "<group>"; };
+		C0CCCF5F20A0794B00DD46B2 /* RCDAddressBookViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RCDAddressBookViewController.h; sourceTree = "<group>"; };
+		C0CCCF6020A0794C00DD46B2 /* RCDAddressBookTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RCDAddressBookTableViewCell.h; sourceTree = "<group>"; };
+		C0CCCF6120A0794C00DD46B2 /* RCDAddressBookViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RCDAddressBookViewController.m; sourceTree = "<group>"; };
+		C0CCCF6220A0794C00DD46B2 /* RCDAddressBookTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RCDAddressBookTableViewCell.m; sourceTree = "<group>"; };
+		C0CCCF6520A12F2400DD46B2 /* RCDNoFriendView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RCDNoFriendView.m; sourceTree = "<group>"; };
+		C0CCCF6620A12F2400DD46B2 /* RCDNoFriendView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RCDNoFriendView.h; sourceTree = "<group>"; };
+		C0CCCF6820A13CBE00DD46B2 /* CHMNewFriendCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CHMNewFriendCell.h; sourceTree = "<group>"; };
+		C0CCCF6920A13CBE00DD46B2 /* CHMNewFriendCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CHMNewFriendCell.m; sourceTree = "<group>"; };
+		C0CCCF6A20A13CBE00DD46B2 /* CHMNewFriendCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CHMNewFriendCell.xib; sourceTree = "<group>"; };
 		C0EAA5D52097E8210046F05C /* CHMHttpTool.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CHMHttpTool.h; sourceTree = "<group>"; };
 		C0EAA5D62097E8210046F05C /* CHMHttpTool.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CHMHttpTool.m; sourceTree = "<group>"; };
 		C0EAA5E120980AE30046F05C /* HttpConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HttpConstants.h; sourceTree = "<group>"; };
@@ -507,6 +521,20 @@
 			path = View;
 			sourceTree = "<group>";
 		};
+		C0CCCF5B20A0786700DD46B2 /* AddressBook */ = {
+			isa = PBXGroup;
+			children = (
+				C0CCCF6020A0794C00DD46B2 /* RCDAddressBookTableViewCell.h */,
+				C0CCCF6220A0794C00DD46B2 /* RCDAddressBookTableViewCell.m */,
+				C0CCCF5F20A0794B00DD46B2 /* RCDAddressBookViewController.h */,
+				C0CCCF6120A0794C00DD46B2 /* RCDAddressBookViewController.m */,
+				C0CCCF6820A13CBE00DD46B2 /* CHMNewFriendCell.h */,
+				C0CCCF6920A13CBE00DD46B2 /* CHMNewFriendCell.m */,
+				C0CCCF6A20A13CBE00DD46B2 /* CHMNewFriendCell.xib */,
+			);
+			path = AddressBook;
+			sourceTree = "<group>";
+		};
 		C0EAA5C82097123C0046F05C /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
@@ -580,6 +608,7 @@
 		C0EAA60220985DAE0046F05C /* Contacts */ = {
 			isa = PBXGroup;
 			children = (
+				C0CCCF5B20A0786700DD46B2 /* AddressBook */,
 				C0CCCF5320A0378D00DD46B2 /* SearchFriend */,
 				C0017789209DE439001B44DE /* NewFriend */,
 				C0017788209DE42D001B44DE /* GroupList */,
@@ -657,6 +686,8 @@
 		C0EAA61C209870E10046F05C /* DiyView */ = {
 			isa = PBXGroup;
 			children = (
+				C0CCCF6620A12F2400DD46B2 /* RCDNoFriendView.h */,
+				C0CCCF6520A12F2400DD46B2 /* RCDNoFriendView.m */,
 				C066EDC9209BE31600CB87FC /* KxMenu */,
 				C0EAA61E209870E10046F05C /* CHMTableViewController.h */,
 				C0EAA620209870E10046F05C /* CHMTableViewController.m */,
@@ -860,6 +891,7 @@
 				C0EAA6412098B63D0046F05C /* CHMChatRoomCell.xib in Resources */,
 				C066EDB4209A862300CB87FC /* CHMUserDetailController.xib in Resources */,
 				C0EAA5EE20981EE70046F05C /* CHMLoginController.xib in Resources */,
+				C0CCCF6C20A13CBE00DD46B2 /* CHMNewFriendCell.xib in Resources */,
 				C066EDBF209AB6EE00CB87FC /* CHMUserDetailFooter.xib in Resources */,
 				C066EDA3209A7B7300CB87FC /* CHMContactCell.xib in Resources */,
 				C0CCCF4B209FF82B00DD46B2 /* splash.png in Resources */,
@@ -986,7 +1018,9 @@
 				C00177C4209EB2F5001B44DE /* CHMGroupSettingHeaderCell.m in Sources */,
 				C0EAA60820985DCC0046F05C /* CHMChatRoomController.m in Sources */,
 				C066EDC4209BDCEB00CB87FC /* CHMSelectMemberController.m in Sources */,
+				C0CCCF6720A12F2400DD46B2 /* RCDNoFriendView.m in Sources */,
 				C066ED912099E2C500CB87FC /* CHMAccountSettingController.m in Sources */,
+				C0CCCF6320A0794C00DD46B2 /* RCDAddressBookViewController.m in Sources */,
 				C066EDC8209BDE5800CB87FC /* CHMBarButtonItem.m in Sources */,
 				C0EAA621209870E10046F05C /* RCUnderlineTextField.m in Sources */,
 				C066EDBD209AB6E300CB87FC /* CHMUserDetailFooter.m in Sources */,
@@ -996,6 +1030,8 @@
 				C0EAA5F2209823F40046F05C /* CHMRegisterController.m in Sources */,
 				C00177A0209DF570001B44DE /* CHMGroupFooter.m in Sources */,
 				C0017792209DE460001B44DE /* CHMGroupListController.m in Sources */,
+				C0CCCF6B20A13CBE00DD46B2 /* CHMNewFriendCell.m in Sources */,
+				C0CCCF6420A0794C00DD46B2 /* RCDAddressBookTableViewCell.m in Sources */,
 				C0137A5B209F385E004D8358 /* CHMInfoProvider.m in Sources */,
 				C0EAA62F209872520046F05C /* CHMMineItemCell.m in Sources */,
 				C0EFDBAD209C8FE400848710 /* CHMPalyCell.m in Sources */,

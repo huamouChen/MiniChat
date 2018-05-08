@@ -30,6 +30,8 @@
 
 // 申请好友
 #define addFriendURL        @"api/Im/ApplyFriend"
+// 同意好友申请
+#define agreeFriendURL      @"api/Im/AgreeFirendApply"
 
 // 获取聊天室
 #define GetChatRoomListURL  @"api/Im/ListChatroom"

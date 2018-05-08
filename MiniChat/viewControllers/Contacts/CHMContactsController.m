@@ -62,6 +62,9 @@ static CGFloat const KIndexViewWidth = 55 / 2.0;
         NSLog(@"------------%@", response);
         NSNumber *codeId = response[@"Code"][@"CodeId"];
         if (codeId.integerValue == 100) {
+            // 清空旧数据
+            [weakSelf.dataArr removeAllObjects];
+            [weakSelf.dataArr addObject:[weakSelf addTopFriend]];
             NSMutableArray *friendsArray = [CHMFriendModel mj_objectArrayWithKeyValuesArray:response[@"Value"]];
             // 处理没有昵称的问题
             NSMutableArray *filterArray = [self dealWithNickNameWithArray:friendsArray];
@@ -160,9 +163,12 @@ static CGFloat const KIndexViewWidth = 55 / 2.0;
     if (section == 0) {
         return nil;
     }
-    CHMSectionHeaderView *header = [CHMSectionHeaderView headerWithTableView:tableView];
-    header.title = [[[UILocalizedIndexedCollation currentCollation] sectionTitles] objectAtIndex:section - 1];
-    return header;
+    if (section > 0 && section < 28) {
+         CHMSectionHeaderView *header = [CHMSectionHeaderView headerWithTableView:tableView];
+         header.title = [[[UILocalizedIndexedCollation currentCollation] sectionTitles] objectAtIndex:section - 1];
+        return header;
+    }
+    return nil;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
@@ -192,6 +198,7 @@ static CGFloat const KIndexViewWidth = 55 / 2.0;
     // 好友详情
     CHMUserDetailController *userDetailController = [CHMUserDetailController new];
     userDetailController.friendModel = model;
+    userDetailController.isFriend = YES;
     [userDetailController setHidesBottomBarWhenPushed:YES];
     [self.navigationController pushViewController:userDetailController animated:YES];
 }
@@ -206,6 +213,12 @@ static CGFloat const KIndexViewWidth = 55 / 2.0;
 //}
 
 #pragma mark - view life cycler
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    // 暂时没做本地保存，所以调用接口刷新数据
+    [self fetchFriendList];
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     
@@ -344,6 +357,21 @@ static CGFloat const KIndexViewWidth = 55 / 2.0;
         [_dataArr addObject:headerArray];
     }
     return _dataArr;
+}
+
+
+/**
+ 顶部固定的数组  新的朋友 群聊
+
+ @return 顶部固定的数组
+ */
+- (NSArray *)addTopFriend {
+    // 新的朋友
+    CHMFriendModel *newFriendModel = [[CHMFriendModel alloc] initWithUserId:KNewFriend nickName:@"新的朋友" portrait:@"newFriend"];
+    // 群聊
+    CHMFriendModel *groupFriendModel = [[CHMFriendModel alloc] initWithUserId:KGroupList nickName:@"群聊" portrait:@"defaultGroup"];
+    NSArray *headerArray = @[newFriendModel, groupFriendModel];
+    return headerArray;
 }
 
 /**
