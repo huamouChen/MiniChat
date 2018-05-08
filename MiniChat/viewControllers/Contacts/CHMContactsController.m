@@ -57,33 +57,63 @@ static CGFloat const KIndexViewWidth = 55 / 2.0;
  获取好友列表
  */
 - (void)fetchFriendList {
-    __weak typeof(self) weakSelf = self;
-    [CHMHttpTool getUserRelationShipListWithSuccess:^(id response) {
-        NSLog(@"------------%@", response);
-        NSNumber *codeId = response[@"Code"][@"CodeId"];
-        if (codeId.integerValue == 100) {
-            // 清空旧数据
-            [weakSelf.dataArr removeAllObjects];
-            [weakSelf.dataArr addObject:[weakSelf addTopFriend]];
-            NSMutableArray *friendsArray = [CHMFriendModel mj_objectArrayWithKeyValuesArray:response[@"Value"]];
-            // 处理没有昵称的问题
-            NSMutableArray *filterArray = [self dealWithNickNameWithArray:friendsArray];
-            // 把当前用户也作为一个好友添加进去
-            // 从沙盒中取登录时保存的用户信息
-            NSString *nickName = [[NSUserDefaults standardUserDefaults] valueForKey:KNickName];
-            NSString *account = [[NSUserDefaults standardUserDefaults] valueForKey:KAccount];
-            NSString *portrait = [[NSUserDefaults standardUserDefaults] valueForKey:KPortrait];
-            CHMFriendModel *currentuser = [[CHMFriendModel alloc] initWithUserId:account nickName:nickName portrait:portrait];
-            [filterArray addObject:currentuser];
-            // 排序
-            [weakSelf.dataArr addObjectsFromArray:[weakSelf testSortWithArray:filterArray]];
-            [weakSelf.tableView reloadData];
-        } else {
-            // 失败暂时不提醒
-        }
-    } failure:^(NSError *error) {
-        [CHMProgressHUD showErrorWithInfo:[NSString stringWithFormat:@"错误码--%zd", error.code]];
-    }];
+    
+    
+    NSMutableArray *friendList = [NSMutableArray arrayWithArray:[[CHMDataBaseManager shareManager] getAllFriends]];
+    if (friendList.count > 0) {
+        // 分组排序
+        [self.dataArr removeAllObjects];
+        [self.dataArr addObject:[self addTopFriend]];
+        [self.dataArr addObjectsFromArray:[self testSortWithArray:friendList]];
+        [self.tableView reloadData];
+        
+    } else {
+        __weak typeof(self) weakSelf = self;
+        [CHMHttpTool getUserRelationShipListWithSuccess:^(id response) {
+            NSLog(@"------------%@", response);
+            NSNumber *codeId = response[@"Code"][@"CodeId"];
+            if (codeId.integerValue == 100) {
+                // 清空旧数据
+//                [weakSelf.dataArr removeAllObjects];
+                [weakSelf.dataArr addObject:[weakSelf addTopFriend]];
+                NSMutableArray *friendsArray = [CHMFriendModel mj_objectArrayWithKeyValuesArray:response[@"Value"]];
+                // 处理没有昵称的问题
+                NSMutableArray *filterArray = [self dealWithNickNameWithArray:friendsArray];
+                // 把当前用户也作为一个好友添加进去
+                // 从沙盒中取登录时保存的用户信息
+                NSString *nickName = [[NSUserDefaults standardUserDefaults] valueForKey:KNickName];
+                NSString *account = [[NSUserDefaults standardUserDefaults] valueForKey:KAccount];
+                NSString *portrait = [[NSUserDefaults standardUserDefaults] valueForKey:KPortrait];
+                CHMFriendModel *currentuser = [[CHMFriendModel alloc] initWithUserId:account nickName:nickName portrait:portrait];
+                [filterArray addObject:currentuser];
+                
+                // 把数据保存到本地数据库
+                NSMutableArray *resultArray = [NSMutableArray array];
+                for (int i = 0; i < filterArray.count; i++) {
+                    CHMFriendModel *friednModel = filterArray[i];
+                    RCUserInfo *userInfo = [[RCUserInfo alloc] initWithUserId:friednModel.UserName name:friednModel.NickName portrait:friednModel.HeaderImage];
+                    [resultArray addObject:userInfo];
+                }
+                
+                // 用户信息表
+                [[CHMDataBaseManager shareManager] insertUserListToDB:resultArray complete:^(BOOL isCompleted) { }];
+                // 好友列表
+                [[CHMDataBaseManager shareManager] insertFriendListToDB:resultArray complete:^(BOOL isCompleted) { }];
+                
+                
+                // 分组排序
+                [weakSelf.dataArr addObjectsFromArray:[weakSelf testSortWithArray:filterArray]];
+                [weakSelf.tableView reloadData];
+            } else {
+                // 失败暂时不提醒
+            }
+        } failure:^(NSError *error) {
+            [CHMProgressHUD showErrorWithInfo:[NSString stringWithFormat:@"错误码--%zd", error.code]];
+        }];
+    }
+    
+    
+    
 }
 
 
@@ -164,8 +194,8 @@ static CGFloat const KIndexViewWidth = 55 / 2.0;
         return nil;
     }
     if (section > 0 && section < 28) {
-         CHMSectionHeaderView *header = [CHMSectionHeaderView headerWithTableView:tableView];
-         header.title = [[[UILocalizedIndexedCollation currentCollation] sectionTitles] objectAtIndex:section - 1];
+        CHMSectionHeaderView *header = [CHMSectionHeaderView headerWithTableView:tableView];
+        header.title = [[[UILocalizedIndexedCollation currentCollation] sectionTitles] objectAtIndex:section - 1];
         return header;
     }
     return nil;
@@ -221,9 +251,6 @@ static CGFloat const KIndexViewWidth = 55 / 2.0;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
-    // 获取数据
-    [self fetchFriendList];
     
     // 获取本地数据
     [self initLocalData];
@@ -362,7 +389,7 @@ static CGFloat const KIndexViewWidth = 55 / 2.0;
 
 /**
  顶部固定的数组  新的朋友 群聊
-
+ 
  @return 顶部固定的数组
  */
 - (NSArray *)addTopFriend {

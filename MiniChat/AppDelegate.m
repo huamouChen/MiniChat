@@ -23,6 +23,8 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
     
+    [self setupBarAppearance];
+    
     [application setStatusBarStyle:UIStatusBarStyleLightContent];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(switchRootViewController) name:KSwitchRootViewController object:nil];
@@ -31,26 +33,16 @@
     [[RCIM sharedRCIM] initWithAppKey:RongCloudAppKey];
     // 发送消息携带用户信息
     [RCIM sharedRCIM].enableMessageAttachUserInfo = YES;
-    
     [self setIMInfoProvider];
-    
-    
-    [[RCIM sharedRCIM] refreshGroupInfoCache:[[RCGroup alloc] initWithGroupId:@"3867" groupName:@"iosGroup" portraitUri:@""] withGroupId:@"3867"];
-    
-    [self setupBarAppearance];
-    
-    self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
-    self.window.backgroundColor = [UIColor whiteColor];
-    [self.window makeKeyAndVisible];
-    
-    [self switchRootViewController];
-    
     [RCIM sharedRCIM].receiveMessageDelegate = self;
-    
     
     // IQKeyBoard 关闭toolBar
     [[IQKeyboardManager sharedManager] setEnableAutoToolbar:NO];
     
+    self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
+    self.window.backgroundColor = [UIColor whiteColor];
+    [self.window makeKeyAndVisible];
+    [self switchRootViewController];
     
     return YES;
 }
@@ -65,11 +57,11 @@
     [RCIM sharedRCIM].currentUserInfo = [[RCUserInfo alloc] initWithUserId:account name:nickName portrait:portrait];
     
     //设置用户信息源和群组信息源
-//    [RCIM sharedRCIM].userInfoDataSource = CHMIMDataSourece;
-//    [RCIM sharedRCIM].groupInfoDataSource = CHMIMDataSourece;
-//
-//    //群成员数据源
-//    [RCIM sharedRCIM].groupMemberDataSource = CHMIMDataSourece;
+    [RCIM sharedRCIM].userInfoDataSource = CHMIMDataSourece;
+    //    [RCIM sharedRCIM].groupInfoDataSource = CHMIMDataSourece;
+    //
+    //    //群成员数据源
+    //    [RCIM sharedRCIM].groupMemberDataSource = CHMIMDataSourece;
 }
 
 

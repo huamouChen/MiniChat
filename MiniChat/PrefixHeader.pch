@@ -24,6 +24,8 @@
 #import "CHMProgressHUD.h"
 #import "MJExtension.h"
 #import <RongIMKit/RongIMKit.h>
+#import "CHMDataBaseManager.h"
+#import "CHMInfoProvider.h"
 
 #import "CHMHttpTool.h"
 

@@ -141,39 +141,76 @@
 
 
 #pragma mark - RCIMUserInfoDataSource
-//- (void)getUserInfoWithUserId:(NSString *)userId completion:(void (^)(RCUserInfo *))completion {
-//    NSLog(@"getUserInfoWithUserId ----- %@", userId);
-//    RCUserInfo *user = [RCUserInfo new];
-//    if (userId == nil || [userId length] == 0) {
-//        user.userId = userId;
-//        user.portraitUri = @"";
-//        user.name = @"";
-//        completion(user);
-//        return;
-//    }
-//    //开发者调自己的服务器接口根据userID异步请求数据
-//    if (![userId isEqualToString:[RCIM sharedRCIM].currentUserInfo.userId]) {
-//        [[CHMUserInfoManager shareInstance] getFriendInfo:userId
-//                                               completion:^(RCUserInfo *user) {
-//                                                   completion(user);
-//                                               }];
-//    } else {
-//        [[CHMUserInfoManager shareInstance] getUserInfo:userId
-//                                             completion:^(RCUserInfo *user) {
-//                                                 [[RCIM sharedRCIM] refreshUserInfoCache:user withUserId:user.userId];
-//
-//                                                 completion(user);
-//                                             }];
-//    }
-//    return;
-//}
-//
-//- (void)getGroupInfoWithGroupId:(NSString *)groupId completion:(void (^)(RCGroup *))completion {
-//    <#code#>
-//}
-//
-//- (void)getUserInfoWithUserId:(NSString *)userId inGroup:(NSString *)groupId completion:(void (^)(RCUserInfo *))completion {
-//    <#code#>
-//}
+- (void)getUserInfoWithUserId:(NSString *)userId completion:(void (^)(RCUserInfo *))completion {
+    NSLog(@"getUserInfoWithUserId ----- %@", userId);
+    RCUserInfo *user = [RCUserInfo new];
+    if (userId == nil || [userId length] == 0) {
+        user.userId = userId;
+        user.portraitUri = KDefaultPortrait;
+        user.name = userId;
+        completion(user);
+        return;
+    }
+    //开发者调自己的服务器接口根据userID异步请求数据
+    if (![userId isEqualToString:[RCIM sharedRCIM].currentUserInfo.userId]) {
+        [[CHMUserInfoManager shareInstance] getFriendInfo:userId
+                                               completion:^(RCUserInfo *user) {
+                                                   completion(user);
+                                               }];
+    } else {
+        [[CHMUserInfoManager shareInstance] getUserInfo:userId
+                                             completion:^(RCUserInfo *user) {
+                                                 [[RCIM sharedRCIM] refreshUserInfoCache:user withUserId:user.userId];
+
+                                                 completion(user);
+                                             }];
+    }
+    return;
+}
+
+- (void)getGroupInfoWithGroupId:(NSString *)groupId completion:(void (^)(RCGroup *))completion {
+    if ([groupId length] == 0)
+        return;
+    
+    //开发者调自己的服务器接口根据userID异步请求数据
+    [CHMHttpTool getGroupInfoWithGroupId:groupId success:^(id response) {
+        NSLog(@"--------%@",response);
+        NSNumber *codeId = response[@"Code"][@"CodeId"];
+        if (codeId.integerValue == 100) {
+            NSString *groupName = response[@"Value"][@"GroupName"];
+            NSString *groupImage = response[@"Value"][@"GroupName"];
+            RCGroup *group = [[RCGroup alloc] initWithGroupId:groupId groupName:groupName portraitUri:groupImage];
+            completion(group);
+        } else {
+        }
+    } failure:^(NSError *error) { }];
+}
+
+- (void)getUserInfoWithUserId:(NSString *)userId inGroup:(NSString *)groupId completion:(void (^)(RCUserInfo *))completion {
+    NSLog(@"getUserInfoWithUserId ----- %@", userId);
+    RCUserInfo *user = [RCUserInfo new];
+    if (userId == nil || [userId length] == 0) {
+        user.userId = userId;
+        user.portraitUri = KDefaultPortrait;
+        user.name = userId;
+        completion(user);
+        return;
+    }
+    //开发者调自己的服务器接口根据userID异步请求数据
+    if (![userId isEqualToString:[RCIM sharedRCIM].currentUserInfo.userId]) {
+        [[CHMUserInfoManager shareInstance] getFriendInfo:userId
+                                               completion:^(RCUserInfo *user) {
+                                                   completion(user);
+                                               }];
+    } else {
+        [[CHMUserInfoManager shareInstance] getUserInfo:userId
+                                             completion:^(RCUserInfo *user) {
+                                                 [[RCIM sharedRCIM] refreshUserInfoCache:user withUserId:user.userId];
+                                                 
+                                                 completion(user);
+                                             }];
+    }
+    return;
+}
 
 @end

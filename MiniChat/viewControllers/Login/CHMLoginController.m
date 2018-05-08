@@ -11,6 +11,7 @@
 #import "CHMRegisterController.h"
 #import <SAMKeychain/SAMKeychain.h>
 
+
 static NSString *const IMServices = @"IMServices";
 
 
@@ -111,6 +112,18 @@ static NSString *const IMServices = @"IMServices";
             // 保存账号密码
             [SAMKeychain setPassword:self->_passwordTextField.text forService:IMServices account:userName];
             
+            // 本地数据
+            RCUserInfo *userInfo = [[RCUserInfo alloc] initWithUserId:userName name:nicknName portrait:headerImg];
+            [[CHMDataBaseManager shareManager] insertUserToDB:userInfo];
+            [[RCIM sharedRCIM] refreshUserInfoCache:userInfo withUserId:userName];
+            
+            //同步群组
+            [[CHMInfoProvider shareInstance] syncGroups];
+            // 同步好友
+            [[CHMInfoProvider shareInstance] syncFriendList:userName complete:^(NSMutableArray *friends) {
+                
+            }];
+            
             // 切换根控制器
             dispatch_async(dispatch_get_main_queue(), ^{
                 [[NSNotificationCenter defaultCenter] postNotificationName:KSwitchRootViewController object:nil];
@@ -161,6 +174,7 @@ static NSString *const IMServices = @"IMServices";
     self.loginTimes = 0;
     _accountTextField.textColor = [UIColor whiteColor];
     _accountTextField.attributedPlaceholder = [[NSAttributedString alloc] initWithString:@"账号" attributes:@{NSForegroundColorAttributeName: [UIColor whiteColor]}];
+    [_accountTextField addTarget:self action:@selector(accountTextFiedTextIsChange) forControlEvents:UIControlEventEditingChanged];
     _accountTextField.delegate = self;
     _accountTextField.returnKeyType = UIReturnKeyNext;
     _passwordTextField.textColor = [UIColor whiteColor];
@@ -186,19 +200,19 @@ static NSString *const IMServices = @"IMServices";
     return false;
 }
 
+
+/**
+ 账户的值发生变化
+ */
+- (void)accountTextFiedTextIsChange {
+    self.passwordTextField.text = @"";
+    // 密码
+    NSString *password = [SAMKeychain passwordForService:IMServices account:self.accountTextField.text];
+    self.passwordTextField.text = password;
+}
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
-
-/*
- #pragma mark - Navigation
- 
- // In a storyboard-based application, you will often want to do a little preparation before navigation
- - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
- // Get the new view controller using [segue destinationViewController].
- // Pass the selected object to the new view controller.
- }
- */
-
 @end

@@ -11,6 +11,7 @@
 #import "FMDatabaseQueue.h"
 #import "CHMFriendModel.h"
 #import "CHMGroupModel.h"
+#import "CHMGroupMemberModel.h"
 
 static NSString *const userTableName = @"USERTABLE";
 static NSString *const groupTableName = @"GROUPTABLEV2";
@@ -36,6 +37,10 @@ static NSString *const groupMemberTableName = @"GROUPMEMBERTABLE";
         }
     });
     return shareManager;
+}
+
+- (void)closeDBForDisconnect {
+    self.dbQueue = nil;
 }
 
 - (FMDatabaseQueue *)dbQueue {
@@ -114,8 +119,7 @@ static NSString *const groupMemberTableName = @"GROUPMEMBERTABLE";
         if (![self isTableOK:friendTableName withDB:db]) {
             NSString *createTableSQL = @"CREATE TABLE FRIENDSTABLE (id integer "
             @"PRIMARY KEY autoincrement, userid "
-            @"text,name text, portraitUri text, status "
-            @"text, updatedAt text)";
+            @"text,name text, portraitUri text)";
             [db executeUpdate:createTableSQL];
             NSString *createIndexSQL = @"CREATE unique INDEX idx_friendsId ON FRIENDSTABLE(userid);";
             [db executeUpdate:createIndexSQL];
@@ -143,6 +147,8 @@ static NSString *const groupMemberTableName = @"GROUPMEMBERTABLE";
         }
     }];
 }
+
+
 
 #pragma mark - 从表中获取所有好友信息
 //从表中获取所有好友信息 //RCUserInfo
@@ -224,14 +230,84 @@ static NSString *const groupMemberTableName = @"GROUPMEMBERTABLE";
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
         [self.dbQueue inTransaction:^(FMDatabase *db, BOOL *rollback) {
             [db executeUpdate:deleteSql];
-            for (RCUserInfo *user in groupMemberList) {
+            for (CHMGroupMemberModel *groupMember in groupMemberList) {
                 NSString *insertSql = @"REPLACE INTO GROUPMEMBERTABLE (groupid, userid, "
                 @"name, portraitUri) VALUES (?, ?, ?, ?)";
-                [db executeUpdate:insertSql, groupId, user.userId, user.name, user.portraitUri];
+                [db executeUpdate:insertSql, groupId, groupMember.UserName, groupMember.NickName, groupMember.HeaderImage];
             }
         }];
         result(YES);
     });
+}
+
+#pragma mark - 存储用户信息
+// 存储用户信息
+- (void)insertUserToDB:(RCUserInfo *)user {
+    NSString *insertSql = @"REPLACE INTO USERTABLE (userid, name, portraitUri) VALUES (?, ?, ?)";
+    
+    [self.dbQueue inDatabase:^(FMDatabase *db) {
+        [db executeUpdate:insertSql, user.userId, user.name, user.portraitUri];
+    }];
+}
+
+//存储用户列表信息
+- (void)insertUserListToDB:(NSMutableArray *)userList complete:(void (^)(BOOL))result {
+    
+    if (userList == nil || [userList count] < 1)
+        return;
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
+        [self.dbQueue inTransaction:^(FMDatabase *db, BOOL *rollback) {
+            for (RCUserInfo *user in userList) {
+                NSString *insertSql = @"REPLACE INTO USERTABLE (userid, name, portraitUri) VALUES (?, ?, ?)";
+                [db executeUpdate:insertSql, user.userId, user.name, user.portraitUri];
+            }
+        }];
+        result(YES);
+    });
+}
+
+#pragma mark - 存储好友信息
+//存储好友信息
+- (void)insertFriendToDB:(RCUserInfo *)friendInfo {
+    NSString *insertSql = @"REPLACE INTO FRIENDSTABLE (userid, name, "
+    @"portraitUri) VALUES (?, ?, ?)";
+    
+    [self.dbQueue inDatabase:^(FMDatabase *db) {
+        [db executeUpdate:insertSql, friendInfo.userId, friendInfo.name, friendInfo.portraitUri];
+    }];
+}
+// 存储一组用户信息
+- (void)insertFriendListToDB:(NSMutableArray *)FriendList complete:(void (^)(BOOL))result {
+    
+    if (FriendList == nil || [FriendList count] < 1)
+        return;
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
+        [self.dbQueue inTransaction:^(FMDatabase *db, BOOL *rollback) {
+            for (RCUserInfo *friendInfo in FriendList) {
+                NSString *insertSql = @"REPLACE INTO FRIENDSTABLE (userid, name, "
+                @"portraitUri) VALUES (?, ?, ?)";
+                [db executeUpdate:insertSql, friendInfo.userId, friendInfo.name, friendInfo.portraitUri];
+            }
+        }];
+        result(YES);
+    });
+}
+
+//从表中获取某个好友的信息
+- (RCUserInfo *)getFriendInfo:(NSString *)friendId {
+    __block RCUserInfo *friendInfo;
+    
+    [self.dbQueue inDatabase:^(FMDatabase *db) {
+        FMResultSet *rs = [db executeQuery:@"SELECT * FROM FRIENDSTABLE WHERE userid=?", friendId];
+        while ([rs next]) {
+            friendInfo = [RCUserInfo new];
+            friendInfo.userId = [rs stringForColumn:@"userid"];
+            friendInfo.name = [rs stringForColumn:@"name"];
+            friendInfo.portraitUri = [rs stringForColumn:@"portraitUri"];
+        }
+        [rs close];
+    }];
+    return friendInfo;
 }
 
 
