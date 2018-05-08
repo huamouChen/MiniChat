@@ -78,7 +78,7 @@
                                                                 buttonTitle:nil
                                                                  titleColor:nil
                                                                  titleFrame:CGRectZero
-                                                                buttonFrame:CGRectMake(0, 0, 17, 17)
+                                                                buttonFrame:CGRectMake(0, 0, 44, 44)
                                                                      target:self
                                                                      action:@selector(showMenu:)];
     self.navigationItem.rightBarButtonItems = @[rightBtn];
@@ -111,7 +111,7 @@
     
     UIBarButtonItem *rightBarButton = self.navigationItem.rightBarButtonItems[0];
     CGRect targetFrame = rightBarButton.customView.frame;
-    CGFloat offset = [UIApplication sharedApplication].statusBarFrame.size.height > 20 ?  54 : 15;
+    CGFloat offset = [UIApplication sharedApplication].statusBarFrame.size.height > 20 ?  24 : 0;
     targetFrame.origin.y = targetFrame.origin.y + offset;
     if (IOS_FSystenVersion >= 11.0) {
         targetFrame.origin.x = self.view.bounds.size.width - targetFrame.size.width - 17;

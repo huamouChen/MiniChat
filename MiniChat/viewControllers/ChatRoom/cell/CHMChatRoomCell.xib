@@ -19,9 +19,8 @@
                 <rect key="frame" x="0.0" y="0.0" width="326" height="79.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="fcr-2O-IKl">
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon_person" translatesAutoresizingMaskIntoConstraints="NO" id="fcr-2O-IKl">
                         <rect key="frame" x="16" y="10" width="60" height="60"/>
-                        <color key="backgroundColor" red="0.0039215686269999999" green="0.58431372550000005" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="60" id="1tL-R0-Jo1"/>
                             <constraint firstAttribute="height" constant="60" id="AL4-kD-r8g"/>
@@ -57,4 +56,7 @@
             <point key="canvasLocation" x="37" y="72"/>
         </tableViewCell>
     </objects>
+    <resources>
+        <image name="icon_person" width="46" height="46"/>
+    </resources>
 </document>

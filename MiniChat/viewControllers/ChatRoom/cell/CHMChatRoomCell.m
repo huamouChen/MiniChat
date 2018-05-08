@@ -18,7 +18,7 @@
 
 - (void)setChatRoomModel:(CHMChatRoomModel *)chatRoomModel {
     _chatRoomModel = chatRoomModel;
-    [_headerImageView chm_imageViewWithURL:_chatRoomModel.GroupImage placeholder:@"icon_person"];
+    [_headerImageView chm_imageViewWithURL:_chatRoomModel.GroupImage placeholder:KDefaultPortrait];
     _nameLabel.text = _chatRoomModel.GroupName;
 }
 

@@ -9,6 +9,7 @@
 #import "CHMChatRoomController.h"
 #import "CHMChatRoomCell.h"
 #import "CHMChatRoomModel.h"
+#import "CHMConversationController.h"
 
 static NSString *const chatRoomReuseableId = @"CHMChatRoomCell";
 
@@ -82,6 +83,19 @@ static NSString *const sectionViewBackgroundColor = @"0xf0f0f6";
     CHMChatRoomCell *cell = [tableView dequeueReusableCellWithIdentifier:chatRoomReuseableId];
     cell.chatRoomModel = self.chatroomLists[indexPath.row];
     return cell;
+}
+
+#pragma mark - table view delegate
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    // 开启聊天室会话
+    CHMChatRoomModel *chatroom = _chatroomLists[indexPath.row];
+    CHMConversationController *conversationVC = [[CHMConversationController alloc]init];
+    conversationVC.conversationType = ConversationType_CHATROOM;
+    conversationVC.targetId = chatroom.GroupId;
+    conversationVC.title = chatroom.GroupName;
+    conversationVC.hidesBottomBarWhenPushed = YES;
+    [self.navigationController pushViewController:conversationVC animated:YES];
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {

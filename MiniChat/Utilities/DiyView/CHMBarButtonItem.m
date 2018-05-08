@@ -40,6 +40,7 @@
         self.button.frame = buttonFrame;
         UIImageView *image = [[UIImageView alloc] initWithImage:buttonImage];
         image.frame = imageFrame;
+        image.center = view.center;
         [self.button addSubview:image];
         if (buttonTitle != nil && titleColor != nil) {
             self.titleText = [[UILabel alloc] initWithFrame:titleFrame];
