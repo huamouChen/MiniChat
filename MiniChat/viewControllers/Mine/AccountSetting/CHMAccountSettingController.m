@@ -123,6 +123,8 @@ static int const sectionHeaderHeight = 15;
         [CHMProgressHUD dismissHUD];
         // 退出融云
         [[RCIM sharedRCIM] logout];
+        // 关闭数据库连接
+        [[CHMDataBaseManager shareManager] closeDBForDisconnect];
         [[NSNotificationCenter defaultCenter] postNotificationName:KSwitchRootViewController object:nil];
     });
     
