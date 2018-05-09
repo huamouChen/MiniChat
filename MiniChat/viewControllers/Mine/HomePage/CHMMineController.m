@@ -11,6 +11,7 @@
 #import "CHMMineItemCell.h"
 #import "CHMAccountSettingController.h"
 #import "RCDCustomerServiceViewController.h"
+#import "CHMAboutController.h"
 
 static NSString *const detailReuseablId = @"CHMMineDetailCell";
 static NSString *const itemReuseablId = @"CHMMineItemCell";
@@ -105,6 +106,9 @@ static NSString *const itemReuseablId = @"CHMMineItemCell";
     if (indexPath.section == 2) {
         if (indexPath.row == 0) { // 意见反馈
             [self feedBackCellClick];
+        }
+        if (indexPath.row == 1) { // 关于博信
+            [self.navigationController pushViewController:[CHMAboutController new] animated:YES];
         }
     }
 }
