@@ -30,7 +30,7 @@
             NSString *headerImg = response[@"HeaderImage"];
             NSString *phoneNum = response[@"PhoneNum"];
             nicknName = ([nicknName isKindOfClass:[NSNull class]] || [nicknName isEqualToString:@""]) ? userName : nicknName;
-            headerImg = ([headerImg isKindOfClass:[NSNull class]] || [headerImg isEqualToString:@""]) ? KDefaultPortrait : headerImg;
+            headerImg = ([headerImg isKindOfClass:[NSNull class]] || [headerImg isEqualToString:@""]) ? KDefaultPortrait : [NSString stringWithFormat:@"%@%@",BaseURL, headerImg];
             // 保存用户信息
             [[NSUserDefaults standardUserDefaults] setObject:userName forKey:KAccount];
             [[NSUserDefaults standardUserDefaults] setObject:nicknName forKey:KNickName];
@@ -62,7 +62,7 @@
                 NSString *headimg = response[@"Value"][@"Headimg"];
                 
                 nickName = ([nickName isKindOfClass:[NSNull class]] ? userName : nickName);
-                headimg = ([headimg isKindOfClass:[NSNull class] ] ? @"icon_person" : headimg);
+                headimg = ([headimg isKindOfClass:[NSNull class] ] ? @"icon_person" : [NSString stringWithFormat:@"%@%@",BaseURL, headimg]);
                 
                 RCUserInfo *user = [[RCUserInfo alloc] initWithUserId:userName name:nickName portrait:headimg];
                 completion(user);

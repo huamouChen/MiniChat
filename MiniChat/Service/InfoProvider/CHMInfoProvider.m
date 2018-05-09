@@ -152,12 +152,12 @@
         return;
     }
     //开发者调自己的服务器接口根据userID异步请求数据
-    if (![userId isEqualToString:[RCIM sharedRCIM].currentUserInfo.userId]) {
+    if (![userId isEqualToString:[RCIM sharedRCIM].currentUserInfo.userId]) {  // 不是当前用户
         [[CHMUserInfoManager shareInstance] getFriendInfo:userId
                                                completion:^(RCUserInfo *user) {
                                                    completion(user);
                                                }];
-    } else {
+    } else { // 当前登录的用户
         [[CHMUserInfoManager shareInstance] getUserInfo:userId
                                              completion:^(RCUserInfo *user) {
                                                  [[RCIM sharedRCIM] refreshUserInfoCache:user withUserId:user.userId];

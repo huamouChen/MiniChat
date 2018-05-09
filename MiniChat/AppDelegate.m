@@ -32,7 +32,7 @@
     // 初始化融云
     [[RCIM sharedRCIM] initWithAppKey:RongCloudAppKey];
     // 发送消息携带用户信息
-    [RCIM sharedRCIM].enableMessageAttachUserInfo = YES;
+//    [RCIM sharedRCIM].enableMessageAttachUserInfo = YES;
     [self setIMInfoProvider];
     [RCIM sharedRCIM].receiveMessageDelegate = self;
     
@@ -57,11 +57,10 @@
     [RCIM sharedRCIM].currentUserInfo = [[RCUserInfo alloc] initWithUserId:account name:nickName portrait:portrait];
     
     //设置用户信息源和群组信息源
-    [RCIM sharedRCIM].userInfoDataSource = CHMIMDataSourece;
-    //    [RCIM sharedRCIM].groupInfoDataSource = CHMIMDataSourece;
-    //
-    //    //群成员数据源
-    //    [RCIM sharedRCIM].groupMemberDataSource = CHMIMDataSourece;
+    [RCIM sharedRCIM].userInfoDataSource = [CHMInfoProvider shareInstance];
+    [RCIM sharedRCIM].groupInfoDataSource = CHMIMDataSourece;
+    //群成员数据源
+//    [RCIM sharedRCIM].groupMemberDataSource = CHMIMDataSourece;
 }
 
 

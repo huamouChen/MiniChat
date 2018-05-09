@@ -75,7 +75,7 @@ static CGFloat const KIndexViewWidth = 55 / 2.0;
             if (codeId.integerValue == 100) {
                 // 清空旧数据
 //                [weakSelf.dataArr removeAllObjects];
-                [weakSelf.dataArr addObject:[weakSelf addTopFriend]];
+//                [weakSelf.dataArr addObject:[weakSelf addTopFriend]];
                 NSMutableArray *friendsArray = [CHMFriendModel mj_objectArrayWithKeyValuesArray:response[@"Value"]];
                 // 处理没有昵称的问题
                 NSMutableArray *filterArray = [self dealWithNickNameWithArray:friendsArray];

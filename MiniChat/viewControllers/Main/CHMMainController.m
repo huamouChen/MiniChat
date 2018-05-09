@@ -8,7 +8,7 @@
 
 #import "CHMMainController.h"
 
-@interface CHMMainController () <RCIMUserInfoDataSource>
+@interface CHMMainController ()
 
 @end
 
@@ -21,8 +21,6 @@
     
     // 连接融云服务器
     [self connectToRongCloud];
-    
-    [RCIM sharedRCIM].userInfoDataSource = self;
     
 }
 
@@ -60,15 +58,7 @@
 
 
 #pragma mark - 用户信息提供者
-- (void)getUserInfoWithUserId:(NSString *)userId completion:(void (^)(RCUserInfo *))completion {
-    RCUserInfo *syscuserInfo = [[RCUserInfo alloc] initWithUserId:KSyscuser name:@"官方客服" portrait:@""];
-    RCUserInfo *syscaperInfo = [[RCUserInfo alloc] initWithUserId:KSyscaper name:@"资金助手" portrait:@""];
-    
-    [[RCIM sharedRCIM] refreshUserInfoCache:syscuserInfo withUserId:KSyscuser];
-    [[RCIM sharedRCIM] refreshUserInfoCache:syscaperInfo withUserId:KSyscaper];
-    
-    
-}
+
 
 
 /**

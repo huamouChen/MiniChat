@@ -22,12 +22,21 @@
 
 @implementation CHMConversationListController
 
+#pragma mark - view life cycler
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    
+    RCUserInfo *groupNotify = [[RCUserInfo alloc] initWithUserId:@"__system__" name:@"" portrait:nil];
+    [[RCIM sharedRCIM] refreshUserInfoCache:groupNotify withUserId:@"__system__"];
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     
     [self setupAppearance];
     
-    
+    // 设置在NavigatorBar中显示连接中的提示
+    self.showConnectingStatusOnNavigatorBar = YES;
     
     // 设置需要显示那些类型的会话
     [self setDisplayConversationTypes:@[@(ConversationType_PRIVATE),
@@ -44,21 +53,34 @@
     
     // 网络不可用的时候，显示网络不可用
     self.isShowNetworkIndicatorView = YES;
-    
-    
-   
-    
 }
 
 
 #pragma mark - 即将刷新会话列表数据
-- (NSMutableArray *)willReloadTableData:(NSMutableArray *)dataSource {
-    [super willReloadTableData:dataSource];
-    //    for (RCConversation *conversation in dataSource) {
-    //        NSLog(@"会话类型：%lu，目标会话ID：%@", (unsigned long)conversation.conversationType, conversation.targetId);
-    //    }
-    return dataSource;
-}
+//- (NSMutableArray *)willReloadTableData:(NSMutableArray *)dataSource {
+//    
+//    NSMutableArray *resultArr = [NSMutableArray array];
+//    
+//        for (RCConversation *conversation in dataSource) {
+//            RCUserInfo *userInfo = conversation.lastestMessage.senderUserInfo;
+//            NSLog(@"---%@\n------%@\n-------%@",userInfo.userId, userInfo.name, userInfo.portraitUri);
+//            
+//            conversation.conversationTitle = userInfo.name;
+//            [resultArr addObject:conversation];
+//            NSLog(@"会话类型：%lu，目标会话ID：%@", (unsigned long)conversation.conversationType, conversation.targetId);
+//        }
+//    
+//    return resultArr;
+//}
+//
+//
+//- (void)willDisplayConversationTableCell:(RCConversationBaseCell *)cell atIndexPath:(NSIndexPath *)indexPath {
+//    RCConversationModel *model = self.conversationListDataSource[indexPath.row];
+//    model.conversationTitle = @"1111";
+//    [cell setModel:model];
+//    [super willDisplayConversationTableCell:cell atIndexPath:indexPath];
+//}
+
 
 /**
  设置外观
@@ -198,6 +220,14 @@
     [self.navigationController pushViewController:chatController animated:YES];
     //    }
 }
+
+
+#pragma mark - 收到消息的监听
+- (void)didReceiveMessageNotification:(NSNotification *)notification {
+    [super didReceiveMessageNotification:notification];
+    NSLog(@"-----------------收到消息");
+}
+
 
 #pragma mark - 自定义cell
 //自定义cell
