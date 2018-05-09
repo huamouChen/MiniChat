@@ -56,6 +56,15 @@
 		C0CCCF6720A12F2400DD46B2 /* RCDNoFriendView.m in Sources */ = {isa = PBXBuildFile; fileRef = C0CCCF6520A12F2400DD46B2 /* RCDNoFriendView.m */; };
 		C0CCCF6B20A13CBE00DD46B2 /* CHMNewFriendCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C0CCCF6920A13CBE00DD46B2 /* CHMNewFriendCell.m */; };
 		C0CCCF6C20A13CBE00DD46B2 /* CHMNewFriendCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C0CCCF6A20A13CBE00DD46B2 /* CHMNewFriendCell.xib */; };
+		C0CCCF7C20A2A77700DD46B2 /* RCDCustomerServiceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C0CCCF7B20A2A77700DD46B2 /* RCDCustomerServiceViewController.m */; };
+		C0CCCF7F20A2A79000DD46B2 /* RCDCSAnnounceView.m in Sources */ = {isa = PBXBuildFile; fileRef = C0CCCF7E20A2A79000DD46B2 /* RCDCSAnnounceView.m */; };
+		C0CCCF8220A2A79E00DD46B2 /* RCDCSEvaluateView.m in Sources */ = {isa = PBXBuildFile; fileRef = C0CCCF8120A2A79E00DD46B2 /* RCDCSEvaluateView.m */; };
+		C0CCCF8520A2A7AB00DD46B2 /* RCDCSEvaluateModel.m in Sources */ = {isa = PBXBuildFile; fileRef = C0CCCF8320A2A7AA00DD46B2 /* RCDCSEvaluateModel.m */; };
+		C0CCCF9020A2A82900DD46B2 /* RCDCSTagView.m in Sources */ = {isa = PBXBuildFile; fileRef = C0CCCF8720A2A82700DD46B2 /* RCDCSTagView.m */; };
+		C0CCCF9120A2A82900DD46B2 /* RCDCSStarView.m in Sources */ = {isa = PBXBuildFile; fileRef = C0CCCF8820A2A82700DD46B2 /* RCDCSStarView.m */; };
+		C0CCCF9220A2A82900DD46B2 /* RCDCSButton.m in Sources */ = {isa = PBXBuildFile; fileRef = C0CCCF8920A2A82800DD46B2 /* RCDCSButton.m */; };
+		C0CCCF9320A2A82900DD46B2 /* RCDCSSolveView.m in Sources */ = {isa = PBXBuildFile; fileRef = C0CCCF8B20A2A82800DD46B2 /* RCDCSSolveView.m */; };
+		C0CCCF9420A2A82900DD46B2 /* RCDCSInputView.m in Sources */ = {isa = PBXBuildFile; fileRef = C0CCCF8D20A2A82800DD46B2 /* RCDCSInputView.m */; };
 		C0EAA5D72097E8210046F05C /* CHMHttpTool.m in Sources */ = {isa = PBXBuildFile; fileRef = C0EAA5D62097E8210046F05C /* CHMHttpTool.m */; };
 		C0EAA5ED20981EE70046F05C /* CHMLoginController.m in Sources */ = {isa = PBXBuildFile; fileRef = C0EAA5EB20981EE70046F05C /* CHMLoginController.m */; };
 		C0EAA5EE20981EE70046F05C /* CHMLoginController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C0EAA5EC20981EE70046F05C /* CHMLoginController.xib */; };
@@ -182,6 +191,24 @@
 		C0CCCF6820A13CBE00DD46B2 /* CHMNewFriendCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CHMNewFriendCell.h; sourceTree = "<group>"; };
 		C0CCCF6920A13CBE00DD46B2 /* CHMNewFriendCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CHMNewFriendCell.m; sourceTree = "<group>"; };
 		C0CCCF6A20A13CBE00DD46B2 /* CHMNewFriendCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CHMNewFriendCell.xib; sourceTree = "<group>"; };
+		C0CCCF7A20A2A77600DD46B2 /* RCDCustomerServiceViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RCDCustomerServiceViewController.h; sourceTree = "<group>"; };
+		C0CCCF7B20A2A77700DD46B2 /* RCDCustomerServiceViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RCDCustomerServiceViewController.m; sourceTree = "<group>"; };
+		C0CCCF7D20A2A79000DD46B2 /* RCDCSAnnounceView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RCDCSAnnounceView.h; sourceTree = "<group>"; };
+		C0CCCF7E20A2A79000DD46B2 /* RCDCSAnnounceView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RCDCSAnnounceView.m; sourceTree = "<group>"; };
+		C0CCCF8020A2A79E00DD46B2 /* RCDCSEvaluateView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RCDCSEvaluateView.h; sourceTree = "<group>"; };
+		C0CCCF8120A2A79E00DD46B2 /* RCDCSEvaluateView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RCDCSEvaluateView.m; sourceTree = "<group>"; };
+		C0CCCF8320A2A7AA00DD46B2 /* RCDCSEvaluateModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RCDCSEvaluateModel.m; sourceTree = "<group>"; };
+		C0CCCF8420A2A7AB00DD46B2 /* RCDCSEvaluateModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RCDCSEvaluateModel.h; sourceTree = "<group>"; };
+		C0CCCF8620A2A82700DD46B2 /* RCDCSTagView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RCDCSTagView.h; sourceTree = "<group>"; };
+		C0CCCF8720A2A82700DD46B2 /* RCDCSTagView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RCDCSTagView.m; sourceTree = "<group>"; };
+		C0CCCF8820A2A82700DD46B2 /* RCDCSStarView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RCDCSStarView.m; sourceTree = "<group>"; };
+		C0CCCF8920A2A82800DD46B2 /* RCDCSButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RCDCSButton.m; sourceTree = "<group>"; };
+		C0CCCF8A20A2A82800DD46B2 /* RCDCSSolveView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RCDCSSolveView.h; sourceTree = "<group>"; };
+		C0CCCF8B20A2A82800DD46B2 /* RCDCSSolveView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RCDCSSolveView.m; sourceTree = "<group>"; };
+		C0CCCF8C20A2A82800DD46B2 /* RCDCSInputView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RCDCSInputView.h; sourceTree = "<group>"; };
+		C0CCCF8D20A2A82800DD46B2 /* RCDCSInputView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RCDCSInputView.m; sourceTree = "<group>"; };
+		C0CCCF8E20A2A82900DD46B2 /* RCDCSStarView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RCDCSStarView.h; sourceTree = "<group>"; };
+		C0CCCF8F20A2A82900DD46B2 /* RCDCSButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RCDCSButton.h; sourceTree = "<group>"; };
 		C0EAA5D52097E8210046F05C /* CHMHttpTool.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CHMHttpTool.h; sourceTree = "<group>"; };
 		C0EAA5D62097E8210046F05C /* CHMHttpTool.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CHMHttpTool.m; sourceTree = "<group>"; };
 		C0EAA5E120980AE30046F05C /* HttpConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HttpConstants.h; sourceTree = "<group>"; };
@@ -535,6 +562,31 @@
 			path = AddressBook;
 			sourceTree = "<group>";
 		};
+		C0CCCF6D20A2A3E200DD46B2 /* FeedBack */ = {
+			isa = PBXGroup;
+			children = (
+				C0CCCF8F20A2A82900DD46B2 /* RCDCSButton.h */,
+				C0CCCF8920A2A82800DD46B2 /* RCDCSButton.m */,
+				C0CCCF8C20A2A82800DD46B2 /* RCDCSInputView.h */,
+				C0CCCF8D20A2A82800DD46B2 /* RCDCSInputView.m */,
+				C0CCCF8A20A2A82800DD46B2 /* RCDCSSolveView.h */,
+				C0CCCF8B20A2A82800DD46B2 /* RCDCSSolveView.m */,
+				C0CCCF8E20A2A82900DD46B2 /* RCDCSStarView.h */,
+				C0CCCF8820A2A82700DD46B2 /* RCDCSStarView.m */,
+				C0CCCF8620A2A82700DD46B2 /* RCDCSTagView.h */,
+				C0CCCF8720A2A82700DD46B2 /* RCDCSTagView.m */,
+				C0CCCF8420A2A7AB00DD46B2 /* RCDCSEvaluateModel.h */,
+				C0CCCF8320A2A7AA00DD46B2 /* RCDCSEvaluateModel.m */,
+				C0CCCF8020A2A79E00DD46B2 /* RCDCSEvaluateView.h */,
+				C0CCCF8120A2A79E00DD46B2 /* RCDCSEvaluateView.m */,
+				C0CCCF7D20A2A79000DD46B2 /* RCDCSAnnounceView.h */,
+				C0CCCF7E20A2A79000DD46B2 /* RCDCSAnnounceView.m */,
+				C0CCCF7A20A2A77600DD46B2 /* RCDCustomerServiceViewController.h */,
+				C0CCCF7B20A2A77700DD46B2 /* RCDCustomerServiceViewController.m */,
+			);
+			path = FeedBack;
+			sourceTree = "<group>";
+		};
 		C0EAA5C82097123C0046F05C /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
@@ -624,6 +676,7 @@
 		C0EAA60320985DAE0046F05C /* Mine */ = {
 			isa = PBXGroup;
 			children = (
+				C0CCCF6D20A2A3E200DD46B2 /* FeedBack */,
 				C066ED8D2099E2A500CB87FC /* AccountSetting */,
 				C0EAA6182098705D0046F05C /* HomePage */,
 			);
@@ -1016,10 +1069,13 @@
 				C066ED8B2099C98F00CB87FC /* CHMConversationController.m in Sources */,
 				C0017797209DED2E001B44DE /* CHMGroupModel.m in Sources */,
 				C00177C4209EB2F5001B44DE /* CHMGroupSettingHeaderCell.m in Sources */,
+				C0CCCF9020A2A82900DD46B2 /* RCDCSTagView.m in Sources */,
 				C0EAA60820985DCC0046F05C /* CHMChatRoomController.m in Sources */,
+				C0CCCF7C20A2A77700DD46B2 /* RCDCustomerServiceViewController.m in Sources */,
 				C066EDC4209BDCEB00CB87FC /* CHMSelectMemberController.m in Sources */,
 				C0CCCF6720A12F2400DD46B2 /* RCDNoFriendView.m in Sources */,
 				C066ED912099E2C500CB87FC /* CHMAccountSettingController.m in Sources */,
+				C0CCCF9320A2A82900DD46B2 /* RCDCSSolveView.m in Sources */,
 				C0CCCF6320A0794C00DD46B2 /* RCDAddressBookViewController.m in Sources */,
 				C066EDC8209BDE5800CB87FC /* CHMBarButtonItem.m in Sources */,
 				C0EAA621209870E10046F05C /* RCUnderlineTextField.m in Sources */,
@@ -1027,8 +1083,11 @@
 				C00177CB209EBD76001B44DE /* CHMGroupMemberModel.m in Sources */,
 				C0EAA6442098B7C80046F05C /* CHMChatRoomModel.m in Sources */,
 				C0CCCF4F20A0051600DD46B2 /* CHMDataBaseManager.m in Sources */,
+				C0CCCF8520A2A7AB00DD46B2 /* RCDCSEvaluateModel.m in Sources */,
 				C0EAA5F2209823F40046F05C /* CHMRegisterController.m in Sources */,
 				C00177A0209DF570001B44DE /* CHMGroupFooter.m in Sources */,
+				C0CCCF9120A2A82900DD46B2 /* RCDCSStarView.m in Sources */,
+				C0CCCF8220A2A79E00DD46B2 /* RCDCSEvaluateView.m in Sources */,
 				C0017792209DE460001B44DE /* CHMGroupListController.m in Sources */,
 				C0CCCF6B20A13CBE00DD46B2 /* CHMNewFriendCell.m in Sources */,
 				C0CCCF6420A0794C00DD46B2 /* RCDAddressBookTableViewCell.m in Sources */,
@@ -1039,12 +1098,15 @@
 				C066ED9C2099E47600CB87FC /* CHMLogoutCell.m in Sources */,
 				C066EDA2209A7B7300CB87FC /* CHMContactCell.m in Sources */,
 				C00177A6209EAD31001B44DE /* CHMGroupSettingController.m in Sources */,
+				C0CCCF9220A2A82900DD46B2 /* RCDCSButton.m in Sources */,
 				C066EDAE209A82EB00CB87FC /* CHMFriendModel.m in Sources */,
 				C0EAA617209866D60046F05C /* UIColor+CHMColor.m in Sources */,
 				C0EAA60E20985DEE0046F05C /* CHMConversationListController.m in Sources */,
 				C0EFDBA1209C142500848710 /* CHMCreateGroupController.m in Sources */,
+				C0CCCF9420A2A82900DD46B2 /* RCDCSInputView.m in Sources */,
 				C0CCCF5220A035BB00DD46B2 /* CHMUserInfoManager.m in Sources */,
 				C0F25A642095BC1900C6BCA6 /* main.m in Sources */,
+				C0CCCF7F20A2A79000DD46B2 /* RCDCSAnnounceView.m in Sources */,
 				C0CCCF5620A0385C00DD46B2 /* CHMSearchFriendController.m in Sources */,
 				C001778D209DE44C001B44DE /* CHMNewFriendsController.m in Sources */,
 				C0017781209D99BE001B44DE /* CHMPlayHeaderView.m in Sources */,

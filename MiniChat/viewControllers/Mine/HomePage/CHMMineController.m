@@ -10,6 +10,7 @@
 #import "CHMMineDetailCell.h"
 #import "CHMMineItemCell.h"
 #import "CHMAccountSettingController.h"
+#import "RCDCustomerServiceViewController.h"
 
 static NSString *const detailReuseablId = @"CHMMineDetailCell";
 static NSString *const itemReuseablId = @"CHMMineItemCell";
@@ -61,20 +62,22 @@ static NSString *const itemReuseablId = @"CHMMineItemCell";
     NSString *portrait = [[NSUserDefaults standardUserDefaults] valueForKey:KPortrait];
     
     self.datasArray = @[@[@{KPortrait:portrait, KNickName: nickName, KAccount: account}],
-                        @[@{KPortrait:@"setting_up", KNickName: @"帐号设置"},
-                          @{KPortrait:@"wallet", KNickName: @"我的钱包"}],
+                        @[@{KPortrait:@"setting_up", KNickName: @"帐号设置"}],
                         @[@{KPortrait:@"sevre_inactive", KNickName: @"意见反馈"},
                           @{KPortrait:@"about_rongcloud", KNickName: @"关于博信"}]];
+    
+//    @{KPortrait:@"wallet", KNickName: @"我的钱包"}
 }
 
 
 #pragma mark - table view data sourece
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 3;
+    return self.datasArray.count;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return section == 0 ? 1 : 2;
+    NSArray *sectionArray = self.datasArray[section];
+    return sectionArray.count;
 }
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -98,6 +101,12 @@ static NSString *const itemReuseablId = @"CHMMineItemCell";
             [self.navigationController pushViewController:[CHMAccountSettingController new] animated:YES];
         }
     }
+    
+    if (indexPath.section == 2) {
+        if (indexPath.row == 0) { // 意见反馈
+            [self feedBackCellClick];
+        }
+    }
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
@@ -107,6 +116,19 @@ static NSString *const itemReuseablId = @"CHMMineItemCell";
 }
 
 
+
+#pragma mark - 意见反馈
+- (void)feedBackCellClick {
+    RCDCustomerServiceViewController *chatService = [[RCDCustomerServiceViewController alloc] init];
+#define SERVICE_ID @"KEFU152410101210011"
+    chatService.conversationType = ConversationType_CUSTOMERSERVICE;
+    chatService.targetId = SERVICE_ID;
+    chatService.title = @"客服";
+    chatService.hidesBottomBarWhenPushed = YES;
+//    chatService.csInfo = csInfo; //用户的详细信息，此数据用于上传用户信息到客服后台，数据的nickName和portraitUrl必须填写。(目前该字段暂时没用到，客服后台显示的用户信息是你获取token时传的参数，之后会用到）
+    [self.navigationController pushViewController :chatService animated:YES];
+
+}
 
 
 - (void)didReceiveMemoryWarning {
