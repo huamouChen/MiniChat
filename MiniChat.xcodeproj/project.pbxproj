@@ -73,6 +73,10 @@
 		C0CCCFA920A2CFE400DD46B2 /* CHMFunctionController.m in Sources */ = {isa = PBXBuildFile; fileRef = C0CCCFA720A2CFE400DD46B2 /* CHMFunctionController.m */; };
 		C0CCCFAA20A2CFE400DD46B2 /* CHMFunctionController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C0CCCFA820A2CFE400DD46B2 /* CHMFunctionController.xib */; };
 		C0CCCFAC20A2D98A00DD46B2 /* introduce.html in Resources */ = {isa = PBXBuildFile; fileRef = C0CCCFAB20A2D98A00DD46B2 /* introduce.html */; };
+		C0CCCFB120A2E1D300DD46B2 /* CHMNewMessageNotificationController.m in Sources */ = {isa = PBXBuildFile; fileRef = C0CCCFAF20A2E1D300DD46B2 /* CHMNewMessageNotificationController.m */; };
+		C0CCCFB220A2E1D300DD46B2 /* CHMNewMessageNotificationController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C0CCCFB020A2E1D300DD46B2 /* CHMNewMessageNotificationController.xib */; };
+		C0CCCFB720A2E25200DD46B2 /* CHMNewMsgSettingCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C0CCCFB520A2E25200DD46B2 /* CHMNewMsgSettingCell.m */; };
+		C0CCCFB820A2E25200DD46B2 /* CHMNewMsgSettingCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C0CCCFB620A2E25200DD46B2 /* CHMNewMsgSettingCell.xib */; };
 		C0EAA5D72097E8210046F05C /* CHMHttpTool.m in Sources */ = {isa = PBXBuildFile; fileRef = C0EAA5D62097E8210046F05C /* CHMHttpTool.m */; };
 		C0EAA5ED20981EE70046F05C /* CHMLoginController.m in Sources */ = {isa = PBXBuildFile; fileRef = C0EAA5EB20981EE70046F05C /* CHMLoginController.m */; };
 		C0EAA5EE20981EE70046F05C /* CHMLoginController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C0EAA5EC20981EE70046F05C /* CHMLoginController.xib */; };
@@ -229,6 +233,12 @@
 		C0CCCFA720A2CFE400DD46B2 /* CHMFunctionController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CHMFunctionController.m; sourceTree = "<group>"; };
 		C0CCCFA820A2CFE400DD46B2 /* CHMFunctionController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CHMFunctionController.xib; sourceTree = "<group>"; };
 		C0CCCFAB20A2D98A00DD46B2 /* introduce.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = introduce.html; sourceTree = "<group>"; };
+		C0CCCFAE20A2E1D300DD46B2 /* CHMNewMessageNotificationController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CHMNewMessageNotificationController.h; sourceTree = "<group>"; };
+		C0CCCFAF20A2E1D300DD46B2 /* CHMNewMessageNotificationController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CHMNewMessageNotificationController.m; sourceTree = "<group>"; };
+		C0CCCFB020A2E1D300DD46B2 /* CHMNewMessageNotificationController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CHMNewMessageNotificationController.xib; sourceTree = "<group>"; };
+		C0CCCFB420A2E25200DD46B2 /* CHMNewMsgSettingCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CHMNewMsgSettingCell.h; sourceTree = "<group>"; };
+		C0CCCFB520A2E25200DD46B2 /* CHMNewMsgSettingCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CHMNewMsgSettingCell.m; sourceTree = "<group>"; };
+		C0CCCFB620A2E25200DD46B2 /* CHMNewMsgSettingCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CHMNewMsgSettingCell.xib; sourceTree = "<group>"; };
 		C0EAA5D52097E8210046F05C /* CHMHttpTool.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CHMHttpTool.h; sourceTree = "<group>"; };
 		C0EAA5D62097E8210046F05C /* CHMHttpTool.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CHMHttpTool.m; sourceTree = "<group>"; };
 		C0EAA5E120980AE30046F05C /* HttpConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HttpConstants.h; sourceTree = "<group>"; };
@@ -634,6 +644,27 @@
 			path = View;
 			sourceTree = "<group>";
 		};
+		C0CCCFAD20A2E1AA00DD46B2 /* NewMessageNotification */ = {
+			isa = PBXGroup;
+			children = (
+				C0CCCFB320A2E23700DD46B2 /* View */,
+				C0CCCFAE20A2E1D300DD46B2 /* CHMNewMessageNotificationController.h */,
+				C0CCCFAF20A2E1D300DD46B2 /* CHMNewMessageNotificationController.m */,
+				C0CCCFB020A2E1D300DD46B2 /* CHMNewMessageNotificationController.xib */,
+			);
+			path = NewMessageNotification;
+			sourceTree = "<group>";
+		};
+		C0CCCFB320A2E23700DD46B2 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				C0CCCFB420A2E25200DD46B2 /* CHMNewMsgSettingCell.h */,
+				C0CCCFB520A2E25200DD46B2 /* CHMNewMsgSettingCell.m */,
+				C0CCCFB620A2E25200DD46B2 /* CHMNewMsgSettingCell.xib */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
 		C0EAA5C82097123C0046F05C /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
@@ -723,6 +754,7 @@
 		C0EAA60320985DAE0046F05C /* Mine */ = {
 			isa = PBXGroup;
 			children = (
+				C0CCCFAD20A2E1AA00DD46B2 /* NewMessageNotification */,
 				C0CCCF9520A2C4FF00DD46B2 /* About */,
 				C0CCCF6D20A2A3E200DD46B2 /* FeedBack */,
 				C066ED8D2099E2A500CB87FC /* AccountSetting */,
@@ -996,10 +1028,12 @@
 				C0CCCF6C20A13CBE00DD46B2 /* CHMNewFriendCell.xib in Resources */,
 				C066EDBF209AB6EE00CB87FC /* CHMUserDetailFooter.xib in Resources */,
 				C066EDA3209A7B7300CB87FC /* CHMContactCell.xib in Resources */,
+				C0CCCFB220A2E1D300DD46B2 /* CHMNewMessageNotificationController.xib in Resources */,
 				C0CCCF4B209FF82B00DD46B2 /* loading_IOS.png in Resources */,
 				C001778E209DE44C001B44DE /* CHMNewFriendsController.xib in Resources */,
 				C066EDB9209A9C8F00CB87FC /* CHMContactHeaderView.xib in Resources */,
 				C0CCCFAC20A2D98A00DD46B2 /* introduce.html in Resources */,
+				C0CCCFB820A2E25200DD46B2 /* CHMNewMsgSettingCell.xib in Resources */,
 				C0CCCF9A20A2C51900DD46B2 /* CHMAboutController.xib in Resources */,
 				C0EAA62B2098723B0046F05C /* CHMMineDetailCell.xib in Resources */,
 				C0EFDB9D209C050100848710 /* CHMSelectMemberCell.xib in Resources */,
@@ -1118,6 +1152,7 @@
 				C066EDAA209A804F00CB87FC /* UILabel+CHMLabel.m in Sources */,
 				C0EAA62A2098723B0046F05C /* CHMMineDetailCell.m in Sources */,
 				C066EDB7209A9C7E00CB87FC /* CHMContactHeaderView.m in Sources */,
+				C0CCCFB120A2E1D300DD46B2 /* CHMNewMessageNotificationController.m in Sources */,
 				C066ED8B2099C98F00CB87FC /* CHMConversationController.m in Sources */,
 				C0017797209DED2E001B44DE /* CHMGroupModel.m in Sources */,
 				C0CCCF9F20A2C64A00DD46B2 /* CHMAboutCell.m in Sources */,
@@ -1165,6 +1200,7 @@
 				C0CCCF7F20A2A79000DD46B2 /* RCDCSAnnounceView.m in Sources */,
 				C0CCCF5620A0385C00DD46B2 /* CHMSearchFriendController.m in Sources */,
 				C001778D209DE44C001B44DE /* CHMNewFriendsController.m in Sources */,
+				C0CCCFB720A2E25200DD46B2 /* CHMNewMsgSettingCell.m in Sources */,
 				C0017781209D99BE001B44DE /* CHMPlayHeaderView.m in Sources */,
 				C0F25A562095BC1800C6BCA6 /* AppDelegate.m in Sources */,
 				C066ED972099E45500CB87FC /* CHMAccountSettingCell.m in Sources */,

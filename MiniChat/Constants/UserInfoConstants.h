@@ -30,6 +30,8 @@
 #define KPortrait       @"portrait"
 #define KPhoneNum       @"phoneNum"
 
+#define KNewMessageNotification        @"newMessageNotification"
+
 
 
 

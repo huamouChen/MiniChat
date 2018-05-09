@@ -68,6 +68,8 @@ static NSString *const deleteMember = @"GroupCutdown";    // 删除成员
 }
 
 
+
+
 /**
  获取群组消息
  */
@@ -129,6 +131,8 @@ static NSString *const deleteMember = @"GroupCutdown";    // 删除成员
     self.deleteVC = selectMemberVC;
     [self.navigationController pushViewController:selectMemberVC animated:YES];
 }
+
+
 
 /**
  处理踢人之后的数据
@@ -221,7 +225,7 @@ static NSString *const deleteMember = @"GroupCutdown";    // 删除成员
 - (void)setupAppearance {
     // 返回按钮
     CHMBarButtonItem *leftButton = [[CHMBarButtonItem alloc] initWithLeftBarButton:@"返回" target:self action:@selector(backBarButtonItemClicked:)];
-    [self.navigationItem setLeftBarButtonItem:leftButton];
+//    [self.navigationItem setLeftBarButtonItem:leftButton];
     
     self.itemArray = @[@[@"群组头像", @"群组名称", @"群公告"],
                        @[@"查找聊天记录"],
@@ -229,7 +233,7 @@ static NSString *const deleteMember = @"GroupCutdown";    // 删除成员
     
     // collection view
     CGRect tempRect =
-    CGRectMake(0, 0, SCREEN_WIDTH, 200);
+    CGRectMake(0, 0, SCREEN_WIDTH, 170);
     UICollectionViewFlowLayout *flowLayout = [[UICollectionViewFlowLayout alloc] init];
     flowLayout.itemSize = CGSizeMake(SCREEN_WIDTH / 4.0, 80);
     flowLayout.minimumLineSpacing = 10;
@@ -238,7 +242,7 @@ static NSString *const deleteMember = @"GroupCutdown";    // 删除成员
     self.headerView = [[UICollectionView alloc] initWithFrame:tempRect collectionViewLayout:flowLayout];
     self.headerView.delegate = self;
     self.headerView.dataSource = self;
-    self.headerView.scrollEnabled = NO;
+//    self.headerView.scrollEnabled = NO;
     self.headerView.backgroundColor = [UIColor whiteColor];
     [self.headerView registerNib:[UINib nibWithNibName:NSStringFromClass([CHMGroupSettingHeaderCell class]) bundle:nil] forCellWithReuseIdentifier:headerCellReuseId];
     
