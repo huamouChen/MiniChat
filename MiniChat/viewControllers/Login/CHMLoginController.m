@@ -102,8 +102,8 @@ static NSString *const IMServices = @"IMServices";
             NSString *nicknName =   response[@"NickName"];
             NSString *headerImg = response[@"HeaderImage"];
             NSString *phoneNum = response[@"PhoneNum"];
-            nicknName = ([nicknName isKindOfClass:[NSNull class]] || [nicknName isEqualToString:@""]) ? userName : nicknName;
-            headerImg = ([headerImg isKindOfClass:[NSNull class]] || [headerImg isEqualToString:@""]) ? KDefaultPortrait : [NSString stringWithFormat:@"%@%@",BaseURL, headerImg];
+            nicknName = ([nicknName isKindOfClass:[NSNull class]] || [nicknName isEqualToString:@""] || nicknName == nil) ? userName : nicknName;
+            headerImg = ([headerImg isKindOfClass:[NSNull class]] || [headerImg isEqualToString:@""] || headerImg == nil) ? KDefaultPortrait : [NSString stringWithFormat:@"%@%@",BaseURL, headerImg];
             // 保存用户信息
             [[NSUserDefaults standardUserDefaults] setObject:userName forKey:KAccount];
             [[NSUserDefaults standardUserDefaults] setObject:nicknName forKey:KNickName];
@@ -114,8 +114,8 @@ static NSString *const IMServices = @"IMServices";
             
             // 本地数据
             RCUserInfo *userInfo = [[RCUserInfo alloc] initWithUserId:userName name:nicknName portrait:headerImg];
-            [[CHMDataBaseManager shareManager] insertUserToDB:userInfo];
             [[RCIM sharedRCIM] refreshUserInfoCache:userInfo withUserId:userName];
+            [[CHMDataBaseManager shareManager] insertUserToDB:userInfo];
             
             //同步群组
             [[CHMInfoProvider shareInstance] syncGroups];

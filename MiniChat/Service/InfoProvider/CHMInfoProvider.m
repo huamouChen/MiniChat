@@ -106,11 +106,13 @@
 - (NSMutableArray *)dealWithNickNameWithArray:(NSArray *)array {
     NSMutableArray *resultArray = [NSMutableArray array];
     for (CHMFriendModel *itemModel in array) {
-        if (itemModel.NickName == nil || [itemModel.NickName isEqualToString:@""]) {
+        if ([itemModel.NickName isKindOfClass:[NSNull class]] || [itemModel.NickName isEqualToString:@""] || itemModel.NickName == nil) {
             itemModel.NickName = itemModel.UserName;
         }
-        if (itemModel.HeaderImage == nil || [itemModel.HeaderImage isEqualToString:@""]) {
+        if ([itemModel.HeaderImage isKindOfClass:[NSNull class]] || [itemModel.HeaderImage isEqualToString:@""] || itemModel.HeaderImage == nil) {
             itemModel.HeaderImage = @"icon_person";
+        } else {
+            itemModel.HeaderImage = [NSString stringWithFormat:@"%@%@",BaseURL, itemModel.HeaderImage];
         }
         
         [resultArray addObject:itemModel];
@@ -155,6 +157,7 @@
 
 #pragma mark - RCIMUserInfoDataSource 用户信息提供者   群组信息提供者
 - (void)getUserInfoWithUserId:(NSString *)userId completion:(void (^)(RCUserInfo *))completion {
+    NSLog(@"%@", userId);
     RCUserInfo *user = nil;
     // 从数据库取
     user = [[CHMDataBaseManager shareManager] getUserByUserId:userId];
@@ -182,8 +185,7 @@
         [[CHMUserInfoManager shareInstance] getUserInfo:userId
                                              completion:^(RCUserInfo *user) {
                                                  [[RCIM sharedRCIM] refreshUserInfoCache:user withUserId:user.userId];
-                                                 
-                                                 completion(user);
+                                                 completion([[RCIM sharedRCIM] currentUserInfo]);
                                              }];
     }
     return;

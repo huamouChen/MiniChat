@@ -57,8 +57,7 @@ static CGFloat const KIndexViewWidth = 55 / 2.0;
  获取好友列表
  */
 - (void)fetchFriendList {
-    
-    
+
     NSMutableArray *friendList = [NSMutableArray arrayWithArray:[[CHMDataBaseManager shareManager] getAllFriends]];
     if (friendList.count > 0) {
         // 分组排序
@@ -123,11 +122,13 @@ static CGFloat const KIndexViewWidth = 55 / 2.0;
 - (NSMutableArray *)dealWithNickNameWithArray:(NSArray *)array {
     NSMutableArray *resultArray = [NSMutableArray array];
     for (CHMFriendModel *itemModel in array) {
-        if (itemModel.NickName == nil || [itemModel.NickName isEqualToString:@""]) {
+        if ([itemModel.NickName isKindOfClass:[NSNull class]] || [itemModel.NickName isEqualToString:@""]) {
             itemModel.NickName = itemModel.UserName;
         }
-        if (itemModel.HeaderImage == nil || [itemModel.HeaderImage isEqualToString:@""]) {
+        if ([itemModel.HeaderImage isKindOfClass:[NSNull class]] || [itemModel.HeaderImage isEqualToString:@""]) {
             itemModel.HeaderImage = @"icon_person";
+        } else {
+            itemModel.HeaderImage = [NSString stringWithFormat:@"%@%@",BaseURL, itemModel.HeaderImage];
         }
         
         [resultArray addObject:itemModel];

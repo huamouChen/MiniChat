@@ -51,7 +51,6 @@
     NSString *nickName = [[NSUserDefaults standardUserDefaults] valueForKey:KNickName];
     NSString *account = [[NSUserDefaults standardUserDefaults] valueForKey:KAccount];
     NSString *portrait = [[NSUserDefaults standardUserDefaults] valueForKey:KPortrait];
-    portrait = [NSString stringWithFormat:@"%@%@",BaseURL, portrait];
     [RCIM sharedRCIM].currentUserInfo = [[RCUserInfo alloc] initWithUserId:account name:nickName portrait:portrait];
 }
 
