@@ -103,7 +103,7 @@ static NSString *const IMServices = @"IMServices";
             NSString *headerImg = response[@"HeaderImage"];
             NSString *phoneNum = response[@"PhoneNum"];
             nicknName = ([nicknName isKindOfClass:[NSNull class]] || [nicknName isEqualToString:@""]) ? userName : nicknName;
-            headerImg = ([headerImg isKindOfClass:[NSNull class]] || [headerImg isEqualToString:@""]) ? KDefaultPortrait : headerImg;
+            headerImg = ([headerImg isKindOfClass:[NSNull class]] || [headerImg isEqualToString:@""]) ? KDefaultPortrait : [NSString stringWithFormat:@"%@%@",BaseURL, headerImg];
             // 保存用户信息
             [[NSUserDefaults standardUserDefaults] setObject:userName forKey:KAccount];
             [[NSUserDefaults standardUserDefaults] setObject:nicknName forKey:KNickName];

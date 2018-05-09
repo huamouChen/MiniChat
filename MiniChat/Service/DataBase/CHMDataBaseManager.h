@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+@class CHMGroupModel;
 
 @interface CHMDataBaseManager : NSObject
 
@@ -14,7 +15,7 @@
 
 - (void)closeDBForDisconnect;
 
-#pragma mark - 用户信息
+#pragma mark - 插入用户信息
 /**
  存储用户信息
 
@@ -29,7 +30,7 @@
  */
 - (void)insertUserListToDB:(NSMutableArray *)userList complete:(void (^)(BOOL))result;
 
-#pragma mark - 好友信息
+#pragma mark - 插入好友信息
 /**
  存储好友信息
 
@@ -45,16 +46,39 @@
  */
 - (void)insertFriendListToDB:(NSMutableArray *)FriendList complete:(void (^)(BOOL))result;
 
+#pragma mark - 插入群组信息
+
+/**
+ 插入群组信息
+
+ @param group 要存储的群组
+ */
+- (void)insertGroupToDB:(CHMGroupModel *)group;
+
+/**
+ 插入一组群组信息
+
+ @param groupList 要存储的一组群组信息
+ @param result 是否成功
+ */
+- (void)insertGroupsToDB:(NSMutableArray *)groupList complete:(void (^)(BOOL))result;
+
+
+//存储群组成员信息
+- (void)insertGroupMemberToDB:(NSMutableArray *)groupMemberList
+                      groupId:(NSString *)groupId
+                     complete:(void (^)(BOOL))result;
 
 
 
 
+
+#pragma mark - 取信息
+//从表中获取用户信息
+- (RCUserInfo *)getUserByUserId:(NSString *)userId;
 
 // 获取所有好友
 - (NSArray *)getAllFriends;
-
-//从表中获取所有群组信息
-- (NSMutableArray *)getAllGroup;
 
 //从表中获取所有用户信息
 - (NSArray *)getAllUserInfo;
@@ -62,9 +86,19 @@
 //从表中获取某个好友的信息
 - (RCUserInfo *)getFriendInfo:(NSString *)friendId;
 
-//存储群组成员信息
-- (void)insertGroupMemberToDB:(NSMutableArray *)groupMemberList
-                      groupId:(NSString *)groupId
-                     complete:(void (^)(BOOL))result;
+#pragma mark - 获取群组信息
+//从表中获取群组信息
+- (CHMGroupModel *)getGroupByGroupId:(NSString *)groupId;
+
+//删除表中的群组信息
+- (void)deleteGroupToDB:(NSString *)groupId;
+
+//从表中获取所有群组信息
+- (NSMutableArray *)getAllGroup;
+
+//清空表中的所有的群组信息
+- (BOOL)clearGroupfromDB;
+
+
 
 @end

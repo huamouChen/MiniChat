@@ -28,6 +28,15 @@ static NSString *const groupCellReuseId = @"CHMContactCell";
  获取群组列表
  */
 - (void)fetchGroupList {
+    NSMutableArray *groupList = [[CHMDataBaseManager shareManager] getAllGroup];
+    if (groupList.count > 0) {
+        self.groupArray = [NSMutableArray arrayWithArray:groupList];
+        // 刷新数据
+        self.footer.footerTitleLabel.text = [NSString stringWithFormat:@"%zd个群聊",self.groupArray.count];
+        [self.tableView reloadData];
+        return;
+    }
+    
     [CHMHttpTool getGroupListWithSuccess:^(id response) {
         NSLog(@"------------%@", response);
         __weak typeof(self) weakSelf = self;

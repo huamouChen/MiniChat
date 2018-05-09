@@ -12,7 +12,7 @@
 @implementation UIImageView (CHMImageView)
 
 - (void)chm_imageViewWithURL:(NSString *)urlString placeholder:(NSString *)placeholder {
-    if (![urlString hasPrefix:@"/"] && ![urlString isEqualToString:@""]) { // 主要是为了兼容设置本地图片，且占位图不是一样的时候
+    if (![urlString hasPrefix:@"http"] && ![urlString isEqualToString:@""]) { // 主要是为了兼容设置本地图片，且占位图不是一样的时候
         self.image = [UIImage imageNamed:urlString];
         return;
     }
@@ -22,7 +22,7 @@
         return;
     }
     
-    NSString *resultString = [NSString stringWithFormat:@"%@%@", BaseURL, urlString];
+    NSString *resultString = [NSString stringWithFormat:@"%@", urlString];
     [self sd_setImageWithURL:[NSURL URLWithString:resultString] placeholderImage:[UIImage imageNamed:placeholder]];
 }
 

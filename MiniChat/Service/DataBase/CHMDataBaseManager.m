@@ -108,8 +108,8 @@ static NSString *const groupMemberTableName = @"GROUPMEMBERTABLE";
         
         if (![self isTableOK:groupTableName withDB:db]) {
             NSString *createTableSQL = @"CREATE TABLE GROUPTABLEV2 (id integer PRIMARY KEY autoincrement, "
-            @"groupId text,name text, portraitUri text,canBetting text,maxNumber "
-            @"text ,introduce text ,groupOwner text,addTime text, isOfficial "
+            @"groupId text,name text, portraitUri text,canBetting text, "
+            @"groupOwner text,addTime text, isOfficial "
             @"text, state text)";
             [db executeUpdate:createTableSQL];
             NSString *createIndexSQL = @"CREATE unique INDEX idx_groupid ON GROUPTABLEV2(groupId);";
@@ -151,6 +151,24 @@ static NSString *const groupMemberTableName = @"GROUPMEMBERTABLE";
 
 
 #pragma mark - 从表中获取所有好友信息
+
+//从表中获取用户信息
+- (RCUserInfo *)getUserByUserId:(NSString *)userId {
+    __block RCUserInfo *model = nil;
+    
+    [self.dbQueue inDatabase:^(FMDatabase *db) {
+        FMResultSet *rs = [db executeQuery:@"SELECT * FROM USERTABLE where userid = ?", userId];
+        while ([rs next]) {
+            model = [[RCUserInfo alloc] init];
+            model.userId = [rs stringForColumn:@"userid"];
+            model.name = [rs stringForColumn:@"name"];
+            model.portraitUri = [rs stringForColumn:@"portraitUri"];
+        }
+        [rs close];
+    }];
+    return model;
+}
+
 //从表中获取所有好友信息 //RCUserInfo
 - (NSArray *)getAllFriends {
     NSMutableArray *allUsers = [NSMutableArray new];
@@ -170,30 +188,6 @@ static NSString *const groupMemberTableName = @"GROUPMEMBERTABLE";
         [rs close];
     }];
     return allUsers;
-}
-
-//从表中获取所有群组信息
-- (NSMutableArray *)getAllGroup {
-    NSMutableArray *allGroups = [NSMutableArray new];
-    
-    [self.dbQueue inDatabase:^(FMDatabase *db) {
-        FMResultSet *rs = [db executeQuery:@"SELECT * FROM GROUPTABLEV2"];
-        while ([rs next]) {
-            CHMGroupModel *model;
-            model = [[CHMGroupModel alloc] init];
-            model.GroupId = [rs stringForColumn:@"groupId"];
-            model.GroupName = [rs stringForColumn:@"name"];
-            model.GroupImage = [rs stringForColumn:@"portraitUri"];
-            model.AddTime = [rs stringForColumn:@"addTime"];
-            model.CanBetting = [rs stringForColumn:@"canBetting"];
-            model.GroupOwner = [rs stringForColumn:@"groupOwner"];
-            model.IsOfficial = [rs stringForColumn:@"isOfficial"];
-            model.State = [rs stringForColumn:@"state"];
-            [allGroups addObject:model];
-        }
-        [rs close];
-    }];
-    return allGroups;
 }
 
 //从表中获取所有用户信息
@@ -293,6 +287,115 @@ static NSString *const groupMemberTableName = @"GROUPMEMBERTABLE";
     });
 }
 
+#pragma mark - 存储群组信息
+//存储群组信息
+- (void)insertGroupToDB:(CHMGroupModel *)group {
+    if (group == nil || [group.GroupId length] < 1)
+        return;
+    
+    NSString *insertSql = @"REPLACE INTO GROUPTABLEV2 (groupId, "
+    @"name,portraitUri,canBetting,"
+    @"groupOwner,addTime,isOfficial,state) VALUES "
+    @"(?,?,?,?,?,?,?,?)";
+    
+    [self.dbQueue inDatabase:^(FMDatabase *db) {
+        [db executeUpdate:insertSql, group.GroupId, group.GroupName, group.GroupImage, group.CanBetting, group.GroupOwner, group.AddTime,
+         group.IsOfficial, group.State];
+    }];
+}
+
+- (void)insertGroupsToDB:(NSMutableArray *)groupList complete:(void (^)(BOOL))result {
+    
+    if (groupList == nil || [groupList count] < 1)
+        return;
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
+        [self.dbQueue inTransaction:^(FMDatabase *db, BOOL *rollback) {
+            for (CHMGroupModel *group in groupList) {
+                NSString *insertSql = @"REPLACE INTO GROUPTABLEV2 (groupId, "
+                @"name,portraitUri,canBetting,"
+                @"groupOwner,addTime,isOfficial,state) VALUES "
+                @"(?,?,?,?,?,?,?,?)";
+                [db executeUpdate:insertSql, group.GroupId, group.GroupName, group.GroupImage, group.CanBetting, group.GroupOwner, group.AddTime,
+                 group.IsOfficial, group.State];
+            }
+        }];
+        result(YES);
+    });
+}
+
+
+#pragma mark - 获取群组信息
+//从表中获取群组信息
+- (CHMGroupModel *)getGroupByGroupId:(NSString *)groupId {
+    __block CHMGroupModel *model = nil;
+    
+    [self.dbQueue inDatabase:^(FMDatabase *db) {
+        FMResultSet *rs = [db executeQuery:@"SELECT * FROM GROUPTABLEV2 where groupId = ?", groupId];
+        while ([rs next]) {
+            model = [[CHMGroupModel alloc] init];
+            model.GroupId = [rs stringForColumn:@"groupId"];
+            model.GroupName = [rs stringForColumn:@"name"];
+            model.GroupImage = [rs stringForColumn:@"portraitUri"];
+            model.CanBetting = [rs stringForColumn:@"canBetting"];
+            model.GroupOwner = [rs stringForColumn:@"groupOwner"];
+            model.AddTime = [rs stringForColumn:@"addTime"];
+            model.IsOfficial = [rs stringForColumn:@"isOfficial"];
+            model.State = [rs stringForColumn:@"state"];
+        }
+        [rs close];
+    }];
+    return model;
+}
+
+//删除表中的群组信息
+- (void)deleteGroupToDB:(NSString *)groupId {
+    if ([groupId length] < 1)
+        return;
+    NSString *deleteSql =
+    [NSString stringWithFormat:@"delete from %@ where %@ = '%@'", @"GROUPTABLEV2", @"groupid", groupId];
+    
+    [self.dbQueue inDatabase:^(FMDatabase *db) {
+        [db executeUpdate:deleteSql];
+    }];
+}
+
+//清空表中的所有的群组信息
+- (BOOL)clearGroupfromDB {
+    __block BOOL result = NO;
+    NSString *clearSql = [NSString stringWithFormat:@"DELETE FROM GROUPTABLEV2"];
+    
+    [self.dbQueue inDatabase:^(FMDatabase *db) {
+        result = [db executeUpdate:clearSql];
+    }];
+    return result;
+}
+
+//从表中获取所有群组信息
+- (NSMutableArray *)getAllGroup {
+    NSMutableArray *allGroups = [NSMutableArray new];
+    
+    [self.dbQueue inDatabase:^(FMDatabase *db) {
+        FMResultSet *rs = [db executeQuery:@"SELECT * FROM GROUPTABLEV2"];
+        while ([rs next]) {
+            CHMGroupModel *model;
+            model = [[CHMGroupModel alloc] init];
+            model.GroupId = [rs stringForColumn:@"groupId"];
+            model.GroupName = [rs stringForColumn:@"name"];
+            model.GroupImage = [rs stringForColumn:@"portraitUri"];
+            model.CanBetting = [rs stringForColumn:@"canBetting"];
+            model.GroupOwner = [rs stringForColumn:@"groupOwner"];
+            model.AddTime = [rs stringForColumn:@"addTime"];
+            model.IsOfficial = [rs stringForColumn:@"isOfficial"];
+            model.State = [rs stringForColumn:@"state"];
+            [allGroups addObject:model];
+        }
+        [rs close];
+    }];
+    return allGroups;
+}
+
+
+#pragma mark - 获取好友信息
 //从表中获取某个好友的信息
 - (RCUserInfo *)getFriendInfo:(NSString *)friendId {
     __block RCUserInfo *friendInfo;

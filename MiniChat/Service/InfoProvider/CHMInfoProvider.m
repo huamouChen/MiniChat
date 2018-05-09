@@ -34,6 +34,14 @@
         if (codeId.integerValue == 100) {
             // 群组信息
             NSArray *groupList = [CHMGroupModel mj_objectArrayWithKeyValuesArray:response[@"Value"]];
+            // 保存数据到本地
+            for (CHMGroupModel *groupModel in groupList) {
+                NSString *groupImage = [NSString stringWithFormat:@"%@%@", BaseURL, groupModel.GroupImage];
+                groupModel.GroupImage = groupImage;
+                [[CHMDataBaseManager shareManager] insertGroupToDB:groupModel];
+            }
+            
+            
             // 群组成员信息
             for (CHMGroupModel *group in groupList) {
                 [CHMHttpTool getGroupMembersWithGroupId:group.GroupId success:^(id response) {
@@ -49,10 +57,10 @@
                          }];
                         
                     } else {
-                        [CHMProgressHUD showErrorWithInfo:response[@"Code"][@"Description"]];
+//                        [CHMProgressHUD showErrorWithInfo:response[@"Code"][@"Description"]];
                     }
                 } failure:^(NSError *error) {
-                    [CHMProgressHUD showErrorWithInfo:[NSString stringWithFormat:@"错误码--%zd", error.code]];
+//                    [CHMProgressHUD showErrorWithInfo:[NSString stringWithFormat:@"错误码--%zd", error.code]];
                 }];
             }
         }
@@ -77,13 +85,18 @@
             CHMFriendModel *currentuser = [[CHMFriendModel alloc] initWithUserId:account nickName:nickName portrait:portrait];
             [filterArray addObject:currentuser];
             
+            // 保存到数据库
+            for (CHMFriendModel *friendModel in filterArray) {
+                RCUserInfo *userInfo = [[RCUserInfo alloc] initWithUserId:friendModel.UserName name:friendModel.NickName portrait:friendModel.HeaderImage];
+                [[CHMDataBaseManager shareManager] insertFriendToDB:userInfo];
+            }
             completion(filterArray);
             
         } else {
             // 失败暂时不提醒
         }
     } failure:^(NSError *error) {
-        [CHMProgressHUD showErrorWithInfo:[NSString stringWithFormat:@"错误码--%zd", error.code]];
+//        [CHMProgressHUD showErrorWithInfo:[NSString stringWithFormat:@"错误码--%zd", error.code]];
     }];
 }
 
@@ -140,10 +153,18 @@
 }
 
 
-#pragma mark - RCIMUserInfoDataSource
+#pragma mark - RCIMUserInfoDataSource 用户信息提供者   群组信息提供者
 - (void)getUserInfoWithUserId:(NSString *)userId completion:(void (^)(RCUserInfo *))completion {
-    NSLog(@"getUserInfoWithUserId ----- %@", userId);
-    RCUserInfo *user = [RCUserInfo new];
+    RCUserInfo *user = nil;
+    // 从数据库取
+    user = [[CHMDataBaseManager shareManager] getUserByUserId:userId];
+    if (user) {
+        completion(user);
+        return;
+    }
+    
+    // userid 为空
+    user = [RCUserInfo new];
     if (userId == nil || [userId length] == 0) {
         user.userId = userId;
         user.portraitUri = KDefaultPortrait;
@@ -161,7 +182,7 @@
         [[CHMUserInfoManager shareInstance] getUserInfo:userId
                                              completion:^(RCUserInfo *user) {
                                                  [[RCIM sharedRCIM] refreshUserInfoCache:user withUserId:user.userId];
-
+                                                 
                                                  completion(user);
                                              }];
     }
@@ -172,13 +193,21 @@
     if ([groupId length] == 0)
         return;
     
+    CHMGroupModel *groupModel = [[CHMDataBaseManager shareManager] getGroupByGroupId:groupId];
+    if (groupModel) {
+        RCGroup *group = [[RCGroup alloc] initWithGroupId:groupModel.GroupId groupName:groupModel.GroupName portraitUri:groupModel.GroupImage];
+        completion(group);
+        return;
+    }
+    
     //开发者调自己的服务器接口根据userID异步请求数据
     [CHMHttpTool getGroupInfoWithGroupId:groupId success:^(id response) {
         NSLog(@"--------%@",response);
         NSNumber *codeId = response[@"Code"][@"CodeId"];
         if (codeId.integerValue == 100) {
             NSString *groupName = response[@"Value"][@"GroupName"];
-            NSString *groupImage = response[@"Value"][@"GroupName"];
+            NSString *groupImage = response[@"Value"][@"GroupImage"];
+            groupImage = ([groupImage isKindOfClass:[NSNull class]] || [groupImage isEqualToString:@""]) ? KDefaultPortrait : [NSString stringWithFormat:@"%@%@",BaseURL, groupImage];
             RCGroup *group = [[RCGroup alloc] initWithGroupId:groupId groupName:groupName portraitUri:groupImage];
             completion(group);
         } else {
