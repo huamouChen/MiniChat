@@ -7,9 +7,10 @@
 //
 
 #import "CHMFunctionController.h"
+#import <WebKit/WebKit.h>
 
 @interface CHMFunctionController ()
-@property (weak, nonatomic) IBOutlet UITextView *textView;
+@property (weak, nonatomic) IBOutlet UIWebView *webView;
 
 @end
 
@@ -19,7 +20,9 @@
     [super viewDidLoad];
     self.title = @"功能介绍";
     
-    self.textView.text = @"博信，给您非一般的感觉！";
+    NSString *filePath = [[NSBundle mainBundle] pathForResource:@"introduce" ofType:@"html"];
+    NSURL *url = [NSURL URLWithString:filePath];
+    [self.webView loadRequest:[NSURLRequest requestWithURL:url]];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -27,14 +30,5 @@
     // Dispose of any resources that can be recreated.
 }
 
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end

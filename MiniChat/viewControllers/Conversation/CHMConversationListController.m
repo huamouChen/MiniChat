@@ -55,33 +55,6 @@
     self.isShowNetworkIndicatorView = YES;
 }
 
-
-#pragma mark - 即将刷新会话列表数据
-//- (NSMutableArray *)willReloadTableData:(NSMutableArray *)dataSource {
-//    
-//    NSMutableArray *resultArr = [NSMutableArray array];
-//    
-//        for (RCConversation *conversation in dataSource) {
-//            RCUserInfo *userInfo = conversation.lastestMessage.senderUserInfo;
-//            NSLog(@"---%@\n------%@\n-------%@",userInfo.userId, userInfo.name, userInfo.portraitUri);
-//            
-//            conversation.conversationTitle = userInfo.name;
-//            [resultArr addObject:conversation];
-//            NSLog(@"会话类型：%lu，目标会话ID：%@", (unsigned long)conversation.conversationType, conversation.targetId);
-//        }
-//    
-//    return resultArr;
-//}
-//
-//
-//- (void)willDisplayConversationTableCell:(RCConversationBaseCell *)cell atIndexPath:(NSIndexPath *)indexPath {
-//    RCConversationModel *model = self.conversationListDataSource[indexPath.row];
-//    model.conversationTitle = @"1111";
-//    [cell setModel:model];
-//    [super willDisplayConversationTableCell:cell atIndexPath:indexPath];
-//}
-
-
 /**
  设置外观
  */
@@ -151,7 +124,7 @@
  *  @param sender sender description
  */
 - (void)pushChat:(id)sender {
-    
+    [self.tabBarController setSelectedIndex:1];
 }
 
 /**

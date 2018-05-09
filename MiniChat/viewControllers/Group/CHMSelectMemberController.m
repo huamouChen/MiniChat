@@ -206,6 +206,16 @@ static CGFloat const KIndexViewWidth = 55 / 2.0;
  获取好友列表
  */
 - (void)fetchFriendList {
+    
+    NSArray *friendList = [[CHMDataBaseManager shareManager] getAllFriends];
+    if (friendList.count > 0) {
+        NSMutableArray *filterArray = [self dealWithNickNameWithArray:friendList];
+        // 排序
+        [self.dataArr addObjectsFromArray:[self testSortWithArray:filterArray]];
+        [self.tableView reloadData];
+        return;
+    }
+    
     __weak typeof(self) weakSelf = self;
     [CHMHttpTool getUserRelationShipListWithSuccess:^(id response) {
         NSLog(@"------------%@", response);
@@ -230,17 +240,20 @@ static CGFloat const KIndexViewWidth = 55 / 2.0;
 - (NSMutableArray *)dealWithNickNameWithArray:(NSArray *)array {
     NSMutableArray *resultArray = [NSMutableArray array];
     for (CHMFriendModel *itemModel in array) {
-        // 过滤官方客服和资金助手
-        if ([itemModel.UserName isEqualToString:KSyscaper] || [itemModel.UserName isEqualToString:KSyscuser]) {
+        // 过滤官方客服和资金助手 当前用户
+        NSString *currentAccount = [[NSUserDefaults standardUserDefaults] valueForKey:KAccount];
+        if ([itemModel.UserName isEqualToString:KSyscaper] || [itemModel.UserName isEqualToString:KSyscuser] || [itemModel.UserName isEqualToString:currentAccount]) {
             continue;
         }
         
-        if (itemModel.NickName == nil || [itemModel.NickName isEqualToString:@""]) {
+        if (itemModel.NickName == nil || [itemModel.NickName isEqualToString:@""] || [itemModel.NickName isKindOfClass:[NSNull class]]) {
             itemModel.NickName = itemModel.UserName;
         }
         
-        if (itemModel.HeaderImage == nil || [itemModel.HeaderImage isEqualToString:@""]) {
+        if (itemModel.HeaderImage == nil || [itemModel.HeaderImage isEqualToString:@""] || [itemModel.HeaderImage isKindOfClass:[NSNull class]]) {
             itemModel.HeaderImage = @"icon_person";
+        } else if ([itemModel.HeaderImage hasPrefix:@"/"]) {
+            itemModel.HeaderImage = [NSString stringWithFormat:@"%@%@", BaseURL, itemModel.HeaderImage];
         }
         
         [resultArray addObject:itemModel];

@@ -72,6 +72,7 @@
 		C0CCCFA320A2C7A000DD46B2 /* CHMAboutHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = C0CCCFA220A2C7A000DD46B2 /* CHMAboutHeaderView.m */; };
 		C0CCCFA920A2CFE400DD46B2 /* CHMFunctionController.m in Sources */ = {isa = PBXBuildFile; fileRef = C0CCCFA720A2CFE400DD46B2 /* CHMFunctionController.m */; };
 		C0CCCFAA20A2CFE400DD46B2 /* CHMFunctionController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C0CCCFA820A2CFE400DD46B2 /* CHMFunctionController.xib */; };
+		C0CCCFAC20A2D98A00DD46B2 /* introduce.html in Resources */ = {isa = PBXBuildFile; fileRef = C0CCCFAB20A2D98A00DD46B2 /* introduce.html */; };
 		C0EAA5D72097E8210046F05C /* CHMHttpTool.m in Sources */ = {isa = PBXBuildFile; fileRef = C0EAA5D62097E8210046F05C /* CHMHttpTool.m */; };
 		C0EAA5ED20981EE70046F05C /* CHMLoginController.m in Sources */ = {isa = PBXBuildFile; fileRef = C0EAA5EB20981EE70046F05C /* CHMLoginController.m */; };
 		C0EAA5EE20981EE70046F05C /* CHMLoginController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C0EAA5EC20981EE70046F05C /* CHMLoginController.xib */; };
@@ -227,6 +228,7 @@
 		C0CCCFA620A2CFE400DD46B2 /* CHMFunctionController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CHMFunctionController.h; sourceTree = "<group>"; };
 		C0CCCFA720A2CFE400DD46B2 /* CHMFunctionController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CHMFunctionController.m; sourceTree = "<group>"; };
 		C0CCCFA820A2CFE400DD46B2 /* CHMFunctionController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CHMFunctionController.xib; sourceTree = "<group>"; };
+		C0CCCFAB20A2D98A00DD46B2 /* introduce.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = introduce.html; sourceTree = "<group>"; };
 		C0EAA5D52097E8210046F05C /* CHMHttpTool.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CHMHttpTool.h; sourceTree = "<group>"; };
 		C0EAA5D62097E8210046F05C /* CHMHttpTool.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CHMHttpTool.m; sourceTree = "<group>"; };
 		C0EAA5E120980AE30046F05C /* HttpConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HttpConstants.h; sourceTree = "<group>"; };
@@ -608,6 +610,7 @@
 		C0CCCF9520A2C4FF00DD46B2 /* About */ = {
 			isa = PBXGroup;
 			children = (
+				C0CCCFAB20A2D98A00DD46B2 /* introduce.html */,
 				C0CCCF9B20A2C5DB00DD46B2 /* View */,
 				C0CCCF9620A2C51900DD46B2 /* CHMAboutController.h */,
 				C0CCCF9720A2C51900DD46B2 /* CHMAboutController.m */,
@@ -996,6 +999,7 @@
 				C0CCCF4B209FF82B00DD46B2 /* loading_IOS.png in Resources */,
 				C001778E209DE44C001B44DE /* CHMNewFriendsController.xib in Resources */,
 				C066EDB9209A9C8F00CB87FC /* CHMContactHeaderView.xib in Resources */,
+				C0CCCFAC20A2D98A00DD46B2 /* introduce.html in Resources */,
 				C0CCCF9A20A2C51900DD46B2 /* CHMAboutController.xib in Resources */,
 				C0EAA62B2098723B0046F05C /* CHMMineDetailCell.xib in Resources */,
 				C0EFDB9D209C050100848710 /* CHMSelectMemberCell.xib in Resources */,
