@@ -92,6 +92,15 @@ typedef void(^failureBlock)(NSError *error);
 + (void)setUserNickNameWithNickName:(NSString *)nickName success:(successBlock)success failure:(failureBlock)failure;
 
 /**
+ 修改头像
+ 
+ @param image 头像图片
+ @param success 成功
+ @param failure 失败
+ */
++ (void)setUserPortraitWithImage:(UIImage *)image success:(successBlock)success failure:(failureBlock)failure;
+
+/**
  绑定手机
  
  @param phoneNumber 要绑定的手机号码

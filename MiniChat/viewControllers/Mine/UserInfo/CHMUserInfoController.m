@@ -10,17 +10,116 @@
 #import "CHMUserPortraitCell.h"
 #import "CHMUserDetailCell.h"
 #import "CHMEditUserInfoController.h"
+#import <Photos/Photos.h>
+
 
 static NSString *const portraitCellReuseId = @"CHMUserPortraitCell";
 static NSString *const detailCellReuseId = @"CHMUserDetailCell";
 
-@interface CHMUserInfoController ()
+@interface CHMUserInfoController () <UIImagePickerControllerDelegate, UINavigationControllerDelegate>
+
+@property (nonatomic, strong) UIImagePickerController *imagePickerController;
 
 @property (nonatomic, strong) NSArray *dataArray;
 
 @end
 
 @implementation CHMUserInfoController
+
+#pragma mark - UIImagePickerControllerDelegate
+- (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker {
+    [picker dismissViewControllerAnimated:YES completion:nil];
+}
+
+- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary<NSString *,id> *)info {
+    [self imagePickerControllerDidCancel:picker];
+    UIImage *selectedImage = nil;
+    selectedImage = picker.allowsEditing ? info[UIImagePickerControllerEditedImage] : info[UIImagePickerControllerOriginalImage];
+    [self uploadPortraitWithImage:selectedImage];
+}
+
+/**
+ 上传头像
+ */
+- (void)uploadPortraitWithImage:(UIImage *)image {
+    // 上传头像到服务器
+    [CHMProgressHUD showWithInfo:@"正在上传中..." isHaveMask:YES];
+    __weak typeof(self) weakSelf = self;
+    [CHMHttpTool setUserPortraitWithImage:image success:^(id response) {
+        NSLog(@"-------------%@",response);
+        NSNumber *codeId = response[@"Result"];
+        if (codeId.integerValue == 1) {
+            [CHMProgressHUD dismissHUD];
+            NSString *imageUrl = @"";
+            NSString *headerImageString = response[@"Parameter"];
+            NSData *jsonData = [headerImageString dataUsingEncoding:NSUTF8StringEncoding];
+            NSError *error = nil;
+            NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:jsonData options:NSJSONReadingAllowFragments error:&error];
+            if (dict) {
+                imageUrl = [NSString stringWithFormat:@"%@%@", BaseURL,dict[@"HeaderImage"]];
+            }
+            [[NSUserDefaults standardUserDefaults] setObject:imageUrl forKey:KPortrait];
+            [weakSelf initLocalData];
+            [weakSelf.tableView reloadData];
+            // 刷新IM缓存数据
+            RCUserInfo *userInfo = [RCIMClient sharedRCIMClient].currentUserInfo;
+            userInfo.portraitUri = imageUrl;
+            [[CHMDataBaseManager shareManager] insertUserToDB:userInfo];
+            [[CHMDataBaseManager shareManager] insertFriendToDB:userInfo];
+            [[RCIM sharedRCIM] refreshUserInfoCache:userInfo withUserId:userInfo.userId];
+            // 发通知，更新其他地方的头像
+            [[NSNotificationCenter defaultCenter] postNotificationName:KChangeUserInfoNotification object:imageUrl];
+        } else {
+            [CHMProgressHUD showErrorWithInfo:response[@"Error"]];
+        }
+    } failure:^(NSError *error) {
+        [CHMProgressHUD showErrorWithInfo:[NSString stringWithFormat:@"错误码--%ld",(long)error.code]];
+    }];
+}
+
+
+/**
+ 拍照
+ */
+- (void)showCamera {
+    AVAuthorizationStatus authorizationStatus = [AVCaptureDevice authorizationStatusForMediaType:AVMediaTypeVideo];
+    if (authorizationStatus == AVAuthorizationStatusRestricted || authorizationStatus == AVAuthorizationStatusDenied) {
+        // 没有权限
+        NSURL *url = [NSURL URLWithString:UIApplicationOpenSettingsURLString];
+        if ([[UIApplication sharedApplication] canOpenURL:url]) {
+            [[UIApplication sharedApplication] openURL:url options:@{} completionHandler:nil];
+        }
+    } else {
+        // 是否支持相机功能
+        if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
+            self.imagePickerController.sourceType = UIImagePickerControllerSourceTypeCamera;
+            [self presentViewController:self.imagePickerController animated:YES completion:nil];
+        } else {
+            [CHMProgressHUD showErrorWithInfo:@"相机功能不可用"];
+        }
+    }
+}
+
+/**
+ 从相册选中照片
+ */
+- (void)showImagePicker {
+    PHAuthorizationStatus authorizationStatus = [PHPhotoLibrary authorizationStatus];
+    if (authorizationStatus == PHAuthorizationStatusDenied || authorizationStatus == PHAuthorizationStatusRestricted) {
+        NSURL *url = [NSURL URLWithString:UIApplicationOpenSettingsURLString];
+        if ([[UIApplication sharedApplication] canOpenURL:url]) {
+            [[UIApplication sharedApplication] openURL:url options:@{} completionHandler:nil];
+        }
+    } else {
+        if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypePhotoLibrary]) {
+            self.imagePickerController.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+            [self presentViewController:self.imagePickerController animated:YES completion:nil];
+        } else {
+            [CHMProgressHUD showErrorWithInfo:@"相册功能不可用"];
+        }
+    }
+    
+}
 
 #pragma mark - view life cycler
 - (void)viewWillAppear:(BOOL)animated {
@@ -112,7 +211,29 @@ static NSString *const detailCellReuseId = @"CHMUserDetailCell";
  点击头像
  */
 - (void)portraitClick {
+    self.imagePickerController = [[UIImagePickerController alloc] init];
+    // 可编辑
+    self.imagePickerController.allowsEditing = YES;
+    self.imagePickerController.delegate = self;
     
+    UIAlertController *alertController = [[UIAlertController alloc] init];
+    // 取消
+    UIAlertAction *cancleAction = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+        [self.imagePickerController dismissViewControllerAnimated:YES completion:nil];
+    }];
+    // 拍照
+    UIAlertAction *cameraAction = [UIAlertAction actionWithTitle:@"拍照" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        [self showCamera];
+    }];
+    // 从相册选择
+    UIAlertAction *albumAction = [UIAlertAction actionWithTitle:@"相册" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        [self showImagePicker];
+    }];
+    [alertController addAction:cancleAction];
+    [alertController addAction:cameraAction];
+    [alertController addAction:albumAction];
+    
+    [self presentViewController:alertController animated:YES completion:nil];
 }
 
 

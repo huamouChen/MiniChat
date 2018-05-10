@@ -149,6 +149,20 @@ static CHMHttpTool *instanse = nil;
 }
 
 /**
+ 修改头像
+
+ @param image 头像图片
+ @param success 成功
+ @param failure 失败
+ */
++ (void)setUserPortraitWithImage:(UIImage *)image success:(successBlock)success failure:(failureBlock)failure {
+    NSData *imgData = UIImageJPEGRepresentation(image, 0.5);
+    NSString *imgString = [imgData base64EncodedStringWithOptions:NSDataBase64Encoding64CharacterLineLength];
+    NSDictionary *params = @{@"ImgStream": imgString};
+    [CHMHttpTool requestWithMethod:RequestMethodTypePost url:SetUserPortraitURL params:params success:success failure:failure];
+}
+
+/**
  绑定手机
 
  @param phoneNumber 要绑定的手机号码

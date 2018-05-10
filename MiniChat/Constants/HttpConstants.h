@@ -34,6 +34,9 @@
 // 修改昵称
 #define SetNickNameURL     @"api/User/SetNickName"
 
+// 修改头像
+#define SetUserPortraitURL  @"api/User/SetHeadimg"
+
 // 修改手机号码
 #define BindMobilePhoneURL  @"api/User/BindPhoneNum"
 

@@ -30,9 +30,20 @@ static NSString *const itemReuseablId = @"CHMMineItemCell";
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    // 修改头像通知
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadPortrait:) name:KChangeUserInfoNotification object:nil];
+    
     [self setupAppearance];
     
     [self initData];
+}
+
+/**
+ 刷新头像
+ */
+- (void)reloadPortrait:(NSNotification *)noti {
+    [self initData];
+    [self.tableView reloadData];
 }
 
 /**
@@ -130,7 +141,6 @@ static NSString *const itemReuseablId = @"CHMMineItemCell";
 #pragma mark - 意见反馈
 - (void)feedBackCellClick {
     RCDCustomerServiceViewController *chatService = [[RCDCustomerServiceViewController alloc] init];
-#define SERVICE_ID @"KEFU152410101210011"
     chatService.conversationType = ConversationType_CUSTOMERSERVICE;
     chatService.targetId = SERVICE_ID;
     chatService.title = @"客服";

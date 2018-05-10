@@ -119,7 +119,10 @@
             RCUserInfo *userInfo = [RCIMClient sharedRCIMClient].currentUserInfo;
             userInfo.name = weakSelf.editTextField.text;
             [[CHMDataBaseManager shareManager] insertUserToDB:userInfo];
+            [[CHMDataBaseManager shareManager] insertFriendToDB:userInfo];
             [[RCIM sharedRCIM] refreshUserInfoCache:userInfo withUserId:userInfo.userId];
+            // 发通知，更新其他地方的信息
+            [[NSNotificationCenter defaultCenter] postNotificationName:KChangeUserInfoNotification object:nil];
             dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
                 [CHMProgressHUD dismissHUD];
                 [self.navigationController popViewControllerAnimated:YES];

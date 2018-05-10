@@ -39,7 +39,7 @@
     UIAlertController *alertController = [[UIAlertController alloc] init];
     // 取消
     UIAlertAction *cancleAction = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
-        [self dismissViewControllerAnimated:self.imagePickerController completion:nil];
+        [self.imagePickerController dismissViewControllerAnimated:YES completion:nil];
     }];
     // 拍照
     UIAlertAction *cameraAction = [UIAlertAction actionWithTitle:@"拍照" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
@@ -83,7 +83,6 @@
  */
 - (void)showImagePicker {
     PHAuthorizationStatus authorizationStatus = [PHPhotoLibrary authorizationStatus];
-    //    ALAuthorizationStatus authorizationStatus = [ALAssetsLibrary authorizationStatus];
     if (authorizationStatus == PHAuthorizationStatusDenied || authorizationStatus == PHAuthorizationStatusRestricted) {
         NSURL *url = [NSURL URLWithString:UIApplicationOpenSettingsURLString];
         if ([[UIApplication sharedApplication] canOpenURL:url]) {
@@ -101,7 +100,7 @@
 
 #pragma mark - image Picker controller delegate
 - (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker {
-    [self dismissViewControllerAnimated:self.imagePickerController completion:nil];
+    [picker dismissViewControllerAnimated:YES completion:nil];
 }
 
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary<NSString *,id> *)info {

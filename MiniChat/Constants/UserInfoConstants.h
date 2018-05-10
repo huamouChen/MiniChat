@@ -32,6 +32,11 @@
 
 #define KNewMessageNotification        @"newMessageNotification"
 
+// 修改头像的通知
+#define KChangePortraitNotification     @"setCurrentUserPortrait"
+// 修改当前用户信息的通知
+#define KChangeUserInfoNotification     @"changeUserInfoNotification"
+
 
 
 

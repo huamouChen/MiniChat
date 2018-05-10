@@ -107,7 +107,7 @@ static CGFloat const KIndexViewWidth = 55 / 2.0;
                 // 失败暂时不提醒
             }
         } failure:^(NSError *error) {
-            [CHMProgressHUD showErrorWithInfo:[NSString stringWithFormat:@"错误码--%zd", error.code]];
+            [CHMProgressHUD showErrorWithInfo:[NSString stringWithFormat:@"错误码--%ld", (long)error.code]];
         }];
     }
     
