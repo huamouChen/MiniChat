@@ -38,4 +38,10 @@
 #define KTitle    @"cellTitle"
 
 
+#define KItemName    @"itemName"
+#define KItemValue   @"itemValue"
+
+
+
+
 #endif /* UserInfoConstants_h */

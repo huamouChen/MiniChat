@@ -29,6 +29,9 @@
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(switchRootViewController) name:KSwitchRootViewController object:nil];
     
+    
+    NSLog(@"RongCloudAppKey-------------%@", RongCloudAppKey);
+    
     // 初始化融云
     [[RCIM sharedRCIM] initWithAppKey:RongCloudAppKey];
     // 发送消息携带用户信息
