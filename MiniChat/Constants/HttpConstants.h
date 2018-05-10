@@ -14,9 +14,9 @@
 //#define BaseURL         @"http://172.16.44.21:8003"
 
 #ifdef DEBUG
-#define BaseURL   @"http://imapi.xxx8.cn"
-#else
 #define BaseURL   @"http://dfgimapi.xxx8.cn"
+#else
+#define BaseURL   @"http://imapi.xxx8.cn"
 #endif
 
 

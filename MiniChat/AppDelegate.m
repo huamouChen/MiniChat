@@ -56,7 +56,9 @@
     NSString *nickName = [[NSUserDefaults standardUserDefaults] valueForKey:KNickName];
     NSString *account = [[NSUserDefaults standardUserDefaults] valueForKey:KAccount];
     NSString *portrait = [[NSUserDefaults standardUserDefaults] valueForKey:KPortrait];
-    [RCIM sharedRCIM].currentUserInfo = [[RCUserInfo alloc] initWithUserId:account name:nickName portrait:portrait];
+    RCUserInfo *userInfo = [[RCUserInfo alloc] initWithUserId:account name:nickName portrait:portrait];
+    [[RCIM sharedRCIM] refreshUserInfoCache:userInfo withUserId:account];
+    [RCIM sharedRCIM].currentUserInfo = userInfo;
     
     //设置用户信息源和群组信息源
     [RCIM sharedRCIM].userInfoDataSource = [CHMInfoProvider shareInstance];

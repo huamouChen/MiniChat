@@ -62,11 +62,12 @@ static NSString *const detailCellReuseId = @"CHMUserDetailCell";
             [weakSelf initLocalData];
             [weakSelf.tableView reloadData];
             // 刷新IM缓存数据
-            RCUserInfo *userInfo = [RCIMClient sharedRCIMClient].currentUserInfo;
-            userInfo.portraitUri = imageUrl;
+            NSString *userId = [[NSUserDefaults standardUserDefaults] valueForKey:KAccount];
+            NSString *nickName = [[NSUserDefaults standardUserDefaults] valueForKey:KNickName];
+            RCUserInfo *userInfo = [[RCUserInfo alloc] initWithUserId:userId name:nickName portrait:imageUrl];
             [[CHMDataBaseManager shareManager] insertUserToDB:userInfo];
             [[CHMDataBaseManager shareManager] insertFriendToDB:userInfo];
-            [[RCIM sharedRCIM] refreshUserInfoCache:userInfo withUserId:userInfo.userId];
+            [[RCIM sharedRCIM] refreshUserInfoCache:userInfo withUserId:userId];
             // 发通知，更新其他地方的头像
             [[NSNotificationCenter defaultCenter] postNotificationName:KChangeUserInfoNotification object:imageUrl];
         } else {

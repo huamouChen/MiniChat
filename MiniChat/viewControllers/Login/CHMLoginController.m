@@ -23,7 +23,11 @@ static NSString *const IMServices = @"IMServices";
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *registerButtonConstraint;
 @property (weak, nonatomic) IBOutlet UIButton *registerButton;
 
+// 获取融云 token 的次数
 @property(nonatomic, assign) int loginTimes;
+
+// 融云 token
+@property (nonatomic, copy) NSString *rongToken;
 
 @end
 
@@ -47,7 +51,7 @@ static NSString *const IMServices = @"IMServices";
         }
         
     } failure:^(NSError *error) {
-        [CHMProgressHUD showErrorWithInfo:[NSString stringWithFormat:@"错误码--%zd", error.code]];
+        [CHMProgressHUD showErrorWithInfo:[NSString stringWithFormat:@"错误码--%ld", (long)error.code]];
     }];
 }
 
@@ -63,7 +67,7 @@ static NSString *const IMServices = @"IMServices";
         if (codeId.integerValue == 100) {
             NSString *rongToken = response[@"Value"][@"RongToken"];
             // 保存融云Token
-            [[NSUserDefaults standardUserDefaults] setObject:rongToken forKey:KRongCloudToken];
+            weakSelf.rongToken = rongToken;
             // 连接融云服务器
             [[RCIM sharedRCIM] connectWithToken:rongToken success:^(NSString *userId) {
                 // 获取个人信息
@@ -76,6 +80,7 @@ static NSString *const IMServices = @"IMServices";
                     [CHMProgressHUD showErrorWithInfo:@"连接失败，请稍后重试"];
                     return;
                 }
+                weakSelf.loginTimes++;
                 [self getRongToken];
             }];
             
@@ -85,7 +90,7 @@ static NSString *const IMServices = @"IMServices";
         
         
     } failure:^(NSError *error) {
-        [CHMProgressHUD showErrorWithInfo:[NSString stringWithFormat:@"错误码--%zd", error.code]];
+        [CHMProgressHUD showErrorWithInfo:[NSString stringWithFormat:@"错误码--%ld", (long)error.code]];
     }];
 }
 
@@ -95,11 +100,14 @@ static NSString *const IMServices = @"IMServices";
  获取用户信息
  */
 - (void)getUserInfo {
+    __weak typeof(self) weakSelf = self;
     [CHMHttpTool getUserInfoWithSuccess:^(id response) {
         NSLog(@"------------%@", response);
         [CHMProgressHUD dismissHUD];
         NSString *userName = response[@"UserName"];
         if (userName) {
+            // 保存融云Token
+            [[NSUserDefaults standardUserDefaults] setObject:weakSelf.rongToken forKey:KRongCloudToken];
             NSString *nicknName =   response[@"NickName"];
             NSString *headerImg = response[@"HeaderImage"];
             NSString *phoneNum = response[@"PhoneNum"];
@@ -132,7 +140,7 @@ static NSString *const IMServices = @"IMServices";
             
         }
     } failure:^(NSError *error) {
-        [CHMProgressHUD showErrorWithInfo:[NSString stringWithFormat:@"错误码--%zd", error.code]];
+        [CHMProgressHUD showErrorWithInfo:[NSString stringWithFormat:@"错误码--%ld", (long)error.code]];
     }];
 }
 

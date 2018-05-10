@@ -116,13 +116,15 @@
             [[NSUserDefaults standardUserDefaults] setObject:weakSelf.editTextField.text forKey:KNickName];
             [[NSUserDefaults standardUserDefaults] synchronize];
             // 刷新IM缓存数据
-            RCUserInfo *userInfo = [RCIMClient sharedRCIMClient].currentUserInfo;
-            userInfo.name = weakSelf.editTextField.text;
+            NSString *userId = [[NSUserDefaults standardUserDefaults] valueForKey:KAccount];
+            NSString *nickName = [[NSUserDefaults standardUserDefaults] valueForKey:KNickName];
+            NSString *portrait = [[NSUserDefaults standardUserDefaults] valueForKey:KPortrait];
+            RCUserInfo *userInfo = [[RCUserInfo alloc] initWithUserId:userId name:nickName portrait:portrait];
             [[CHMDataBaseManager shareManager] insertUserToDB:userInfo];
             [[CHMDataBaseManager shareManager] insertFriendToDB:userInfo];
-            [[RCIM sharedRCIM] refreshUserInfoCache:userInfo withUserId:userInfo.userId];
-            // 发通知，更新其他地方的信息
-            [[NSNotificationCenter defaultCenter] postNotificationName:KChangeUserInfoNotification object:nil];
+            [[RCIM sharedRCIM] refreshUserInfoCache:userInfo withUserId:userId];
+            // 发通知，更新其他地方的头像
+            [[NSNotificationCenter defaultCenter] postNotificationName:KChangeUserInfoNotification object:portrait];
             dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
                 [CHMProgressHUD dismissHUD];
                 [self.navigationController popViewControllerAnimated:YES];
