@@ -58,7 +58,7 @@ static NSString *const detailReuseablId = @"CHMMineDetailCell";
             [CHMProgressHUD showErrorWithInfo:response[@"Code"][@"Description"]];
         }
     } failure:^(NSError *error) {
-        [CHMProgressHUD showErrorWithInfo:[NSString stringWithFormat:@"错误码--%zd",error.code]];
+        [CHMProgressHUD showErrorWithInfo:[NSString stringWithFormat:@"错误码--%ld",(long)error.code]];
     }];
 }
 

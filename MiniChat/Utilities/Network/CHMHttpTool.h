@@ -83,6 +83,24 @@ typedef void(^failureBlock)(NSError *error);
 + (void)getUserInfoWithSuccess:(successBlock)success failure:(failureBlock)failure;
 
 /**
+ 修改昵称
+ 
+ @param nickName 新的昵称
+ @param success 成功
+ @param failure 失败
+ */
++ (void)setUserNickNameWithNickName:(NSString *)nickName success:(successBlock)success failure:(failureBlock)failure;
+
+/**
+ 绑定手机
+ 
+ @param phoneNumber 要绑定的手机号码
+ @param success 成功
+ @param failure 失败
+ */
++ (void)bindMobilePhoneWithPhoneNumber:(NSString *)phoneNumber success:(successBlock)success failure:(failureBlock)failure;
+
+/**
  添加好友
  
  @param userId 要添加的用户ID

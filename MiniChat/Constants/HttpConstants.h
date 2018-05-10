@@ -11,8 +11,14 @@
 
 
 
-#define BaseURL         @"http://dfgimapi.xxx8.cn/"
 //#define BaseURL         @"http://172.16.44.21:8003"
+
+#ifdef DEBUG
+#define BaseURL   @"http://imapi.xxx8.cn"
+#else
+#define BaseURL   @"http://dfgimapi.xxx8.cn"
+#endif
+
 
 // 登录
 #define LoginURL        @"api/Log/Login"
@@ -24,6 +30,12 @@
 
 // 获取账号信息
 #define GetUserInfoURL     @"api/User/GetUserInfo"
+
+// 修改昵称
+#define SetNickNameURL     @"api/User/SetNickName"
+
+// 修改手机号码
+#define BindMobilePhoneURL  @"api/User/BindPhoneNum"
 
 // 查询用户信息
 #define SearchUserURL      @"api/Im/FindUser"

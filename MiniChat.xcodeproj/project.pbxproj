@@ -82,6 +82,8 @@
 		C0CCCFC220A3DD0D00DD46B2 /* CHMUserPortraitCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C0CCCFC020A3DD0D00DD46B2 /* CHMUserPortraitCell.xib */; };
 		C0CCCFC620A3DDF300DD46B2 /* CHMUserDetailCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C0CCCFC420A3DDF300DD46B2 /* CHMUserDetailCell.m */; };
 		C0CCCFC720A3DDF300DD46B2 /* CHMUserDetailCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C0CCCFC520A3DDF300DD46B2 /* CHMUserDetailCell.xib */; };
+		C0CCCFCB20A3EC6400DD46B2 /* CHMEditUserInfoController.m in Sources */ = {isa = PBXBuildFile; fileRef = C0CCCFC920A3EC6400DD46B2 /* CHMEditUserInfoController.m */; };
+		C0CCCFCC20A3EC6400DD46B2 /* CHMEditUserInfoController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C0CCCFCA20A3EC6400DD46B2 /* CHMEditUserInfoController.xib */; };
 		C0EAA5D72097E8210046F05C /* CHMHttpTool.m in Sources */ = {isa = PBXBuildFile; fileRef = C0EAA5D62097E8210046F05C /* CHMHttpTool.m */; };
 		C0EAA5ED20981EE70046F05C /* CHMLoginController.m in Sources */ = {isa = PBXBuildFile; fileRef = C0EAA5EB20981EE70046F05C /* CHMLoginController.m */; };
 		C0EAA5EE20981EE70046F05C /* CHMLoginController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C0EAA5EC20981EE70046F05C /* CHMLoginController.xib */; };
@@ -252,6 +254,9 @@
 		C0CCCFC320A3DDF300DD46B2 /* CHMUserDetailCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CHMUserDetailCell.h; sourceTree = "<group>"; };
 		C0CCCFC420A3DDF300DD46B2 /* CHMUserDetailCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CHMUserDetailCell.m; sourceTree = "<group>"; };
 		C0CCCFC520A3DDF300DD46B2 /* CHMUserDetailCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CHMUserDetailCell.xib; sourceTree = "<group>"; };
+		C0CCCFC820A3EC6400DD46B2 /* CHMEditUserInfoController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CHMEditUserInfoController.h; sourceTree = "<group>"; };
+		C0CCCFC920A3EC6400DD46B2 /* CHMEditUserInfoController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CHMEditUserInfoController.m; sourceTree = "<group>"; };
+		C0CCCFCA20A3EC6400DD46B2 /* CHMEditUserInfoController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CHMEditUserInfoController.xib; sourceTree = "<group>"; };
 		C0EAA5D52097E8210046F05C /* CHMHttpTool.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CHMHttpTool.h; sourceTree = "<group>"; };
 		C0EAA5D62097E8210046F05C /* CHMHttpTool.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CHMHttpTool.m; sourceTree = "<group>"; };
 		C0EAA5E120980AE30046F05C /* HttpConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HttpConstants.h; sourceTree = "<group>"; };
@@ -684,6 +689,9 @@
 				C0CCCFBD20A3DCE100DD46B2 /* view */,
 				C0CCCFBA20A2F70300DD46B2 /* CHMUserInfoController.h */,
 				C0CCCFBB20A2F70300DD46B2 /* CHMUserInfoController.m */,
+				C0CCCFC820A3EC6400DD46B2 /* CHMEditUserInfoController.h */,
+				C0CCCFC920A3EC6400DD46B2 /* CHMEditUserInfoController.m */,
+				C0CCCFCA20A3EC6400DD46B2 /* CHMEditUserInfoController.xib */,
 			);
 			path = UserInfo;
 			sourceTree = "<group>";
@@ -1079,6 +1087,7 @@
 				C0EAA601209859960046F05C /* Main.storyboard in Resources */,
 				C0EAA630209872520046F05C /* CHMMineItemCell.xib in Resources */,
 				C00177C2209EB2F5001B44DE /* CHMGroupSettingHeaderCell.xib in Resources */,
+				C0CCCFCC20A3EC6400DD46B2 /* CHMEditUserInfoController.xib in Resources */,
 				C0EFDBA8209C82FE00848710 /* CHMBettingController.xib in Resources */,
 				C066ED9D2099E47600CB87FC /* CHMLogoutCell.xib in Resources */,
 				C02376F0209FF2020007AEAC /* Launch Screen.storyboard in Resources */,
@@ -1202,6 +1211,7 @@
 				C0CCCF7C20A2A77700DD46B2 /* RCDCustomerServiceViewController.m in Sources */,
 				C0CCCFC120A3DD0D00DD46B2 /* CHMUserPortraitCell.m in Sources */,
 				C066EDC4209BDCEB00CB87FC /* CHMSelectMemberController.m in Sources */,
+				C0CCCFCB20A3EC6400DD46B2 /* CHMEditUserInfoController.m in Sources */,
 				C0CCCF6720A12F2400DD46B2 /* RCDNoFriendView.m in Sources */,
 				C066ED912099E2C500CB87FC /* CHMAccountSettingController.m in Sources */,
 				C0CCCF9320A2A82900DD46B2 /* RCDCSSolveView.m in Sources */,

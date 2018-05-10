@@ -9,6 +9,7 @@
 #import "CHMUserInfoController.h"
 #import "CHMUserPortraitCell.h"
 #import "CHMUserDetailCell.h"
+#import "CHMEditUserInfoController.h"
 
 static NSString *const portraitCellReuseId = @"CHMUserPortraitCell";
 static NSString *const detailCellReuseId = @"CHMUserDetailCell";
@@ -22,11 +23,15 @@ static NSString *const detailCellReuseId = @"CHMUserDetailCell";
 @implementation CHMUserInfoController
 
 #pragma mark - view life cycler
-- (void)viewDidLoad {
-    [super viewDidLoad];
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
     
     [self initLocalData];
-    
+}
+
+- (void)viewDidLoad {
+    [super viewDidLoad];
+
     [self setupAppearance];
 }
 
@@ -41,6 +46,8 @@ static NSString *const detailCellReuseId = @"CHMUserDetailCell";
     self.dataArray = @[@{KItemName: @"头像", KItemValue: portraitString},
                        @{KItemName: @"昵称", KItemValue: nickName},
                        @{KItemName: @"手机", KItemValue: mobileString}];
+    
+    [self.tableView reloadData];
 }
 
 /**
@@ -85,6 +92,47 @@ static NSString *const detailCellReuseId = @"CHMUserDetailCell";
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
+    switch (indexPath.row) {
+        case 0: // 头像
+            [self portraitClick];
+            break;
+        case 1: // 昵称
+            [self nickNameClick];
+            break;
+        case 2:  //手机号
+            [self mobileClcick];
+            break;
+        default:
+            break;
+    }
+}
+
+
+/**
+ 点击头像
+ */
+- (void)portraitClick {
+    
+}
+
+
+/**
+ 点击昵称
+ */
+- (void)nickNameClick {
+    CHMEditUserInfoController *editController = [CHMEditUserInfoController new];
+    editController.isEditNickName = YES;
+    [self.navigationController pushViewController:editController animated:YES];
+}
+
+
+/**
+ 点击手机号码
+ */
+- (void)mobileClcick {
+    CHMEditUserInfoController *editController = [CHMEditUserInfoController new];
+    editController.isEditNickName = NO;
+    [self.navigationController pushViewController:editController animated:YES];
 }
 
 

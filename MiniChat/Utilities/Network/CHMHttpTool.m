@@ -137,6 +137,32 @@ static CHMHttpTool *instanse = nil;
 
 
 /**
+ 修改昵称
+
+ @param nickName 新的昵称
+ @param success 成功
+ @param failure 失败
+ */
++ (void)setUserNickNameWithNickName:(NSString *)nickName success:(successBlock)success failure:(failureBlock)failure {
+    NSDictionary *params = @{@"NickName": nickName};
+    [CHMHttpTool requestWithMethod:RequestMethodTypePost url:SetNickNameURL params:params success:success failure:failure];
+}
+
+/**
+ 绑定手机
+
+ @param phoneNumber 要绑定的手机号码
+ @param success 成功
+ @param failure 失败
+ */
++ (void)bindMobilePhoneWithPhoneNumber:(NSString *)phoneNumber success:(successBlock)success failure:(failureBlock)failure {
+    NSDictionary *params = @{@"PhoneNum": phoneNumber};
+    [CHMHttpTool requestWithMethod:RequestMethodTypePost url:BindMobilePhoneURL params:params success:success failure:failure];
+}
+
+
+
+/**
  查询用户信息
 
  @param userId 用户ID
