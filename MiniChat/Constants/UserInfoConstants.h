@@ -38,6 +38,10 @@
 #define KChangeUserInfoNotification     @"changeUserInfoNotification"
 
 
+// 同意好友请求
+#define KAcceptResponse             @"AcceptResponse"
+
+
 
 
 #define KTitle    @"cellTitle"

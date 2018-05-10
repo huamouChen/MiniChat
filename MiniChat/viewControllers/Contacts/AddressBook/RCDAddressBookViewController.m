@@ -207,6 +207,12 @@ static CGFloat const rowHeight = 65;
         NSNumber *codeId = response[@"Code"][@"CodeId"];
         if (codeId.integerValue == 100) {
             [CHMProgressHUD showSuccessWithInfo:@"已经接受好友请求"];
+            // 就刷新好友列表数据
+            NSString *account = [[NSUserDefaults standardUserDefaults] valueForKey:KAccount];
+            [[CHMInfoProvider shareInstance] syncFriendList:account complete:^(NSMutableArray *friends) {
+                [[NSNotificationCenter defaultCenter] postNotificationName:KChangeUserInfoNotification object:nil];
+            }];
+            
         } else {
             [CHMProgressHUD showErrorWithInfo:response[@"Code"][@"Description"]];
         }

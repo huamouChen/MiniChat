@@ -32,7 +32,7 @@ static NSString *const groupCellReuseId = @"CHMContactCell";
     if (groupList.count > 0) {
         self.groupArray = [NSMutableArray arrayWithArray:groupList];
         // 刷新数据
-        self.footer.footerTitleLabel.text = [NSString stringWithFormat:@"%zd个群聊",self.groupArray.count];
+        self.footer.footerTitleLabel.text = [NSString stringWithFormat:@"%ld个群聊",(long)self.groupArray.count];
         [self.tableView reloadData];
         return;
     }
@@ -45,7 +45,7 @@ static NSString *const groupCellReuseId = @"CHMContactCell";
             NSArray *groupList = [CHMGroupModel mj_objectArrayWithKeyValuesArray:response[@"Value"]];
             weakSelf.groupArray = [NSMutableArray arrayWithArray:groupList];
             // 刷新数据
-            weakSelf.footer.footerTitleLabel.text = [NSString stringWithFormat:@"%zd个群聊",weakSelf.groupArray.count];
+            weakSelf.footer.footerTitleLabel.text = [NSString stringWithFormat:@"%ld个群聊",(long)weakSelf.groupArray.count];
             [weakSelf.tableView reloadData];
         }
         
@@ -82,11 +82,14 @@ static NSString *const groupCellReuseId = @"CHMContactCell";
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    // 获取数据
-    [self fetchData];
-    
     // 设置外观
     [self setupAppearance];
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    
+    [self fetchData];
 }
 
 

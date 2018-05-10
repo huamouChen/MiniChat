@@ -194,14 +194,6 @@
     //    }
 }
 
-
-#pragma mark - 收到消息的监听
-- (void)didReceiveMessageNotification:(NSNotification *)notification {
-    [super didReceiveMessageNotification:notification];
-    NSLog(@"-----------------收到消息");
-}
-
-
 #pragma mark - 自定义cell
 //自定义cell
 - (RCConversationBaseCell *)rcConversationListTableView:(UITableView *)tableView

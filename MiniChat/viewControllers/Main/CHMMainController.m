@@ -7,12 +7,28 @@
 //
 
 #import "CHMMainController.h"
+#import "CHMInfoProvider.h"
 
-@interface CHMMainController ()
+@interface CHMMainController () <RCIMReceiveMessageDelegate>
 
 @end
 
 @implementation CHMMainController
+
+#pragma mark - RCIMReceiveMessageDelegate
+- (void)onRCIMReceiveMessage:(RCMessage *)message left:(int)left {
+    NSLog(@"-------%@",message);
+    RCContactNotificationMessage *contactNotificationMsg = nil;
+    if ([message.objectName isEqualToString:@"RC:ContactNtf"]) {
+        contactNotificationMsg = (RCContactNotificationMessage *)message.content;
+        // 如果是同意好友申请的消息，就刷新好友列表数据
+        NSString *account = [[NSUserDefaults standardUserDefaults] valueForKey:KAccount];
+        [[CHMInfoProvider shareInstance] syncFriendList:account complete:^(NSMutableArray *friends) {
+            [[NSNotificationCenter defaultCenter] postNotificationName:KChangeUserInfoNotification object:nil];
+        }];
+    }
+}
+
 
 
 
@@ -22,7 +38,10 @@
     // 连接融云服务器
     [self connectToRongCloud];
     
+    [RCIM sharedRCIM].receiveMessageDelegate = self;
 }
+
+
 
 /**
  连接融云服务器
@@ -71,6 +90,4 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
-
-
 @end

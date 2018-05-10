@@ -17,4 +17,6 @@
 @property (nonatomic, copy) NSString *GroupOwner;
 @property (nonatomic, copy) NSString *IsOfficial;
 @property (nonatomic, copy) NSString *State;
+
+- (instancetype)initWithGroupId:(NSString *)groupId groupName:(NSString *)groupName groupPortrait:(NSString *)groupPortrait;
 @end

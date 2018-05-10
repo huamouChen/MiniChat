@@ -84,6 +84,7 @@
 		C0CCCFC720A3DDF300DD46B2 /* CHMUserDetailCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C0CCCFC520A3DDF300DD46B2 /* CHMUserDetailCell.xib */; };
 		C0CCCFCB20A3EC6400DD46B2 /* CHMEditUserInfoController.m in Sources */ = {isa = PBXBuildFile; fileRef = C0CCCFC920A3EC6400DD46B2 /* CHMEditUserInfoController.m */; };
 		C0CCCFCC20A3EC6400DD46B2 /* CHMEditUserInfoController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C0CCCFCA20A3EC6400DD46B2 /* CHMEditUserInfoController.xib */; };
+		C0CCCFF020A4838200DD46B2 /* loading_IOS.jpg in Resources */ = {isa = PBXBuildFile; fileRef = C0CCCFEF20A4838200DD46B2 /* loading_IOS.jpg */; };
 		C0EAA5D72097E8210046F05C /* CHMHttpTool.m in Sources */ = {isa = PBXBuildFile; fileRef = C0EAA5D62097E8210046F05C /* CHMHttpTool.m */; };
 		C0EAA5ED20981EE70046F05C /* CHMLoginController.m in Sources */ = {isa = PBXBuildFile; fileRef = C0EAA5EB20981EE70046F05C /* CHMLoginController.m */; };
 		C0EAA5EE20981EE70046F05C /* CHMLoginController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C0EAA5EC20981EE70046F05C /* CHMLoginController.xib */; };
@@ -257,6 +258,7 @@
 		C0CCCFC820A3EC6400DD46B2 /* CHMEditUserInfoController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CHMEditUserInfoController.h; sourceTree = "<group>"; };
 		C0CCCFC920A3EC6400DD46B2 /* CHMEditUserInfoController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CHMEditUserInfoController.m; sourceTree = "<group>"; };
 		C0CCCFCA20A3EC6400DD46B2 /* CHMEditUserInfoController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CHMEditUserInfoController.xib; sourceTree = "<group>"; };
+		C0CCCFEF20A4838200DD46B2 /* loading_IOS.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = loading_IOS.jpg; sourceTree = "<group>"; };
 		C0EAA5D52097E8210046F05C /* CHMHttpTool.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CHMHttpTool.h; sourceTree = "<group>"; };
 		C0EAA5D62097E8210046F05C /* CHMHttpTool.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CHMHttpTool.m; sourceTree = "<group>"; };
 		C0EAA5E120980AE30046F05C /* HttpConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HttpConstants.h; sourceTree = "<group>"; };
@@ -981,6 +983,7 @@
 				C0F25A542095BC1800C6BCA6 /* AppDelegate.h */,
 				C0F25A552095BC1800C6BCA6 /* AppDelegate.m */,
 				C0F25A5D2095BC1900C6BCA6 /* Assets.xcassets */,
+				C0CCCFEF20A4838200DD46B2 /* loading_IOS.jpg */,
 				C0CCCF4A209FF82A00DD46B2 /* loading_IOS.png */,
 				C02376EF209FF2020007AEAC /* Launch Screen.storyboard */,
 				C0EAA600209859960046F05C /* Main.storyboard */,
@@ -1064,6 +1067,7 @@
 			files = (
 				C0017793209DE460001B44DE /* CHMGroupListController.xib in Resources */,
 				C0EAA5F3209823F40046F05C /* CHMRegisterController.xib in Resources */,
+				C0CCCFF020A4838200DD46B2 /* loading_IOS.jpg in Resources */,
 				C0CCCFC220A3DD0D00DD46B2 /* CHMUserPortraitCell.xib in Resources */,
 				C0EFDBAE209C8FE400848710 /* CHMPalyCell.xib in Resources */,
 				C00177C3209EB2F5001B44DE /* CHMGroupSettingCell.xib in Resources */,

@@ -14,6 +14,7 @@
 #import <AssetsLibrary/AssetsLibrary.h>
 #import <Photos/Photos.h>
 #import "CHMConversationController.h"
+#import "CHMGroupModel.h"
 
 
 @interface CHMCreateGroupController () <UIImagePickerControllerDelegate, UINavigationControllerDelegate>
@@ -134,17 +135,17 @@
                                           NSString *groupName = response[@"Value"][@"GroupName"];
                                           RCGroup *groupInfo = [[RCGroup alloc] initWithGroupId:groupId groupName:groupName portraitUri:groupPortrait];
                                           [[RCIM sharedRCIM] refreshGroupInfoCache:groupInfo withGroupId:groupId];
-                                          // 开启新会话，先清空栈，再push
-
                                           // push
                                           [self starGroupConversationWithGroupInfo:groupInfo];
-                                          
+                                          // 保存数据到本地
+                                          CHMGroupModel *groupModel = [[CHMGroupModel alloc] initWithGroupId:groupId groupName:groupName groupPortrait:groupPortrait];
+                                          [[CHMDataBaseManager shareManager] insertGroupToDB:groupModel];
                                       } else {
                                           [CHMProgressHUD showErrorWithInfo: responseDescripton];
                                       }
                         
                                   } failure:^(NSError *error) {
-                                      [CHMProgressHUD showErrorWithInfo:[NSString stringWithFormat:@"%zd", error.code]];
+                                      [CHMProgressHUD showErrorWithInfo:[NSString stringWithFormat:@"%ld", (long)error.code]];
                                   }];
 }
 

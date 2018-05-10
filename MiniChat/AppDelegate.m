@@ -13,7 +13,7 @@
 #import "CHMMainController.h"
 
 
-@interface AppDelegate () <RCIMReceiveMessageDelegate>
+@interface AppDelegate ()
 
 @end
 
@@ -29,15 +29,10 @@
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(switchRootViewController) name:KSwitchRootViewController object:nil];
     
-    
-    NSLog(@"RongCloudAppKey-------------%@", RongCloudAppKey);
-    
     // 初始化融云
     [[RCIM sharedRCIM] initWithAppKey:RongCloudAppKey];
     // 发送消息携带用户信息
-//    [RCIM sharedRCIM].enableMessageAttachUserInfo = YES;
     [self setIMInfoProvider];
-    [RCIM sharedRCIM].receiveMessageDelegate = self;
     
     // IQKeyBoard 关闭toolBar
     [[IQKeyboardManager sharedManager] setEnableAutoToolbar:NO];
@@ -56,9 +51,12 @@
     NSString *nickName = [[NSUserDefaults standardUserDefaults] valueForKey:KNickName];
     NSString *account = [[NSUserDefaults standardUserDefaults] valueForKey:KAccount];
     NSString *portrait = [[NSUserDefaults standardUserDefaults] valueForKey:KPortrait];
-    RCUserInfo *userInfo = [[RCUserInfo alloc] initWithUserId:account name:nickName portrait:portrait];
-    [[RCIM sharedRCIM] refreshUserInfoCache:userInfo withUserId:account];
-    [RCIM sharedRCIM].currentUserInfo = userInfo;
+    if (account) {
+        RCUserInfo *userInfo = [[RCUserInfo alloc] initWithUserId:account name:nickName portrait:portrait];
+        [[RCIM sharedRCIM] refreshUserInfoCache:userInfo withUserId:account];
+        [RCIM sharedRCIM].currentUserInfo = userInfo;
+    }
+   
     
     //设置用户信息源和群组信息源
     [RCIM sharedRCIM].userInfoDataSource = [CHMInfoProvider shareInstance];
@@ -66,12 +64,6 @@
     //群成员数据源
 //    [RCIM sharedRCIM].groupMemberDataSource = CHMIMDataSourece;
 }
-
-
-- (void)onRCIMReceiveMessage:(RCMessage *)message left:(int)left {
-    NSLog(@"-----------%@",message);
-}
-
 
 
 /**

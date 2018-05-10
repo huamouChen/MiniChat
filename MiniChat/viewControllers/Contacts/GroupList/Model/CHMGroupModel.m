@@ -10,4 +10,13 @@
 
 @implementation CHMGroupModel
 
+- (instancetype)initWithGroupId:(NSString *)groupId groupName:(NSString *)groupName groupPortrait:(NSString *)groupPortrait {
+    if (self = [super init]) {
+        self.GroupId = groupId;
+        self.GroupName = groupName;
+        self.GroupImage = groupPortrait;
+    }
+    return self;
+}
+
 @end
