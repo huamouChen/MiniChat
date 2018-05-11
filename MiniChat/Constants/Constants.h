@@ -14,12 +14,16 @@
 
 #ifdef DEBUG
 #define RongCloudAppKey   @"cpj2xarlc74vn"
-#else
-#define RongCloudAppKey   @"pgyu6atqpefzu"
-#endif
-
 // 客服 ID
 #define SERVICE_ID @"KEFU152410101210011"
+#else
+#define RongCloudAppKey   @"pgyu6atqpefzu"
+// 客服 ID
+#define SERVICE_ID @"KEFU152600331440927"
+#endif
+
+
+
 
 
 #define KIsiPhoneX ([UIScreen instancesRespondToSelector:@selector(currentMode)] ? CGSizeEqualToSize(CGSizeMake(1125, 2436), [[UIScreen mainScreen] currentMode].size) : NO)

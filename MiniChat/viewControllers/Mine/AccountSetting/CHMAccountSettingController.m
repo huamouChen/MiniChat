@@ -109,6 +109,10 @@ static int const sectionHeaderHeight = 15;
         }
     }
     
+    if (indexPath.section == 1) {
+        [self clearCache]; // 清除缓存
+    }
+    
     if (indexPath.section == 2) {
         // 退出登录
         [self logout];
@@ -117,7 +121,6 @@ static int const sectionHeaderHeight = 15;
 
 
 #pragma mark - cell 点击响应方法
-
 /**
  退出登录
  */
@@ -135,7 +138,31 @@ static int const sectionHeaderHeight = 15;
         [[CHMDataBaseManager shareManager] closeDBForDisconnect];
         [[NSNotificationCenter defaultCenter] postNotificationName:KSwitchRootViewController object:nil];
     });
-    
+}
+
+/**
+ 清除缓存
+ */
+- (void)clearCache {
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+    NSString *cachePath = [NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES) objectAtIndex:0];
+    NSArray *files = [[NSFileManager defaultManager] subpathsAtPath:cachePath];
+     [CHMProgressHUD showWithInfo:@"正在清理中..." isHaveMask:YES];
+    for (NSString *p in files) {
+        NSError *error;
+        NSString *path = [cachePath stringByAppendingPathComponent:p];
+        if ([[NSFileManager defaultManager] fileExistsAtPath:path]) {
+            [[NSFileManager defaultManager] removeItemAtPath:path error:&error];
+        }
+    }
+        
+    [self performSelectorOnMainThread:@selector(clearCacheSuccess) withObject:nil waitUntilDone:YES];
+});
+}
+- (void)clearCacheSuccess {
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+       [CHMProgressHUD showSuccessWithInfo:@"清理成功"] ;
+    });
     
 }
 
