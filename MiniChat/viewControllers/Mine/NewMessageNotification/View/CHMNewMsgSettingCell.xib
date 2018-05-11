@@ -40,6 +40,7 @@
             </constraints>
             <viewLayoutGuide key="safeArea" id="aW0-zy-SZf"/>
             <connections>
+                <outlet property="itemNameLabel" destination="wc9-7r-dOs" id="pfd-0Q-Hye"/>
                 <outlet property="switchButton" destination="dWB-9w-WrH" id="Sx5-WM-xRD"/>
             </connections>
         </tableViewCell>

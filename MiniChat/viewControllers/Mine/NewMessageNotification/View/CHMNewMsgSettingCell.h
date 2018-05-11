@@ -9,5 +9,6 @@
 #import <UIKit/UIKit.h>
 
 @interface CHMNewMsgSettingCell : UITableViewCell
+@property (weak, nonatomic) IBOutlet UILabel *itemNameLabel;
 @property (weak, nonatomic) IBOutlet UISwitch *switchButton;
 @end

@@ -11,6 +11,7 @@
 #import "CHMLogoutCell.h"
 #import "CHMNewMessageNotificationController.h"
 #import "CHMChangePasswordController.h"
+#import "CHMPushSettingController.h"
 
 static NSString *const settingCellReuseId = @"CHMAccountSettingCell";
 static NSString *const logoutCellReuseId = @"CHMLogoutCell";
@@ -107,13 +108,17 @@ static int const sectionHeaderHeight = 15;
         if (indexPath.row == 0) { // 密码修改
             [self.navigationController pushViewController:[CHMChangePasswordController new] animated:YES];
         }
-    }
-    
-    if (indexPath.section == 0) {
+        
         if (indexPath.row == 2) { // 新消息通知
             [self.navigationController pushViewController:[CHMNewMessageNotificationController new] animated:YES];
         }
+        
+        if (indexPath.row == 3) { // 推送设置
+            [self.navigationController pushViewController:[CHMPushSettingController new] animated:YES];
+        }
     }
+    
+
     
     if (indexPath.section == 1) {
         [self clearCache]; // 清除缓存

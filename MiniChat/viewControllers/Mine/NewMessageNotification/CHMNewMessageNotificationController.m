@@ -77,24 +77,19 @@ static NSString *const reuseId = @"CHMNewMsgSettingCell";
         [[RCIMClient sharedRCIMClient] setNotificationQuietHours:@"00:00:00"
                                                         spanMins:1439
                                                          success:^{
-                                                             NSLog(@"setNotificationQuietHours succeed");
-                                                             
-                                                             [[NSUserDefaults standardUserDefaults] setBool:YES forKey:KNewMessageNotification];
                                                              [CHMProgressHUD showSuccessWithInfo:@"设置成功"];
-                                                         }
-                                                           error:^(RCErrorCode status) {
-                                                               [CHMProgressHUD showErrorWithInfo:@"设置失败"];
-                                                               
-                                                           }];
+                                                         } error:^(RCErrorCode status) {
+                                                             [CHMProgressHUD showErrorWithInfo:@"设置失败"];
+                                                             
+                                                         }];
     } else {
-        [[RCIMClient sharedRCIMClient] removeNotificationQuietHours:^{
-            [[NSUserDefaults standardUserDefaults] setBool:NO forKey:KNewMessageNotification];
-        }
-                                                              error:^(RCErrorCode status) {
-                                                                  
-                                                                  
-                                                              }];
         
+        [[RCIMClient sharedRCIMClient] removeNotificationQuietHours:^{
+            [CHMProgressHUD showSuccessWithInfo:@"设置成功"];
+        } error:^(RCErrorCode status) {
+            [CHMProgressHUD showErrorWithInfo:@"设置失败"];
+            
+        }];
     }
     
 }

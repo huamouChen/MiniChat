@@ -87,6 +87,7 @@
 		C0CCCFF020A4838200DD46B2 /* loading_IOS.jpg in Resources */ = {isa = PBXBuildFile; fileRef = C0CCCFEF20A4838200DD46B2 /* loading_IOS.jpg */; };
 		C0CCCFF520A535B800DD46B2 /* CHMChangePasswordController.m in Sources */ = {isa = PBXBuildFile; fileRef = C0CCCFF320A535B800DD46B2 /* CHMChangePasswordController.m */; };
 		C0CCCFF620A535B800DD46B2 /* CHMChangePasswordController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C0CCCFF420A535B800DD46B2 /* CHMChangePasswordController.xib */; };
+		C0CCCFFA20A5416200DD46B2 /* CHMPushSettingController.m in Sources */ = {isa = PBXBuildFile; fileRef = C0CCCFF920A5416200DD46B2 /* CHMPushSettingController.m */; };
 		C0EAA5D72097E8210046F05C /* CHMHttpTool.m in Sources */ = {isa = PBXBuildFile; fileRef = C0EAA5D62097E8210046F05C /* CHMHttpTool.m */; };
 		C0EAA5ED20981EE70046F05C /* CHMLoginController.m in Sources */ = {isa = PBXBuildFile; fileRef = C0EAA5EB20981EE70046F05C /* CHMLoginController.m */; };
 		C0EAA5EE20981EE70046F05C /* CHMLoginController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C0EAA5EC20981EE70046F05C /* CHMLoginController.xib */; };
@@ -264,6 +265,8 @@
 		C0CCCFF220A535B800DD46B2 /* CHMChangePasswordController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CHMChangePasswordController.h; sourceTree = "<group>"; };
 		C0CCCFF320A535B800DD46B2 /* CHMChangePasswordController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CHMChangePasswordController.m; sourceTree = "<group>"; };
 		C0CCCFF420A535B800DD46B2 /* CHMChangePasswordController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CHMChangePasswordController.xib; sourceTree = "<group>"; };
+		C0CCCFF820A5416200DD46B2 /* CHMPushSettingController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CHMPushSettingController.h; sourceTree = "<group>"; };
+		C0CCCFF920A5416200DD46B2 /* CHMPushSettingController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CHMPushSettingController.m; sourceTree = "<group>"; };
 		C0EAA5D52097E8210046F05C /* CHMHttpTool.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CHMHttpTool.h; sourceTree = "<group>"; };
 		C0EAA5D62097E8210046F05C /* CHMHttpTool.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CHMHttpTool.m; sourceTree = "<group>"; };
 		C0EAA5E120980AE30046F05C /* HttpConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HttpConstants.h; sourceTree = "<group>"; };
@@ -726,6 +729,15 @@
 			path = ChangePassword;
 			sourceTree = "<group>";
 		};
+		C0CCCFF720A5413100DD46B2 /* PushSetting */ = {
+			isa = PBXGroup;
+			children = (
+				C0CCCFF820A5416200DD46B2 /* CHMPushSettingController.h */,
+				C0CCCFF920A5416200DD46B2 /* CHMPushSettingController.m */,
+			);
+			path = PushSetting;
+			sourceTree = "<group>";
+		};
 		C0EAA5C82097123C0046F05C /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
@@ -815,6 +827,7 @@
 		C0EAA60320985DAE0046F05C /* Mine */ = {
 			isa = PBXGroup;
 			children = (
+				C0CCCFF720A5413100DD46B2 /* PushSetting */,
 				C0CCCFF120A535A200DD46B2 /* ChangePassword */,
 				C0CCCFB920A2F18300DD46B2 /* UserInfo */,
 				C0CCCFAD20A2E1AA00DD46B2 /* NewMessageNotification */,
@@ -1256,6 +1269,7 @@
 				C0CCCF6B20A13CBE00DD46B2 /* CHMNewFriendCell.m in Sources */,
 				C0CCCF6420A0794C00DD46B2 /* RCDAddressBookTableViewCell.m in Sources */,
 				C0137A5B209F385E004D8358 /* CHMInfoProvider.m in Sources */,
+				C0CCCFFA20A5416200DD46B2 /* CHMPushSettingController.m in Sources */,
 				C0EAA62F209872520046F05C /* CHMMineItemCell.m in Sources */,
 				C0CCCFBC20A2F70300DD46B2 /* CHMUserInfoController.m in Sources */,
 				C0EFDBAD209C8FE400848710 /* CHMPalyCell.m in Sources */,
