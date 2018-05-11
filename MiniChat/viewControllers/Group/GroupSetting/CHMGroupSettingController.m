@@ -28,7 +28,9 @@ static NSString *const deleteMember = @"GroupCutdown";    // 删除成员
 
 @interface CHMGroupSettingController () <UICollectionViewDelegate, UICollectionViewDataSource, UIImagePickerControllerDelegate, UINavigationControllerDelegate>
 
-@property (nonatomic, strong) CHMGroupModel *cuurentGroupModel;
+@property (nonatomic, strong) CHMGroupModel *cuurentGroupModel;  // 当前组
+
+@property (nonatomic, strong) RCConversation *currentConversation;  // 当前会话
 
 @property (nonatomic, strong) UICollectionView *headerView;
 @property (nonatomic, strong) NSMutableArray *collectionViewResource;
@@ -42,6 +44,9 @@ static NSString *const deleteMember = @"GroupCutdown";    // 删除成员
 
 @property (nonatomic, strong) UIImagePickerController *imagePickerController; // 为了群头像
 
+@property (nonatomic, assign) BOOL enableNewMessageNotification;   // 消息免打扰
+@property (nonatomic, assign) BOOL isTopChat;   // 会话置顶
+
 @end
 
 @implementation CHMGroupSettingController
@@ -51,6 +56,11 @@ static NSString *const deleteMember = @"GroupCutdown";    // 删除成员
  获取群组成员
  */
 - (void)startLoad {
+    
+    // 会话置顶
+    self.currentConversation = [[RCIMClient sharedRCIMClient] getConversation:ConversationType_GROUP targetId:_groupId];
+    self.isTopChat = self.currentConversation.isTop;
+    
     __weak typeof(self) weakSelf = self;
     [CHMHttpTool getGroupMembersWithGroupId:self.groupId success:^(id response) {
         NSLog(@"--------%@",response);
@@ -70,6 +80,24 @@ static NSString *const deleteMember = @"GroupCutdown";    // 删除成员
     } failure:^(NSError *error) {
         [CHMProgressHUD showErrorWithInfo:[NSString stringWithFormat:@"错误码--%zd", error.code]];
     }];
+    
+    
+    // 消息免打扰
+    [[RCIMClient sharedRCIMClient] getConversationNotificationStatus:ConversationType_GROUP
+                                                            targetId:_groupId
+                                                             success:^(RCConversationNotificationStatus nStatus) {
+                                                                 weakSelf.enableNewMessageNotification = NO;
+                                                                 if (nStatus == NOTIFY) {
+                                                                     weakSelf.enableNewMessageNotification = YES;
+                                                                 }
+                                                                 dispatch_async(dispatch_get_main_queue(), ^{
+                                                                     [weakSelf initLocalData];
+                                                                 });
+                                                             }
+                                                               error:^(RCErrorCode status){ }];
+    
+    
+    
 }
 
 
@@ -200,6 +228,10 @@ static NSString *const deleteMember = @"GroupCutdown";    // 删除成员
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     CHMGroupSettingCell *cell = [tableView dequeueReusableCellWithIdentifier:itemCellReuseId];
     cell.infoDict = _itemArray[indexPath.section][indexPath.row];
+    cell.indexPath = indexPath;
+    cell.switchClickBlock = ^(NSIndexPath *selectedIndexPath, UISwitch *switchBtn) {
+        [self switchButton:switchBtn didClickWithIndexPath:selectedIndexPath];
+    };
     return cell;
 }
 
@@ -223,6 +255,46 @@ static NSString *const deleteMember = @"GroupCutdown";    // 删除成员
             [self clearChatCache];
         }
     }
+}
+
+
+#pragma mark - 点击开关按钮
+/**
+ 点击开关按钮
+
+ @param indexPath switch 所在的 indexPath
+ */
+- (void)switchButton:(UISwitch *)switchButton didClickWithIndexPath:(NSIndexPath *)indexPath  {
+    if (indexPath.section == 2) {
+        if (indexPath.row == 0) { // 消息免打扰
+            [self setAcceptNewMessage:switchButton];
+        }
+        if (indexPath.row == 1) { // 会话置顶
+            [self setChatTop:switchButton];
+        }
+    }
+}
+
+/**
+ 设置是否消息免打扰
+ */
+- (void)setAcceptNewMessage:(UISwitch *)switchButton {
+    [[RCIMClient sharedRCIMClient] setConversationNotificationStatus:ConversationType_GROUP
+                                                            targetId:_groupId
+                                                           isBlocked:switchButton.on
+                                                             success:^(RCConversationNotificationStatus nStatus) {
+                                                                 NSLog(@"消息免打扰成功");
+                                                             }
+                                                               error:^(RCErrorCode status) {
+                                                                   NSLog(@"消息免打扰失败");
+                                                               }];
+}
+
+/**
+ 会话置顶
+ */
+- (void)setChatTop:(UISwitch *)switchButton {
+    [[RCIMClient sharedRCIMClient] setConversationToTop:ConversationType_GROUP targetId:_groupId isTop:switchButton.on];
 }
 
 #pragma mark - 清除聊天记录
@@ -249,7 +321,7 @@ static NSString *const deleteMember = @"GroupCutdown";    // 删除成员
     NSArray *latestMessages = [[RCIMClient sharedRCIMClient] getLatestMessages:ConversationType_GROUP targetId:_groupId count:1];
     if (latestMessages.count > 0) {
         [CHMProgressHUD showWithInfo:@"正在清除中..." isHaveMask:YES];
-//        RCMessage *message = (RCMessage *)[latestMessages firstObject];
+        //        RCMessage *message = (RCMessage *)[latestMessages firstObject];
         
         
         [[RCIMClient sharedRCIMClient] deleteMessages:ConversationType_GROUP
@@ -264,24 +336,24 @@ static NSString *const deleteMember = @"GroupCutdown";    // 删除成员
                                                 }];
         
         // 远程消息需要开通增值服务才可以
-//        [[RCIMClient sharedRCIMClient] clearRemoteHistoryMessages:ConversationType_GROUP
-//                                                        targetId:weakSelf.groupId
-//                                                      recordTime:message.sentTime
-//                                                         success:^{
-//                                                             [[RCIMClient sharedRCIMClient] deleteMessages:ConversationType_GROUP
-//                                                                                                  targetId:weakSelf.groupId
-//                                                                                                   success:^{
-//                                                                                                       [CHMProgressHUD showSuccessWithInfo:@"清除成功"];
-//                                                                                                       [[NSNotificationCenter defaultCenter] postNotificationName:@"ClearHistoryMsg" object:nil];
-//
-//                                                                                                   }
-//                                                                                                     error:^(RCErrorCode status) {
-//                                                                                                         [CHMProgressHUD dismissHUD];
-//                                                                                                     }];
-//                                                         }
-//                                                           error:^(RCErrorCode status) {
-//                                                               [CHMProgressHUD showErrorWithInfo:@"清除失败"];
-//                                                           }];
+        //        [[RCIMClient sharedRCIMClient] clearRemoteHistoryMessages:ConversationType_GROUP
+        //                                                        targetId:weakSelf.groupId
+        //                                                      recordTime:message.sentTime
+        //                                                         success:^{
+        //                                                             [[RCIMClient sharedRCIMClient] deleteMessages:ConversationType_GROUP
+        //                                                                                                  targetId:weakSelf.groupId
+        //                                                                                                   success:^{
+        //                                                                                                       [CHMProgressHUD showSuccessWithInfo:@"清除成功"];
+        //                                                                                                       [[NSNotificationCenter defaultCenter] postNotificationName:@"ClearHistoryMsg" object:nil];
+        //
+        //                                                                                                   }
+        //                                                                                                     error:^(RCErrorCode status) {
+        //                                                                                                         [CHMProgressHUD dismissHUD];
+        //                                                                                                     }];
+        //                                                         }
+        //                                                           error:^(RCErrorCode status) {
+        //                                                               [CHMProgressHUD showErrorWithInfo:@"清除失败"];
+        //                                                           }];
     }
 }
 
@@ -398,6 +470,18 @@ static NSString *const deleteMember = @"GroupCutdown";    // 删除成员
 
 
 #pragma mark - view life  cycler
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    if (_collectionViewResource.count < 1) {
+        [self startLoad];
+    }
+    if (_collectionViewResource.count > 0) {
+        self.title = [NSString stringWithFormat:@"群组信息(%zd)", _collectionViewResource.count];
+    } else {
+        self.title = @"群组信息";
+    }
+}
+
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
     [CHMProgressHUD dismissHUD];
@@ -419,6 +503,9 @@ static NSString *const deleteMember = @"GroupCutdown";    // 删除成员
 - (void)initLocalData {
     self.cuurentGroupModel = [[CHMDataBaseManager shareManager] getGroupByGroupId:_groupId];
     
+    NSString *newMsgNoti = _enableNewMessageNotification ? @"0" : @"1";  // 消息免打扰
+    NSString *isTopChat = _isTopChat ? @"1" : @"0";                      // 会话置顶
+    
     self.itemArray = @[@[@{KItemName: @"群组头像", KItemIsShowSwitch: @"o", KItemPortrait: _cuurentGroupModel.GroupImage, KItemSwitch: @"0", KItemValue:@""},
                          @{KItemName: @"群组名称", KItemIsShowSwitch: @"o", KItemPortrait: @"", KItemSwitch: @"0", KItemValue:_cuurentGroupModel.GroupName},
                          @{KItemName: @"群公告", KItemIsShowSwitch: @"o", KItemPortrait: @"", KItemSwitch: @"0", KItemValue:@""}
@@ -426,11 +513,13 @@ static NSString *const deleteMember = @"GroupCutdown";    // 删除成员
                        
                        @[@{KItemName: @"查找聊天记录", KItemIsShowSwitch: @"o", KItemPortrait: @"", KItemSwitch: @"0", KItemValue:@""},],
                        
-                       @[@{KItemName: @"消息免打扰", KItemIsShowSwitch: @"1", KItemPortrait: @"", KItemSwitch: @"0", KItemValue:@""},
-                         @{KItemName: @"会话置顶", KItemIsShowSwitch: @"1", KItemPortrait: @"", KItemSwitch: @"0", KItemValue:@""},
+                       @[@{KItemName: @"消息免打扰", KItemIsShowSwitch: @"1", KItemPortrait: @"", KItemSwitch: newMsgNoti, KItemValue:@""},
+                         @{KItemName: @"会话置顶", KItemIsShowSwitch: @"1", KItemPortrait: @"", KItemSwitch: isTopChat, KItemValue:@""},
                          @{KItemName: @"清除聊天记录", KItemIsShowSwitch: @"o", KItemPortrait: @"", KItemSwitch: @"0", KItemValue:@""}
                          ]
                        ];
+    // 刷新数据
+    [self.tableView reloadData];
 }
 
 
@@ -441,7 +530,6 @@ static NSString *const deleteMember = @"GroupCutdown";    // 删除成员
     // 返回按钮
     //    CHMBarButtonItem *leftButton = [[CHMBarButtonItem alloc] initWithLeftBarButton:@"返回" target:self action:@selector(backBarButtonItemClicked:)];
     //    [self.navigationItem setLeftBarButtonItem:leftButton];
-    
     
     // collection view
     CGRect tempRect =
@@ -483,21 +571,6 @@ static NSString *const deleteMember = @"GroupCutdown";    // 删除成员
 - (void)backBarButtonItemClicked:(id)sender {
     [self.navigationController popViewControllerAnimated:YES];
 }
-
-
-- (void)viewWillAppear:(BOOL)animated {
-    [super viewWillAppear:animated];
-    if (_collectionViewResource.count < 1) {
-        [self startLoad];
-    }
-    if (_collectionViewResource.count > 0) {
-        self.title = [NSString stringWithFormat:@"群组信息(%zd)", _collectionViewResource.count];
-    } else {
-        self.title = @"群组信息";
-    }
-}
-
-
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
