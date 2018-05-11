@@ -41,6 +41,9 @@
 // 同意好友请求
 #define KAcceptResponse             @"AcceptResponse"
 
+// 清除聊天记录
+#define KClearHistoryMsg             @"ClearHistoryMsg"
+
 
 
 

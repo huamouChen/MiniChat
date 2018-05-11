@@ -217,9 +217,77 @@ static NSString *const deleteMember = @"GroupCutdown";    // 删除成员
             [self portraitClick];
         }
     }
+    
+    if (indexPath.section == 2) {
+        if (indexPath.row == 2) {
+            [self clearChatCache];
+        }
+    }
+}
+
+#pragma mark - 清除聊天记录
+/**
+ 清除聊天记录
+ */
+- (void)clearChatCache {
+    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"" message:@"确定清除聊天记录？" preferredStyle:UIAlertControllerStyleActionSheet];
+    
+    // cancle action
+    UIAlertAction *cancleAction = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {}];
+    // comfirm action
+    UIAlertAction *comfirmAction = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
+        [self clearMessageCache];
+    }];
+    
+    [alertController addAction:comfirmAction];
+    [alertController addAction:cancleAction];
+    
+    [self presentViewController:alertController animated:YES completion:nil];
+}
+- (void)clearMessageCache {
+    __weak typeof(self) weakSelf = self;
+    NSArray *latestMessages = [[RCIMClient sharedRCIMClient] getLatestMessages:ConversationType_GROUP targetId:_groupId count:1];
+    if (latestMessages.count > 0) {
+        [CHMProgressHUD showWithInfo:@"正在清除中..." isHaveMask:YES];
+//        RCMessage *message = (RCMessage *)[latestMessages firstObject];
+        
+        
+        [[RCIMClient sharedRCIMClient] deleteMessages:ConversationType_GROUP
+                                             targetId:weakSelf.groupId
+                                              success:^{
+                                                  [CHMProgressHUD showSuccessWithInfo:@"清除成功"];
+                                                  [[NSNotificationCenter defaultCenter] postNotificationName:KClearHistoryMsg object:nil];
+                                                  
+                                              }
+                                                error:^(RCErrorCode status) {
+                                                    [CHMProgressHUD dismissHUD];
+                                                }];
+        
+        // 远程消息需要开通增值服务才可以
+//        [[RCIMClient sharedRCIMClient] clearRemoteHistoryMessages:ConversationType_GROUP
+//                                                        targetId:weakSelf.groupId
+//                                                      recordTime:message.sentTime
+//                                                         success:^{
+//                                                             [[RCIMClient sharedRCIMClient] deleteMessages:ConversationType_GROUP
+//                                                                                                  targetId:weakSelf.groupId
+//                                                                                                   success:^{
+//                                                                                                       [CHMProgressHUD showSuccessWithInfo:@"清除成功"];
+//                                                                                                       [[NSNotificationCenter defaultCenter] postNotificationName:@"ClearHistoryMsg" object:nil];
+//
+//                                                                                                   }
+//                                                                                                     error:^(RCErrorCode status) {
+//                                                                                                         [CHMProgressHUD dismissHUD];
+//                                                                                                     }];
+//                                                         }
+//                                                           error:^(RCErrorCode status) {
+//                                                               [CHMProgressHUD showErrorWithInfo:@"清除失败"];
+//                                                           }];
+    }
 }
 
 
+
+#pragma mark - 显示头像弹出框
 /**
  显示头像弹出框
  */
@@ -329,7 +397,12 @@ static NSString *const deleteMember = @"GroupCutdown";    // 删除成员
 }
 
 
-#pragma mark view life cycler
+#pragma mark - view life  cycler
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+    [CHMProgressHUD dismissHUD];
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     
@@ -401,7 +474,6 @@ static NSString *const deleteMember = @"GroupCutdown";    // 删除成员
     };
     [self.tableViewFooter.dismissButton setTitle:@"退出" forState:UIControlStateNormal];
     self.tableView.tableFooterView = _tableViewFooter;
-    
 }
 
 
@@ -431,6 +503,5 @@ static NSString *const deleteMember = @"GroupCutdown";    // 删除成员
     [super didReceiveMemoryWarning];
 }
 
-#pragma mark - Table view data source
 
 @end

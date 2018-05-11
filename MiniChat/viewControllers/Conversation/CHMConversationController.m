@@ -18,8 +18,20 @@ static NSInteger const bettingTag = 2000;
 
 @implementation CHMConversationController
 
+#pragma mark - view life  cycler
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+    [CHMProgressHUD dismissHUD];
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    //清除历史消息
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(clearHistoryMSG:)
+                                                 name:KClearHistoryMsg
+                                               object:nil];
     
     [self setupRightBarButton];
     
@@ -31,10 +43,7 @@ static NSInteger const bettingTag = 2000;
             [self.chatSessionInputBarControl.pluginBoardView removeItemWithTag:bettingTag];
         }
     }
-    
 }
-
-
 
 /**
  扩展框方法响应
@@ -51,6 +60,14 @@ static NSInteger const bettingTag = 2000;
         bettingController.modalPresentationStyle = UIModalPresentationOverCurrentContext;
         [self presentViewController:bettingController animated:YES completion:nil];
     }
+}
+
+#pragma mark 清除聊天记录
+- (void)clearHistoryMSG:(NSNotification *)notification {
+    [self.conversationDataRepository removeAllObjects];
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [self.conversationMessageCollectionView reloadData];
+    });
 }
 
 
@@ -124,6 +141,7 @@ static NSInteger const bettingTag = 2000;
  *  不添加rightBarButtonItemClicked事件，则使用默认实现。
  */
 - (void)rightBarButtonItemClicked:(id)sender {
+    [self.view endEditing:YES];
     
     if (self.conversationType == ConversationType_PRIVATE) {
 //        RCDUserInfo *friendInfo = [[RCDataBaseManager shareInstance] getFriendInfo:self.targetId];
@@ -207,7 +225,6 @@ static NSInteger const bettingTag = 2000;
         [self.navigationController pushViewController:infoVC animated:YES];
     }
 }
-
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
