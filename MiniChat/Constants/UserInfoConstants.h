@@ -47,8 +47,12 @@
 #define KTitle    @"cellTitle"
 
 
-#define KItemName    @"itemName"
-#define KItemValue   @"itemValue"
+// dictionary 用来传值
+#define KItemName       @"itemName"
+#define KItemValue      @"itemValue"
+#define KItemPortrait   @"itemPortrait"
+#define KItemSwitch     @"itemSwitch"
+#define KItemIsShowSwitch     @"itemIsShowSwitch"
 
 
 

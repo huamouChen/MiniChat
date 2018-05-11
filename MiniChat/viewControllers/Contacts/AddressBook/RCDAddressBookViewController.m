@@ -53,7 +53,7 @@ static CGFloat const rowHeight = 65;
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
-    self.navigationItem.title = @"新朋友";
+    self.navigationItem.title = @"新的朋友";
     
     self.tableView.tableFooterView = [UIView new];
     self.tableView.rowHeight = rowHeight;
@@ -83,15 +83,11 @@ static CGFloat const rowHeight = 65;
 
 
 
-
-
-
-
-//- (void)viewWillAppear:(BOOL)animated {
-//    [super viewWillAppear:animated];
-//    _needSyncFriendList = YES;
-//    [self getAllData];
-//}
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    self.needSyncFriendList = YES;
+    [self getAllData];
+}
 
 //删除已选中用户
 - (void)removeSelectedUsers:(NSArray *)selectedUsers {
@@ -111,12 +107,12 @@ static CGFloat const rowHeight = 65;
  */
 - (void)getAllData {
     __weak typeof(self) weakSelf = self;
-    _friends = [NSMutableArray arrayWithArray:[[CHMDataBaseManager shareManager] getAllFriends]];
+    self.friends = [NSMutableArray arrayWithArray:[[CHMDataBaseManager shareManager] getAllFriends]];
     if (_friends.count > 0) {
         self.hideSectionHeader = YES;
-        _friends = [self sortForFreindList:_friends];
+        weakSelf.friends = [self sortForFreindList:_friends];
         tag = 0;
-        [self.tableView reloadData];
+        [weakSelf.tableView reloadData];
     } else {
         CGRect frame = CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT - 64);
         self.noFriendView = [[RCDNoFriendView alloc] initWithFrame:frame];
@@ -129,14 +125,13 @@ static CGFloat const rowHeight = 65;
             self->isSyncFriends = YES;
             if (friends.count > 0 ) {
                 dispatch_async(dispatch_get_main_queue(), ^{
-                    if (self.noFriendView != nil) {
-                        [self.noFriendView removeFromSuperview];
+                    if (weakSelf.noFriendView != nil) {
+                        [weakSelf.noFriendView removeFromSuperview];
                     }
                 });
                 
                 [self getAllData];
             }
-            
         }];
     }
 }
@@ -162,17 +157,6 @@ static CGFloat const rowHeight = 65;
     cell.acceptButtonClickBlock = ^(NSIndexPath *selectedIndexPath) {
         [self acceptButtonClickWithIndexPath:selectedIndexPath];
     };
-    
-    
-    //    RCUserInfo *user = _friends[indexPath.row];
-    //    [_friendsDic setObject:user forKey:[NSString stringWithFormat:@"%ld", (long)cell.tag]];
-    //    [cell setModel:user];
-    //    if ([user.status intValue] == 11) {
-    //        cell.selected = NO;
-    //        cell.acceptBtn.hidden = NO;
-    //        [cell.acceptBtn addTarget:self action:@selector(doAccept:) forControlEvents:UIControlEventTouchUpInside];
-    //        cell.arrow.hidden = YES;
-    //    }
     return cell;
 }
 
@@ -242,45 +226,6 @@ static CGFloat const rowHeight = 65;
     chatViewController.displayUserNameInCell = NO;
     //    chatViewController.needPopToRootView = YES;
     [self.navigationController pushViewController:chatViewController animated:YES];
-}
-
-- (void)doAccept:(UIButton *)sender {
-    
-    NSInteger tempTag = sender.tag;
-    tempTag -= 5000;
-    RCDAddressBookTableViewCell *cell = (RCDAddressBookTableViewCell *)[self.view viewWithTag:tempTag];
-    
-    RCUserInfo *friend = [_friendsDic objectForKey:[NSString stringWithFormat:@"%ld", (long)tempTag]];
-    
-    //    [RCDHTTPTOOL processInviteFriendRequest:friend.userId
-    //                                   complete:^(BOOL request) {
-    //                                       if (request) {
-    //                                           [RCDHTTPTOOL getFriendscomplete:^(NSMutableArray *result) {
-    //
-    //                                               dispatch_async(dispatch_get_main_queue(), ^{
-    //                                                   cell.acceptBtn.hidden = YES;
-    //                                                   cell.arrow.hidden = NO;
-    //                                                   cell.rightLabel.hidden = NO;
-    //                                                   cell.rightLabel.text = @"已接受";
-    //                                                   cell.selected = YES;
-    //                                                   [hud hide:YES];
-    //                                               });
-    //                                           }];
-    //                                           [RCDHTTPTOOL getFriendscomplete:^(NSMutableArray *result){
-    //
-    //                                           }];
-    //                                       } else {
-    //                                           dispatch_async(dispatch_get_main_queue(), ^{
-    //                                               [hud hide:YES];
-    //                                               UIAlertView *failAlert = [[UIAlertView alloc] initWithTitle:@"添加失败"
-    //                                                                                                   message:nil
-    //                                                                                                  delegate:nil
-    //                                                                                         cancelButtonTitle:@"确定"
-    //                                                                                         otherButtonTitles:nil, nil];
-    //                                               [failAlert show];
-    //                                           });
-    //                                       }
-    //                                   }];
 }
 
 - (NSMutableArray *)sortForFreindList:(NSMutableArray *)friendList {

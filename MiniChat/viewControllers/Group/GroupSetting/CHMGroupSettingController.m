@@ -14,6 +14,7 @@
 #import "CHMGroupMemberModel.h"
 #import "CHMUserDetailController.h"
 #import "CHMSelectMemberController.h"
+#import <Photos/Photos.h>
 
 static CGFloat const rowHeight = 44;
 static CGFloat const sectionHeight = 15;
@@ -25,7 +26,9 @@ static NSString *const addMember = @"GroupAdd";    // 添加成员
 static NSString *const deleteMember = @"GroupCutdown";    // 删除成员
 
 
-@interface CHMGroupSettingController () <UICollectionViewDelegate, UICollectionViewDataSource>
+@interface CHMGroupSettingController () <UICollectionViewDelegate, UICollectionViewDataSource, UIImagePickerControllerDelegate, UINavigationControllerDelegate>
+
+@property (nonatomic, strong) CHMGroupModel *cuurentGroupModel;
 
 @property (nonatomic, strong) UICollectionView *headerView;
 @property (nonatomic, strong) NSMutableArray *collectionViewResource;
@@ -37,11 +40,13 @@ static NSString *const deleteMember = @"GroupCutdown";    // 删除成员
 
 @property (nonatomic, strong) UIViewController *deleteVC;  // 删除数组控制器
 
+@property (nonatomic, strong) UIImagePickerController *imagePickerController; // 为了群头像
+
 @end
 
 @implementation CHMGroupSettingController
 
-#pragma mark - 获取数据
+#pragma mark - load data
 /**
  获取群组成员
  */
@@ -194,7 +199,7 @@ static NSString *const deleteMember = @"GroupCutdown";    // 删除成员
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     CHMGroupSettingCell *cell = [tableView dequeueReusableCellWithIdentifier:itemCellReuseId];
-    cell.itemTitle = _itemArray[indexPath.section][indexPath.row];
+    cell.infoDict = _itemArray[indexPath.section][indexPath.row];
     return cell;
 }
 
@@ -207,15 +212,152 @@ static NSString *const deleteMember = @"GroupCutdown";    // 删除成员
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    if (indexPath.section == 0) {
+        if (indexPath.row == 0) { // 群头像
+            [self portraitClick];
+        }
+    }
+}
+
+
+/**
+ 显示头像弹出框
+ */
+- (void)portraitClick {
+    self.imagePickerController = [[UIImagePickerController alloc] init];
+    // 可编辑
+    self.imagePickerController.allowsEditing = YES;
+    self.imagePickerController.delegate = self;
+    
+    UIAlertController *alertController = [[UIAlertController alloc] init];
+    // 取消
+    UIAlertAction *cancleAction = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+        [self.imagePickerController dismissViewControllerAnimated:YES completion:nil];
+    }];
+    // 拍照
+    UIAlertAction *cameraAction = [UIAlertAction actionWithTitle:@"拍照" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        [self showCamera];
+    }];
+    // 从相册选择
+    UIAlertAction *albumAction = [UIAlertAction actionWithTitle:@"相册" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        [self showImagePicker];
+    }];
+    [alertController addAction:cancleAction];
+    [alertController addAction:cameraAction];
+    [alertController addAction:albumAction];
+    
+    [self presentViewController:alertController animated:YES completion:nil];
+}
+/**
+ 拍照
+ */
+- (void)showCamera {
+    AVAuthorizationStatus authorizationStatus = [AVCaptureDevice authorizationStatusForMediaType:AVMediaTypeVideo];
+    if (authorizationStatus == AVAuthorizationStatusRestricted || authorizationStatus == AVAuthorizationStatusDenied) {
+        // 没有权限
+        NSURL *url = [NSURL URLWithString:UIApplicationOpenSettingsURLString];
+        if ([[UIApplication sharedApplication] canOpenURL:url]) {
+            [[UIApplication sharedApplication] openURL:url options:@{} completionHandler:nil];
+        }
+    } else {
+        // 是否支持相机功能
+        if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
+            self.imagePickerController.sourceType = UIImagePickerControllerSourceTypeCamera;
+            [self presentViewController:self.imagePickerController animated:YES completion:nil];
+        } else {
+            [CHMProgressHUD showErrorWithInfo:@"相机功能不可用"];
+        }
+    }
+}
+/**
+ 从相册选中照片
+ */
+- (void)showImagePicker {
+    PHAuthorizationStatus authorizationStatus = [PHPhotoLibrary authorizationStatus];
+    if (authorizationStatus == PHAuthorizationStatusDenied || authorizationStatus == PHAuthorizationStatusRestricted) {
+        NSURL *url = [NSURL URLWithString:UIApplicationOpenSettingsURLString];
+        if ([[UIApplication sharedApplication] canOpenURL:url]) {
+            [[UIApplication sharedApplication] openURL:url options:@{} completionHandler:nil];
+        }
+    } else {
+        if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypePhotoLibrary]) {
+            self.imagePickerController.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+            [self presentViewController:self.imagePickerController animated:YES completion:nil];
+        } else {
+            [CHMProgressHUD showErrorWithInfo:@"相册功能不可用"];
+        }
+    }
+}
+#pragma mark - UIImagePickerControllerDelegate
+- (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker {
+    [picker dismissViewControllerAnimated:YES completion:nil];
+}
+
+- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary<NSString *,id> *)info {
+    [self imagePickerControllerDidCancel:picker];
+    UIImage *selectedImage = nil;
+    selectedImage = picker.allowsEditing ? info[UIImagePickerControllerEditedImage] : info[UIImagePickerControllerOriginalImage];
+    [self uploadPortraitWithImage:selectedImage];
+}
+
+/**
+ 上传头像
+ */
+- (void)uploadPortraitWithImage:(UIImage *)image {
+    // 上传头像到服务器
+    [CHMProgressHUD showWithInfo:@"正在上传中..." isHaveMask:YES];
+    __weak typeof(self) weakSelf = self;
+    
+    [CHMHttpTool setGroupPortraitWithGroupId:_groupId groupPortrait:image success:^(id response) {
+        NSLog(@"-------------%@",response);
+        NSNumber *codeId = response[@"Code"][@"CodeId"];
+        if (codeId.integerValue == 100) {
+            [CHMProgressHUD dismissHUD];
+            NSString *headerImageString = [NSString stringWithFormat:@"%@%@", BaseURL, response[@"Value"][@"GroupImage"]];
+            // 保存到本地
+            CHMGroupModel *groupModel = [[CHMGroupModel alloc] initWithGroupId:weakSelf.groupId groupName:weakSelf.groupName groupPortrait:headerImageString];
+            [[CHMDataBaseManager shareManager] insertGroupToDB:groupModel];
+            // 刷新cell
+            [weakSelf initLocalData];
+            [weakSelf.tableView reloadData];
+        } else {
+            [CHMProgressHUD showErrorWithInfo:response[@"Code"][@"Description"]];
+        }
+    } failure:^(NSError *error) {
+        [CHMProgressHUD showErrorWithInfo:[NSString stringWithFormat:@"错误码--%ld",(long)error.code]];
+    }];
 }
 
 
 #pragma mark view life cycler
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    [self initLocalData];
+    
     [self setupAppearance];
     
     [self getGroupInfo];
+}
+
+/**
+ 获取本地数据
+ */
+- (void)initLocalData {
+    self.cuurentGroupModel = [[CHMDataBaseManager shareManager] getGroupByGroupId:_groupId];
+    
+    self.itemArray = @[@[@{KItemName: @"群组头像", KItemIsShowSwitch: @"o", KItemPortrait: _cuurentGroupModel.GroupImage, KItemSwitch: @"0", KItemValue:@""},
+                         @{KItemName: @"群组名称", KItemIsShowSwitch: @"o", KItemPortrait: @"", KItemSwitch: @"0", KItemValue:_cuurentGroupModel.GroupName},
+                         @{KItemName: @"群公告", KItemIsShowSwitch: @"o", KItemPortrait: @"", KItemSwitch: @"0", KItemValue:@""}
+                         ],
+                       
+                       @[@{KItemName: @"查找聊天记录", KItemIsShowSwitch: @"o", KItemPortrait: @"", KItemSwitch: @"0", KItemValue:@""},],
+                       
+                       @[@{KItemName: @"消息免打扰", KItemIsShowSwitch: @"1", KItemPortrait: @"", KItemSwitch: @"0", KItemValue:@""},
+                         @{KItemName: @"会话置顶", KItemIsShowSwitch: @"1", KItemPortrait: @"", KItemSwitch: @"0", KItemValue:@""},
+                         @{KItemName: @"清除聊天记录", KItemIsShowSwitch: @"o", KItemPortrait: @"", KItemSwitch: @"0", KItemValue:@""}
+                         ]
+                       ];
 }
 
 
@@ -224,12 +366,9 @@ static NSString *const deleteMember = @"GroupCutdown";    // 删除成员
  */
 - (void)setupAppearance {
     // 返回按钮
-    CHMBarButtonItem *leftButton = [[CHMBarButtonItem alloc] initWithLeftBarButton:@"返回" target:self action:@selector(backBarButtonItemClicked:)];
-//    [self.navigationItem setLeftBarButtonItem:leftButton];
+    //    CHMBarButtonItem *leftButton = [[CHMBarButtonItem alloc] initWithLeftBarButton:@"返回" target:self action:@selector(backBarButtonItemClicked:)];
+    //    [self.navigationItem setLeftBarButtonItem:leftButton];
     
-    self.itemArray = @[@[@"群组头像", @"群组名称", @"群公告"],
-                       @[@"查找聊天记录"],
-                       @[@"消息免打扰", @"会话置顶", @"清除聊天记录"]];
     
     // collection view
     CGRect tempRect =
@@ -242,7 +381,7 @@ static NSString *const deleteMember = @"GroupCutdown";    // 删除成员
     self.headerView = [[UICollectionView alloc] initWithFrame:tempRect collectionViewLayout:flowLayout];
     self.headerView.delegate = self;
     self.headerView.dataSource = self;
-//    self.headerView.scrollEnabled = NO;
+    //    self.headerView.scrollEnabled = NO;
     self.headerView.backgroundColor = [UIColor whiteColor];
     [self.headerView registerNib:[UINib nibWithNibName:NSStringFromClass([CHMGroupSettingHeaderCell class]) bundle:nil] forCellWithReuseIdentifier:headerCellReuseId];
     

@@ -14,6 +14,7 @@
 #import "CHMContactHeaderView.h"
 #import "CHMNewFriendsController.h"
 #import "CHMGroupListController.h"
+#import "RCDAddressBookViewController.h"
 
 static NSString *const contactReuseId = @"CHMContactCell";
 static int const rowHeight = 55;
@@ -217,8 +218,13 @@ static CGFloat const KIndexViewWidth = 55 / 2.0;
     CHMFriendModel *model = self.dataArr[indexPath.section][indexPath.row];
     // 新的朋友
     if ([model.UserName isEqualToString:KNewFriend]) {
-        [self.navigationController pushViewController:[CHMNewFriendsController new] animated:YES];
+        RCDAddressBookViewController *addressBookVC = [RCDAddressBookViewController addressBookViewController];
+        addressBookVC.needSyncFriendList = YES;
+        [self.navigationController pushViewController:addressBookVC animated:YES];
         return;
+        
+//        [self.navigationController pushViewController:[CHMNewFriendsController new] animated:YES];
+//        return;
     }
     // 群组列表
     if ([model.UserName isEqualToString:KGroupList]) {
