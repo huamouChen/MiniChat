@@ -85,6 +85,8 @@
 		C0CCCFCB20A3EC6400DD46B2 /* CHMEditUserInfoController.m in Sources */ = {isa = PBXBuildFile; fileRef = C0CCCFC920A3EC6400DD46B2 /* CHMEditUserInfoController.m */; };
 		C0CCCFCC20A3EC6400DD46B2 /* CHMEditUserInfoController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C0CCCFCA20A3EC6400DD46B2 /* CHMEditUserInfoController.xib */; };
 		C0CCCFF020A4838200DD46B2 /* loading_IOS.jpg in Resources */ = {isa = PBXBuildFile; fileRef = C0CCCFEF20A4838200DD46B2 /* loading_IOS.jpg */; };
+		C0CCCFF520A535B800DD46B2 /* CHMChangePasswordController.m in Sources */ = {isa = PBXBuildFile; fileRef = C0CCCFF320A535B800DD46B2 /* CHMChangePasswordController.m */; };
+		C0CCCFF620A535B800DD46B2 /* CHMChangePasswordController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C0CCCFF420A535B800DD46B2 /* CHMChangePasswordController.xib */; };
 		C0EAA5D72097E8210046F05C /* CHMHttpTool.m in Sources */ = {isa = PBXBuildFile; fileRef = C0EAA5D62097E8210046F05C /* CHMHttpTool.m */; };
 		C0EAA5ED20981EE70046F05C /* CHMLoginController.m in Sources */ = {isa = PBXBuildFile; fileRef = C0EAA5EB20981EE70046F05C /* CHMLoginController.m */; };
 		C0EAA5EE20981EE70046F05C /* CHMLoginController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C0EAA5EC20981EE70046F05C /* CHMLoginController.xib */; };
@@ -259,6 +261,9 @@
 		C0CCCFC920A3EC6400DD46B2 /* CHMEditUserInfoController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CHMEditUserInfoController.m; sourceTree = "<group>"; };
 		C0CCCFCA20A3EC6400DD46B2 /* CHMEditUserInfoController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CHMEditUserInfoController.xib; sourceTree = "<group>"; };
 		C0CCCFEF20A4838200DD46B2 /* loading_IOS.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = loading_IOS.jpg; sourceTree = "<group>"; };
+		C0CCCFF220A535B800DD46B2 /* CHMChangePasswordController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CHMChangePasswordController.h; sourceTree = "<group>"; };
+		C0CCCFF320A535B800DD46B2 /* CHMChangePasswordController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CHMChangePasswordController.m; sourceTree = "<group>"; };
+		C0CCCFF420A535B800DD46B2 /* CHMChangePasswordController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CHMChangePasswordController.xib; sourceTree = "<group>"; };
 		C0EAA5D52097E8210046F05C /* CHMHttpTool.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CHMHttpTool.h; sourceTree = "<group>"; };
 		C0EAA5D62097E8210046F05C /* CHMHttpTool.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CHMHttpTool.m; sourceTree = "<group>"; };
 		C0EAA5E120980AE30046F05C /* HttpConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HttpConstants.h; sourceTree = "<group>"; };
@@ -711,6 +716,16 @@
 			path = view;
 			sourceTree = "<group>";
 		};
+		C0CCCFF120A535A200DD46B2 /* ChangePassword */ = {
+			isa = PBXGroup;
+			children = (
+				C0CCCFF220A535B800DD46B2 /* CHMChangePasswordController.h */,
+				C0CCCFF320A535B800DD46B2 /* CHMChangePasswordController.m */,
+				C0CCCFF420A535B800DD46B2 /* CHMChangePasswordController.xib */,
+			);
+			path = ChangePassword;
+			sourceTree = "<group>";
+		};
 		C0EAA5C82097123C0046F05C /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
@@ -800,6 +815,7 @@
 		C0EAA60320985DAE0046F05C /* Mine */ = {
 			isa = PBXGroup;
 			children = (
+				C0CCCFF120A535A200DD46B2 /* ChangePassword */,
 				C0CCCFB920A2F18300DD46B2 /* UserInfo */,
 				C0CCCFAD20A2E1AA00DD46B2 /* NewMessageNotification */,
 				C0CCCF9520A2C4FF00DD46B2 /* About */,
@@ -1100,6 +1116,7 @@
 				C0CCCFA020A2C64A00DD46B2 /* CHMAboutCell.xib in Resources */,
 				C0EFDBA2209C142500848710 /* CHMCreateGroupController.xib in Resources */,
 				C066ED982099E45500CB87FC /* CHMAccountSettingCell.xib in Resources */,
+				C0CCCFF620A535B800DD46B2 /* CHMChangePasswordController.xib in Resources */,
 				C066ED8C2099C98F00CB87FC /* CHMConversationController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1211,6 +1228,7 @@
 				C0CCCF9F20A2C64A00DD46B2 /* CHMAboutCell.m in Sources */,
 				C00177C4209EB2F5001B44DE /* CHMGroupSettingHeaderCell.m in Sources */,
 				C0CCCF9020A2A82900DD46B2 /* RCDCSTagView.m in Sources */,
+				C0CCCFF520A535B800DD46B2 /* CHMChangePasswordController.m in Sources */,
 				C0EAA60820985DCC0046F05C /* CHMChatRoomController.m in Sources */,
 				C0CCCF7C20A2A77700DD46B2 /* RCDCustomerServiceViewController.m in Sources */,
 				C0CCCFC120A3DD0D00DD46B2 /* CHMUserPortraitCell.m in Sources */,

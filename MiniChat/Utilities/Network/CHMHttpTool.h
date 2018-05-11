@@ -56,6 +56,16 @@ typedef void(^failureBlock)(NSError *error);
  */
 + (void)registerWithAccount:(NSString *)account password:(NSString *)password bounds:(NSString *)bounds userType:(NSString *)userType success:(successBlock)success failure:(failureBlock)failure;
 
+/**
+ 修改密码
+ 
+ @param oldPassword 旧密码
+ @param newPassword 新密码
+ @param  success 成功
+ @param failure 失败
+ */
++ (void)changePasswordWithOldPassword:(NSString *)oldPassword newPassword:(NSString *)newPassword success:(successBlock)success failure:(failureBlock)failure;
+
 
 /**
  获取融云 token

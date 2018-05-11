@@ -24,6 +24,8 @@
 #define LoginURL        @"api/Log/Login"
 // 注册
 #define RegisterURL     @"Api/Team/AddUser"
+// 修改密码
+#define ChangePasswordURL @"api/User/Pwd"
 
 // 获取融云 token
 #define RongTokenURL    @"api/Im/Token"

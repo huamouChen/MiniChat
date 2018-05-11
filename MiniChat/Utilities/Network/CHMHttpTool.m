@@ -115,6 +115,20 @@ static CHMHttpTool *instanse = nil;
     [CHMHttpTool requestWithMethod:RequestMethodTypePost url:RegisterURL params:params success:success failure:failure];
 }
 
+
+/**
+ 修改密码
+
+ @param oldPassword 旧密码
+ @param newPassword 新密码
+ @param  success 成功
+ @param failure 失败
+ */
++ (void)changePasswordWithOldPassword:(NSString *)oldPassword newPassword:(NSString *)newPassword success:(successBlock)success failure:(failureBlock)failure {
+    NSDictionary *params = @{@"OldPwd": oldPassword, @"NewPwd": newPassword};
+    [CHMHttpTool requestWithMethod:RequestMethodTypePost url:ChangePasswordURL params:params success:success failure:failure];
+}
+
 /**
  获取融云token
  

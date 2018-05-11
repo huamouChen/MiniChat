@@ -10,6 +10,7 @@
 #import "CHMAccountSettingCell.h"
 #import "CHMLogoutCell.h"
 #import "CHMNewMessageNotificationController.h"
+#import "CHMChangePasswordController.h"
 
 static NSString *const settingCellReuseId = @"CHMAccountSettingCell";
 static NSString *const logoutCellReuseId = @"CHMLogoutCell";
@@ -102,6 +103,11 @@ static int const sectionHeaderHeight = 15;
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    if (indexPath.section == 0) {
+        if (indexPath.row == 0) { // 密码修改
+            [self.navigationController pushViewController:[CHMChangePasswordController new] animated:YES];
+        }
+    }
     
     if (indexPath.section == 0) {
         if (indexPath.row == 2) { // 新消息通知
