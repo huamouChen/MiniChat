@@ -287,7 +287,6 @@ static NSString *const itemCellReuseId = @"CHMGroupSettingHeaderCell";    // tab
     self.deleteVC = selectMemberVC;
     [self.navigationController pushViewController:selectMemberVC animated:YES];
 }
-
 /**
  处理踢人之后的数据
  
@@ -295,19 +294,19 @@ static NSString *const itemCellReuseId = @"CHMGroupSettingHeaderCell";    // tab
  @return 处理好的数组
  */
 - (NSMutableArray *)dealWithDeleteCompleteWithArray:(NSArray *)array {
-    NSMutableArray *resultArr = self.collectionViewResource;
-
-    for (int i = 0; i < self.collectionViewResource.count; i++) {
-        CHMGroupMemberModel *originModel = self.collectionViewResource[i];
-        for (CHMGroupMemberModel *itemModel in array) {
-            if ([itemModel.UserName isEqualToString:originModel.UserName]) { // 相同的话，就是已经被删除了的成员
-                [resultArr removeObject:originModel];
+    NSMutableArray *resultArr = [NSMutableArray array];
+    for (CHMGroupMemberModel * originModel in self.collectionViewResource) {
+        BOOL isHave = NO;
+        for (CHMGroupMemberModel *deleteModel in array) {
+            if ([originModel.UserName isEqualToString:deleteModel.UserName]) {
+                isHave = YES;
+                continue;
             }
         }
+        if (!isHave) {
+            [resultArr addObject:originModel];
+        }
     }
-    
-
-    
     return resultArr;
 }
 
