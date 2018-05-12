@@ -9,7 +9,7 @@
 #import "CHMContactsController.h"
 
 typedef void(^DeleteMemberBlock)(NSArray *groupMemberArray);
-typedef void(^AddMemberBlock)(NSArray *groupMemberArray);
+typedef void(^AddMemberBlock)(NSMutableArray *groupMemberArray);
 
 @interface CHMSelectMemberController : UIViewController
 // 群组id

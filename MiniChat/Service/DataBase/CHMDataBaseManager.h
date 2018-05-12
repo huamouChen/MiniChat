@@ -69,6 +69,11 @@
                       groupId:(NSString *)groupId
                      complete:(void (^)(BOOL))result;
 
+// 删除群组成员信息
+- (void)deleteGroupMemberToDB:(NSMutableArray *)groupMemberList
+                      groupId:(NSString *)groupId
+                     complete:(void (^)(BOOL))result;
+
 
 
 
@@ -95,6 +100,9 @@
 
 //从表中获取所有群组信息
 - (NSMutableArray *)getAllGroup;
+
+//从表中获取群组成员信息
+- (NSMutableArray *)getGroupMember:(NSString *)groupId;
 
 //清空表中的所有的群组信息
 - (BOOL)clearGroupfromDB;

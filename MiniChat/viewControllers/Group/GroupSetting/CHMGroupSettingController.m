@@ -22,9 +22,6 @@ static CGFloat const sectionHeight = 15;
 static NSString *const headerCellReuseId = @"CHMGroupSettingHeaderCell";  // 头部collection view 重用标识
 static NSString *const itemCellReuseId = @"CHMGroupSettingHeaderCell";    // table view  cell 重用标识
 
-static NSString *const addMember = @"GroupAdd";    // 添加成员
-static NSString *const deleteMember = @"GroupCutdown";    // 删除成员
-
 
 @interface CHMGroupSettingController () <UICollectionViewDelegate, UICollectionViewDataSource, UIImagePickerControllerDelegate, UINavigationControllerDelegate>
 
@@ -61,12 +58,26 @@ static NSString *const deleteMember = @"GroupCutdown";    // 删除成员
  获取群组成员
  */
 - (void)startLoad {
-    
+    __weak typeof(self) weakSelf = self;
     // 会话置顶
     self.currentConversation = [[RCIMClient sharedRCIMClient] getConversation:ConversationType_GROUP targetId:_groupId];
     self.isTopChat = self.currentConversation.isTop;
     
-    __weak typeof(self) weakSelf = self;
+    NSMutableArray *groupMemberList = [[CHMDataBaseManager shareManager] getGroupMember:self.groupId];
+    if (groupMemberList.count > 0) {
+        self.collectionViewResource = [NSMutableArray arrayWithArray:groupMemberList];
+        // 加多 加号和减号
+        CHMGroupMemberModel *addModel = [[CHMGroupMemberModel alloc] initWithUserName:KAddMember nickName:@"" headerImage:@"add_member" groupId:self.groupId];
+        CHMGroupMemberModel *cutdownModel = [[CHMGroupMemberModel alloc] initWithUserName:KDeleteMember nickName:@"" headerImage:@"delete_member" groupId:self.groupId];
+        [self.collectionViewResource addObject:addModel];
+        // 群组才能踢除群组成员
+        if (self.isGroupOwner) {
+            [self.collectionViewResource addObject:cutdownModel];
+        }
+        [self.headerView reloadData];
+        [self.tableView reloadData];
+
+    } else {
     [CHMHttpTool getGroupMembersWithGroupId:self.groupId success:^(id response) {
         NSLog(@"--------%@",response);
         NSNumber *codeId = response[@"Code"][@"CodeId"];
@@ -74,8 +85,8 @@ static NSString *const deleteMember = @"GroupCutdown";    // 删除成员
             NSArray *groupMemberArray = [CHMGroupMemberModel mj_objectArrayWithKeyValuesArray:response[@"Value"]];
             weakSelf.collectionViewResource = [NSMutableArray arrayWithArray:groupMemberArray];
             // 加多 加号和减号
-            CHMGroupMemberModel *addModel = [[CHMGroupMemberModel alloc] initWithUserName:addMember nickName:@"" headerImage:@"add_member" groupId:self.groupId];
-            CHMGroupMemberModel *cutdownModel = [[CHMGroupMemberModel alloc] initWithUserName:deleteMember nickName:@"" headerImage:@"delete_member" groupId:self.groupId];
+            CHMGroupMemberModel *addModel = [[CHMGroupMemberModel alloc] initWithUserName:KAddMember nickName:@"" headerImage:@"add_member" groupId:self.groupId];
+            CHMGroupMemberModel *cutdownModel = [[CHMGroupMemberModel alloc] initWithUserName:KDeleteMember nickName:@"" headerImage:@"delete_member" groupId:self.groupId];
             [weakSelf.collectionViewResource addObject:addModel];
             // 群组才能踢除群组成员
             if (weakSelf.isGroupOwner) {
@@ -88,6 +99,7 @@ static NSString *const deleteMember = @"GroupCutdown";    // 删除成员
     } failure:^(NSError *error) {
         [CHMProgressHUD showErrorWithInfo:[NSString stringWithFormat:@"错误码--%zd", error.code]];
     }];
+    }
     
     
     // 消息免打扰
@@ -219,7 +231,7 @@ static NSString *const deleteMember = @"GroupCutdown";    // 删除成员
     [self presentViewController:alertController animated:YES completion:nil];
 }
 
-
+#pragma mark - 群组添加成员
 /**
  群组添加成员
  */
@@ -230,15 +242,35 @@ static NSString *const deleteMember = @"GroupCutdown";    // 删除成员
     selectMemberVC.sourceArrar = self.collectionViewResource;
     selectMemberVC.groupId = self.groupId;
     selectMemberVC.groupName = self.groupName == nil ? @"" : self.groupName;
-    selectMemberVC.addMemberBlock = ^(NSArray *groupMemberArray) {
+    selectMemberVC.addMemberBlock = ^(NSMutableArray *groupMemberArray) {
+        // 保存数据到本地
+        [[CHMDataBaseManager shareManager] insertGroupMemberToDB:groupMemberArray groupId:weakSelf.groupId complete:^(BOOL isComplete) {
+            
+        }];
+        // 新添加的成员放在最后，先移除加号和减号
+        if (weakSelf.isGroupOwner) {
+            [weakSelf.collectionViewResource removeObjectAtIndex:weakSelf.collectionViewResource.count - 1];
+            [weakSelf.collectionViewResource removeObjectAtIndex:weakSelf.collectionViewResource.count - 1];
+        } else {
+            [weakSelf.collectionViewResource removeObjectAtIndex:weakSelf.collectionViewResource.count - 1];
+        }
         [weakSelf.collectionViewResource addObjectsFromArray:groupMemberArray];
+        // 加多 加号和减号
+        CHMGroupMemberModel *addModel = [[CHMGroupMemberModel alloc] initWithUserName:KAddMember nickName:@"" headerImage:@"add_member" groupId:self.groupId];
+        CHMGroupMemberModel *cutdownModel = [[CHMGroupMemberModel alloc] initWithUserName:KDeleteMember nickName:@"" headerImage:@"delete_member" groupId:self.groupId];
+        [self.collectionViewResource addObject:addModel];
+        // 群组才能踢除群组成员
+        if (self.isGroupOwner) {
+            [self.collectionViewResource addObject:cutdownModel];
+        }
+        
         [weakSelf.headerView reloadData];
     };
     self.deleteVC = selectMemberVC;
     [self.navigationController pushViewController:selectMemberVC animated:YES];
 }
 
-
+#pragma mark - 群组踢人
 /**
  群组踢人
  */
@@ -249,14 +281,12 @@ static NSString *const deleteMember = @"GroupCutdown";    // 删除成员
     selectMemberVC.sourceArrar = self.collectionViewResource;
     selectMemberVC.groupId = self.groupId;
     selectMemberVC.deleteMemberBlock = ^(NSArray *groupMemberArray) {
-        weakSelf.collectionViewResource = [self dealWithDeleteCompleteWithArray:groupMemberArray];
+        weakSelf.collectionViewResource = [NSMutableArray arrayWithArray:[self dealWithDeleteCompleteWithArray:groupMemberArray]];
         [weakSelf.headerView reloadData];
     };
     self.deleteVC = selectMemberVC;
     [self.navigationController pushViewController:selectMemberVC animated:YES];
 }
-
-
 
 /**
  处理踢人之后的数据
@@ -265,17 +295,19 @@ static NSString *const deleteMember = @"GroupCutdown";    // 删除成员
  @return 处理好的数组
  */
 - (NSMutableArray *)dealWithDeleteCompleteWithArray:(NSArray *)array {
-    // 返回的数组是二维数组，是分好组的
-    NSMutableArray *resultArr = [NSMutableArray array];
-    for (int i = 0; i < array.count; i++) {
-        NSArray *sectionArr = array[i];
-        for (CHMGroupMemberModel *itemModel in sectionArr) {
-            if (itemModel.isCheck) {
-                continue;
+    NSMutableArray *resultArr = self.collectionViewResource;
+
+    for (int i = 0; i < self.collectionViewResource.count; i++) {
+        CHMGroupMemberModel *originModel = self.collectionViewResource[i];
+        for (CHMGroupMemberModel *itemModel in array) {
+            if ([itemModel.UserName isEqualToString:originModel.UserName]) { // 相同的话，就是已经被删除了的成员
+                [resultArr removeObject:originModel];
             }
-            [resultArr addObject:itemModel];
         }
     }
+    
+
+    
     return resultArr;
 }
 
@@ -283,11 +315,11 @@ static NSString *const deleteMember = @"GroupCutdown";    // 删除成员
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
     // 拿出模型
     CHMGroupMemberModel *groupMemberModel = _collectionViewResource[indexPath.item];
-    if ([groupMemberModel.UserName isEqualToString:addMember] ) {
+    if ([groupMemberModel.UserName isEqualToString:KAddMember] ) {
         [self addGroupMember];
         return;
     }
-    if ([groupMemberModel.UserName isEqualToString:deleteMember] ) {
+    if ([groupMemberModel.UserName isEqualToString:KDeleteMember] ) {
         [self deleteMemberFromGroup];
         return;
     }
@@ -584,7 +616,7 @@ static NSString *const deleteMember = @"GroupCutdown";    // 删除成员
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    //    [self initLocalData];
+//        [self initLocalData];
     
     [self setupAppearance];
     

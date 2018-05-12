@@ -77,7 +77,7 @@ static CGFloat const KIndexViewWidth = 55 / 2.0;
  添加群组成员
  */
 - (void)addGroupmember {
-    [CHMProgressHUD showWithInfo:@"       " isHaveMask:YES];
+    [CHMProgressHUD showWithInfo:@"正在添加成员..." isHaveMask:YES];
     __weak typeof(self) weakSelf = self;
     // 获得选取的成员数组
     NSArray *selectedMemberArray = [self dealWithSelectedArray];
@@ -143,19 +143,24 @@ static CGFloat const KIndexViewWidth = 55 / 2.0;
  剔除群组成员
  */
 - (void)deleteMemberFromGroup {
-    [CHMProgressHUD showWithInfo:@"       " isHaveMask:YES];
+    [CHMProgressHUD showWithInfo:@"正在踢除成员..." isHaveMask:YES];
     __weak typeof(self) weakSelf = self;
-    NSMutableArray *memberIdArray = [self getMemberIdForArray:_sourceArrar];
+    NSMutableArray *memberIdArray = [self getDeleteMemberFrom:_sourceArrar];
     [CHMHttpTool kickMemberFromGroup:_groupId members:memberIdArray success:^(id response) {
         NSLog(@"---------%@",response);
         NSNumber *codeId = response[@"Code"][@"CodeId"];
         if (codeId.integerValue == 100) {
             dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
                 [CHMProgressHUD dismissHUD];
+                // 删除本地数据
+                NSMutableArray *sendBackArray = [weakSelf sendDeleteMemberBackFromArray:weakSelf.sourceArrar];
+                [[CHMDataBaseManager shareManager] deleteGroupMemberToDB:sendBackArray groupId:weakSelf.groupId complete:^(BOOL isComplete) {
+                
+                }];
                 if (weakSelf.deleteMemberBlock) {
-                    weakSelf.deleteMemberBlock(weakSelf.dataArr);
+                    weakSelf.deleteMemberBlock(sendBackArray);
                 }
-                [self.navigationController popViewControllerAnimated:YES];
+                [weakSelf.navigationController popViewControllerAnimated:YES];
             });
         } else {
             [CHMProgressHUD showErrorWithInfo:response[@"Code"][@"Description"]];
@@ -170,10 +175,28 @@ static CGFloat const KIndexViewWidth = 55 / 2.0;
  @param array 成员的数组
  @return 成员ID的数组
  */
-- (NSMutableArray *)getMemberIdForArray:(NSArray *)array {
+- (NSMutableArray *)getDeleteMemberFrom:(NSArray *)array {
     NSMutableArray *memberIdArray = [NSMutableArray array];
     for (CHMGroupMemberModel *memberModel in array) {
-        [memberIdArray addObject:memberModel.UserName];
+        if (memberModel.isCheck) { // 选中的成员才踢除
+            [memberIdArray addObject:memberModel.UserName];
+        }
+    }
+    return memberIdArray;
+}
+
+/**
+ 把删除了的成员传回上个界面更新数据
+
+ @param array 来源数组
+ @return 已经删除的成员
+ */
+- (NSMutableArray *)sendDeleteMemberBackFromArray:(NSArray *)array {
+    NSMutableArray *memberIdArray = [NSMutableArray array];
+    for (CHMGroupMemberModel *memberModel in array) {
+        if (memberModel.isCheck) { // 选中的成员才踢除
+            [memberIdArray addObject:memberModel];
+        }
     }
     return memberIdArray;
 }
@@ -240,9 +263,9 @@ static CGFloat const KIndexViewWidth = 55 / 2.0;
 - (NSMutableArray *)dealWithNickNameWithArray:(NSArray *)array {
     NSMutableArray *resultArray = [NSMutableArray array];
     for (CHMFriendModel *itemModel in array) {
-        // 过滤官方客服和资金助手 当前用户
+        // 过滤官方客服和资金助手 当前用户 加号 和 减号
         NSString *currentAccount = [[NSUserDefaults standardUserDefaults] valueForKey:KAccount];
-        if ([itemModel.UserName isEqualToString:KSyscaper] || [itemModel.UserName isEqualToString:KSyscuser] || [itemModel.UserName isEqualToString:currentAccount]) {
+        if ([itemModel.UserName isEqualToString:KSyscaper] || [itemModel.UserName isEqualToString:KSyscuser] || [itemModel.UserName isEqualToString:currentAccount] || [itemModel.UserName isEqualToString:KAddMember] || [itemModel.UserName isEqualToString:KDeleteMember]) {
             continue;
         }
         
@@ -259,6 +282,30 @@ static CGFloat const KIndexViewWidth = 55 / 2.0;
         [resultArray addObject:itemModel];
     }
     return resultArray;
+}
+
+
+/**
+ 添加成员的时候 处理添加成员的数组，过滤已经存在的群组成员
+
+ @param array 过滤完的数据
+ */
+- (NSMutableArray *)filterAddMemberWithArray:(NSArray *)array {
+    NSArray *friendArray = [[CHMDataBaseManager shareManager] getAllFriends];
+    NSMutableArray *filterArray = [NSMutableArray array];
+    for (CHMFriendModel *friendModel in friendArray) {
+        BOOL isHave = NO;
+        for (CHMGroupMemberModel *groupMemberModel in array) {
+            if ([friendModel.UserName isEqualToString:groupMemberModel.UserName]) { // 如果是同一个朋友，就不要显示了
+                isHave = YES;
+                continue;
+            }
+        }
+        if (!isHave) {
+            [filterArray addObject:friendModel];
+        }
+    }
+    return filterArray;
 }
 
 #pragma mark - 排序
@@ -363,13 +410,13 @@ static CGFloat const KIndexViewWidth = 55 / 2.0;
         // 处理昵称为空
         NSMutableArray *dealArray = [self dealWithNickNameWithArray:self.sourceArrar];
         self.dataArr = [NSMutableArray arrayWithArray:[self testSortWithArray:dealArray]];
+    } else if (_isAddMember) {
+        NSMutableArray *addArray = [self filterAddMemberWithArray:self.sourceArrar];
+        self.dataArr = [NSMutableArray arrayWithArray:[self testSortWithArray:addArray]];
     } else {
         [self fetchFriendList];
     }
-    
-    // 获取本地数据
-    [self initLocalData];
-    
+
     // 设置外观
     [self setupAppearance];
 }
@@ -407,12 +454,6 @@ static CGFloat const KIndexViewWidth = 55 / 2.0;
     self.navigationItem.rightBarButtonItems = @[rightButton];
 }
 
-
-/**
- 初始化本地写死的数据
- */
-- (void)initLocalData {
-}
 
 #pragma mark - 创建索引条
 - (void)creatIndexView {

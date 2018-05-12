@@ -1426,7 +1426,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = SGYD3BGQ2N;
+				DEVELOPMENT_TEAM = 5B8K84R7NK;
 				GCC_PREFIX_HEADER = /Users/chenhuamou/Desktop/miniChat/MiniChat/MiniChat/PrefixHeader.pch;
 				INFOPLIST_FILE = MiniChat/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
@@ -1434,7 +1434,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.boxyl.limeng1;
+				PRODUCT_BUNDLE_IDENTIFIER = com.boxyl.limeng;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -1454,7 +1454,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = SGYD3BGQ2N;
+				DEVELOPMENT_TEAM = 5B8K84R7NK;
 				GCC_PREFIX_HEADER = /Users/chenhuamou/Desktop/miniChat/MiniChat/MiniChat/PrefixHeader.pch;
 				INFOPLIST_FILE = MiniChat/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
@@ -1462,7 +1462,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.boxyl.limeng1;
+				PRODUCT_BUNDLE_IDENTIFIER = com.boxyl.limeng;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				PROVISIONING_PROFILE_SPECIFIER = "";

@@ -49,13 +49,7 @@
                     NSNumber *codeId = response[@"Code"][@"CodeId"];
                     if (codeId.integerValue == 100) {
                         NSMutableArray *groupMemberArray = [CHMGroupMemberModel mj_objectArrayWithKeyValuesArray:response[@"Value"]];
-                        [[CHMDataBaseManager shareManager]
-                         insertGroupMemberToDB:groupMemberArray
-                         groupId:group.GroupId
-                         complete:^(BOOL result){
-                             
-                         }];
-                        
+                        [[CHMDataBaseManager shareManager] insertGroupMemberToDB:groupMemberArray groupId:group.GroupId complete:^(BOOL result){ }];
                     } else {
 //                        [CHMProgressHUD showErrorWithInfo:response[@"Code"][@"Description"]];
                     }

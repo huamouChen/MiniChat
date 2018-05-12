@@ -209,31 +209,6 @@ static NSString *const groupMemberTableName = @"GROUPMEMBERTABLE";
     return allUsers;
 }
 
-
-
-//存储群组成员信息
-- (void)insertGroupMemberToDB:(NSMutableArray *)groupMemberList
-                      groupId:(NSString *)groupId
-                     complete:(void (^)(BOOL))result {
-    if (groupMemberList == nil || [groupMemberList count] < 1)
-        return;
-    
-    NSString *deleteSql =
-    [NSString stringWithFormat:@"delete from %@ where %@ = '%@'", @"GROUPMEMBERTABLE", @"groupid", groupId];
-    
-    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
-        [self.dbQueue inTransaction:^(FMDatabase *db, BOOL *rollback) {
-            [db executeUpdate:deleteSql];
-            for (CHMGroupMemberModel *groupMember in groupMemberList) {
-                NSString *insertSql = @"REPLACE INTO GROUPMEMBERTABLE (groupid, userid, "
-                @"name, portraitUri) VALUES (?, ?, ?, ?)";
-                [db executeUpdate:insertSql, groupId, groupMember.UserName, groupMember.NickName, groupMember.HeaderImage];
-            }
-        }];
-        result(YES);
-    });
-}
-
 #pragma mark - 存储用户信息
 // 存储用户信息
 - (void)insertUserToDB:(RCUserInfo *)user {
@@ -305,7 +280,6 @@ static NSString *const groupMemberTableName = @"GROUPMEMBERTABLE";
 }
 
 - (void)insertGroupsToDB:(NSMutableArray *)groupList complete:(void (^)(BOOL))result {
-    
     if (groupList == nil || [groupList count] < 1)
         return;
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
@@ -321,6 +295,52 @@ static NSString *const groupMemberTableName = @"GROUPMEMBERTABLE";
         }];
         result(YES);
     });
+}
+
+//存储群组成员信息
+- (void)insertGroupMemberToDB:(NSMutableArray *)groupMemberList
+                      groupId:(NSString *)groupId
+                     complete:(void (^)(BOOL))result {
+    if (groupMemberList == nil || [groupMemberList count] < 1)
+        return;
+    
+    NSString *deleteSql =
+    [NSString stringWithFormat:@"delete from %@ where %@ = '%@'", @"GROUPMEMBERTABLE", @"groupid", groupId];
+    
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
+        [self.dbQueue inTransaction:^(FMDatabase *db, BOOL *rollback) {
+            [db executeUpdate:deleteSql];
+            for (CHMGroupMemberModel *groupMember in groupMemberList) {
+                NSString *insertSql = @"REPLACE INTO GROUPMEMBERTABLE (groupid, userid, "
+                @"name, portraitUri) VALUES (?, ?, ?, ?)";
+                [db executeUpdate:insertSql, groupId, groupMember.UserName, groupMember.NickName, groupMember.HeaderImage];
+            }
+        }];
+        result(YES);
+    });
+}
+
+
+/**
+ 删除群组成员
+
+ @param groupMemberList 要删除群组成员数组
+ @param groupId 对应的群组
+ @param result 是否成功
+ */
+- (void)deleteGroupMemberToDB:(NSMutableArray *)groupMemberList groupId:(NSString *)groupId complete:(void (^)(BOOL))result {
+    if ([groupId length] < 1)
+        return;
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        [self.dbQueue inTransaction:^(FMDatabase *db, BOOL *rollback) {
+            for (CHMGroupMemberModel *user in groupMemberList) {
+                NSString *deleteSql = [NSString stringWithFormat:@"delete from %@ where %@ = '%@' and %@ = '%@'", @"GROUPMEMBERTABLE", @"groupid", groupId, @"userid", user.UserName];
+                [db executeUpdate:deleteSql];
+            }
+        }];
+        result(YES);
+    });
+    result(NO);
 }
 
 
@@ -346,6 +366,27 @@ static NSString *const groupMemberTableName = @"GROUPMEMBERTABLE";
     }];
     return model;
 }
+
+//从表中获取群组成员信息
+- (NSMutableArray *)getGroupMember:(NSString *)groupId {
+    NSMutableArray *allUsers = [NSMutableArray new];
+    
+    [self.dbQueue inDatabase:^(FMDatabase *db) {
+        FMResultSet *rs = [db executeQuery:@"SELECT * FROM GROUPMEMBERTABLE where groupid=? order by id", groupId];
+        while ([rs next]) {
+            //            RCUserInfo *model;
+            CHMGroupMemberModel *model;
+            model = [[CHMGroupMemberModel alloc] init];
+            model.UserName = [rs stringForColumn:@"userid"];
+            model.NickName = [rs stringForColumn:@"name"];
+            model.HeaderImage = [rs stringForColumn:@"portraitUri"];
+            [allUsers addObject:model];
+        }
+        [rs close];
+    }];
+    return allUsers;
+}
+
 
 //删除表中的群组信息
 - (void)deleteGroupToDB:(NSString *)groupId {
