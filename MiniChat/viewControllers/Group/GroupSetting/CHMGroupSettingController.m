@@ -47,6 +47,11 @@ static NSString *const deleteMember = @"GroupCutdown";    // 删除成员
 @property (nonatomic, assign) BOOL enableNewMessageNotification;   // 消息免打扰
 @property (nonatomic, assign) BOOL isTopChat;   // 会话置顶
 
+/**
+ 是否是群主
+ */
+@property (nonatomic, assign) BOOL isGroupOwner;
+
 @end
 
 @implementation CHMGroupSettingController
@@ -72,7 +77,10 @@ static NSString *const deleteMember = @"GroupCutdown";    // 删除成员
             CHMGroupMemberModel *addModel = [[CHMGroupMemberModel alloc] initWithUserName:addMember nickName:@"" headerImage:@"add_member" groupId:self.groupId];
             CHMGroupMemberModel *cutdownModel = [[CHMGroupMemberModel alloc] initWithUserName:deleteMember nickName:@"" headerImage:@"delete_member" groupId:self.groupId];
             [weakSelf.collectionViewResource addObject:addModel];
-            [weakSelf.collectionViewResource addObject:cutdownModel];
+            // 群组才能踢除群组成员
+            if (weakSelf.isGroupOwner) {
+                [weakSelf.collectionViewResource addObject:cutdownModel];
+            }
             [weakSelf.headerView reloadData];
         } else {
             [CHMProgressHUD showErrorWithInfo:response[@"Code"][@"Description"]];
@@ -120,12 +128,95 @@ static NSString *const deleteMember = @"GroupCutdown";    // 删除成员
     }];
 }
 
-
+#pragma mark - 点击底部退出按钮 或者解散按钮
 /**
  点击底部退出按钮 或者解散按钮
  */
 - (void)tableViewFooterViewDismissButtongClick {
-    NSLog(@"--------退出或者解散");
+    if (_isGroupOwner) {
+        [self dismissGroup];
+    } else {
+        [self quitGroup];
+    }
+}
+/**
+ 群主解散群组
+ */
+- (void)dismissGroup {
+    
+    __weak typeof(self) weakSelf = self;
+    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"确定解散群组吗？" message:@"" preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertAction *comfirmAction = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        [CHMProgressHUD showWithInfo:@"正在解散中..." isHaveMask:YES];
+        // 1.调用服务器接口，成功后删除本地数据
+        [CHMHttpTool dismissGroup:weakSelf.groupId success:^(id response) {
+            NSLog(@"-----------%@",response);
+            NSNumber *codeId = response[@"Code"][@"CodeId"];
+            if (codeId.integerValue == 100) {
+                [CHMProgressHUD dismissHUD];
+                // 退出成功后，删除该条聊天，并且删除本地数据库 也要删除远程服务器的聊天记录，目前还没有开通远程消息，所以现在直接删除本地的记录
+                [[RCIMClient sharedRCIMClient] clearMessages:ConversationType_GROUP targetId:weakSelf.groupId];
+                [[RCIMClient sharedRCIMClient] removeConversation:ConversationType_GROUP targetId:weakSelf.groupId];
+                // 删除本地数据
+                [[CHMDataBaseManager shareManager] deleteGroupToDB:weakSelf.groupId];
+                // 回到会话界面
+                [self.navigationController popToRootViewControllerAnimated:YES];
+                
+            } else {
+                [CHMProgressHUD showErrorWithInfo:response[@"Code"][@"Description"]];
+            }
+        } failure:^(NSError *error) {
+            [CHMProgressHUD showErrorWithInfo:[NSString stringWithFormat:@"错误码%ld", (long)error.code]];
+        }];
+    }];
+    UIAlertAction *cancleAction = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+        
+    }];
+    
+    [alertController addAction:comfirmAction];
+    [alertController addAction:cancleAction];
+    
+    [self presentViewController:alertController animated:YES completion:nil];
+}
+
+
+/**
+ 普通成员退出群组
+ */
+- (void)quitGroup {
+    __weak typeof(self) weakSelf = self;
+    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"确定退出群组吗？" message:@"" preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertAction *comfirmAction = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        [CHMProgressHUD showWithInfo:@"正在退出中..." isHaveMask:YES];
+        // 1.调用服务器接口，成功后删除本地数据
+        [CHMHttpTool quitFromGroup:weakSelf.groupId success:^(id response) {
+            NSLog(@"-----------%@",response);
+            NSNumber *codeId = response[@"Code"][@"CodeId"];
+            if (codeId.integerValue == 100) {
+                [CHMProgressHUD dismissHUD];
+                // 退出成功后，删除该条聊天，并且删除本地数据库 也要删除远程服务器的聊天记录，目前还没有开通远程消息，所以现在直接删除本地的记录
+                [[RCIMClient sharedRCIMClient] clearMessages:ConversationType_GROUP targetId:weakSelf.groupId];
+                [[RCIMClient sharedRCIMClient] removeConversation:ConversationType_GROUP targetId:weakSelf.groupId];
+                // 删除本地数据
+                [[CHMDataBaseManager shareManager] deleteGroupToDB:weakSelf.groupId];
+                // 回到会话界面
+                [self.navigationController popToRootViewControllerAnimated:YES];
+                
+            } else {
+                [CHMProgressHUD showErrorWithInfo:response[@"Code"][@"Description"]];
+            }
+        } failure:^(NSError *error) {
+            [CHMProgressHUD showErrorWithInfo:[NSString stringWithFormat:@"错误码%ld", (long)error.code]];
+        }];
+    }];
+    UIAlertAction *cancleAction = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+        
+    }];
+    
+    [alertController addAction:comfirmAction];
+    [alertController addAction:cancleAction];
+    
+    [self presentViewController:alertController animated:YES completion:nil];
 }
 
 
@@ -261,7 +352,7 @@ static NSString *const deleteMember = @"GroupCutdown";    // 删除成员
 #pragma mark - 点击开关按钮
 /**
  点击开关按钮
-
+ 
  @param indexPath switch 所在的 indexPath
  */
 - (void)switchButton:(UISwitch *)switchButton didClickWithIndexPath:(NSIndexPath *)indexPath  {
@@ -472,6 +563,9 @@ static NSString *const deleteMember = @"GroupCutdown";    // 删除成员
 #pragma mark - view life  cycler
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
+    
+    [self initLocalData];
+    
     if (_collectionViewResource.count < 1) {
         [self startLoad];
     }
@@ -490,7 +584,7 @@ static NSString *const deleteMember = @"GroupCutdown";    // 删除成员
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    [self initLocalData];
+    //    [self initLocalData];
     
     [self setupAppearance];
     
@@ -502,6 +596,9 @@ static NSString *const deleteMember = @"GroupCutdown";    // 删除成员
  */
 - (void)initLocalData {
     self.cuurentGroupModel = [[CHMDataBaseManager shareManager] getGroupByGroupId:_groupId];
+    NSString *currentAccount = [[NSUserDefaults standardUserDefaults] valueForKey:KAccount];
+    // 是否是群主
+    self.isGroupOwner = [_cuurentGroupModel.GroupOwner isEqualToString:currentAccount] ? YES : NO;
     
     NSString *newMsgNoti = _enableNewMessageNotification ? @"0" : @"1";  // 消息免打扰
     NSString *isTopChat = _isTopChat ? @"1" : @"0";                      // 会话置顶
@@ -518,6 +615,13 @@ static NSString *const deleteMember = @"GroupCutdown";    // 删除成员
                          @{KItemName: @"清除聊天记录", KItemIsShowSwitch: @"o", KItemPortrait: @"", KItemSwitch: @"0", KItemValue:@""}
                          ]
                        ];
+    
+    if (_isGroupOwner) {
+        [self.tableViewFooter.dismissButton setTitle:@"解散并删除" forState:UIControlStateNormal];
+    } else {
+        [self.tableViewFooter.dismissButton setTitle:@"退出并删除" forState:UIControlStateNormal];
+    }
+    
     // 刷新数据
     [self.tableView reloadData];
 }
@@ -560,8 +664,13 @@ static NSString *const deleteMember = @"GroupCutdown";    // 删除成员
     self.tableViewFooter.dismissButtonClickBlock = ^{
         [weakSelf tableViewFooterViewDismissButtongClick];
     };
-    [self.tableViewFooter.dismissButton setTitle:@"退出" forState:UIControlStateNormal];
-    self.tableView.tableFooterView = _tableViewFooter;
+    
+    if (_isGroupOwner) {
+        [self.tableViewFooter.dismissButton setTitle:@"解散并删除" forState:UIControlStateNormal];
+    } else {
+        [self.tableViewFooter.dismissButton setTitle:@"退出并删除" forState:UIControlStateNormal];
+    }
+    self.tableView.tableFooterView = self.tableViewFooter;
 }
 
 

@@ -8,13 +8,13 @@
 
 #import <UIKit/UIKit.h>
 
-typedef void(^DismissButtonClickBlock)();
+typedef void(^DismissButtonClickBlock)(void);
 
 @interface CHMGroupSettingFooter : UITableViewHeaderFooterView
 
 @property (nonatomic, strong) UIButton *dismissButton;
 
-@property (nonatomic, assign) DismissButtonClickBlock dismissButtonClickBlock;
+@property (nonatomic, copy) DismissButtonClickBlock dismissButtonClickBlock;
 
 + (instancetype)groupSettingFooterViewTableView:(UITableView *)tableView;
 

@@ -18,6 +18,7 @@
 #pragma mark - RCIMReceiveMessageDelegate
 - (void)onRCIMReceiveMessage:(RCMessage *)message left:(int)left {
     NSLog(@"-------%@",message);
+    // 好友信息
     RCContactNotificationMessage *contactNotificationMsg = nil;
     if ([message.objectName isEqualToString:@"RC:ContactNtf"]) {
         contactNotificationMsg = (RCContactNotificationMessage *)message.content;
@@ -27,6 +28,15 @@
             [[NSNotificationCenter defaultCenter] postNotificationName:KChangeUserInfoNotification object:nil];
         }];
     }
+    
+    // 把添加到群组的消息
+    RCGroupNotificationMessage *groupNotificationMsg = nil;
+    if ([message.objectName isEqualToString:@"RC:GrpNtf"]) {
+        groupNotificationMsg = (RCGroupNotificationMessage *)message.content;
+        // 刷新群组列表
+        [[CHMInfoProvider shareInstance] syncGroups];
+    }
+    
 }
 
 

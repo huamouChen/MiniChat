@@ -38,7 +38,7 @@ static NSString *const reuseId = @"CHMGroupSettingFooter";
 
 - (instancetype)initWithReuseIdentifier:(NSString *)reuseIdentifier {
     if (self = [super initWithReuseIdentifier:reuseIdentifier]) {
-        [self.contentView addSubview:self.dismissButton];
+        [self addSubview:self.dismissButton];
     }
     return self;
 }
@@ -56,7 +56,6 @@ static NSString *const reuseId = @"CHMGroupSettingFooter";
         _dismissButton.layer.cornerRadius = 5;
         _dismissButton.layer.masksToBounds = YES;
         [_dismissButton addTarget:self action:@selector(dismissButtonClick) forControlEvents:UIControlEventTouchUpInside];
-        
     }
     return _dismissButton;
 }

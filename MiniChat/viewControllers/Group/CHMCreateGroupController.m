@@ -117,6 +117,9 @@
  点击创建群组按钮
  */
 - (IBAction)createGroupButtonClick {
+    // 当前账号，为了设置群创建者
+    NSString *currentAccount = [[NSUserDefaults standardUserDefaults] valueForKey:KAccount];
+    
     [self.view endEditing:YES];
     [CHMProgressHUD showWithInfo:@"正在创建中..." isHaveMask:YES];
     NSArray *groupMemberArray = [self dealWithGroupMemberId];
@@ -139,6 +142,8 @@
                                           [self starGroupConversationWithGroupInfo:groupInfo];
                                           // 保存数据到本地
                                           CHMGroupModel *groupModel = [[CHMGroupModel alloc] initWithGroupId:groupId groupName:groupName groupPortrait:groupPortrait];
+                                          groupModel.GroupOwner = currentAccount;
+                                          
                                           [[CHMDataBaseManager shareManager] insertGroupToDB:groupModel];
                                       } else {
                                           [CHMProgressHUD showErrorWithInfo: responseDescripton];
