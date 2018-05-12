@@ -313,7 +313,8 @@ static NSString *const groupMemberTableName = @"GROUPMEMBERTABLE";
             for (CHMGroupMemberModel *groupMember in groupMemberList) {
                 NSString *insertSql = @"REPLACE INTO GROUPMEMBERTABLE (groupid, userid, "
                 @"name, portraitUri) VALUES (?, ?, ?, ?)";
-                [db executeUpdate:insertSql, groupId, groupMember.UserName, groupMember.NickName, groupMember.HeaderImage];
+                NSString *nickName = ([groupMember.NickName isKindOfClass:[NSNull class]] || groupMember.NickName == nil || [groupMember.NickName isEqualToString:@""]) ? groupMember.UserName : groupMember.NickName;
+                [db executeUpdate:insertSql, groupId, groupMember.UserName, nickName, groupMember.HeaderImage];
             }
         }];
         result(YES);

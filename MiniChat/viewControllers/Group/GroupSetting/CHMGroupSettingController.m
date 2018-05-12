@@ -76,29 +76,29 @@ static NSString *const itemCellReuseId = @"CHMGroupSettingHeaderCell";    // tab
         }
         [self.headerView reloadData];
         [self.tableView reloadData];
-
+        
     } else {
-    [CHMHttpTool getGroupMembersWithGroupId:self.groupId success:^(id response) {
-        NSLog(@"--------%@",response);
-        NSNumber *codeId = response[@"Code"][@"CodeId"];
-        if (codeId.integerValue == 100) {
-            NSArray *groupMemberArray = [CHMGroupMemberModel mj_objectArrayWithKeyValuesArray:response[@"Value"]];
-            weakSelf.collectionViewResource = [NSMutableArray arrayWithArray:groupMemberArray];
-            // 加多 加号和减号
-            CHMGroupMemberModel *addModel = [[CHMGroupMemberModel alloc] initWithUserName:KAddMember nickName:@"" headerImage:@"add_member" groupId:self.groupId];
-            CHMGroupMemberModel *cutdownModel = [[CHMGroupMemberModel alloc] initWithUserName:KDeleteMember nickName:@"" headerImage:@"delete_member" groupId:self.groupId];
-            [weakSelf.collectionViewResource addObject:addModel];
-            // 群组才能踢除群组成员
-            if (weakSelf.isGroupOwner) {
-                [weakSelf.collectionViewResource addObject:cutdownModel];
+        [CHMHttpTool getGroupMembersWithGroupId:self.groupId success:^(id response) {
+            NSLog(@"--------%@",response);
+            NSNumber *codeId = response[@"Code"][@"CodeId"];
+            if (codeId.integerValue == 100) {
+                NSArray *groupMemberArray = [CHMGroupMemberModel mj_objectArrayWithKeyValuesArray:response[@"Value"]];
+                weakSelf.collectionViewResource = [NSMutableArray arrayWithArray:groupMemberArray];
+                // 加多 加号和减号
+                CHMGroupMemberModel *addModel = [[CHMGroupMemberModel alloc] initWithUserName:KAddMember nickName:@"" headerImage:@"add_member" groupId:self.groupId];
+                CHMGroupMemberModel *cutdownModel = [[CHMGroupMemberModel alloc] initWithUserName:KDeleteMember nickName:@"" headerImage:@"delete_member" groupId:self.groupId];
+                [weakSelf.collectionViewResource addObject:addModel];
+                // 群组才能踢除群组成员
+                if (weakSelf.isGroupOwner) {
+                    [weakSelf.collectionViewResource addObject:cutdownModel];
+                }
+                [weakSelf.headerView reloadData];
+            } else {
+                [CHMProgressHUD showErrorWithInfo:response[@"Code"][@"Description"]];
             }
-            [weakSelf.headerView reloadData];
-        } else {
-            [CHMProgressHUD showErrorWithInfo:response[@"Code"][@"Description"]];
-        }
-    } failure:^(NSError *error) {
-        [CHMProgressHUD showErrorWithInfo:[NSString stringWithFormat:@"错误码--%zd", error.code]];
-    }];
+        } failure:^(NSError *error) {
+            [CHMProgressHUD showErrorWithInfo:[NSString stringWithFormat:@"错误码--%zd", error.code]];
+        }];
     }
     
     
@@ -614,8 +614,6 @@ static NSString *const itemCellReuseId = @"CHMGroupSettingHeaderCell";    // tab
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
-//        [self initLocalData];
     
     [self setupAppearance];
     

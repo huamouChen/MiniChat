@@ -11,6 +11,7 @@
 #import "CHMUserDetailCell.h"
 #import "CHMEditUserInfoController.h"
 #import <Photos/Photos.h>
+#import "CHMPhotoBrowserController.h"
 
 
 static NSString *const portraitCellReuseId = @"CHMUserPortraitCell";
@@ -21,6 +22,8 @@ static NSString *const detailCellReuseId = @"CHMUserDetailCell";
 @property (nonatomic, strong) UIImagePickerController *imagePickerController;
 
 @property (nonatomic, strong) NSArray *dataArray;
+
+@property (nonatomic, copy) NSString *portraitString;
 
 @end
 
@@ -140,6 +143,7 @@ static NSString *const detailCellReuseId = @"CHMUserDetailCell";
  */
 - (void)initLocalData {
     NSString *portraitString = [[NSUserDefaults standardUserDefaults] valueForKey:KPortrait];
+    self.portraitString = portraitString;
     NSString *nickName = [[NSUserDefaults standardUserDefaults] valueForKey:KNickName];
     NSString *mobileString = [[NSUserDefaults standardUserDefaults] valueForKey:KPhoneNum];
     
@@ -230,9 +234,18 @@ static NSString *const detailCellReuseId = @"CHMUserDetailCell";
     UIAlertAction *albumAction = [UIAlertAction actionWithTitle:@"相册" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
         [self showImagePicker];
     }];
+    // 查看大图
+    __weak typeof(self) weakSelf = self;
+    UIAlertAction *scaleAction = [UIAlertAction actionWithTitle:@"大图" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        CHMPhotoBrowserController *vc = [[CHMPhotoBrowserController alloc] initWithPhotosArray:@[weakSelf.portraitString] currentIndex:0 transitionStyle:CHMPhotoBrowserTransitionPresent];
+        vc.isShowPageLabel = YES;
+        [self presentViewController:vc animated:YES completion:nil];
+    }];
+    
     [alertController addAction:cancleAction];
     [alertController addAction:cameraAction];
     [alertController addAction:albumAction];
+    [alertController addAction:scaleAction];
     
     [self presentViewController:alertController animated:YES completion:nil];
 }
