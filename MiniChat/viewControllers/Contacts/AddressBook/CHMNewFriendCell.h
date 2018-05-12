@@ -7,7 +7,16 @@
 //
 
 #import <UIKit/UIKit.h>
+@class CHMFriendModel;
+
+typedef void(^AcceptButtonClickBlock)(NSIndexPath *selectedIndexPath);
 
 @interface CHMNewFriendCell : UITableViewCell
+
+@property (nonatomic, strong) NSIndexPath *indexPath;
+
+@property (nonatomic, strong) CHMFriendModel *friendModel;
+
+@property (nonatomic, copy) AcceptButtonClickBlock acceptButtonClickBlock;
 
 @end

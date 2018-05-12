@@ -7,12 +7,14 @@
 //
 
 #import "RCDAddressBookViewController.h"
-#import "RCDAddressBookTableViewCell.h"
 #import <RongIMLib/RongIMLib.h>
 #import "RCDNoFriendView.h"
 #import "CHMDataBaseManager.h"
 #import "CHMConversationController.h"
+#import "CHMNewFriendCell.h"
+#import "CHMFriendModel.h"
 
+static NSString *const reuseId = @"CHMNewFriendCell";
 
 static CGFloat const rowHeight = 65;
 
@@ -63,9 +65,17 @@ static CGFloat const rowHeight = 65;
     tag = 0;
     isSyncFriends = NO;
     
+    // register cell
+    [self.tableView registerNib:[UINib nibWithNibName:NSStringFromClass([CHMNewFriendCell class]) bundle:nil] forCellReuseIdentifier:reuseId];
     
-    
-    
+    self.tableView.rowHeight = rowHeight;
+}
+
+
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    self.needSyncFriendList = YES;
     
     // IMLib 库获取会话列表
     NSArray *conversationList = [[RCIMClient sharedRCIMClient]
@@ -75,17 +85,24 @@ static CGFloat const rowHeight = 65;
     
     self.applyArray = conversationList;
     
+    if (_applyArray.count > 0) {
+        self.hideSectionHeader = YES;
+        self.friends = [self sortForFreindList:_friends];
+        tag = 0;
+        [self.tableView reloadData];
+    } else {
+        CGRect frame = CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT - 64);
+        self.noFriendView = [[RCDNoFriendView alloc] initWithFrame:frame];
+        self.noFriendView.displayLabel.text = @"暂无数据";
+        [self.view addSubview:self.noFriendView];
+        [self.view bringSubviewToFront:self.noFriendView];
+    }
+    
     for (RCConversation *conversation in conversationList) {
         NSLog(@"会话类型：%lu，目标会话ID：%@", (unsigned long)conversation.conversationType, conversation.targetId);
         
     }
-}
-
-
-
-- (void)viewWillAppear:(BOOL)animated {
-    [super viewWillAppear:animated];
-    self.needSyncFriendList = YES;
+    
     [self getAllData];
 }
 
@@ -106,34 +123,34 @@ static CGFloat const rowHeight = 65;
  *  initial data
  */
 - (void)getAllData {
-    __weak typeof(self) weakSelf = self;
-    self.friends = [NSMutableArray arrayWithArray:[[CHMDataBaseManager shareManager] getAllFriends]];
-    if (_friends.count > 0) {
-        self.hideSectionHeader = YES;
-        weakSelf.friends = [self sortForFreindList:_friends];
-        tag = 0;
-        [weakSelf.tableView reloadData];
-    } else {
-        CGRect frame = CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT - 64);
-        self.noFriendView = [[RCDNoFriendView alloc] initWithFrame:frame];
-        self.noFriendView.displayLabel.text = @"暂无数据";
-        [self.view addSubview:self.noFriendView];
-        [self.view bringSubviewToFront:self.noFriendView];
-    }
-    if (isSyncFriends == NO) {
-        [[CHMInfoProvider shareInstance] syncFriendList:[RCIM sharedRCIM].currentUserInfo.userId complete:^(NSMutableArray *friends) {
-            self->isSyncFriends = YES;
-            if (friends.count > 0 ) {
-                dispatch_async(dispatch_get_main_queue(), ^{
-                    if (weakSelf.noFriendView != nil) {
-                        [weakSelf.noFriendView removeFromSuperview];
-                    }
-                });
-                
-                [self getAllData];
-            }
-        }];
-    }
+//    __weak typeof(self) weakSelf = self;
+//    self.friends = [NSMutableArray arrayWithArray:[[CHMDataBaseManager shareManager] getAllFriends]];
+//    if (_friends.count > 0) {
+//        self.hideSectionHeader = YES;
+//        weakSelf.friends = [self sortForFreindList:_friends];
+//        tag = 0;
+//        [weakSelf.tableView reloadData];
+//    } else {
+//        CGRect frame = CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT - 64);
+//        self.noFriendView = [[RCDNoFriendView alloc] initWithFrame:frame];
+//        self.noFriendView.displayLabel.text = @"暂无数据";
+//        [self.view addSubview:self.noFriendView];
+//        [self.view bringSubviewToFront:self.noFriendView];
+//    }
+//    if (isSyncFriends == NO) {
+//        [[CHMInfoProvider shareInstance] syncFriendList:[RCIM sharedRCIM].currentUserInfo.userId complete:^(NSMutableArray *friends) {
+//            self->isSyncFriends = YES;
+//            if (friends.count > 0 ) {
+//                dispatch_async(dispatch_get_main_queue(), ^{
+//                    if (weakSelf.noFriendView != nil) {
+//                        [weakSelf.noFriendView removeFromSuperview];
+//                    }
+//                });
+//
+//                [self getAllData];
+//            }
+//        }];
+//    }
 }
 
 - (void)didReceiveMemoryWarning {
@@ -142,21 +159,30 @@ static CGFloat const rowHeight = 65;
 }
 
 #pragma mark - UITableViewDataSource
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    return _applyArray.count;
+}
+
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    static NSString *reusableCellWithIdentifier = @"RCDAddressBookCell";
-    RCDAddressBookTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:reusableCellWithIdentifier];
-    if (!cell) {
-        cell = [[RCDAddressBookTableViewCell alloc] init];
-    }
-    cell.selectedIndexPath = indexPath;
-    
     RCConversation *conversation = _applyArray[indexPath.row];
-    RCUserInfo *userInfo = [[RCUserInfo alloc] initWithUserId:conversation.targetId name:conversation.targetId portrait:@"icon_person"];
-    [cell setModel:userInfo];
     
+    CHMNewFriendCell *cell = [tableView dequeueReusableCellWithIdentifier:reuseId];
+    cell.indexPath = indexPath;
+    // 是否是好友
+    RCUserInfo *userInfo = [[CHMDataBaseManager shareManager] getFriendInfo:conversation.targetId];
+    CHMFriendModel *friendModel = nil;
+    if (userInfo) {
+        friendModel = [[CHMFriendModel alloc] initWithUserId:userInfo.userId nickName:userInfo.name portrait:userInfo.portraitUri];
+    } else {
+        friendModel = [[CHMFriendModel alloc] initWithUserId:conversation.targetId nickName:conversation.targetId portrait:KDefaultPortrait];
+    }
+    friendModel.isCheck = userInfo ? NO : YES;
+    cell.friendModel = friendModel;
     cell.acceptButtonClickBlock = ^(NSIndexPath *selectedIndexPath) {
         [self acceptButtonClickWithIndexPath:selectedIndexPath];
     };
+    // 设置选中效果为无
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
     return cell;
 }
 
@@ -185,7 +211,7 @@ static CGFloat const rowHeight = 65;
             applyId = [NSString stringWithFormat:@"%@", dict[@"ApplyId"]];
         }
     }
-    
+    __weak typeof(self) weakSelf = self;
     [CHMHttpTool agreeFriendWithApplyId:applyId success:^(id response) {
         NSLog(@"agreeFriendWithApplyId----------%@", response);
         NSNumber *codeId = response[@"Code"][@"CodeId"];
@@ -196,6 +222,7 @@ static CGFloat const rowHeight = 65;
             [[CHMInfoProvider shareInstance] syncFriendList:account complete:^(NSMutableArray *friends) {
                 [[NSNotificationCenter defaultCenter] postNotificationName:KChangeUserInfoNotification object:nil];
             }];
+            [weakSelf.tableView reloadData];
             
         } else {
             [CHMProgressHUD showErrorWithInfo:response[@"Code"][@"Description"]];
@@ -205,28 +232,34 @@ static CGFloat const rowHeight = 65;
     }];
 }
 
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return _applyArray.count;
+
+/**
+ 接受了好友之后，进入聊天界面
+ */
+- (void)startChat {
+    
 }
 
+
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    RCUserInfo *user = _friends[indexPath.row];
-    RCUserInfo *friend = [[CHMDataBaseManager shareManager] getFriendInfo:user.userId];
-        if (!friend) {
-            return;
-        }
-    RCUserInfo *userInfo = [RCUserInfo new];
-    userInfo.userId = friend.userId;
-    userInfo.portraitUri = friend.portraitUri;
-    userInfo.name = friend.name;
-    
-    CHMConversationController *chatViewController = [[CHMConversationController alloc] init];
-    chatViewController.conversationType = ConversationType_PRIVATE;
-    chatViewController.targetId = userInfo.userId;
-    chatViewController.title = userInfo.name;
-    chatViewController.displayUserNameInCell = NO;
-//        chatViewController.needPopToRootView = YES;
-    [self.navigationController pushViewController:chatViewController animated:YES];
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+//    RCUserInfo *user = _friends[indexPath.row];
+//    RCUserInfo *friend = [[CHMDataBaseManager shareManager] getFriendInfo:user.userId];
+//    if (!friend) {
+//        return;
+//    }
+//    RCUserInfo *userInfo = [RCUserInfo new];
+//    userInfo.userId = friend.userId;
+//    userInfo.portraitUri = friend.portraitUri;
+//    userInfo.name = friend.name;
+//
+//    CHMConversationController *chatViewController = [[CHMConversationController alloc] init];
+//    chatViewController.conversationType = ConversationType_PRIVATE;
+//    chatViewController.targetId = userInfo.userId;
+//    chatViewController.title = userInfo.name;
+//    chatViewController.displayUserNameInCell = NO;
+//    //        chatViewController.needPopToRootView = YES;
+//    [self.navigationController pushViewController:chatViewController animated:YES];
 }
 
 - (NSMutableArray *)sortForFreindList:(NSMutableArray *)friendList {
