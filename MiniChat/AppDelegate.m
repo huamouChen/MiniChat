@@ -11,9 +11,10 @@
 #import <IQKeyboardManager/IQKeyboardManager.h>
 #import "CHMLoginController.h"
 #import "CHMMainController.h"
+#import <UserNotifications/UserNotifications.h>
 
 
-@interface AppDelegate ()
+@interface AppDelegate () <UNUserNotificationCenterDelegate, RCIMReceiveMessageDelegate>
 
 @end
 
@@ -25,6 +26,9 @@
     
     [self setupBarAppearance];
     
+    // 注册远程通知
+    [self registerRemoteNotification];
+    
     [application setStatusBarStyle:UIStatusBarStyleLightContent];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(switchRootViewController) name:KSwitchRootViewController object:nil];
@@ -33,6 +37,8 @@
     [[RCIM sharedRCIM] initWithAppKey:RongCloudAppKey];
     // 发送消息携带用户信息
     [self setIMInfoProvider];
+    // 连接融云服务器
+    [self connectToRongCloud];
     
     // IQKeyBoard 关闭toolBar
     [[IQKeyboardManager sharedManager] setEnableAutoToolbar:NO];
@@ -44,6 +50,104 @@
     
     return YES;
 }
+
+#pragma mark - RCIMReceiveMessageDelegate
+- (void)onRCIMReceiveMessage:(RCMessage *)message left:(int)left {
+    NSLog(@"-------%@",message);
+    // 好友信息
+    RCContactNotificationMessage *contactNotificationMsg = nil;
+    if ([message.objectName isEqualToString:@"RC:ContactNtf"]) {
+        contactNotificationMsg = (RCContactNotificationMessage *)message.content;
+        // 如果是同意好友申请的消息，就刷新好友列表数据
+        NSString *account = [[NSUserDefaults standardUserDefaults] valueForKey:KAccount];
+        [[CHMInfoProvider shareInstance] syncFriendList:account complete:^(NSMutableArray *friends) {
+            [[NSNotificationCenter defaultCenter] postNotificationName:KChangeUserInfoNotification object:nil];
+        }];
+    }
+    
+    // 把添加到群组的消息
+    RCGroupNotificationMessage *groupNotificationMsg = nil;
+    if ([message.objectName isEqualToString:@"RC:GrpNtf"]) {
+        groupNotificationMsg = (RCGroupNotificationMessage *)message.content;
+        // 刷新群组列表
+        [[CHMInfoProvider shareInstance] syncGroups];
+    }
+}
+
+/**
+ 连接融云服务器
+ */
+- (void)connectToRongCloud {
+    NSString *rongCloudToken = [[NSUserDefaults standardUserDefaults] valueForKey:KRongCloudToken];
+    [[RCIM sharedRCIM] connectWithToken:rongCloudToken success:^(NSString *userId) {
+        NSLog(@"----连接成功%@",userId);
+        [self setCurrentUserInfo];
+        [RCIM sharedRCIM].receiveMessageDelegate = self;
+        
+    } error:^(RCConnectErrorCode status) {
+        NSLog(@"----连接失败%ld",(long)status);
+    } tokenIncorrect:^{
+        NSLog(@"----连接token不正确");
+    }];
+}
+/**
+ 设置当前用户的用户信息，用于SDK显示和发送。
+ */
+- (void)setCurrentUserInfo {
+    // 从沙盒中取登录时保存的用户信息
+    NSString *nickName = [[NSUserDefaults standardUserDefaults] valueForKey:KNickName];
+    NSString *account = [[NSUserDefaults standardUserDefaults] valueForKey:KAccount];
+    NSString *portrait = [[NSUserDefaults standardUserDefaults] valueForKey:KPortrait];
+    [RCIM sharedRCIM].currentUserInfo = [[RCUserInfo alloc] initWithUserId:account name:nickName portrait:portrait];
+}
+
+
+#pragma mark - 注册远程通知 
+- (void)registerRemoteNotification {
+    // 设置代理
+    if (@available(iOS 10.0, *)) {
+        [UNUserNotificationCenter currentNotificationCenter].delegate = self;
+        [[UNUserNotificationCenter currentNotificationCenter] requestAuthorizationWithOptions:UNAuthorizationOptionAlert | UNAuthorizationOptionBadge | UNAuthorizationOptionSound completionHandler:^(BOOL granted, NSError * _Nullable error) {
+            if (granted) {
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    [[UIApplication sharedApplication] registerForRemoteNotifications];
+                });
+            }
+        }];
+    } else {
+        UIUserNotificationSettings *setting = [UIUserNotificationSettings settingsForTypes:UIUserNotificationTypeAlert | UIUserNotificationTypeBadge | UIUserNotificationTypeSound categories:nil];
+        [[UIApplication sharedApplication] registerUserNotificationSettings:setting];
+        [[UIApplication sharedApplication] registerForRemoteNotifications];
+    }
+}
+
+#pragma mark - 推送获取 token
+- (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
+    NSString *token = [[[[deviceToken description] stringByReplacingOccurrencesOfString:@"<" withString:@""] stringByReplacingOccurrencesOfString:@">" withString:@""] stringByReplacingOccurrencesOfString:@" " withString:@""];
+    [[RCIMClient sharedRCIMClient] setDeviceToken:token];
+}
+- (void)application:(UIApplication *)application didFailToRegisterForRemoteNotificationsWithError:(NSError *)error {
+#if TARGET_IPHONE_SIMULATOR
+    // 模拟器不能使用远程推送
+#else
+    NSLog(@"获取DeviceToken失败！！！");
+    NSLog(@"ERROR：%@", error);
+#endif
+}
+
+
+#pragma mark - iOS10 之后收到推送
+- (void)userNotificationCenter:(UNUserNotificationCenter *)center didReceiveNotificationResponse:(UNNotificationResponse *)response withCompletionHandler:(void (^)(void))completionHandler  API_AVAILABLE(ios(10.0)) API_AVAILABLE(ios(10.0)){
+    NSLog(@"---------------ios10之后的推送");
+    completionHandler();
+}
+
+#pragma ios10 之前收到推送
+- (void)application:(UIApplication *)application didReceiveRemoteNotification:(nonnull NSDictionary *)userInfo fetchCompletionHandler:(nonnull void (^)(UIBackgroundFetchResult))completionHandler {
+    NSLog(@"---------------ios10之前的推送");
+    completionHandler(UIBackgroundFetchResultNewData);
+}
+
 
 #pragma mark - 信息提供者
 - (void)setIMInfoProvider {
@@ -119,6 +223,7 @@
 
 - (void)applicationWillEnterForeground:(UIApplication *)application {
     // Called as part of the transition from the background to the active state; here you can undo many of the changes made on entering the background.
+    application.applicationIconBadgeNumber = 0;
 }
 
 
