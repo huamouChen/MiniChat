@@ -58,6 +58,12 @@
  */
 - (void)setNewPassword {
     [self.view endEditing:YES];
+    
+    if (![_nPwdTextField.text isEqualToString:_comfirmTextField.text]) {
+        [CHMProgressHUD showErrorWithInfo:@"两次密码输入不一致"];
+        return;
+    }
+    
     [CHMProgressHUD showWithInfo:@"正在修改中..." isHaveMask:YES];
     [CHMHttpTool changePasswordWithOldPassword:_oldPasswordTextField.text newPassword:_nPwdTextField.text success:^(id response) {
         

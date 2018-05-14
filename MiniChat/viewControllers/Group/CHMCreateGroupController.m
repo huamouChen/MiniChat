@@ -150,7 +150,7 @@
                                       }
                         
                                   } failure:^(NSError *error) {
-                                      [CHMProgressHUD showErrorWithInfo:[NSString stringWithFormat:@"%ld", (long)error.code]];
+                                      [CHMProgressHUD showErrorWithInfo:[NSString stringWithFormat:@"错误码--%ld", (long)error.code]];
                                   }];
 }
 

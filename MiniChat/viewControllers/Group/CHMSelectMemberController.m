@@ -91,8 +91,9 @@ static CGFloat const KIndexViewWidth = 55 / 2.0;
                 [CHMProgressHUD dismissHUD];
                 if (weakSelf.addMemberBlock) {
                     weakSelf.addMemberBlock([self dealWithAddMember]);
+                    [self.navigationController popViewControllerAnimated:YES];
                 }
-                [self.navigationController popViewControllerAnimated:YES];
+                
             });
         } else {
             [CHMProgressHUD showErrorWithInfo:response[@"Code"][@"Description"]];

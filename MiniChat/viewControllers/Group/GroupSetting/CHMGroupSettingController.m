@@ -242,11 +242,16 @@ static NSString *const itemCellReuseId = @"CHMGroupSettingHeaderCell";    // tab
     selectMemberVC.sourceArrar = self.collectionViewResource;
     selectMemberVC.groupId = self.groupId;
     selectMemberVC.groupName = self.groupName == nil ? @"" : self.groupName;
+    
     selectMemberVC.addMemberBlock = ^(NSMutableArray *groupMemberArray) {
+        NSMutableArray *resultArray = [NSMutableArray arrayWithArray:weakSelf.collectionViewResource];
+        [resultArray addObjectsFromArray:groupMemberArray];
         // 保存数据到本地
-        [[CHMDataBaseManager shareManager] insertGroupMemberToDB:groupMemberArray groupId:weakSelf.groupId complete:^(BOOL isComplete) {
-            
+        [[CHMDataBaseManager shareManager] insertGroupMemberToDB:resultArray groupId:weakSelf.groupId complete:^(BOOL isComplete) {
+
         }];
+        
+        
         // 新添加的成员放在最后，先移除加号和减号
         if (weakSelf.isGroupOwner) {
             [weakSelf.collectionViewResource removeObjectAtIndex:weakSelf.collectionViewResource.count - 1];
@@ -255,13 +260,15 @@ static NSString *const itemCellReuseId = @"CHMGroupSettingHeaderCell";    // tab
             [weakSelf.collectionViewResource removeObjectAtIndex:weakSelf.collectionViewResource.count - 1];
         }
         [weakSelf.collectionViewResource addObjectsFromArray:groupMemberArray];
+        
+        
         // 加多 加号和减号
-        CHMGroupMemberModel *addModel = [[CHMGroupMemberModel alloc] initWithUserName:KAddMember nickName:@"" headerImage:@"add_member" groupId:self.groupId];
-        CHMGroupMemberModel *cutdownModel = [[CHMGroupMemberModel alloc] initWithUserName:KDeleteMember nickName:@"" headerImage:@"delete_member" groupId:self.groupId];
-        [self.collectionViewResource addObject:addModel];
+        CHMGroupMemberModel *addModel = [[CHMGroupMemberModel alloc] initWithUserName:KAddMember nickName:@"" headerImage:@"add_member" groupId:weakSelf.groupId];
+        CHMGroupMemberModel *cutdownModel = [[CHMGroupMemberModel alloc] initWithUserName:KDeleteMember nickName:@"" headerImage:@"delete_member" groupId:weakSelf.groupId];
+        [weakSelf.collectionViewResource addObject:addModel];
         // 群组才能踢除群组成员
-        if (self.isGroupOwner) {
-            [self.collectionViewResource addObject:cutdownModel];
+        if (weakSelf.isGroupOwner) {
+            [weakSelf.collectionViewResource addObject:cutdownModel];
         }
         
         [weakSelf.headerView reloadData];

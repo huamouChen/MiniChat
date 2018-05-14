@@ -38,7 +38,7 @@ static CHMHttpTool *instanse = nil;
         // 设置请求以及相应的序列化
         _sessionManager.requestSerializer = [AFJSONRequestSerializer serializer];
         // 设置超时时间
-        _sessionManager.requestSerializer.timeoutInterval = 10.0;
+        _sessionManager.requestSerializer.timeoutInterval = 20.0;
         // 设置响应内容的类型
         _sessionManager.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"application/json", @"text/json", @"text/javascript",@"text/html", @"charset=utf-8", nil];
     }

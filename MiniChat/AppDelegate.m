@@ -51,7 +51,7 @@
     return YES;
 }
 
-#pragma mark - RCIMReceiveMessageDelegate
+#pragma mark - RCIMReceiveMessageDelegate  收到消息
 - (void)onRCIMReceiveMessage:(RCMessage *)message left:(int)left {
     NSLog(@"-------%@",message);
     // 好友信息
@@ -69,9 +69,27 @@
     RCGroupNotificationMessage *groupNotificationMsg = nil;
     if ([message.objectName isEqualToString:@"RC:GrpNtf"]) {
         groupNotificationMsg = (RCGroupNotificationMessage *)message.content;
+        
+        if ([groupNotificationMsg.operation isEqualToString:@"Dismiss"]) {
+            [[RCIMClient sharedRCIMClient]clearRemoteHistoryMessages:ConversationType_GROUP
+                                                            targetId:message.targetId
+                                                          recordTime:message.sentTime
+                                                             success:^{
+                                                                 [[RCIMClient sharedRCIMClient] clearMessages:ConversationType_GROUP targetId:message.targetId];
+                                                             }
+                                                               error:nil
+             ];
+            // 移除该条会话
+            [[RCIMClient sharedRCIMClient] removeConversation:ConversationType_GROUP targetId:message.targetId];
+            // 删除本地数据中对应的群组
+            [[CHMDataBaseManager shareManager] deleteGroupToDB:message.targetId];
+        }
+        
         // 刷新群组列表
         [[CHMInfoProvider shareInstance] syncGroups];
     }
+    
+    
 }
 
 /**

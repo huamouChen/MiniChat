@@ -14,7 +14,11 @@
 //#define BaseURL         @"http://172.16.44.21:8003"
 
 #ifdef DEBUG
-#define BaseURL   @"http://dfgimapi.xxx8.cn"
+//#define BaseURL   @"http://dfgimapi.xxx8.cn"
+
+#define BaseURL   @"http://192.168.31.246:8012"
+
+
 #else
 #define BaseURL   @"http://imapi.xxx8.cn"
 #endif

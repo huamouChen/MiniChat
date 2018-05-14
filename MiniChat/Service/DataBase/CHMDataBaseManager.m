@@ -297,6 +297,7 @@ static NSString *const groupMemberTableName = @"GROUPMEMBERTABLE";
     });
 }
 
+
 //存储群组成员信息
 - (void)insertGroupMemberToDB:(NSMutableArray *)groupMemberList
                       groupId:(NSString *)groupId
@@ -311,6 +312,9 @@ static NSString *const groupMemberTableName = @"GROUPMEMBERTABLE";
         [self.dbQueue inTransaction:^(FMDatabase *db, BOOL *rollback) {
             [db executeUpdate:deleteSql];
             for (CHMGroupMemberModel *groupMember in groupMemberList) {
+                if ([groupMember.UserName isEqualToString:KAddMember] || [groupMember.UserName isEqualToString:KDeleteMember]) {
+                    continue;
+                }
                 NSString *insertSql = @"REPLACE INTO GROUPMEMBERTABLE (groupid, userid, "
                 @"name, portraitUri) VALUES (?, ?, ?, ?)";
                 NSString *nickName = ([groupMember.NickName isKindOfClass:[NSNull class]] || groupMember.NickName == nil || [groupMember.NickName isEqualToString:@""]) ? groupMember.UserName : groupMember.NickName;
