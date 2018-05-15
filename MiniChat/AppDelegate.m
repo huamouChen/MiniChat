@@ -12,6 +12,7 @@
 #import "CHMLoginController.h"
 #import "CHMMainController.h"
 #import <UserNotifications/UserNotifications.h>
+#import "CHMGroupTipMessage.h"
 
 
 @interface AppDelegate () <UNUserNotificationCenterDelegate, RCIMReceiveMessageDelegate>
@@ -35,6 +36,8 @@
     
     // 初始化融云
     [[RCIM sharedRCIM] initWithAppKey:RongCloudAppKey];
+    // 注册自定义消息
+    [[RCIM sharedRCIM] registerMessageType:[CHMGroupTipMessage class]];
     // 发送消息携带用户信息
     [self setIMInfoProvider];
     // 连接融云服务器

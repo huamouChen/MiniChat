@@ -46,6 +46,8 @@
 		C066EDC8209BDE5800CB87FC /* CHMBarButtonItem.m in Sources */ = {isa = PBXBuildFile; fileRef = C066EDC7209BDE5800CB87FC /* CHMBarButtonItem.m */; };
 		C066EDCC209BE31600CB87FC /* KxMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = C066EDCA209BE31600CB87FC /* KxMenu.m */; };
 		C066EDD0209BE4AD00CB87FC /* UIImage+CHMImage.m in Sources */ = {isa = PBXBuildFile; fileRef = C066EDCF209BE4AD00CB87FC /* UIImage+CHMImage.m */; };
+		C0C42A1020AAB4DB006671B5 /* CHMGroupTipMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = C0C42A0F20AAB4DB006671B5 /* CHMGroupTipMessage.m */; };
+		C0C42A1320AAB5F6006671B5 /* CHMGroupTipCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C0C42A1220AAB5F6006671B5 /* CHMGroupTipCell.m */; };
 		C0CCCF4B209FF82B00DD46B2 /* loading_IOS.png in Resources */ = {isa = PBXBuildFile; fileRef = C0CCCF4A209FF82A00DD46B2 /* loading_IOS.png */; };
 		C0CCCF4F20A0051600DD46B2 /* CHMDataBaseManager.m in Sources */ = {isa = PBXBuildFile; fileRef = C0CCCF4E20A0051600DD46B2 /* CHMDataBaseManager.m */; };
 		C0CCCF5220A035BB00DD46B2 /* CHMUserInfoManager.m in Sources */ = {isa = PBXBuildFile; fileRef = C0CCCF5120A035BB00DD46B2 /* CHMUserInfoManager.m */; };
@@ -198,6 +200,10 @@
 		C066EDCB209BE31600CB87FC /* KxMenu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KxMenu.h; sourceTree = "<group>"; };
 		C066EDCE209BE4AD00CB87FC /* UIImage+CHMImage.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIImage+CHMImage.h"; sourceTree = "<group>"; };
 		C066EDCF209BE4AD00CB87FC /* UIImage+CHMImage.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIImage+CHMImage.m"; sourceTree = "<group>"; };
+		C0C42A0E20AAB4DB006671B5 /* CHMGroupTipMessage.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CHMGroupTipMessage.h; sourceTree = "<group>"; };
+		C0C42A0F20AAB4DB006671B5 /* CHMGroupTipMessage.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CHMGroupTipMessage.m; sourceTree = "<group>"; };
+		C0C42A1120AAB5F6006671B5 /* CHMGroupTipCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CHMGroupTipCell.h; sourceTree = "<group>"; };
+		C0C42A1220AAB5F6006671B5 /* CHMGroupTipCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CHMGroupTipCell.m; sourceTree = "<group>"; };
 		C0CCCF4A209FF82A00DD46B2 /* loading_IOS.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = loading_IOS.png; sourceTree = "<group>"; };
 		C0CCCF4D20A0051600DD46B2 /* CHMDataBaseManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CHMDataBaseManager.h; sourceTree = "<group>"; };
 		C0CCCF4E20A0051600DD46B2 /* CHMDataBaseManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CHMDataBaseManager.m; sourceTree = "<group>"; };
@@ -586,6 +592,17 @@
 			path = Image;
 			sourceTree = "<group>";
 		};
+		C0C42A0D20AAB34F006671B5 /* DiyMessage */ = {
+			isa = PBXGroup;
+			children = (
+				C0C42A0E20AAB4DB006671B5 /* CHMGroupTipMessage.h */,
+				C0C42A0F20AAB4DB006671B5 /* CHMGroupTipMessage.m */,
+				C0C42A1120AAB5F6006671B5 /* CHMGroupTipCell.h */,
+				C0C42A1220AAB5F6006671B5 /* CHMGroupTipCell.m */,
+			);
+			path = DiyMessage;
+			sourceTree = "<group>";
+		};
 		C0CCCF4C20A0050500DD46B2 /* DataBase */ = {
 			isa = PBXGroup;
 			children = (
@@ -871,6 +888,7 @@
 		C0EAA60520985DAF0046F05C /* Conversation */ = {
 			isa = PBXGroup;
 			children = (
+				C0C42A0D20AAB34F006671B5 /* DiyMessage */,
 				C0CCCF5720A06BB900DD46B2 /* View */,
 				C0EAA60C20985DEE0046F05C /* CHMConversationListController.h */,
 				C0EAA60D20985DEE0046F05C /* CHMConversationListController.m */,
@@ -1292,6 +1310,7 @@
 				C0EAA5F2209823F40046F05C /* CHMRegisterController.m in Sources */,
 				C00177A0209DF570001B44DE /* CHMGroupFooter.m in Sources */,
 				C0CCCFA320A2C7A000DD46B2 /* CHMAboutHeaderView.m in Sources */,
+				C0C42A1320AAB5F6006671B5 /* CHMGroupTipCell.m in Sources */,
 				C0CCCF9120A2A82900DD46B2 /* RCDCSStarView.m in Sources */,
 				C0CCCF8220A2A79E00DD46B2 /* RCDCSEvaluateView.m in Sources */,
 				C0CCCFA920A2CFE400DD46B2 /* CHMFunctionController.m in Sources */,
@@ -1314,6 +1333,7 @@
 				C0EFDBA1209C142500848710 /* CHMCreateGroupController.m in Sources */,
 				C0CCCF9420A2A82900DD46B2 /* RCDCSInputView.m in Sources */,
 				C0CCCF5220A035BB00DD46B2 /* CHMUserInfoManager.m in Sources */,
+				C0C42A1020AAB4DB006671B5 /* CHMGroupTipMessage.m in Sources */,
 				C0F25A642095BC1900C6BCA6 /* main.m in Sources */,
 				C0CCCF7F20A2A79000DD46B2 /* RCDCSAnnounceView.m in Sources */,
 				C0CCCF5620A0385C00DD46B2 /* CHMSearchFriendController.m in Sources */,

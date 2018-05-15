@@ -11,6 +11,8 @@
 #import "CHMGroupSettingController.h"
 #import "CHMUserDetailController.h"
 #import "CHMFriendModel.h"
+#import "CHMGroupTipCell.h"
+#import "CHMGroupTipMessage.h"
 
 static NSInteger const bettingTag = 2000;
 
@@ -19,12 +21,6 @@ static NSInteger const bettingTag = 2000;
 @end
 
 @implementation CHMConversationController
-
-
-- (RCMessage *)willAppendAndDisplayMessage:(RCMessage *)message {
-    NSLog(@"------%@",message);
-    return message;
-}
 
 #pragma mark - view life  cycler
 - (void)viewWillDisappear:(BOOL)animated {
@@ -40,6 +36,9 @@ static NSInteger const bettingTag = 2000;
                                              selector:@selector(clearHistoryMSG:)
                                                  name:KClearHistoryMsg
                                                object:nil];
+    
+    ///注册自定义测试消息Cell
+    [self registerClass:[CHMGroupTipCell class] forMessageClass:[CHMGroupTipMessage class]];
     
     [self setupRightBarButton];
     
@@ -135,12 +134,12 @@ static NSInteger const bettingTag = 2000;
 }
 
 - (void)setRightNavigationItem:(UIImage *)image withFrame:(CGRect)frame {
-     CHMBarButtonItem *rightBtn = [[CHMBarButtonItem alloc] initContainImage:image imageViewFrame:frame buttonTitle:nil
-                                                                     titleColor:nil
-                                                                     titleFrame:CGRectZero
-                                                                    buttonFrame:frame
-                                                                         target:self
-                                                                         action:@selector(rightBarButtonItemClicked:)];
+    CHMBarButtonItem *rightBtn = [[CHMBarButtonItem alloc] initContainImage:image imageViewFrame:frame buttonTitle:nil
+                                                                 titleColor:nil
+                                                                 titleFrame:CGRectZero
+                                                                buttonFrame:frame
+                                                                     target:self
+                                                                     action:@selector(rightBarButtonItemClicked:)];
     self.navigationItem.rightBarButtonItem = rightBtn;
 }
 
@@ -161,39 +160,39 @@ static NSInteger const bettingTag = 2000;
         [self.navigationController pushViewController:userDetailController animated:YES];
         
         
-//        RCDUserInfo *friendInfo = [[RCDataBaseManager shareInstance] getFriendInfo:self.targetId];
-//        if (![friendInfo.status isEqualToString:@"20"]) {
-//            RCDAddFriendViewController *vc = [[RCDAddFriendViewController alloc] init];
-//            vc.targetUserInfo = friendInfo;
-//            [self.navigationController pushViewController:vc animated:YES];
-//        } else {
-//            RCDPrivateSettingsTableViewController *settingsVC =
-//            [RCDPrivateSettingsTableViewController privateSettingsTableViewController];
-//            settingsVC.userId = self.targetId;
-//            [self.navigationController pushViewController:settingsVC animated:YES];
-//        }
+        //        RCDUserInfo *friendInfo = [[RCDataBaseManager shareInstance] getFriendInfo:self.targetId];
+        //        if (![friendInfo.status isEqualToString:@"20"]) {
+        //            RCDAddFriendViewController *vc = [[RCDAddFriendViewController alloc] init];
+        //            vc.targetUserInfo = friendInfo;
+        //            [self.navigationController pushViewController:vc animated:YES];
+        //        } else {
+        //            RCDPrivateSettingsTableViewController *settingsVC =
+        //            [RCDPrivateSettingsTableViewController privateSettingsTableViewController];
+        //            settingsVC.userId = self.targetId;
+        //            [self.navigationController pushViewController:settingsVC animated:YES];
+        //        }
         
     } else if (self.conversationType == ConversationType_DISCUSSION) {
-//        RCDDiscussGroupSettingViewController *settingVC = [[RCDDiscussGroupSettingViewController alloc] init];
-//        settingVC.conversationType = self.conversationType;
-//        settingVC.targetId = self.targetId;
-//        settingVC.conversationTitle = self.userName;
-//        //设置讨论组标题时，改变当前会话页面的标题
-//        settingVC.setDiscussTitleCompletion = ^(NSString *discussTitle) {
-//            self.title = discussTitle;
-//        };
-//        //清除聊天记录之后reload data
-//        __weak RCDChatViewController *weakSelf = self;
-//        settingVC.clearHistoryCompletion = ^(BOOL isSuccess) {
-//            if (isSuccess) {
-//                [weakSelf.conversationDataRepository removeAllObjects];
-//                dispatch_async(dispatch_get_main_queue(), ^{
-//                    [weakSelf.conversationMessageCollectionView reloadData];
-//                });
-//            }
-//        };
-//
-//        [self.navigationController pushViewController:settingVC animated:YES];
+        //        RCDDiscussGroupSettingViewController *settingVC = [[RCDDiscussGroupSettingViewController alloc] init];
+        //        settingVC.conversationType = self.conversationType;
+        //        settingVC.targetId = self.targetId;
+        //        settingVC.conversationTitle = self.userName;
+        //        //设置讨论组标题时，改变当前会话页面的标题
+        //        settingVC.setDiscussTitleCompletion = ^(NSString *discussTitle) {
+        //            self.title = discussTitle;
+        //        };
+        //        //清除聊天记录之后reload data
+        //        __weak RCDChatViewController *weakSelf = self;
+        //        settingVC.clearHistoryCompletion = ^(BOOL isSuccess) {
+        //            if (isSuccess) {
+        //                [weakSelf.conversationDataRepository removeAllObjects];
+        //                dispatch_async(dispatch_get_main_queue(), ^{
+        //                    [weakSelf.conversationMessageCollectionView reloadData];
+        //                });
+        //            }
+        //        };
+        //
+        //        [self.navigationController pushViewController:settingVC animated:YES];
     }
     
     //群组设置
@@ -203,33 +202,33 @@ static NSInteger const bettingTag = 2000;
         settingVC.groupId = self.targetId;
         [self.navigationController pushViewController:settingVC animated:YES];
         
-//        RCDGroupSettingsTableViewController *settingsVC =
-//        [RCDGroupSettingsTableViewController groupSettingsTableViewController];
-//        if (_groupInfo == nil) {
-//            settingsVC.Group = [[RCDataBaseManager shareInstance] getGroupByGroupId:self.targetId];
-//        } else {
-//            settingsVC.Group = _groupInfo;
-//        }
-//        [self.navigationController pushViewController:settingsVC animated:YES];
+        //        RCDGroupSettingsTableViewController *settingsVC =
+        //        [RCDGroupSettingsTableViewController groupSettingsTableViewController];
+        //        if (_groupInfo == nil) {
+        //            settingsVC.Group = [[RCDataBaseManager shareInstance] getGroupByGroupId:self.targetId];
+        //        } else {
+        //            settingsVC.Group = _groupInfo;
+        //        }
+        //        [self.navigationController pushViewController:settingsVC animated:YES];
     }
     
     //客服设置
     else if (self.conversationType == ConversationType_CUSTOMERSERVICE ||
              self.conversationType == ConversationType_SYSTEM) {
-//        RCDSettingBaseViewController *settingVC = [[RCDSettingBaseViewController alloc] init];
-//        settingVC.conversationType = self.conversationType;
-//        settingVC.targetId = self.targetId;
-//        //清除聊天记录之后reload data
-//        __weak RCDChatViewController *weakSelf = self;
-//        settingVC.clearHistoryCompletion = ^(BOOL isSuccess) {
-//            if (isSuccess) {
-//                [weakSelf.conversationDataRepository removeAllObjects];
-//                dispatch_async(dispatch_get_main_queue(), ^{
-//                    [weakSelf.conversationMessageCollectionView reloadData];
-//                });
-//            }
-//        };
-//        [self.navigationController pushViewController:settingVC animated:YES];
+        //        RCDSettingBaseViewController *settingVC = [[RCDSettingBaseViewController alloc] init];
+        //        settingVC.conversationType = self.conversationType;
+        //        settingVC.targetId = self.targetId;
+        //        //清除聊天记录之后reload data
+        //        __weak RCDChatViewController *weakSelf = self;
+        //        settingVC.clearHistoryCompletion = ^(BOOL isSuccess) {
+        //            if (isSuccess) {
+        //                [weakSelf.conversationDataRepository removeAllObjects];
+        //                dispatch_async(dispatch_get_main_queue(), ^{
+        //                    [weakSelf.conversationMessageCollectionView reloadData];
+        //                });
+        //            }
+        //        };
+        //        [self.navigationController pushViewController:settingVC animated:YES];
     } else if (ConversationType_APPSERVICE == self.conversationType ||
                ConversationType_PUBLICSERVICE == self.conversationType) {
         RCPublicServiceProfile *serviceProfile =
