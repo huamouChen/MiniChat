@@ -327,8 +327,35 @@ static NSString *const groupMemberTableName = @"GROUPMEMBERTABLE";
 
 
 /**
- 删除群组成员
+ 更新单个群成员的信息
+ 
+ @param member 要更新的成员
+ @param groupId 对应的群组
+ @param result 是否成功
+ */
+- (void)updateMember:(RCUserInfo *)member toGroupId:(NSString *)groupId
+            complete:(void (^)(BOOL))result {
+//    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
+        [self.dbQueue inTransaction:^(FMDatabase *db, BOOL *rollback) {
+//            NSString *insertSql = @"REPLACE INTO GROUPMEMBERTABLE (groupid, userid, "
+//            @"name, portraitUri) VALUES (?, ?, ?, ?)";
+            
+            NSString *nickName = ([member.name isKindOfClass:[NSNull class]] || member.name == nil || [member.name isEqualToString:@""]) ? member.userId : member.name;
+            NSString *updateSql = [NSString stringWithFormat:@"Update GROUPMEMBERTABLE set name = '%@', portraitUri = '%@' where groupid = '%@' AND userid = '%@'", nickName, member.portraitUri, groupId, member.userId];
+            
+            [db executeUpdate:updateSql];
 
+//            [db executeUpdate:insertSql, groupId, member.userId, nickName, member.portraitUri];
+        }
+         ];
+        result(YES);
+//    });
+}
+
+
+/**
+ 删除群组成员
+ 
  @param groupMemberList 要删除群组成员数组
  @param groupId 对应的群组
  @param result 是否成功

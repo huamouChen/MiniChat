@@ -48,10 +48,10 @@
                 [self.navigationController popViewControllerAnimated:YES];
             });
         } else {
-            [CHMProgressHUD showErrorWithInfo:response[@"Code"][@"Description"]];
+            [CHMProgressHUD showErrorWithInfo:response[@"InnerMessage"]];
         }
     } failure:^(NSError *error) {
-        [CHMProgressHUD showErrorWithInfo:[NSString stringWithFormat:@"错误码--%zd", error.code]];
+        [CHMProgressHUD showErrorWithInfo:[NSString stringWithFormat:@"错误码--%ld", error.code]];
     }];
 }
 

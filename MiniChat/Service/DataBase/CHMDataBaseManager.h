@@ -7,7 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
-@class CHMGroupModel;
+@class CHMGroupModel, CHMGroupMemberModel;
 
 @interface CHMDataBaseManager : NSObject
 
@@ -63,6 +63,15 @@
  */
 - (void)insertGroupsToDB:(NSMutableArray *)groupList complete:(void (^)(BOOL))result;
 
+
+/**
+ 更新单个群成员的信息
+ 
+ @param member 要更新的成员
+ @param groupId 对应的群组
+ @param result 是否成功
+ */
+- (void)updateMember:(RCUserInfo *)member toGroupId:(NSString *)groupId complete:(void (^)(BOOL))result;
 
 //存储群组成员信息
 - (void)insertGroupMemberToDB:(NSMutableArray *)groupMemberList
