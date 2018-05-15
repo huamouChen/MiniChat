@@ -19,6 +19,11 @@ static NSString *const detailReuseablId = @"CHMMineDetailCell";
 
 @property (nonatomic, strong) NSArray *datasArray;
 
+// 当前用户的 账号
+@property (nonatomic, copy) NSString *targetId;
+// 当前用户的 昵称
+@property (nonatomic, copy) NSString *nickName;
+
 @end
 
 @implementation CHMUserDetailController
@@ -29,14 +34,14 @@ static NSString *const detailReuseablId = @"CHMMineDetailCell";
  */
 - (void)sendMessage {
     //新建一个聊天会话View Controller对象,建议这样初始化
-    CHMConversationController *chatController = [[CHMConversationController alloc] initWithConversationType:ConversationType_PRIVATE targetId:_friendModel.UserName];
+    CHMConversationController *chatController = [[CHMConversationController alloc] initWithConversationType:ConversationType_PRIVATE targetId:_targetId];
     [chatController setHidesBottomBarWhenPushed:YES];
     //设置会话的类型，如单聊、讨论组、群聊、聊天室、客服、公众服务会话等
     chatController.conversationType = ConversationType_PRIVATE;
     //设置会话的目标会话ID。（单聊、客服、公众服务会话为对方的ID，讨论组、群聊、聊天室为会话的ID）
-    chatController.targetId = _friendModel.UserName;
+    chatController.targetId = _targetId;
     //设置聊天会话界面要显示的标题
-    chatController.title = _friendModel.NickName;
+    chatController.title = _nickName;
     //显示聊天会话界面
     [self.navigationController pushViewController:chatController animated:YES];
 }
@@ -48,8 +53,8 @@ static NSString *const detailReuseablId = @"CHMMineDetailCell";
 - (void)addFriend {
     [CHMProgressHUD showWithInfo:@"正在发送..." isHaveMask:YES];
     NSString *currentInfo = [[NSUserDefaults standardUserDefaults] valueForKey:KNickName];
-    currentInfo = ([currentInfo isEqualToString:@""] || currentInfo == nil) ? [[NSUserDefaults standardUserDefaults] valueForKey:KNickName] : currentInfo;
-    [CHMHttpTool addFriendWithUserId:_friendModel.UserName mark:[NSString stringWithFormat:@"我是%@，想加你为好友",currentInfo] success:^(id response) {
+    currentInfo = ([currentInfo isEqualToString:@""] || currentInfo == nil) ? [[NSUserDefaults standardUserDefaults] valueForKey:KAccount] : currentInfo;
+    [CHMHttpTool addFriendWithUserId:_targetId mark:[NSString stringWithFormat:@"我是%@，想加你为好友",currentInfo] success:^(id response) {
         NSLog(@"-------%@", response);
         NSNumber *codeId = response[@"Code"][@"CodeId"];
         if (codeId.integerValue == 100) {
@@ -74,9 +79,9 @@ static NSString *const detailReuseablId = @"CHMMineDetailCell";
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    [self setupAppearance];
-    
     [self initData];
+    
+    [self setupAppearance];
 }
 
 /**
@@ -108,6 +113,10 @@ static NSString *const detailReuseablId = @"CHMMineDetailCell";
  初始化数据
  */
 - (void)initData {
+    
+    self.targetId = _friendModel ? _friendModel.UserName : _groupMemberModel.UserName;
+    self.nickName = _friendModel ? _friendModel.NickName : _groupMemberModel.NickName;
+    
     if (_friendModel) {
         self.datasArray = @[@[@{KPortrait:_friendModel.HeaderImage, KNickName: _friendModel.NickName, KAccount: _friendModel.UserName}]];
     }
@@ -115,6 +124,9 @@ static NSString *const detailReuseablId = @"CHMMineDetailCell";
     if (_groupMemberModel) {
         self.datasArray = @[@[@{KPortrait:_groupMemberModel.HeaderImage, KNickName: _groupMemberModel.NickName == nil ? _groupMemberModel.UserName : _groupMemberModel.NickName, KAccount: _groupMemberModel.UserName}]];
     }
+    
+    RCUserInfo *userInfo = [[CHMDataBaseManager shareManager] getFriendInfo:self.targetId];
+    _isFriend = userInfo ? YES : NO;
     
 }
 

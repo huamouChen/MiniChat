@@ -29,6 +29,9 @@ static CGFloat const rowHeight = 65;
 // 申请好友的消息数组
 @property (nonatomic, strong) NSArray *applyArray;
 
+// 当前点击的接受按钮下标
+@property (nonatomic, assign) NSInteger currentIndex;
+
 
 @end
 
@@ -75,6 +78,7 @@ static CGFloat const rowHeight = 65;
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
+    self.currentIndex = -1;
     self.needSyncFriendList = YES;
     
     // IMLib 库获取会话列表
@@ -176,7 +180,8 @@ static CGFloat const rowHeight = 65;
     } else {
         friendModel = [[CHMFriendModel alloc] initWithUserId:conversation.targetId nickName:conversation.targetId portrait:KDefaultPortrait];
     }
-    friendModel.isCheck = userInfo ? NO : YES;
+    // row 判断主要是为了防止数据刷新不及时
+    friendModel.isCheck = (userInfo || self.currentIndex == indexPath.row) ? NO : YES;
     cell.friendModel = friendModel;
     cell.acceptButtonClickBlock = ^(NSIndexPath *selectedIndexPath) {
         [self acceptButtonClickWithIndexPath:selectedIndexPath];
@@ -192,7 +197,7 @@ static CGFloat const rowHeight = 65;
  */
 - (void)acceptButtonClickWithIndexPath:(NSIndexPath *)indexPath {
     
-    [CHMProgressHUD showWithInfo:@"正在同意好友申请" isHaveMask:YES];
+    [CHMProgressHUD showWithInfo:@"正在同意好友申请..." isHaveMask:YES];
     
     RCConversation *conversation = _applyArray[indexPath.row];
     
@@ -216,13 +221,14 @@ static CGFloat const rowHeight = 65;
         NSLog(@"agreeFriendWithApplyId----------%@", response);
         NSNumber *codeId = response[@"Code"][@"CodeId"];
         if (codeId.integerValue == 100) {
-            [CHMProgressHUD showSuccessWithInfo:@"已经接受好友请求"];
+            weakSelf.currentIndex = indexPath.row;
             // 就刷新好友列表数据
             NSString *account = [[NSUserDefaults standardUserDefaults] valueForKey:KAccount];
             [[CHMInfoProvider shareInstance] syncFriendList:account complete:^(NSMutableArray *friends) {
                 [[NSNotificationCenter defaultCenter] postNotificationName:KChangeUserInfoNotification object:nil];
             }];
             [weakSelf.tableView reloadData];
+            [CHMProgressHUD showSuccessWithInfo:@"已经接受好友请求"];
             
         } else {
             [CHMProgressHUD showErrorWithInfo:response[@"Code"][@"Description"]];

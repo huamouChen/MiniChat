@@ -9,6 +9,8 @@
 #import "CHMConversationController.h"
 #import "CHMBettingController.h"
 #import "CHMGroupSettingController.h"
+#import "CHMUserDetailController.h"
+#import "CHMFriendModel.h"
 
 static NSInteger const bettingTag = 2000;
 
@@ -17,6 +19,12 @@ static NSInteger const bettingTag = 2000;
 @end
 
 @implementation CHMConversationController
+
+
+- (RCMessage *)willAppendAndDisplayMessage:(RCMessage *)message {
+    NSLog(@"------%@",message);
+    return message;
+}
 
 #pragma mark - view life  cycler
 - (void)viewWillDisappear:(BOOL)animated {
@@ -136,6 +144,7 @@ static NSInteger const bettingTag = 2000;
     self.navigationItem.rightBarButtonItem = rightBtn;
 }
 
+#pragma mark - 点击navigationBar right item
 /**
  *  此处使用自定义设置，开发者可以根据需求自己实现
  *  不添加rightBarButtonItemClicked事件，则使用默认实现。
@@ -144,6 +153,14 @@ static NSInteger const bettingTag = 2000;
     [self.view endEditing:YES];
     
     if (self.conversationType == ConversationType_PRIVATE) {
+        
+        CHMUserDetailController *userDetailController = [CHMUserDetailController new];
+        RCUserInfo *userInfo = [[CHMDataBaseManager shareManager] getFriendInfo:self.targetId];
+        CHMFriendModel *friendModel = [[CHMFriendModel alloc] initWithUserId:userInfo.userId nickName:userInfo.name portrait:userInfo.portraitUri];
+        userDetailController.friendModel = friendModel;
+        [self.navigationController pushViewController:userDetailController animated:YES];
+        
+        
 //        RCDUserInfo *friendInfo = [[RCDataBaseManager shareInstance] getFriendInfo:self.targetId];
 //        if (![friendInfo.status isEqualToString:@"20"]) {
 //            RCDAddFriendViewController *vc = [[RCDAddFriendViewController alloc] init];

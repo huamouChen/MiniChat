@@ -58,6 +58,10 @@
     RCContactNotificationMessage *contactNotificationMsg = nil;
     if ([message.objectName isEqualToString:@"RC:ContactNtf"]) {
         contactNotificationMsg = (RCContactNotificationMessage *)message.content;
+        // 保存到数据库
+        RCUserInfo *userInfo = [[RCUserInfo alloc] initWithUserId:contactNotificationMsg.targetUserId name:contactNotificationMsg.targetUserId portrait:KDefaultPortrait];
+        [[CHMDataBaseManager shareManager] insertUserToDB:userInfo];
+        [[CHMDataBaseManager shareManager] insertFriendToDB:userInfo];
         // 如果是同意好友申请的消息，就刷新好友列表数据
         NSString *account = [[NSUserDefaults standardUserDefaults] valueForKey:KAccount];
         [[CHMInfoProvider shareInstance] syncFriendList:account complete:^(NSMutableArray *friends) {
@@ -71,14 +75,17 @@
         groupNotificationMsg = (RCGroupNotificationMessage *)message.content;
         
         if ([groupNotificationMsg.operation isEqualToString:@"Dismiss"]) {
-            [[RCIMClient sharedRCIMClient]clearRemoteHistoryMessages:ConversationType_GROUP
-                                                            targetId:message.targetId
-                                                          recordTime:message.sentTime
-                                                             success:^{
-                                                                 [[RCIMClient sharedRCIMClient] clearMessages:ConversationType_GROUP targetId:message.targetId];
-                                                             }
-                                                               error:nil
-             ];
+            
+            [[RCIMClient sharedRCIMClient] clearMessages:ConversationType_GROUP targetId:message.targetId];
+            
+//            [[RCIMClient sharedRCIMClient]clearRemoteHistoryMessages:ConversationType_GROUP
+//                                                            targetId:message.targetId
+//                                                          recordTime:message.sentTime
+//                                                             success:^{
+//                                                                 [[RCIMClient sharedRCIMClient] clearMessages:ConversationType_GROUP targetId:message.targetId];
+//                                                             }
+//                                                               error:nil
+//             ];
             // 移除该条会话
             [[RCIMClient sharedRCIMClient] removeConversation:ConversationType_GROUP targetId:message.targetId];
             // 删除本地数据中对应的群组

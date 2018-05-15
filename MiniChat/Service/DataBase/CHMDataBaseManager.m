@@ -383,7 +383,8 @@ static NSString *const groupMemberTableName = @"GROUPMEMBERTABLE";
             CHMGroupMemberModel *model;
             model = [[CHMGroupMemberModel alloc] init];
             model.UserName = [rs stringForColumn:@"userid"];
-            model.NickName = [rs stringForColumn:@"name"];
+            NSString *nickName = ([rs stringForColumn:@"name"] == nil || [[rs stringForColumn:@"name"] isEqualToString:@""]) ? model.UserName : [rs stringForColumn:@"name"];
+            model.NickName = nickName;
             model.HeaderImage = [rs stringForColumn:@"portraitUri"];
             [allUsers addObject:model];
         }

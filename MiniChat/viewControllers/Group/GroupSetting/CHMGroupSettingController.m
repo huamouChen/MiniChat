@@ -82,8 +82,16 @@ static NSString *const itemCellReuseId = @"CHMGroupSettingHeaderCell";    // tab
             NSLog(@"--------%@",response);
             NSNumber *codeId = response[@"Code"][@"CodeId"];
             if (codeId.integerValue == 100) {
+                NSMutableArray *filterArrary = [NSMutableArray array];
                 NSArray *groupMemberArray = [CHMGroupMemberModel mj_objectArrayWithKeyValuesArray:response[@"Value"]];
-                weakSelf.collectionViewResource = [NSMutableArray arrayWithArray:groupMemberArray];
+                for (CHMGroupMemberModel *memberModel in groupMemberArray) {
+                    if ([memberModel.NickName isKindOfClass:[NSNull class]] || memberModel.NickName == nil || [memberModel.NickName isEqualToString:@""]) {
+                        memberModel.NickName = memberModel.UserName;
+                    }
+                    [filterArrary addObject:memberModel];
+                }
+                
+                weakSelf.collectionViewResource = filterArrary;
                 // 加多 加号和减号
                 CHMGroupMemberModel *addModel = [[CHMGroupMemberModel alloc] initWithUserName:KAddMember nickName:@"" headerImage:@"add_member" groupId:self.groupId];
                 CHMGroupMemberModel *cutdownModel = [[CHMGroupMemberModel alloc] initWithUserName:KDeleteMember nickName:@"" headerImage:@"delete_member" groupId:self.groupId];
@@ -119,6 +127,8 @@ static NSString *const itemCellReuseId = @"CHMGroupSettingHeaderCell";    // tab
     
     
 }
+
+
 
 
 

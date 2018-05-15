@@ -47,8 +47,8 @@ static NSString *const cellReuseId = @"CHMMineDetailCell";
                 NSString *headimg = response[@"Value"][@"Headimg"];
                 NSNumber *relationCode = response[@"Value"][@"Relation"];
                 
-                nickName = ([nickName isKindOfClass:[NSNull class]] ? userName : nickName);
-                headimg = ([headimg isKindOfClass:[NSNull class] ] ? @"icon_person" : headimg);
+                nickName = [nickName isKindOfClass:[NSNull class]] || nickName == nil || [nickName isEqualToString:@""]  ? userName : nickName;
+                headimg = ([headimg isKindOfClass:[NSNull class] ] || headimg == nil || [headimg isEqualToString:@""]  ? KDefaultPortrait : headimg);
                 CHMFriendModel *friendModel = [[CHMFriendModel alloc] initWithUserId:userName nickName:nickName portrait:headimg];
                 // 用来标记是否是好友
                 friendModel.isCheck = relationCode.integerValue == 1 ? YES : NO;

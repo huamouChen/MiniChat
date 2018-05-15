@@ -117,6 +117,12 @@
  点击创建群组按钮
  */
 - (IBAction)createGroupButtonClick {
+    
+    if (_nameTextField.text.length <= 0) {
+        [CHMProgressHUD showErrorWithInfo:@"群组名称不能为空"];
+        return;
+    }
+    
     // 当前账号，为了设置群创建者
     NSString *currentAccount = [[NSUserDefaults standardUserDefaults] valueForKey:KAccount];
     
