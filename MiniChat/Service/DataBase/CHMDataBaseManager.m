@@ -426,7 +426,8 @@ static NSString *const groupMemberTableName = @"GROUPMEMBERTABLE";
     if ([groupId length] < 1)
         return;
     NSString *deleteSql =
-    [NSString stringWithFormat:@"delete from %@ where %@ = '%@'", @"GROUPTABLEV2", @"groupid", groupId];
+    [NSString stringWithFormat:@"delete from %@ where %@ = '%@'", @"GROUPTABLEV2", @"groupId", groupId];
+    
     
     [self.dbQueue inDatabase:^(FMDatabase *db) {
         [db executeUpdate:deleteSql];

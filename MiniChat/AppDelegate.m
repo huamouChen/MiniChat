@@ -84,11 +84,11 @@
             [[RCIMClient sharedRCIMClient] removeConversation:ConversationType_GROUP targetId:message.targetId];
             // 删除本地数据中对应的群组
             [[CHMDataBaseManager shareManager] deleteGroupToDB:message.targetId];
+        }  else {
+            // 其他操作 刷新群组信息
+            [[CHMInfoProvider shareInstance] syncGroupWithGroupId:message.targetId];
+            [[CHMInfoProvider shareInstance] syncGroupMemberListWithGroupId:message.targetId];
         }
-        // 其他操作 刷新群组信息
-        [[CHMInfoProvider shareInstance] syncGroupWithGroupId:message.targetId];
-        [[CHMInfoProvider shareInstance] syncGroupMemberListWithGroupId:message.targetId];
-        
     }
 }
 
