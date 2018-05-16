@@ -37,6 +37,15 @@ static NSString *const IMServices = @"IMServices";
  点击登录按钮
  */
 - (IBAction)clickLoginButton {
+    
+    if (_accountTextField.text.length <=0) {
+        [CHMProgressHUD showErrorWithInfo:@"账号不能为空"];
+        return;
+    }
+    if (_passwordTextField.text.length <= 0) {
+        [CHMProgressHUD showErrorWithInfo:@"密码不能为空"];
+        return;
+    }
     [self.view endEditing:YES];
     [CHMProgressHUD showWithInfo:@"正在登录中..." isHaveMask:YES];
     [CHMHttpTool loginWithAccount:_accountTextField.text password:_passwordTextField.text success:^(id response) {
@@ -44,6 +53,10 @@ static NSString *const IMServices = @"IMServices";
         NSNumber *result = response[@"Result"];
         if (result.integerValue == 0) {
             NSString *loginToken = response[@"Token"];
+            if ([loginToken isKindOfClass:[NSNull class]] || loginToken == nil || [loginToken isEqualToString:@""]) {
+                [CHMProgressHUD showErrorWithInfo:@"登录出现错误"];
+                return ;
+            }
             [[NSUserDefaults standardUserDefaults] setObject:loginToken forKey:KLoginToken];
             [self getRongToken];
         } else {

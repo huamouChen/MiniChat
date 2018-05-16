@@ -55,9 +55,14 @@ static NSString *const detailReuseablId = @"CHMMineDetailCell";
                 weakSelf.datasArray = @[@[@{KPortrait:userInfo.portraitUri, KNickName: userInfo.name, KAccount: userInfo.userId}]];
                 [weakSelf.tableView reloadData];
                 
-                // 更新本地数据
-                [[CHMDataBaseManager shareManager] insertUserToDB:userInfo];
-                [[CHMDataBaseManager shareManager] insertFriendToDB:userInfo];
+                if (weakSelf.isFriend) {
+                    // 更新本地数据
+                    [[CHMDataBaseManager shareManager] insertUserToDB:userInfo];
+                    [[CHMDataBaseManager shareManager] insertFriendToDB:userInfo];
+                }
+                
+                
+                
                 
                 // 更新群组成员信息
                 if (weakSelf.isFromGroup) {
