@@ -1124,6 +1124,7 @@
 			knownRegions = (
 				en,
 				Base,
+				"zh-Hans",
 			);
 			mainGroup = C0F25A482095BC1800C6BCA6;
 			productRefGroup = C0F25A522095BC1800C6BCA6 /* Products */;
@@ -1478,12 +1479,25 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 5B8K84R7NK;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/MiniChat/viewControllers/ios-rongimdemo/framework",
+					"$(PROJECT_DIR)/MiniChat/viewControllers/ios-rongimdemo/framework/JrmfIMLib",
+					"$(PROJECT_DIR)/MiniChat/viewControllers/ios-rongimdemo/framework/ifly",
+					"$(PROJECT_DIR)/MiniChat/viewControllers/ios-rongimdemo/framework/AlipaySDK",
+					"$(PROJECT_DIR)/MiniChat/viewControllers/ios-rongimdemo/framework/bqmm",
+				);
 				GCC_PREFIX_HEADER = /Users/chenhuamou/Desktop/miniChat/MiniChat/MiniChat/PrefixHeader.pch;
 				INFOPLIST_FILE = MiniChat/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
+				);
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/MiniChat/viewControllers/ios-rongimdemo/framework",
+					"$(PROJECT_DIR)/MiniChat/viewControllers/ios-rongimdemo/RCloudMessage/Utilities/UMAnalytics",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.boxyl.limeng;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1507,12 +1521,25 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 5B8K84R7NK;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/MiniChat/viewControllers/ios-rongimdemo/framework",
+					"$(PROJECT_DIR)/MiniChat/viewControllers/ios-rongimdemo/framework/JrmfIMLib",
+					"$(PROJECT_DIR)/MiniChat/viewControllers/ios-rongimdemo/framework/ifly",
+					"$(PROJECT_DIR)/MiniChat/viewControllers/ios-rongimdemo/framework/AlipaySDK",
+					"$(PROJECT_DIR)/MiniChat/viewControllers/ios-rongimdemo/framework/bqmm",
+				);
 				GCC_PREFIX_HEADER = /Users/chenhuamou/Desktop/miniChat/MiniChat/MiniChat/PrefixHeader.pch;
 				INFOPLIST_FILE = MiniChat/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
+				);
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/MiniChat/viewControllers/ios-rongimdemo/framework",
+					"$(PROJECT_DIR)/MiniChat/viewControllers/ios-rongimdemo/RCloudMessage/Utilities/UMAnalytics",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.boxyl.limeng;
 				PRODUCT_NAME = "$(TARGET_NAME)";

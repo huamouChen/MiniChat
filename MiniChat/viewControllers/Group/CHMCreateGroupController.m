@@ -117,8 +117,12 @@
  点击创建群组按钮
  */
 - (IBAction)createGroupButtonClick {
-    
-    if (_nameTextField.text.length <= 0) {
+    if (_nameTextField.text.length <= 0 ) {
+        [CHMProgressHUD showErrorWithInfo:@"群组名称不能为空"];
+        return;
+    }
+    NSString *groupName = [_nameTextField.text stringByReplacingOccurrencesOfString:@" " withString:@""];
+    if ([groupName isEqualToString:@""] || groupName.length <= 0) {
         [CHMProgressHUD showErrorWithInfo:@"群组名称不能为空"];
         return;
     }
