@@ -31,6 +31,8 @@
     if (self) {
         self.content = [aDecoder decodeObjectForKey:@"content"];
         self.extra = [aDecoder decodeObjectForKey:@"extra"];
+        self.toGroupId = [aDecoder decodeObjectForKey:@"toGroupId"];
+        self.opeation = [aDecoder decodeObjectForKey:@"opeation"];
     }
     return self;
 }
@@ -39,12 +41,16 @@
 - (void)encodeWithCoder:(NSCoder *)aCoder {
     [aCoder encodeObject:self.content forKey:@"content"];
     [aCoder encodeObject:self.extra forKey:@"extra"];
+    [aCoder encodeObject:self.toGroupId forKey:@"toGroupId"];
+    [aCoder encodeObject:self.opeation forKey:@"opeation"];
 }
 
 ///将消息内容编码成json
 - (NSData *)encode {
     NSMutableDictionary *dataDict = [NSMutableDictionary dictionary];
     [dataDict setObject:self.content forKey:@"content"];
+    [dataDict setObject:self.toGroupId forKey:@"toGroupId"];
+    [dataDict setObject:self.opeation forKey:@"opeation"];
     if (self.extra) {
         [dataDict setObject:self.extra forKey:@"extra"];
     }
@@ -76,6 +82,8 @@
         if (dictionary) {
             self.content = dictionary[@"content"];
             self.extra = dictionary[@"extra"];
+            self.toGroupId = dictionary[@"toGroupId"];
+            self.opeation = dictionary[@"opeation"];
             
             NSDictionary *userinfoDic = dictionary[@"user"];
             [self decodeUserInfo:userinfoDic];

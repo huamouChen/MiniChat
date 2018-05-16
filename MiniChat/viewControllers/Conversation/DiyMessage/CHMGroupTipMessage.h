@@ -23,6 +23,18 @@
 @property(nonatomic, strong) NSString *content;
 
 /*!
+ 消息对应的群组ID
+ */
+@property(nonatomic, strong) NSString *toGroupId;
+
+/*!
+ 消息的操作项
+ */
+@property(nonatomic, strong) NSString *opeation;
+
+
+
+/*!
  测试消息的附加信息
  */
 @property(nonatomic, strong) NSString *extra;

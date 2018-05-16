@@ -73,33 +73,23 @@
     }
     
     // 把添加到群组的消息
-    RCGroupNotificationMessage *groupNotificationMsg = nil;
-    if ([message.objectName isEqualToString:@"RC:GrpNtf"]) {
-        groupNotificationMsg = (RCGroupNotificationMessage *)message.content;
-        
-        if ([groupNotificationMsg.operation isEqualToString:@"Dismiss"]) {
-            
+    CHMGroupTipMessage *groupNotificationMsg = nil;
+    //    RCGroupNotificationMessage
+    if ([message.objectName isEqualToString:@"CHM:GtipMsg"]) {
+        groupNotificationMsg = (CHMGroupTipMessage *)message.content;
+        // 解散群组的操作
+        if ([groupNotificationMsg.opeation isEqualToString:@"Dismiss"]) {
             [[RCIMClient sharedRCIMClient] clearMessages:ConversationType_GROUP targetId:message.targetId];
-            
-//            [[RCIMClient sharedRCIMClient]clearRemoteHistoryMessages:ConversationType_GROUP
-//                                                            targetId:message.targetId
-//                                                          recordTime:message.sentTime
-//                                                             success:^{
-//                                                                 [[RCIMClient sharedRCIMClient] clearMessages:ConversationType_GROUP targetId:message.targetId];
-//                                                             }
-//                                                               error:nil
-//             ];
             // 移除该条会话
             [[RCIMClient sharedRCIMClient] removeConversation:ConversationType_GROUP targetId:message.targetId];
             // 删除本地数据中对应的群组
             [[CHMDataBaseManager shareManager] deleteGroupToDB:message.targetId];
         }
+        // 其他操作 刷新群组信息
+        [[CHMInfoProvider shareInstance] syncGroupWithGroupId:message.targetId];
+        [[CHMInfoProvider shareInstance] syncGroupMemberListWithGroupId:message.targetId];
         
-        // 刷新群组列表
-        [[CHMInfoProvider shareInstance] syncGroups];
     }
-    
-    
 }
 
 /**
@@ -188,13 +178,13 @@
         [[RCIM sharedRCIM] refreshUserInfoCache:userInfo withUserId:account];
         [RCIM sharedRCIM].currentUserInfo = userInfo;
     }
-   
+    
     
     //设置用户信息源和群组信息源
     [RCIM sharedRCIM].userInfoDataSource = [CHMInfoProvider shareInstance];
     [RCIM sharedRCIM].groupInfoDataSource = CHMIMDataSourece;
     //群成员数据源
-//    [RCIM sharedRCIM].groupMemberDataSource = CHMIMDataSourece;
+    //    [RCIM sharedRCIM].groupMemberDataSource = CHMIMDataSourece;
 }
 
 

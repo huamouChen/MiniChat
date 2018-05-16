@@ -15,6 +15,7 @@
 #import "CHMUserDetailController.h"
 #import "CHMSelectMemberController.h"
 #import <Photos/Photos.h>
+#import "CHMSearchController.h"
 
 static CGFloat const rowHeight = 44;
 static CGFloat const sectionHeight = 15;
@@ -398,6 +399,13 @@ static NSString *const itemCellReuseId = @"CHMGroupSettingHeaderCell";    // tab
     if (indexPath.section == 0) {
         if (indexPath.row == 0) { // 群头像
             [self portraitClick];
+        }
+    }
+    
+    if (indexPath.section == 1) { // 查找聊天记录
+        if (indexPath.row == 0) {
+            CHMSearchController *searchHistoryController = [[CHMSearchController alloc] init];
+            [self.navigationController pushViewController:searchHistoryController animated:YES];
         }
     }
     

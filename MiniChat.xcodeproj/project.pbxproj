@@ -48,6 +48,7 @@
 		C066EDD0209BE4AD00CB87FC /* UIImage+CHMImage.m in Sources */ = {isa = PBXBuildFile; fileRef = C066EDCF209BE4AD00CB87FC /* UIImage+CHMImage.m */; };
 		C0C42A1020AAB4DB006671B5 /* CHMGroupTipMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = C0C42A0F20AAB4DB006671B5 /* CHMGroupTipMessage.m */; };
 		C0C42A1320AAB5F6006671B5 /* CHMGroupTipCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C0C42A1220AAB5F6006671B5 /* CHMGroupTipCell.m */; };
+		C0C430AF20ABDAD6006671B5 /* CHMSearchController.m in Sources */ = {isa = PBXBuildFile; fileRef = C0C430AE20ABDAD6006671B5 /* CHMSearchController.m */; };
 		C0CCCF4B209FF82B00DD46B2 /* loading_IOS.png in Resources */ = {isa = PBXBuildFile; fileRef = C0CCCF4A209FF82A00DD46B2 /* loading_IOS.png */; };
 		C0CCCF4F20A0051600DD46B2 /* CHMDataBaseManager.m in Sources */ = {isa = PBXBuildFile; fileRef = C0CCCF4E20A0051600DD46B2 /* CHMDataBaseManager.m */; };
 		C0CCCF5220A035BB00DD46B2 /* CHMUserInfoManager.m in Sources */ = {isa = PBXBuildFile; fileRef = C0CCCF5120A035BB00DD46B2 /* CHMUserInfoManager.m */; };
@@ -204,6 +205,8 @@
 		C0C42A0F20AAB4DB006671B5 /* CHMGroupTipMessage.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CHMGroupTipMessage.m; sourceTree = "<group>"; };
 		C0C42A1120AAB5F6006671B5 /* CHMGroupTipCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CHMGroupTipCell.h; sourceTree = "<group>"; };
 		C0C42A1220AAB5F6006671B5 /* CHMGroupTipCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CHMGroupTipCell.m; sourceTree = "<group>"; };
+		C0C430AD20ABDAD6006671B5 /* CHMSearchController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CHMSearchController.h; sourceTree = "<group>"; };
+		C0C430AE20ABDAD6006671B5 /* CHMSearchController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CHMSearchController.m; sourceTree = "<group>"; };
 		C0CCCF4A209FF82A00DD46B2 /* loading_IOS.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = loading_IOS.png; sourceTree = "<group>"; };
 		C0CCCF4D20A0051600DD46B2 /* CHMDataBaseManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CHMDataBaseManager.h; sourceTree = "<group>"; };
 		C0CCCF4E20A0051600DD46B2 /* CHMDataBaseManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CHMDataBaseManager.m; sourceTree = "<group>"; };
@@ -447,6 +450,7 @@
 		C00427562097053200BE24C1 /* viewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				C0C430AC20ABD653006671B5 /* SearchView */,
 				C0EFDBA3209C82DB00848710 /* Bet */,
 				C066EDC0209BDC6200CB87FC /* Group */,
 				C0EAA60420985DAF0046F05C /* ChatRoom */,
@@ -601,6 +605,15 @@
 				C0C42A1220AAB5F6006671B5 /* CHMGroupTipCell.m */,
 			);
 			path = DiyMessage;
+			sourceTree = "<group>";
+		};
+		C0C430AC20ABD653006671B5 /* SearchView */ = {
+			isa = PBXGroup;
+			children = (
+				C0C430AD20ABDAD6006671B5 /* CHMSearchController.h */,
+				C0C430AE20ABDAD6006671B5 /* CHMSearchController.m */,
+			);
+			path = SearchView;
 			sourceTree = "<group>";
 		};
 		C0CCCF4C20A0050500DD46B2 /* DataBase */ = {
@@ -1289,6 +1302,7 @@
 				C0CCCF9F20A2C64A00DD46B2 /* CHMAboutCell.m in Sources */,
 				C00177C4209EB2F5001B44DE /* CHMGroupSettingHeaderCell.m in Sources */,
 				C0CCCF9020A2A82900DD46B2 /* RCDCSTagView.m in Sources */,
+				C0C430AF20ABDAD6006671B5 /* CHMSearchController.m in Sources */,
 				C0CCCFF520A535B800DD46B2 /* CHMChangePasswordController.m in Sources */,
 				C0EAA60820985DCC0046F05C /* CHMChatRoomController.m in Sources */,
 				C0CCCF7C20A2A77700DD46B2 /* RCDCustomerServiceViewController.m in Sources */,

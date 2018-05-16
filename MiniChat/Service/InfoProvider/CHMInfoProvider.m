@@ -12,6 +12,7 @@
 #import "CHMGroupMemberModel.h"
 #import "CHMFriendModel.h"
 #import "CHMUserInfoManager.h"
+#import "CHMGroupTipMessage.h"
 
 @implementation CHMInfoProvider
 
@@ -63,6 +64,70 @@
         NSLog(@"-------%zd", error.code);
     }];
 }
+
+/**
+ 更新单个群组的信息
+
+ @param groupId 要更新的群组ID
+ */
+- (void)syncGroupWithGroupId:(NSString *)groupId {
+    [CHMHttpTool getGroupInfoWithGroupId:groupId success:^(id response) {
+        NSLog(@"--------%@",response);
+        NSNumber *codeId = response[@"Code"][@"CodeId"];
+        if (codeId.integerValue == 100) {
+            NSString *groupName = [NSString stringWithFormat:@"%@",response[@"Value"][@"GroupName"]];
+            NSString *groupImage = [NSString stringWithFormat:@"%@%@",BaseURL, response[@"Value"][@"GroupImage"]];
+            NSString *addTime = [NSString stringWithFormat:@"%@",response[@"Value"][@"AddTime"]];
+            NSString *canBetting = [NSString stringWithFormat:@"%@", response[@"Value"][@"CanBetting"]];
+            NSString *groupOwner = [NSString stringWithFormat:@"%@", response[@"Value"][@"GroupOwner"]];
+            NSString *isOfficial = [NSString stringWithFormat:@"%@", response[@"Value"][@"IsOfficial"]];
+            NSString *groupState = [NSString stringWithFormat:@"%@", response[@"Value"][@"State"]];
+            CHMGroupModel *groupModel = [[CHMGroupModel alloc] initWithGroupId:groupId groupName:groupName groupPortrait:groupImage];
+            groupModel.AddTime = addTime;
+            groupModel.CanBetting = canBetting;
+            groupModel.GroupOwner = groupOwner;
+            groupModel.IsOfficial = isOfficial;
+            groupModel.State = groupState;
+            // 保存到本地
+            [[CHMDataBaseManager shareManager] insertGroupToDB:groupModel];
+        } else {
+//            [CHMProgressHUD showErrorWithInfo:response[@"Code"][@"Description"]];
+        }
+    } failure:^(NSError *error) {
+//        [CHMProgressHUD showErrorWithInfo:[NSString stringWithFormat:@"错误码--%zd", error.code]];
+    }];
+}
+
+/**
+ 更新单个群组的成员信息
+
+ @param groupId 要更新的群组ID
+ */
+- (void)syncGroupMemberListWithGroupId:(NSString *)groupId {
+    [CHMHttpTool getGroupMembersWithGroupId:groupId success:^(id response) {
+        NSLog(@"--------%@",response);
+        NSNumber *codeId = response[@"Code"][@"CodeId"];
+        if (codeId.integerValue == 100) {
+            NSMutableArray *filterArrary = [NSMutableArray array];
+            NSArray *groupMemberArray = [CHMGroupMemberModel mj_objectArrayWithKeyValuesArray:response[@"Value"]];
+            for (CHMGroupMemberModel *memberModel in groupMemberArray) {
+                if ([memberModel.NickName isKindOfClass:[NSNull class]] || memberModel.NickName == nil || [memberModel.NickName isEqualToString:@""]) {
+                    memberModel.NickName = memberModel.UserName;
+                }
+                [filterArrary addObject:memberModel];
+            }
+            
+            
+            // 保存到本地
+            [[CHMDataBaseManager shareManager] insertGroupMemberToDB:filterArrary groupId:groupId complete:^(BOOL isComplete) { }];
+        } else {
+//            [CHMProgressHUD showErrorWithInfo:response[@"Code"][@"Description"]];
+        }
+    } failure:^(NSError *error) {
+//        [CHMProgressHUD showErrorWithInfo:[NSString stringWithFormat:@"错误码--%zd", error.code]];
+    }];
+}
+
 
 - (void)syncFriendList:(NSString *)userId complete:(void (^)(NSMutableArray *friends))completion {
     [CHMHttpTool getUserRelationShipListWithSuccess:^(id response) {

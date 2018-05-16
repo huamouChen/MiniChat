@@ -22,6 +22,18 @@
  *  同步自己的所属群组到融云服务器,修改群组信息后都需要调用同步
  */
 - (void)syncGroups;
+/**
+ 更新单个群组的信息
+ 
+ @param groupId 要更新的群组ID
+ */
+- (void)syncGroupWithGroupId:(NSString *)groupId;
+/**
+ 更新单个群组的成员信息
+ 
+ @param groupId 要更新的群组ID
+ */
+- (void)syncGroupMemberListWithGroupId:(NSString *)groupId;
 
 /**
  *  获取群中的成员列表
