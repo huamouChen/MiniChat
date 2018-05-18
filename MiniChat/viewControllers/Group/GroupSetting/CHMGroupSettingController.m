@@ -701,12 +701,6 @@ static NSString *const itemCellReuseId = @"CHMGroupSettingHeaderCell";    // tab
 - (void)initLocalData {
     self.cuurentGroupModel = [[CHMDataBaseManager shareManager] getGroupByGroupId:_groupId];
     
-    if (!self.cuurentGroupModel) {
-        [CHMProgressHUD showErrorWithInfo:@"该群已解散或者你被踢出了该群"];
-        [self.navigationController popViewControllerAnimated:YES];
-        return;
-    }
-    
     NSString *currentAccount = [[NSUserDefaults standardUserDefaults] valueForKey:KAccount];
     // 是否是群主
     self.isGroupOwner = [_cuurentGroupModel.GroupOwner isEqualToString:currentAccount] ? YES : NO;

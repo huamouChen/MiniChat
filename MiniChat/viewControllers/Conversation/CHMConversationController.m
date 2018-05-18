@@ -207,6 +207,13 @@ static NSInteger const bettingTag = 2000;
     //群组设置
     else if (self.conversationType == ConversationType_GROUP) {
         
+        // 在群组详情界面可能会受到群组解散的消息
+        CHMGroupModel *groupModel = [[CHMDataBaseManager shareManager] getGroupByGroupId:self.targetId];
+        if (!groupModel) {
+            [CHMProgressHUD showErrorWithInfo:@"你不在该群组或群组已解散"];
+            return;
+        }
+        
         CHMGroupSettingController *settingVC = [CHMGroupSettingController new];
         settingVC.groupId = self.targetId;
         [self.navigationController pushViewController:settingVC animated:YES];
