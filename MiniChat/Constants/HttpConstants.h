@@ -81,6 +81,8 @@
 #define SetGroupPortraitURL               @"api/Im/SetGroupImg"
 // 修改群名称
 #define ModifyGroupNameURL                 @"api/im/SetGroupName"
+// 群公告
+#define ModifyGroupBulletinURL                    @"api/im/SetBulletin"
 
 
 // 发送文本消息到服务器

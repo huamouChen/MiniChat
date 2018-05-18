@@ -53,6 +53,8 @@
 		C0C430B520AC3C1D006671B5 /* CHMSearchDataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = C0C430B420AC3C1D006671B5 /* CHMSearchDataManager.m */; };
 		C0C430B920AE648D006671B5 /* CHMGroupNameEditController.m in Sources */ = {isa = PBXBuildFile; fileRef = C0C430B720AE648D006671B5 /* CHMGroupNameEditController.m */; };
 		C0C430BA20AE648D006671B5 /* CHMGroupNameEditController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C0C430B820AE648D006671B5 /* CHMGroupNameEditController.xib */; };
+		C0C430BE20AE6FBE006671B5 /* CHMGroupBulletinController.m in Sources */ = {isa = PBXBuildFile; fileRef = C0C430BC20AE6FBE006671B5 /* CHMGroupBulletinController.m */; };
+		C0C430BF20AE6FBE006671B5 /* CHMGroupBulletinController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C0C430BD20AE6FBE006671B5 /* CHMGroupBulletinController.xib */; };
 		C0CCCF4B209FF82B00DD46B2 /* loading_IOS.png in Resources */ = {isa = PBXBuildFile; fileRef = C0CCCF4A209FF82A00DD46B2 /* loading_IOS.png */; };
 		C0CCCF4F20A0051600DD46B2 /* CHMDataBaseManager.m in Sources */ = {isa = PBXBuildFile; fileRef = C0CCCF4E20A0051600DD46B2 /* CHMDataBaseManager.m */; };
 		C0CCCF5220A035BB00DD46B2 /* CHMUserInfoManager.m in Sources */ = {isa = PBXBuildFile; fileRef = C0CCCF5120A035BB00DD46B2 /* CHMUserInfoManager.m */; };
@@ -218,6 +220,9 @@
 		C0C430B620AE648D006671B5 /* CHMGroupNameEditController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CHMGroupNameEditController.h; sourceTree = "<group>"; };
 		C0C430B720AE648D006671B5 /* CHMGroupNameEditController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CHMGroupNameEditController.m; sourceTree = "<group>"; };
 		C0C430B820AE648D006671B5 /* CHMGroupNameEditController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CHMGroupNameEditController.xib; sourceTree = "<group>"; };
+		C0C430BB20AE6FBE006671B5 /* CHMGroupBulletinController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CHMGroupBulletinController.h; sourceTree = "<group>"; };
+		C0C430BC20AE6FBE006671B5 /* CHMGroupBulletinController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CHMGroupBulletinController.m; sourceTree = "<group>"; };
+		C0C430BD20AE6FBE006671B5 /* CHMGroupBulletinController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CHMGroupBulletinController.xib; sourceTree = "<group>"; };
 		C0CCCF4A209FF82A00DD46B2 /* loading_IOS.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = loading_IOS.png; sourceTree = "<group>"; };
 		C0CCCF4D20A0051600DD46B2 /* CHMDataBaseManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CHMDataBaseManager.h; sourceTree = "<group>"; };
 		C0CCCF4E20A0051600DD46B2 /* CHMDataBaseManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CHMDataBaseManager.m; sourceTree = "<group>"; };
@@ -433,6 +438,9 @@
 				C0C430B620AE648D006671B5 /* CHMGroupNameEditController.h */,
 				C0C430B720AE648D006671B5 /* CHMGroupNameEditController.m */,
 				C0C430B820AE648D006671B5 /* CHMGroupNameEditController.xib */,
+				C0C430BB20AE6FBE006671B5 /* CHMGroupBulletinController.h */,
+				C0C430BC20AE6FBE006671B5 /* CHMGroupBulletinController.m */,
+				C0C430BD20AE6FBE006671B5 /* CHMGroupBulletinController.xib */,
 			);
 			path = GroupSetting;
 			sourceTree = "<group>";
@@ -1172,6 +1180,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C0C430BF20AE6FBE006671B5 /* CHMGroupBulletinController.xib in Resources */,
 				C0017793209DE460001B44DE /* CHMGroupListController.xib in Resources */,
 				C0EAA5F3209823F40046F05C /* CHMRegisterController.xib in Resources */,
 				C0CCCFF020A4838200DD46B2 /* loading_IOS.jpg in Resources */,
@@ -1354,6 +1363,7 @@
 				C0CCCF9920A2C51900DD46B2 /* CHMAboutController.m in Sources */,
 				C0CCCF6B20A13CBE00DD46B2 /* CHMNewFriendCell.m in Sources */,
 				C0137A5B209F385E004D8358 /* CHMInfoProvider.m in Sources */,
+				C0C430BE20AE6FBE006671B5 /* CHMGroupBulletinController.m in Sources */,
 				C0CCCFFA20A5416200DD46B2 /* CHMPushSettingController.m in Sources */,
 				C0EAA62F209872520046F05C /* CHMMineItemCell.m in Sources */,
 				C0CCCFBC20A2F70300DD46B2 /* CHMUserInfoController.m in Sources */,

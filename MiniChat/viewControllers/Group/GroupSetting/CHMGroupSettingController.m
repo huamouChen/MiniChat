@@ -17,6 +17,7 @@
 #import <Photos/Photos.h>
 #import "CHMSearchController.h"
 #import "CHMGroupNameEditController.h"
+#import "CHMGroupBulletinController.h"
 
 static CGFloat const rowHeight = 44;
 static CGFloat const sectionHeight = 15;
@@ -410,7 +411,10 @@ static NSString *const itemCellReuseId = @"CHMGroupSettingHeaderCell";    // tab
         }
         
         if (indexPath.row == 2) { // 群公告
-            
+            CHMGroupBulletinController *bulletinController = [CHMGroupBulletinController new];
+            bulletinController.groupId = self.groupId;
+            bulletinController.originalGroupBulletin = @"群组公告。。。";
+            [self.navigationController pushViewController:bulletinController animated:YES];
         }
     }
     

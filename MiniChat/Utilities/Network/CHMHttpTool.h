@@ -250,6 +250,16 @@ typedef void(^failureBlock)(NSError *error);
 + (void)modifyGroupName:(NSString *)groupName forGroup:(NSString *)groupId success:(successBlock)success failure:(failureBlock)failure;
 
 /**
+ 修改群公告
+ 
+ @param bulletin 群公告
+ @param groupId 群ID
+ @param success 成功
+ @param failure 失败
+ */
++ (void)modifyGroupBulletin:(NSString *)bulletin forGroup:(NSString *)groupId success:(successBlock)success failure:(failureBlock)failure;
+
+/**
  把文本消息发送到服务器
  
  @param message 要发送的文本消息

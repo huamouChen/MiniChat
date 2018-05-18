@@ -389,6 +389,19 @@ static CHMHttpTool *instanse = nil;
     [CHMHttpTool requestWithMethod:RequestMethodTypePost url:ModifyGroupNameURL params:params success:success failure:failure];
 }
 
+/**
+ 修改群公告
+
+ @param bulletin 群公告
+ @param groupId 群ID
+ @param success 成功
+ @param failure 失败
+ */
++ (void)modifyGroupBulletin:(NSString *)bulletin forGroup:(NSString *)groupId success:(successBlock)success failure:(failureBlock)failure {
+    NSDictionary *params = @{@"GroupId": groupId, @"Bulletin": bulletin};
+    [CHMHttpTool requestWithMethod:RequestMethodTypePost url:ModifyGroupBulletinURL params:params success:success failure:failure];
+}
+
 
 #pragma mark - 玩法相关
 /**
