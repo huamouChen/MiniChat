@@ -37,6 +37,8 @@
     
     [self setNavigationButton];
     
+    self.edgesForExtendedLayout = UIRectEdgeNone;
+    
     self.view.backgroundColor = [UIColor chm_colorWithHexString:@"#f0f0f6" alpha:1.0];
     
     self.title = _isEditNickName ? @"昵称修改" : @"手机号修改";

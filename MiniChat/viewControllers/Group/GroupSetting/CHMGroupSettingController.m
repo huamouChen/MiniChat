@@ -84,7 +84,6 @@ static NSString *const itemCellReuseId = @"CHMGroupSettingHeaderCell";    // tab
         [self getGroupMemberList];
     }
     
-    
     // 消息免打扰
     [[RCIMClient sharedRCIMClient] getConversationNotificationStatus:ConversationType_GROUP
                                                             targetId:_groupId
@@ -272,7 +271,7 @@ static NSString *const itemCellReuseId = @"CHMGroupSettingHeaderCell";    // tab
         [resultArray addObjectsFromArray:groupMemberArray];
         // 保存数据到本地
         [[CHMDataBaseManager shareManager] insertGroupMemberToDB:resultArray groupId:weakSelf.groupId complete:^(BOOL isComplete) {
-
+            
         }];
         
         
@@ -609,7 +608,11 @@ static NSString *const itemCellReuseId = @"CHMGroupSettingHeaderCell";    // tab
     if (authorizationStatus == PHAuthorizationStatusDenied || authorizationStatus == PHAuthorizationStatusRestricted) {
         NSURL *url = [NSURL URLWithString:UIApplicationOpenSettingsURLString];
         if ([[UIApplication sharedApplication] canOpenURL:url]) {
-            [[UIApplication sharedApplication] openURL:url options:@{} completionHandler:nil];
+            if (@available(iOS 10.0, *)) {
+                [[UIApplication sharedApplication] openURL:url options:@{} completionHandler:nil];
+            } else {
+                // Fallback on earlier versions
+            }
         }
     } else {
         if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypePhotoLibrary]) {
@@ -665,13 +668,9 @@ static NSString *const itemCellReuseId = @"CHMGroupSettingHeaderCell";    // tab
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     
-    
-    
     [self initLocalData];
     
-//    if (_collectionViewResource.count < 1) {
-        [self startLoad];
-//    }
+    [self startLoad];
     if (_collectionViewResource.count > 0) {
         self.title = [NSString stringWithFormat:@"群组信息(%zd)", _collectionViewResource.count];
     } else {
@@ -687,11 +686,13 @@ static NSString *const itemCellReuseId = @"CHMGroupSettingHeaderCell";    // tab
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    
+    
     [self setupAppearance];
     
     [self getGroupInfo];
     
-//    [self getGroupMemberList];
+    //    [self getGroupMemberList];
 }
 
 /**
@@ -699,6 +700,13 @@ static NSString *const itemCellReuseId = @"CHMGroupSettingHeaderCell";    // tab
  */
 - (void)initLocalData {
     self.cuurentGroupModel = [[CHMDataBaseManager shareManager] getGroupByGroupId:_groupId];
+    
+    if (!self.cuurentGroupModel) {
+        [CHMProgressHUD showErrorWithInfo:@"该群已解散或者你被踢出了该群"];
+        [self.navigationController popViewControllerAnimated:YES];
+        return;
+    }
+    
     NSString *currentAccount = [[NSUserDefaults standardUserDefaults] valueForKey:KAccount];
     // 是否是群主
     self.isGroupOwner = [_cuurentGroupModel.GroupOwner isEqualToString:currentAccount] ? YES : NO;
@@ -735,8 +743,8 @@ static NSString *const itemCellReuseId = @"CHMGroupSettingHeaderCell";    // tab
  */
 - (void)setupAppearance {
     // 返回按钮
-        CHMBarButtonItem *leftButton = [[CHMBarButtonItem alloc] initWithLeftBarButton:@"返回" target:self action:@selector(backBarButtonItemClicked:)];
-        [self.navigationItem setLeftBarButtonItem:leftButton];
+    CHMBarButtonItem *leftButton = [[CHMBarButtonItem alloc] initWithLeftBarButton:@"返回" target:self action:@selector(backBarButtonItemClicked:)];
+    [self.navigationItem setLeftBarButtonItem:leftButton];
     
     // collection view
     CGRect tempRect =

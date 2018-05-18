@@ -15,6 +15,9 @@
 #import "CHMNewFriendsController.h"
 #import "CHMGroupListController.h"
 #import "RCDAddressBookViewController.h"
+#import "KxMenu.h"
+#import "CHMSelectMemberController.h"
+#import "CHMSearchFriendController.h"
 
 static NSString *const contactReuseId = @"CHMContactCell";
 static int const rowHeight = 55;
@@ -283,8 +286,85 @@ static CGFloat const KIndexViewWidth = 55 / 2.0;
     [self.view addSubview:self.indexLabelCenter];
     // 创建索引视图
     [self creatIndexView];
+    
+    // navigationBar right item
+    CHMBarButtonItem *rightBtn = [[CHMBarButtonItem alloc] initContainImage:[UIImage imageNamed:@"add"]
+                                                             imageViewFrame:CGRectMake(0, 0, 17, 17)
+                                                                buttonTitle:nil
+                                                                 titleColor:nil
+                                                                 titleFrame:CGRectZero
+                                                                buttonFrame:CGRectMake(0, 0, 44, 44)
+                                                                     target:self
+                                                                     action:@selector(showMenu:)];
+    self.navigationItem.rightBarButtonItems = @[rightBtn];
 }
 
+/**
+ 右上角的弹出框
+ 
+ @param sender 目标按钮，即右上角加号
+ */
+- (void)showMenu:(UIButton *)sender {
+    NSArray *menuItems = @[
+                           
+                           [KxMenuItem menuItem:@"发起聊天"
+                                          image:[UIImage imageNamed:@"startchat_icon"]
+                                         target:self
+                                         action:@selector(pushChat:)],
+                           
+                           [KxMenuItem menuItem:@"创建群组"
+                                          image:[UIImage imageNamed:@"creategroup_icon"]
+                                         target:self
+                                         action:@selector(pushContactSelected:)],
+                           
+                           [KxMenuItem menuItem:@"添加好友"
+                                          image:[UIImage imageNamed:@"addfriend_icon"]
+                                         target:self
+                                         action:@selector(pushAddFriend:)]
+                           ];
+    
+    UIBarButtonItem *rightBarButton = self.navigationItem.rightBarButtonItems[0];
+    CGRect targetFrame = rightBarButton.customView.frame;
+    CGFloat offset = [UIApplication sharedApplication].statusBarFrame.size.height > 20 ?  24 : 0;
+    targetFrame.origin.y = targetFrame.origin.y + offset;
+    if (IOS_FSystenVersion >= 11.0) {
+        targetFrame.origin.x = self.view.bounds.size.width - targetFrame.size.width - 17;
+    }
+    [KxMenu setTintColor:[UIColor chm_colorWithHexString:@"#000000" alpha:1.0]];
+    [KxMenu setTitleFont:[UIFont systemFontOfSize:17]];
+    [KxMenu showMenuInView:self.navigationController.navigationBar.superview
+                  fromRect:targetFrame
+                 menuItems:menuItems];
+}
+
+/**
+ *  发起聊天
+ *
+ *  @param sender sender description
+ */
+- (void)pushChat:(id)sender {
+    [self.tabBarController setSelectedIndex:1];
+}
+
+/**
+ *  创建群组
+ *
+ *  @param sender sender description
+ */
+- (void)pushContactSelected:(id)sender {
+    CHMSelectMemberController *selectMemberController = [CHMSelectMemberController new];
+    selectMemberController.hidesBottomBarWhenPushed = YES;
+    [self.navigationController pushViewController:selectMemberController animated:YES];
+}
+
+/**
+ *  添加好友
+ *
+ *  @param sender sender description
+ */
+- (void)pushAddFriend:(id)sender {
+    [self.navigationController pushViewController:[CHMSearchFriendController new] animated:YES];
+}
 
 /**
  初始化本地写死的数据
