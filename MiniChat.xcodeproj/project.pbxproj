@@ -48,9 +48,6 @@
 		C066EDD0209BE4AD00CB87FC /* UIImage+CHMImage.m in Sources */ = {isa = PBXBuildFile; fileRef = C066EDCF209BE4AD00CB87FC /* UIImage+CHMImage.m */; };
 		C0C42A1020AAB4DB006671B5 /* CHMGroupTipMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = C0C42A0F20AAB4DB006671B5 /* CHMGroupTipMessage.m */; };
 		C0C42A1320AAB5F6006671B5 /* CHMGroupTipCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C0C42A1220AAB5F6006671B5 /* CHMGroupTipCell.m */; };
-		C0C430AF20ABDAD6006671B5 /* CHMSearchController.m in Sources */ = {isa = PBXBuildFile; fileRef = C0C430AE20ABDAD6006671B5 /* CHMSearchController.m */; };
-		C0C430B220AC3B63006671B5 /* CHMSearchResultModel.m in Sources */ = {isa = PBXBuildFile; fileRef = C0C430B120AC3B63006671B5 /* CHMSearchResultModel.m */; };
-		C0C430B520AC3C1D006671B5 /* CHMSearchDataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = C0C430B420AC3C1D006671B5 /* CHMSearchDataManager.m */; };
 		C0C430B920AE648D006671B5 /* CHMGroupNameEditController.m in Sources */ = {isa = PBXBuildFile; fileRef = C0C430B720AE648D006671B5 /* CHMGroupNameEditController.m */; };
 		C0C430BA20AE648D006671B5 /* CHMGroupNameEditController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C0C430B820AE648D006671B5 /* CHMGroupNameEditController.xib */; };
 		C0C430BE20AE6FBE006671B5 /* CHMGroupBulletinController.m in Sources */ = {isa = PBXBuildFile; fileRef = C0C430BC20AE6FBE006671B5 /* CHMGroupBulletinController.m */; };
@@ -99,6 +96,16 @@
 		C0CCD00220A72B9500DD46B2 /* CHMPhotoBrowserController.m in Sources */ = {isa = PBXBuildFile; fileRef = C0CCCFFE20A72B9500DD46B2 /* CHMPhotoBrowserController.m */; };
 		C0CCD00320A72B9500DD46B2 /* UIView+CHMLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = C0CCCFFF20A72B9500DD46B2 /* UIView+CHMLayout.m */; };
 		C0CCD00420A72B9500DD46B2 /* CHMPhotoBrowserCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C0CCD00020A72B9500DD46B2 /* CHMPhotoBrowserCell.m */; };
+		C0CECDBB20AEB757007F9355 /* RCDSearchMoreViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C0CECDA920AEB757007F9355 /* RCDSearchMoreViewCell.m */; };
+		C0CECDBC20AEB757007F9355 /* RCDSearchHistoryMessageController.m in Sources */ = {isa = PBXBuildFile; fileRef = C0CECDAA20AEB757007F9355 /* RCDSearchHistoryMessageController.m */; };
+		C0CECDBD20AEB757007F9355 /* RCDSearchDataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = C0CECDAB20AEB757007F9355 /* RCDSearchDataManager.m */; };
+		C0CECDBE20AEB757007F9355 /* RCDSearchMoreController.m in Sources */ = {isa = PBXBuildFile; fileRef = C0CECDAD20AEB757007F9355 /* RCDSearchMoreController.m */; };
+		C0CECDBF20AEB757007F9355 /* RCDSearchBar.m in Sources */ = {isa = PBXBuildFile; fileRef = C0CECDAF20AEB757007F9355 /* RCDSearchBar.m */; };
+		C0CECDC020AEB757007F9355 /* RCDSearchResultModel.m in Sources */ = {isa = PBXBuildFile; fileRef = C0CECDB020AEB757007F9355 /* RCDSearchResultModel.m */; };
+		C0CECDC120AEB757007F9355 /* RCDSearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C0CECDB120AEB757007F9355 /* RCDSearchViewController.m */; };
+		C0CECDC220AEB757007F9355 /* RCDSearchResultViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C0CECDB620AEB757007F9355 /* RCDSearchResultViewCell.m */; };
+		C0CECDC320AEB757007F9355 /* RCDLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = C0CECDBA20AEB757007F9355 /* RCDLabel.m */; };
+		C0CECDC620AEB769007F9355 /* RCDUtilities.m in Sources */ = {isa = PBXBuildFile; fileRef = C0CECDC520AEB768007F9355 /* RCDUtilities.m */; };
 		C0EAA5D72097E8210046F05C /* CHMHttpTool.m in Sources */ = {isa = PBXBuildFile; fileRef = C0EAA5D62097E8210046F05C /* CHMHttpTool.m */; };
 		C0EAA5ED20981EE70046F05C /* CHMLoginController.m in Sources */ = {isa = PBXBuildFile; fileRef = C0EAA5EB20981EE70046F05C /* CHMLoginController.m */; };
 		C0EAA5EE20981EE70046F05C /* CHMLoginController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C0EAA5EC20981EE70046F05C /* CHMLoginController.xib */; };
@@ -211,12 +218,6 @@
 		C0C42A0F20AAB4DB006671B5 /* CHMGroupTipMessage.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CHMGroupTipMessage.m; sourceTree = "<group>"; };
 		C0C42A1120AAB5F6006671B5 /* CHMGroupTipCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CHMGroupTipCell.h; sourceTree = "<group>"; };
 		C0C42A1220AAB5F6006671B5 /* CHMGroupTipCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CHMGroupTipCell.m; sourceTree = "<group>"; };
-		C0C430AD20ABDAD6006671B5 /* CHMSearchController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CHMSearchController.h; sourceTree = "<group>"; };
-		C0C430AE20ABDAD6006671B5 /* CHMSearchController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CHMSearchController.m; sourceTree = "<group>"; };
-		C0C430B020AC3B63006671B5 /* CHMSearchResultModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CHMSearchResultModel.h; sourceTree = "<group>"; };
-		C0C430B120AC3B63006671B5 /* CHMSearchResultModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CHMSearchResultModel.m; sourceTree = "<group>"; };
-		C0C430B320AC3C1D006671B5 /* CHMSearchDataManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CHMSearchDataManager.h; sourceTree = "<group>"; };
-		C0C430B420AC3C1D006671B5 /* CHMSearchDataManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CHMSearchDataManager.m; sourceTree = "<group>"; };
 		C0C430B620AE648D006671B5 /* CHMGroupNameEditController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CHMGroupNameEditController.h; sourceTree = "<group>"; };
 		C0C430B720AE648D006671B5 /* CHMGroupNameEditController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CHMGroupNameEditController.m; sourceTree = "<group>"; };
 		C0C430B820AE648D006671B5 /* CHMGroupNameEditController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CHMGroupNameEditController.xib; sourceTree = "<group>"; };
@@ -299,6 +300,26 @@
 		C0CCD00020A72B9500DD46B2 /* CHMPhotoBrowserCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CHMPhotoBrowserCell.m; sourceTree = "<group>"; };
 		C0CCD00120A72B9500DD46B2 /* CHMPhotoBrowserController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CHMPhotoBrowserController.h; sourceTree = "<group>"; };
 		C0CCD00520A810D900DD46B2 /* MiniChat.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = MiniChat.entitlements; sourceTree = "<group>"; };
+		C0CECDA920AEB757007F9355 /* RCDSearchMoreViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RCDSearchMoreViewCell.m; sourceTree = "<group>"; };
+		C0CECDAA20AEB757007F9355 /* RCDSearchHistoryMessageController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RCDSearchHistoryMessageController.m; sourceTree = "<group>"; };
+		C0CECDAB20AEB757007F9355 /* RCDSearchDataManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RCDSearchDataManager.m; sourceTree = "<group>"; };
+		C0CECDAC20AEB757007F9355 /* RCDSearchResultViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RCDSearchResultViewCell.h; sourceTree = "<group>"; };
+		C0CECDAD20AEB757007F9355 /* RCDSearchMoreController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RCDSearchMoreController.m; sourceTree = "<group>"; };
+		C0CECDAE20AEB757007F9355 /* RCDLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RCDLabel.h; sourceTree = "<group>"; };
+		C0CECDAF20AEB757007F9355 /* RCDSearchBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RCDSearchBar.m; sourceTree = "<group>"; };
+		C0CECDB020AEB757007F9355 /* RCDSearchResultModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RCDSearchResultModel.m; sourceTree = "<group>"; };
+		C0CECDB120AEB757007F9355 /* RCDSearchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RCDSearchViewController.m; sourceTree = "<group>"; };
+		C0CECDB220AEB757007F9355 /* RCDSearchHistoryMessageController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RCDSearchHistoryMessageController.h; sourceTree = "<group>"; };
+		C0CECDB320AEB757007F9355 /* RCDSearchMoreViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RCDSearchMoreViewCell.h; sourceTree = "<group>"; };
+		C0CECDB420AEB757007F9355 /* RCDSearchDataManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RCDSearchDataManager.h; sourceTree = "<group>"; };
+		C0CECDB520AEB757007F9355 /* RCDSearchMoreController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RCDSearchMoreController.h; sourceTree = "<group>"; };
+		C0CECDB620AEB757007F9355 /* RCDSearchResultViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RCDSearchResultViewCell.m; sourceTree = "<group>"; };
+		C0CECDB720AEB757007F9355 /* RCDSearchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RCDSearchViewController.h; sourceTree = "<group>"; };
+		C0CECDB820AEB757007F9355 /* RCDSearchResultModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RCDSearchResultModel.h; sourceTree = "<group>"; };
+		C0CECDB920AEB757007F9355 /* RCDSearchBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RCDSearchBar.h; sourceTree = "<group>"; };
+		C0CECDBA20AEB757007F9355 /* RCDLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RCDLabel.m; sourceTree = "<group>"; };
+		C0CECDC420AEB768007F9355 /* RCDUtilities.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RCDUtilities.h; sourceTree = "<group>"; };
+		C0CECDC520AEB768007F9355 /* RCDUtilities.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RCDUtilities.m; sourceTree = "<group>"; };
 		C0EAA5D52097E8210046F05C /* CHMHttpTool.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CHMHttpTool.h; sourceTree = "<group>"; };
 		C0EAA5D62097E8210046F05C /* CHMHttpTool.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CHMHttpTool.m; sourceTree = "<group>"; };
 		C0EAA5E120980AE30046F05C /* HttpConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HttpConstants.h; sourceTree = "<group>"; };
@@ -472,7 +493,7 @@
 		C00427562097053200BE24C1 /* viewControllers */ = {
 			isa = PBXGroup;
 			children = (
-				C0C430AC20ABD653006671B5 /* SearchView */,
+				C0CECDA820AEB757007F9355 /* SearchView */,
 				C0EFDBA3209C82DB00848710 /* Bet */,
 				C066EDC0209BDC6200CB87FC /* Group */,
 				C0EAA60420985DAF0046F05C /* ChatRoom */,
@@ -627,19 +648,6 @@
 				C0C42A1220AAB5F6006671B5 /* CHMGroupTipCell.m */,
 			);
 			path = DiyMessage;
-			sourceTree = "<group>";
-		};
-		C0C430AC20ABD653006671B5 /* SearchView */ = {
-			isa = PBXGroup;
-			children = (
-				C0C430AD20ABDAD6006671B5 /* CHMSearchController.h */,
-				C0C430AE20ABDAD6006671B5 /* CHMSearchController.m */,
-				C0C430B320AC3C1D006671B5 /* CHMSearchDataManager.h */,
-				C0C430B420AC3C1D006671B5 /* CHMSearchDataManager.m */,
-				C0C430B020AC3B63006671B5 /* CHMSearchResultModel.h */,
-				C0C430B120AC3B63006671B5 /* CHMSearchResultModel.m */,
-			);
-			path = SearchView;
 			sourceTree = "<group>";
 		};
 		C0CCCF4C20A0050500DD46B2 /* DataBase */ = {
@@ -810,6 +818,34 @@
 				C0CCCFFF20A72B9500DD46B2 /* UIView+CHMLayout.m */,
 			);
 			path = CHMPhotoBrowser;
+			sourceTree = "<group>";
+		};
+		C0CECDA820AEB757007F9355 /* SearchView */ = {
+			isa = PBXGroup;
+			children = (
+				C0CECDAE20AEB757007F9355 /* RCDLabel.h */,
+				C0CECDBA20AEB757007F9355 /* RCDLabel.m */,
+				C0CECDB920AEB757007F9355 /* RCDSearchBar.h */,
+				C0CECDAF20AEB757007F9355 /* RCDSearchBar.m */,
+				C0CECDB420AEB757007F9355 /* RCDSearchDataManager.h */,
+				C0CECDAB20AEB757007F9355 /* RCDSearchDataManager.m */,
+				C0CECDB220AEB757007F9355 /* RCDSearchHistoryMessageController.h */,
+				C0CECDAA20AEB757007F9355 /* RCDSearchHistoryMessageController.m */,
+				C0CECDB520AEB757007F9355 /* RCDSearchMoreController.h */,
+				C0CECDAD20AEB757007F9355 /* RCDSearchMoreController.m */,
+				C0CECDB320AEB757007F9355 /* RCDSearchMoreViewCell.h */,
+				C0CECDA920AEB757007F9355 /* RCDSearchMoreViewCell.m */,
+				C0CECDB820AEB757007F9355 /* RCDSearchResultModel.h */,
+				C0CECDB020AEB757007F9355 /* RCDSearchResultModel.m */,
+				C0CECDAC20AEB757007F9355 /* RCDSearchResultViewCell.h */,
+				C0CECDB620AEB757007F9355 /* RCDSearchResultViewCell.m */,
+				C0CECDB720AEB757007F9355 /* RCDSearchViewController.h */,
+				C0CECDB120AEB757007F9355 /* RCDSearchViewController.m */,
+				C0CECDC420AEB768007F9355 /* RCDUtilities.h */,
+				C0CECDC520AEB768007F9355 /* RCDUtilities.m */,
+			);
+			name = SearchView;
+			path = ../../../../SearchView;
 			sourceTree = "<group>";
 		};
 		C0EAA5C82097123C0046F05C /* Utilities */ = {
@@ -1318,6 +1354,7 @@
 				C066EDA6209A7E7600CB87FC /* CHMSectionHeaderView.m in Sources */,
 				C0EFDBB2209C97FE00848710 /* CHMPlayItemModel.m in Sources */,
 				C0EAA63B2098819F0046F05C /* UIImageView+CHMImageView.m in Sources */,
+				C0CECDBE20AEB757007F9355 /* RCDSearchMoreController.m in Sources */,
 				C0EAA5ED20981EE70046F05C /* CHMLoginController.m in Sources */,
 				C0EAA60B20985DDD0046F05C /* CHMContactsController.m in Sources */,
 				C0EAA6402098B63D0046F05C /* CHMChatRoomCell.m in Sources */,
@@ -1329,17 +1366,20 @@
 				C0017797209DED2E001B44DE /* CHMGroupModel.m in Sources */,
 				C0CCCF9F20A2C64A00DD46B2 /* CHMAboutCell.m in Sources */,
 				C00177C4209EB2F5001B44DE /* CHMGroupSettingHeaderCell.m in Sources */,
+				C0CECDC020AEB757007F9355 /* RCDSearchResultModel.m in Sources */,
 				C0CCCF9020A2A82900DD46B2 /* RCDCSTagView.m in Sources */,
-				C0C430AF20ABDAD6006671B5 /* CHMSearchController.m in Sources */,
 				C0CCCFF520A535B800DD46B2 /* CHMChangePasswordController.m in Sources */,
 				C0EAA60820985DCC0046F05C /* CHMChatRoomController.m in Sources */,
 				C0CCCF7C20A2A77700DD46B2 /* RCDCustomerServiceViewController.m in Sources */,
 				C0CCCFC120A3DD0D00DD46B2 /* CHMUserPortraitCell.m in Sources */,
 				C0CCD00420A72B9500DD46B2 /* CHMPhotoBrowserCell.m in Sources */,
+				C0CECDC220AEB757007F9355 /* RCDSearchResultViewCell.m in Sources */,
 				C066EDC4209BDCEB00CB87FC /* CHMSelectMemberController.m in Sources */,
 				C0CCCFCB20A3EC6400DD46B2 /* CHMEditUserInfoController.m in Sources */,
+				C0CECDC620AEB769007F9355 /* RCDUtilities.m in Sources */,
 				C0CCCF6720A12F2400DD46B2 /* RCDNoFriendView.m in Sources */,
 				C066ED912099E2C500CB87FC /* CHMAccountSettingController.m in Sources */,
+				C0CECDC120AEB757007F9355 /* RCDSearchViewController.m in Sources */,
 				C0CCCF9320A2A82900DD46B2 /* RCDCSSolveView.m in Sources */,
 				C0CCD00220A72B9500DD46B2 /* CHMPhotoBrowserController.m in Sources */,
 				C0CCCF6320A0794C00DD46B2 /* RCDAddressBookViewController.m in Sources */,
@@ -1348,8 +1388,9 @@
 				C066EDBD209AB6E300CB87FC /* CHMUserDetailFooter.m in Sources */,
 				C00177CB209EBD76001B44DE /* CHMGroupMemberModel.m in Sources */,
 				C0EAA6442098B7C80046F05C /* CHMChatRoomModel.m in Sources */,
-				C0C430B520AC3C1D006671B5 /* CHMSearchDataManager.m in Sources */,
 				C0CCCF4F20A0051600DD46B2 /* CHMDataBaseManager.m in Sources */,
+				C0CECDBB20AEB757007F9355 /* RCDSearchMoreViewCell.m in Sources */,
+				C0CECDBF20AEB757007F9355 /* RCDSearchBar.m in Sources */,
 				C0CCCF8520A2A7AB00DD46B2 /* RCDCSEvaluateModel.m in Sources */,
 				C0EAA5F2209823F40046F05C /* CHMRegisterController.m in Sources */,
 				C00177A0209DF570001B44DE /* CHMGroupFooter.m in Sources */,
@@ -1358,8 +1399,10 @@
 				C0CCCF9120A2A82900DD46B2 /* RCDCSStarView.m in Sources */,
 				C0CCCF8220A2A79E00DD46B2 /* RCDCSEvaluateView.m in Sources */,
 				C0C430B920AE648D006671B5 /* CHMGroupNameEditController.m in Sources */,
+				C0CECDC320AEB757007F9355 /* RCDLabel.m in Sources */,
 				C0CCCFA920A2CFE400DD46B2 /* CHMFunctionController.m in Sources */,
 				C0017792209DE460001B44DE /* CHMGroupListController.m in Sources */,
+				C0CECDBD20AEB757007F9355 /* RCDSearchDataManager.m in Sources */,
 				C0CCCF9920A2C51900DD46B2 /* CHMAboutController.m in Sources */,
 				C0CCCF6B20A13CBE00DD46B2 /* CHMNewFriendCell.m in Sources */,
 				C0137A5B209F385E004D8358 /* CHMInfoProvider.m in Sources */,
@@ -1375,6 +1418,7 @@
 				C0CCCF9220A2A82900DD46B2 /* RCDCSButton.m in Sources */,
 				C066EDAE209A82EB00CB87FC /* CHMFriendModel.m in Sources */,
 				C0EAA617209866D60046F05C /* UIColor+CHMColor.m in Sources */,
+				C0CECDBC20AEB757007F9355 /* RCDSearchHistoryMessageController.m in Sources */,
 				C0EAA60E20985DEE0046F05C /* CHMConversationListController.m in Sources */,
 				C0EFDBA1209C142500848710 /* CHMCreateGroupController.m in Sources */,
 				C0CCCF9420A2A82900DD46B2 /* RCDCSInputView.m in Sources */,
@@ -1395,7 +1439,6 @@
 				C0EAA5F62098259D0046F05C /* CHMRongTokenResponse.m in Sources */,
 				C066EDD0209BE4AD00CB87FC /* UIImage+CHMImage.m in Sources */,
 				C0CCCF5A20A06BD400DD46B2 /* RCDChatListCell.m in Sources */,
-				C0C430B220AC3B63006671B5 /* CHMSearchResultModel.m in Sources */,
 				C066EDCC209BE31600CB87FC /* KxMenu.m in Sources */,
 				C0EAA6252098713E0046F05C /* CHMMineController.m in Sources */,
 				C0EAA5FE20984F2D0046F05C /* CHMMainController.m in Sources */,
@@ -1533,6 +1576,7 @@
 					"$(PROJECT_DIR)/MiniChat/viewControllers/ios-rongimdemo/framework/AlipaySDK",
 					"$(PROJECT_DIR)/MiniChat/viewControllers/ios-rongimdemo/framework/bqmm",
 				);
+				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_PREFIX_HEADER = /Users/chenhuamou/Desktop/miniChat/MiniChat/MiniChat/PrefixHeader.pch;
 				INFOPLIST_FILE = MiniChat/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
@@ -1575,6 +1619,7 @@
 					"$(PROJECT_DIR)/MiniChat/viewControllers/ios-rongimdemo/framework/AlipaySDK",
 					"$(PROJECT_DIR)/MiniChat/viewControllers/ios-rongimdemo/framework/bqmm",
 				);
+				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_PREFIX_HEADER = /Users/chenhuamou/Desktop/miniChat/MiniChat/MiniChat/PrefixHeader.pch;
 				INFOPLIST_FILE = MiniChat/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;

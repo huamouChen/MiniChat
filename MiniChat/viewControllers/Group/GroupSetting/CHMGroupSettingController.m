@@ -15,9 +15,9 @@
 #import "CHMUserDetailController.h"
 #import "CHMSelectMemberController.h"
 #import <Photos/Photos.h>
-#import "CHMSearchController.h"
 #import "CHMGroupNameEditController.h"
 #import "CHMGroupBulletinController.h"
+#import "RCDSearchHistoryMessageController.h"
 
 static CGFloat const rowHeight = 44;
 static CGFloat const sectionHeight = 15;
@@ -425,8 +425,10 @@ static NSString *const itemCellReuseId = @"CHMGroupSettingHeaderCell";    // tab
     
     if (indexPath.section == 1) { // 查找聊天记录
         if (indexPath.row == 0) {
-            CHMSearchController *searchHistoryController = [[CHMSearchController alloc] init];
-            [self.navigationController pushViewController:searchHistoryController animated:YES];
+            RCDSearchHistoryMessageController *searchViewController = [[RCDSearchHistoryMessageController alloc] init];
+            searchViewController.conversationType = ConversationType_GROUP;
+            searchViewController.targetId = self.groupId;
+            [self.navigationController pushViewController:searchViewController animated:YES];
         }
     }
     
