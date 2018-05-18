@@ -49,6 +49,10 @@
 		C0C42A1020AAB4DB006671B5 /* CHMGroupTipMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = C0C42A0F20AAB4DB006671B5 /* CHMGroupTipMessage.m */; };
 		C0C42A1320AAB5F6006671B5 /* CHMGroupTipCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C0C42A1220AAB5F6006671B5 /* CHMGroupTipCell.m */; };
 		C0C430AF20ABDAD6006671B5 /* CHMSearchController.m in Sources */ = {isa = PBXBuildFile; fileRef = C0C430AE20ABDAD6006671B5 /* CHMSearchController.m */; };
+		C0C430B220AC3B63006671B5 /* CHMSearchResultModel.m in Sources */ = {isa = PBXBuildFile; fileRef = C0C430B120AC3B63006671B5 /* CHMSearchResultModel.m */; };
+		C0C430B520AC3C1D006671B5 /* CHMSearchDataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = C0C430B420AC3C1D006671B5 /* CHMSearchDataManager.m */; };
+		C0C430B920AE648D006671B5 /* CHMGroupNameEditController.m in Sources */ = {isa = PBXBuildFile; fileRef = C0C430B720AE648D006671B5 /* CHMGroupNameEditController.m */; };
+		C0C430BA20AE648D006671B5 /* CHMGroupNameEditController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C0C430B820AE648D006671B5 /* CHMGroupNameEditController.xib */; };
 		C0CCCF4B209FF82B00DD46B2 /* loading_IOS.png in Resources */ = {isa = PBXBuildFile; fileRef = C0CCCF4A209FF82A00DD46B2 /* loading_IOS.png */; };
 		C0CCCF4F20A0051600DD46B2 /* CHMDataBaseManager.m in Sources */ = {isa = PBXBuildFile; fileRef = C0CCCF4E20A0051600DD46B2 /* CHMDataBaseManager.m */; };
 		C0CCCF5220A035BB00DD46B2 /* CHMUserInfoManager.m in Sources */ = {isa = PBXBuildFile; fileRef = C0CCCF5120A035BB00DD46B2 /* CHMUserInfoManager.m */; };
@@ -207,6 +211,13 @@
 		C0C42A1220AAB5F6006671B5 /* CHMGroupTipCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CHMGroupTipCell.m; sourceTree = "<group>"; };
 		C0C430AD20ABDAD6006671B5 /* CHMSearchController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CHMSearchController.h; sourceTree = "<group>"; };
 		C0C430AE20ABDAD6006671B5 /* CHMSearchController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CHMSearchController.m; sourceTree = "<group>"; };
+		C0C430B020AC3B63006671B5 /* CHMSearchResultModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CHMSearchResultModel.h; sourceTree = "<group>"; };
+		C0C430B120AC3B63006671B5 /* CHMSearchResultModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CHMSearchResultModel.m; sourceTree = "<group>"; };
+		C0C430B320AC3C1D006671B5 /* CHMSearchDataManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CHMSearchDataManager.h; sourceTree = "<group>"; };
+		C0C430B420AC3C1D006671B5 /* CHMSearchDataManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CHMSearchDataManager.m; sourceTree = "<group>"; };
+		C0C430B620AE648D006671B5 /* CHMGroupNameEditController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CHMGroupNameEditController.h; sourceTree = "<group>"; };
+		C0C430B720AE648D006671B5 /* CHMGroupNameEditController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CHMGroupNameEditController.m; sourceTree = "<group>"; };
+		C0C430B820AE648D006671B5 /* CHMGroupNameEditController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CHMGroupNameEditController.xib; sourceTree = "<group>"; };
 		C0CCCF4A209FF82A00DD46B2 /* loading_IOS.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = loading_IOS.png; sourceTree = "<group>"; };
 		C0CCCF4D20A0051600DD46B2 /* CHMDataBaseManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CHMDataBaseManager.h; sourceTree = "<group>"; };
 		C0CCCF4E20A0051600DD46B2 /* CHMDataBaseManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CHMDataBaseManager.m; sourceTree = "<group>"; };
@@ -419,6 +430,9 @@
 				C00177B7209EB2F5001B44DE /* view */,
 				C00177A4209EAD31001B44DE /* CHMGroupSettingController.h */,
 				C00177A5209EAD31001B44DE /* CHMGroupSettingController.m */,
+				C0C430B620AE648D006671B5 /* CHMGroupNameEditController.h */,
+				C0C430B720AE648D006671B5 /* CHMGroupNameEditController.m */,
+				C0C430B820AE648D006671B5 /* CHMGroupNameEditController.xib */,
 			);
 			path = GroupSetting;
 			sourceTree = "<group>";
@@ -612,6 +626,10 @@
 			children = (
 				C0C430AD20ABDAD6006671B5 /* CHMSearchController.h */,
 				C0C430AE20ABDAD6006671B5 /* CHMSearchController.m */,
+				C0C430B320AC3C1D006671B5 /* CHMSearchDataManager.h */,
+				C0C430B420AC3C1D006671B5 /* CHMSearchDataManager.m */,
+				C0C430B020AC3B63006671B5 /* CHMSearchResultModel.h */,
+				C0C430B120AC3B63006671B5 /* CHMSearchResultModel.m */,
 			);
 			path = SearchView;
 			sourceTree = "<group>";
@@ -1191,6 +1209,7 @@
 				C066ED982099E45500CB87FC /* CHMAccountSettingCell.xib in Resources */,
 				C0CCCFF620A535B800DD46B2 /* CHMChangePasswordController.xib in Resources */,
 				C066ED8C2099C98F00CB87FC /* CHMConversationController.xib in Resources */,
+				C0C430BA20AE648D006671B5 /* CHMGroupNameEditController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1320,6 +1339,7 @@
 				C066EDBD209AB6E300CB87FC /* CHMUserDetailFooter.m in Sources */,
 				C00177CB209EBD76001B44DE /* CHMGroupMemberModel.m in Sources */,
 				C0EAA6442098B7C80046F05C /* CHMChatRoomModel.m in Sources */,
+				C0C430B520AC3C1D006671B5 /* CHMSearchDataManager.m in Sources */,
 				C0CCCF4F20A0051600DD46B2 /* CHMDataBaseManager.m in Sources */,
 				C0CCCF8520A2A7AB00DD46B2 /* RCDCSEvaluateModel.m in Sources */,
 				C0EAA5F2209823F40046F05C /* CHMRegisterController.m in Sources */,
@@ -1328,6 +1348,7 @@
 				C0C42A1320AAB5F6006671B5 /* CHMGroupTipCell.m in Sources */,
 				C0CCCF9120A2A82900DD46B2 /* RCDCSStarView.m in Sources */,
 				C0CCCF8220A2A79E00DD46B2 /* RCDCSEvaluateView.m in Sources */,
+				C0C430B920AE648D006671B5 /* CHMGroupNameEditController.m in Sources */,
 				C0CCCFA920A2CFE400DD46B2 /* CHMFunctionController.m in Sources */,
 				C0017792209DE460001B44DE /* CHMGroupListController.m in Sources */,
 				C0CCCF9920A2C51900DD46B2 /* CHMAboutController.m in Sources */,
@@ -1364,6 +1385,7 @@
 				C0EAA5F62098259D0046F05C /* CHMRongTokenResponse.m in Sources */,
 				C066EDD0209BE4AD00CB87FC /* UIImage+CHMImage.m in Sources */,
 				C0CCCF5A20A06BD400DD46B2 /* RCDChatListCell.m in Sources */,
+				C0C430B220AC3B63006671B5 /* CHMSearchResultModel.m in Sources */,
 				C066EDCC209BE31600CB87FC /* KxMenu.m in Sources */,
 				C0EAA6252098713E0046F05C /* CHMMineController.m in Sources */,
 				C0EAA5FE20984F2D0046F05C /* CHMMainController.m in Sources */,

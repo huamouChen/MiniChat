@@ -10,4 +10,8 @@
 
 @interface CHMSearchController : UITableViewController
 
+@property (nonatomic, assign) RCConversationType conversationType;
+
+@property (nonatomic, strong) NSString *targetId;
+
 @end

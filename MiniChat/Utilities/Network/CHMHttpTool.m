@@ -376,6 +376,20 @@ static CHMHttpTool *instanse = nil;
 }
 
 
+/**
+ 修改群名称
+
+ @param groupName 新的群名称
+ @param groupId 目标groupId
+ @param success 成功
+ @param failure 失败
+ */
++ (void)modifyGroupName:(NSString *)groupName forGroup:(NSString *)groupId success:(successBlock)success failure:(failureBlock)failure {
+    NSDictionary *params = @{@"GroupId": groupId, @"GroupName": groupName};
+    [CHMHttpTool requestWithMethod:RequestMethodTypePost url:ModifyGroupNameURL params:params success:success failure:failure];
+}
+
+
 #pragma mark - 玩法相关
 /**
  把文本消息发送到服务器

@@ -79,6 +79,8 @@
 #define GetGroupMembersURL               @"api/Im/ListGroupUsers"
 //设置群组头像
 #define SetGroupPortraitURL               @"api/Im/SetGroupImg"
+// 修改群名称
+#define ModifyGroupNameURL                 @"api/im/SetGroupName"
 
 
 // 发送文本消息到服务器

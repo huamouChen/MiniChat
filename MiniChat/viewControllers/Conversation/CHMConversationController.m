@@ -13,6 +13,7 @@
 #import "CHMFriendModel.h"
 #import "CHMGroupTipCell.h"
 #import "CHMGroupTipMessage.h"
+#import "CHMGroupModel.h"
 
 static NSInteger const bettingTag = 2000;
 
@@ -26,6 +27,14 @@ static NSInteger const bettingTag = 2000;
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
     [CHMProgressHUD dismissHUD];
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    if (self.conversationType == ConversationType_GROUP) {
+        CHMGroupModel *groupModel = [[CHMDataBaseManager shareManager] getGroupByGroupId:self.targetId];
+        self.title = groupModel.GroupName;
+    }
 }
 
 - (void)viewDidLoad {

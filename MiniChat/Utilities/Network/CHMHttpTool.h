@@ -240,6 +240,16 @@ typedef void(^failureBlock)(NSError *error);
 + (void)dismissGroup:(NSString *)groupId success:(successBlock)success failure:(failureBlock)failure;
 
 /**
+ 修改群名称
+ 
+ @param groupName 新的群名称
+ @param groupId 目标groupId
+ @param success 成功
+ @param failure 失败
+ */
++ (void)modifyGroupName:(NSString *)groupName forGroup:(NSString *)groupId success:(successBlock)success failure:(failureBlock)failure;
+
+/**
  把文本消息发送到服务器
  
  @param message 要发送的文本消息
