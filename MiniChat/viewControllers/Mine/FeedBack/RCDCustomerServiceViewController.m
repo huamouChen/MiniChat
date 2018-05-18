@@ -186,7 +186,7 @@ clickedButtonAtIndex:(NSInteger)buttonIndex {
     backBtn.frame = CGRectMake(0, 6, 87, 23);
     UIImageView *backImg = [[UIImageView alloc]
         initWithImage:[UIImage imageNamed:@"back"]];
-    backImg.frame = CGRectMake(-6, 4, 10, 17);
+    backImg.frame = CGRectMake(0, 4, 12, 20);
     [backBtn addSubview:backImg];
     UILabel *backText =
         [[UILabel alloc] initWithFrame:CGRectMake(9, 4, 85, 17)];
@@ -201,7 +201,7 @@ clickedButtonAtIndex:(NSInteger)buttonIndex {
         forControlEvents:UIControlEventTouchUpInside];
     UIBarButtonItem *leftButton =
         [[UIBarButtonItem alloc] initWithCustomView:backBtn];
-    [__weakself.navigationItem setLeftBarButtonItem:leftButton];
+//    [__weakself.navigationItem setLeftBarButtonItem:leftButton];
   });
 }
 

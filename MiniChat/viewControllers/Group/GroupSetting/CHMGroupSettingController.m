@@ -404,6 +404,10 @@ static NSString *const itemCellReuseId = @"CHMGroupSettingHeaderCell";    // tab
         }
         
         if (indexPath.row == 1) { // 群名称
+            if (!_isGroupOwner) {
+                [CHMProgressHUD showErrorWithInfo:@"只有群主才可以修改群名称"];
+                return;
+            }
             CHMGroupNameEditController *editController = [CHMGroupNameEditController new];
             editController.groupId = self.groupId;
             editController.originalGroupName = self.groupName;
@@ -539,6 +543,12 @@ static NSString *const itemCellReuseId = @"CHMGroupSettingHeaderCell";    // tab
  显示头像弹出框
  */
 - (void)portraitClick {
+    
+    if (!_isGroupOwner) {
+        [CHMProgressHUD showErrorWithInfo:@"只有群主才可以修改群头像"];
+        return;
+    }
+    
     self.imagePickerController = [[UIImagePickerController alloc] init];
     // 可编辑
     self.imagePickerController.allowsEditing = YES;
@@ -572,7 +582,11 @@ static NSString *const itemCellReuseId = @"CHMGroupSettingHeaderCell";    // tab
         // 没有权限
         NSURL *url = [NSURL URLWithString:UIApplicationOpenSettingsURLString];
         if ([[UIApplication sharedApplication] canOpenURL:url]) {
-            [[UIApplication sharedApplication] openURL:url options:@{} completionHandler:nil];
+            if (@available(iOS 10.0, *)) {
+                [[UIApplication sharedApplication] openURL:url options:@{} completionHandler:nil];
+            } else {
+                // Fallback on earlier versions
+            }
         }
     } else {
         // 是否支持相机功能
@@ -718,8 +732,8 @@ static NSString *const itemCellReuseId = @"CHMGroupSettingHeaderCell";    // tab
  */
 - (void)setupAppearance {
     // 返回按钮
-    //    CHMBarButtonItem *leftButton = [[CHMBarButtonItem alloc] initWithLeftBarButton:@"返回" target:self action:@selector(backBarButtonItemClicked:)];
-    //    [self.navigationItem setLeftBarButtonItem:leftButton];
+        CHMBarButtonItem *leftButton = [[CHMBarButtonItem alloc] initWithLeftBarButton:@"返回" target:self action:@selector(backBarButtonItemClicked:)];
+        [self.navigationItem setLeftBarButtonItem:leftButton];
     
     // collection view
     CGRect tempRect =

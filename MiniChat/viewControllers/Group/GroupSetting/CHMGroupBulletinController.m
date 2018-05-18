@@ -42,7 +42,7 @@
     
     self.view.backgroundColor = [UIColor chm_colorWithHexString:@"#f0f0f6" alpha:1.0];
     
-    self.title = @"群名称修改";
+    self.title = @"群公告";
     self.textView.text = _originalGroupBulletin;
     
     self.textView.delegate = self;
