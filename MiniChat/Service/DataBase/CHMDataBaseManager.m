@@ -110,7 +110,7 @@ static NSString *const groupMemberTableName = @"GROUPMEMBERTABLE";
             NSString *createTableSQL = @"CREATE TABLE GROUPTABLEV2 (id integer PRIMARY KEY autoincrement, "
             @"groupId text,name text, portraitUri text,canBetting text, "
             @"groupOwner text,addTime text, isOfficial "
-            @"text, state text)";
+            @"text, state text, bulletin text)";
             [db executeUpdate:createTableSQL];
             NSString *createIndexSQL = @"CREATE unique INDEX idx_groupid ON GROUPTABLEV2(groupId);";
             [db executeUpdate:createIndexSQL];
@@ -270,12 +270,12 @@ static NSString *const groupMemberTableName = @"GROUPMEMBERTABLE";
     
     NSString *insertSql = @"REPLACE INTO GROUPTABLEV2 (groupId, "
     @"name,portraitUri,canBetting,"
-    @"groupOwner,addTime,isOfficial,state) VALUES "
-    @"(?,?,?,?,?,?,?,?)";
+    @"groupOwner,addTime,isOfficial,state, bulletin) VALUES "
+    @"(?,?,?,?,?,?,?,?,?)";
     
     [self.dbQueue inDatabase:^(FMDatabase *db) {
         [db executeUpdate:insertSql, group.GroupId, group.GroupName, group.GroupImage, group.CanBetting, group.GroupOwner, group.AddTime,
-         group.IsOfficial, group.State];
+         group.IsOfficial, group.State, group.Bulletin];
     }];
 }
 
@@ -287,10 +287,10 @@ static NSString *const groupMemberTableName = @"GROUPMEMBERTABLE";
             for (CHMGroupModel *group in groupList) {
                 NSString *insertSql = @"REPLACE INTO GROUPTABLEV2 (groupId, "
                 @"name,portraitUri,canBetting,"
-                @"groupOwner,addTime,isOfficial,state) VALUES "
-                @"(?,?,?,?,?,?,?,?)";
+                @"groupOwner,addTime,isOfficial,state, bulletin) VALUES "
+                @"(?,?,?,?,?,?,?,?, ?)";
                 [db executeUpdate:insertSql, group.GroupId, group.GroupName, group.GroupImage, group.CanBetting, group.GroupOwner, group.AddTime,
-                 group.IsOfficial, group.State];
+                 group.IsOfficial, group.State,group.Bulletin];
             }
         }];
         result(YES);
@@ -393,6 +393,7 @@ static NSString *const groupMemberTableName = @"GROUPMEMBERTABLE";
             model.AddTime = [rs stringForColumn:@"addTime"];
             model.IsOfficial = [rs stringForColumn:@"isOfficial"];
             model.State = [rs stringForColumn:@"state"];
+            model.Bulletin = [rs stringForColumn:@"bulletin"];
         }
         [rs close];
     }];
@@ -461,6 +462,7 @@ static NSString *const groupMemberTableName = @"GROUPMEMBERTABLE";
             model.AddTime = [rs stringForColumn:@"addTime"];
             model.IsOfficial = [rs stringForColumn:@"isOfficial"];
             model.State = [rs stringForColumn:@"state"];
+            model.Bulletin = [rs stringForColumn:@"bulletin"];
             [allGroups addObject:model];
         }
         [rs close];

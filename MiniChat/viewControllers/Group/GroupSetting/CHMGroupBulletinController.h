@@ -14,6 +14,6 @@
 
 @property (nonatomic, copy) NSString *groupId;
 
-
+@property (nonatomic, assign) BOOL isGroupOwner;
 
 @end

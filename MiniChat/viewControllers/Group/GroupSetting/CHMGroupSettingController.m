@@ -417,7 +417,8 @@ static NSString *const itemCellReuseId = @"CHMGroupSettingHeaderCell";    // tab
         if (indexPath.row == 2) { // 群公告
             CHMGroupBulletinController *bulletinController = [CHMGroupBulletinController new];
             bulletinController.groupId = self.groupId;
-            bulletinController.originalGroupBulletin = @"群组公告。。。";
+            bulletinController.originalGroupBulletin = self.cuurentGroupModel.Bulletin;
+            bulletinController.isGroupOwner = self.isGroupOwner;
             [self.navigationController pushViewController:bulletinController animated:YES];
         }
     }

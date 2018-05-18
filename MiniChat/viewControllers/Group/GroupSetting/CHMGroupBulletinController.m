@@ -7,6 +7,7 @@
 //
 
 #import "CHMGroupBulletinController.h"
+#import "CHMGroupModel.h"
 
 @interface CHMGroupBulletinController () <UITextViewDelegate>
 @property (weak, nonatomic) IBOutlet UITextView *textView;
@@ -68,29 +69,34 @@
     [self.view endEditing:YES];
     self.groupBulletin = self.textView.text;
     
+    if (!_isGroupOwner) {
+        [CHMProgressHUD showErrorWithInfo:@"只有群主才可以修改群公告"];
+        return;
+    }
+    
     [self modifyGroupName];
 }
 
 /**
- 修改群名称
+ 修改群公告
  */
 - (void)modifyGroupName {
     __weak typeof(self) weakSelf = self;
+
     [CHMProgressHUD showWithInfo:@"正在修改中..." isHaveMask:YES];
-    
-    
-    
+
     [CHMHttpTool modifyGroupBulletin:_textView.text forGroup:_groupId success:^(id response) {
         NSLog(@"------------%@", response);
         NSNumber *codeId = response[@"Code"][@"CodeId"];
         if (codeId.integerValue == 100) {
+            [CHMProgressHUD showSuccessWithInfo:@"修改成功"];
             CHMGroupModel *groupModel = [[CHMDataBaseManager shareManager] getGroupByGroupId:weakSelf.groupId];
-//            groupModel.GroupName = weakSelf.groupBulletin;
+            groupModel.Bulletin = weakSelf.groupBulletin;
             // 刷新数据库的名称
             [[CHMDataBaseManager shareManager] insertGroupToDB:groupModel];
             // 刷新群组详情的界面
             dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-                [CHMProgressHUD showSuccessWithInfo:@"修改成功"];
+                [CHMProgressHUD dismissHUD];
                 [self.navigationController popViewControllerAnimated:YES];
             });
             
@@ -107,7 +113,7 @@
  */
 - (void)textFieldEditChanged {
     NSString *toBeString = _textView.text;
-    if (![toBeString isEqualToString:self.originalGroupBulletin]) {
+    if (![toBeString isEqualToString:self.originalGroupBulletin] && _isGroupOwner) {
         [self.rightBtn buttonIsCanClick:YES buttonColor:[UIColor whiteColor] barButtonItem:self.rightBtn];
     } else {
         [self.rightBtn buttonIsCanClick:NO
