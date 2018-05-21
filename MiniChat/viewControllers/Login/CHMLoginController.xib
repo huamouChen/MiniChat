@@ -16,7 +16,6 @@
                 <outlet property="bgImg" destination="pFS-pr-78l" id="sto-v5-0gI"/>
                 <outlet property="passwordTextField" destination="eWd-hu-sM8" id="9BU-uU-J3d"/>
                 <outlet property="registerButton" destination="CMY-ds-eSJ" id="S8b-Yv-Keh"/>
-                <outlet property="registerButtonConstraint" destination="OYn-aw-bNm" id="hmq-FX-Mru"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>

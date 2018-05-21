@@ -20,7 +20,6 @@ static NSString *const IMServices = @"IMServices";
 @property (weak, nonatomic) IBOutlet UIImageView *bgImg;
 @property (weak, nonatomic) IBOutlet RCUnderlineTextField *accountTextField;
 @property (weak, nonatomic) IBOutlet RCUnderlineTextField *passwordTextField;
-@property (weak, nonatomic) IBOutlet NSLayoutConstraint *registerButtonConstraint;
 @property (weak, nonatomic) IBOutlet UIButton *registerButton;
 
 // 获取融云 token 的次数
@@ -166,11 +165,6 @@ static NSString *const IMServices = @"IMServices";
 
 
 #pragma mark -  view life cycler
-- (void)viewWillLayoutSubviews {
-    [super viewWillLayoutSubviews];
-    self.registerButtonConstraint.constant = KIsiPhoneX ? KTouchBarHeight : 0;
-}
-
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     [self.navigationController setNavigationBarHidden:YES animated:animated];

@@ -429,8 +429,8 @@ static CGFloat const KIndexViewWidth = 55 / 2.0;
     UITouch *touch = [touches anyObject];
     CGPoint point = [touch locationInView:_indexContentView];
     
-    CGFloat navigationBarHeight = KIsiPhoneX ? KNavigationBar88 : KNavigationBar64;
-    CGFloat tabBarHeight = KIsiPhoneX ? KTouchBarHeight + KTabBar49 : KTabBar49;
+    CGFloat navigationBarHeight = KISIphoneX ? KNavigationBar88 : KNavigationBar64;
+    CGFloat tabBarHeight = KISIphoneX ? KTouchBarHeight + KTabBar49 : KTabBar49;
     int index = (int)((point.y / (SCREEN_HEIGHT - navigationBarHeight - tabBarHeight)) * self.indexArr.count);
     if (index > 26 || index < 0)return;
     //    给显示的view赋标题
@@ -521,8 +521,8 @@ static CGFloat const KIndexViewWidth = 55 / 2.0;
 
 - (UIView *)indexContentView {
     if (!_indexContentView) {
-        CGFloat navigationBarHeight = KIsiPhoneX ? KNavigationBar88 : KNavigationBar64;
-        CGFloat tabBarHeight = KIsiPhoneX ? KTouchBarHeight + KTabBar49 : KTabBar49;
+        CGFloat navigationBarHeight = KISIphoneX ? KNavigationBar88 : KNavigationBar64;
+        CGFloat tabBarHeight = KISIphoneX ? KTouchBarHeight + KTabBar49 : KTabBar49;
         _indexContentView = [[UIView alloc] initWithFrame:CGRectMake(SCREEN_WIDTH - KIndexViewWidth, navigationBarHeight, KIndexViewWidth, SCREEN_HEIGHT - navigationBarHeight - tabBarHeight)];
     }
     return _indexContentView;

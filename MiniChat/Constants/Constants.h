@@ -23,12 +23,6 @@
 #endif
 
 
-
-
-
-#define KIsiPhoneX ([UIScreen instancesRespondToSelector:@selector(currentMode)] ? CGSizeEqualToSize(CGSizeMake(1125, 2436), [[UIScreen mainScreen] currentMode].size) : NO)
-
-
 #ifdef DEBUG
 #define NSLog(...) NSLog(@"%s 第%d行 \n %@\n\n",__func__,__LINE__,[NSString stringWithFormat:__VA_ARGS__])
 #else
@@ -41,7 +35,9 @@
 #define SCREEN_HEIGHT ([UIScreen mainScreen].bounds.size.height)
 
 #define KTouchBarHeight 34.0f
-#define KIsiPhoneX ([UIScreen instancesRespondToSelector:@selector(currentMode)] ? CGSizeEqualToSize(CGSizeMake(1125, 2436), [[UIScreen mainScreen] currentMode].size) : NO)
+#define KISIphoneX (CGSizeEqualToSize(CGSizeMake(375.f, 812.f), [UIScreen mainScreen].bounds.size) || CGSizeEqualToSize(CGSizeMake(812.f, 375.f), [UIScreen mainScreen].bounds.size))
+
+
 #define IOS_FSystenVersion ([[[UIDevice currentDevice] systemVersion] floatValue])
 
 #define KNavigationBar88    88.0
